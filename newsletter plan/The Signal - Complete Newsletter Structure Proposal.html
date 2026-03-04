@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Signal — Complete Newsletter Structure Proposal</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #0D9F5F;
+  --green-light: #E8F7F0;
+  --green-dark: #0A7D4A;
+  --green-glow: rgba(13,159,95,0.10);
+  --green-glow-strong: rgba(13,159,95,0.22);
+  --dark: #09090b;
+  --dark-2: #111113;
+  --dark-3: #1a1a1f;
+  --dark-4: #252529;
+  --dark-5: #32323a;
+  --gray-1: #3f3f46;
+  --gray-2: #52525b;
+  --gray-3: #71717a;
+  --gray-4: #a1a1aa;
+  --gray-5: #d4d4d8;
+  --white: #fafafa;
+  --off-white: #f4f4f5;
+  --red: #ef4444;
+  --red-soft: rgba(239,68,68,0.08);
+  --orange: #f59e0b;
+  --orange-soft: rgba(245,158,11,0.08);
+  --blue: #3b82f6;
+  --blue-soft: rgba(59,130,246,0.08);
+  --purple: #8b5cf6;
+  --purple-soft: rgba(139,92,246,0.08);
+  --cyan: #06b6d4;
+  --cyan-soft: rgba(6,182,212,0.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--dark);color:var(--white);line-height:1.7;font-size:15px;-webkit-font-smoothing:antialiased}
+a{color:var(--green);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ===== NAV ===== */
+.nav{background:rgba(17,17,19,0.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--dark-4);padding:10px 32px;position:sticky;top:0;z-index:200}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-size:15px;font-weight:800;letter-spacing:-0.5px}
+.nav-logo .a{color:var(--green)}
+.nav-links{display:flex;gap:3px;flex-wrap:wrap}
+.nav-links a{color:var(--gray-3);font-size:10.5px;font-weight:500;padding:4px 9px;border-radius:6px;transition:all .15s;white-space:nowrap}
+.nav-links a:hover{background:var(--dark-3);color:var(--green);text-decoration:none}
+
+/* ===== HERO ===== */
+.hero{background:var(--dark);padding:100px 40px 80px;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid var(--dark-4)}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(13,159,95,0.06),transparent 70%)}
+.hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--green-glow-strong),transparent)}
+.hero-inner{position:relative;z-index:1;max-width:920px;margin:0 auto}
+.hero-chip{display:inline-flex;align-items:center;gap:8px;background:var(--dark-3);border:1px solid var(--dark-5);color:var(--gray-4);padding:6px 16px;border-radius:100px;font-size:12px;font-weight:500;margin-bottom:28px}
+.hero-chip .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:.5}50%{opacity:1}}
+.hero h1{font-size:clamp(36px,5.5vw,62px);font-weight:900;line-height:1.05;letter-spacing:-2px;margin-bottom:18px}
+.hero h1 .accent{background:linear-gradient(135deg,var(--green),#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{font-size:17px;color:var(--gray-3);max-width:600px;margin:0 auto 44px;line-height:1.7}
+.hero-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;max-width:780px;margin:0 auto}
+.hero-metric{background:var(--dark-2);border:1px solid var(--dark-4);border-radius:12px;padding:18px 10px;text-align:center;transition:border-color .3s}
+.hero-metric:hover{border-color:var(--green-glow-strong)}
+.hero-metric .val{font-size:26px;font-weight:800;color:var(--green);letter-spacing:-1px;display:block}
+.hero-metric .lbl{font-size:9px;color:var(--gray-3);text-transform:uppercase;letter-spacing:1px;margin-top:3px;display:block}
+
+/* ===== SECTIONS ===== */
+.s{max-width:1100px;margin:0 auto;padding:80px 40px}
+.s-full{padding:80px 40px}
+.s-alt{background:var(--dark-2)}
+.s-label{font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px}
+.s-title{font-size:clamp(24px,3.5vw,36px);font-weight:800;line-height:1.15;letter-spacing:-0.5px;margin-bottom:10px}
+.s-desc{font-size:15px;color:var(--gray-3);max-width:640px;margin-bottom:40px;line-height:1.7}
+h3{font-size:17px;font-weight:700;margin:32px 0 12px;color:var(--white)}
+h4{font-size:14px;font-weight:700;margin-bottom:5px}
+
+/* ===== CARDS ===== */
+.card{background:var(--dark-3);border:1px solid var(--dark-4);border-radius:12px;padding:22px;transition:border-color .2s}
+.card:hover{border-color:rgba(13,159,95,0.22)}
+.card p{color:var(--gray-3);font-size:13px;margin:0;line-height:1.6}
+.cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:18px 0}
+
+/* ===== STAT CARDS ===== */
+.sc{background:var(--dark-3);border:1px solid var(--dark-4);border-radius:12px;padding:20px;text-align:center}
+.sc .n{font-size:24px;font-weight:800;color:var(--green);letter-spacing:-1px}
+.sc .l{font-size:10px;color:var(--gray-3);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+
+/* ===== TABLES ===== */
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
+th{background:var(--dark-4);color:var(--gray-5);padding:10px 13px;text-align:left;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+td{padding:10px 13px;border-bottom:1px solid var(--dark-4);color:var(--gray-4)}
+tr:hover td{background:rgba(255,255,255,0.015)}
+th:first-child{border-radius:8px 0 0 0}
+th:last-child{border-radius:0 8px 0 0}
+.yes{color:var(--green);font-weight:700}
+.no{color:var(--gray-2)}
+
+/* ===== CALLOUT ===== */
+.callout{background:var(--green-glow);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:16px 20px;margin:20px 0;font-size:13px;color:var(--gray-4);line-height:1.7}
+.callout strong{color:var(--green)}
+
+/* ===== TRAIT CARDS ===== */
+.trait-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin:18px 0}
+.trait{background:var(--dark-3);border:1px solid var(--dark-4);border-radius:10px;padding:18px 20px}
+.trait strong{color:var(--green);font-size:13px;display:block;margin-bottom:4px}
+.trait p{color:var(--gray-3);font-size:12px;line-height:1.6;margin:0}
+
+/* ===== TIMELINE ===== */
+.tl{margin:24px 0}
+.tl-item{display:flex;gap:16px;margin-bottom:22px}
+.tl-dot{flex-shrink:0;width:38px;height:38px;background:var(--green);color:var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;position:relative}
+.tl-item:not(:last-child) .tl-dot::after{content:'';position:absolute;top:38px;left:50%;transform:translateX(-50%);width:2px;height:22px;background:var(--dark-4)}
+.tl-body h4{font-size:14px;font-weight:700;margin-bottom:3px}
+.tl-body p{font-size:12px;color:var(--gray-3);margin-bottom:6px;line-height:1.6}
+.tl-tags{display:flex;gap:5px;flex-wrap:wrap}
+.tl-tag{background:var(--green-glow);color:var(--green);font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px}
+
+/* ===== FUNNEL ===== */
+.funnel{display:flex;align-items:center;justify-content:center;margin:28px 0;flex-wrap:wrap}
+.fn-step{text-align:center;padding:12px 8px;flex:1;min-width:85px}
+.fn-icon{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 5px;font-size:14px;font-weight:800;border:2px solid}
+.fn-lbl{font-size:11px;font-weight:600}
+.fn-sub{font-size:10px;color:var(--gray-3)}
+.fn-arr{color:var(--green);font-size:18px;font-weight:700;flex-shrink:0}
+
+/* ===== PIPE BLOCKS ===== */
+.pb{background:var(--dark-3);border:1px solid var(--dark-4);border-radius:10px;padding:16px 20px;margin-bottom:4px;transition:border-color .15s}
+.pb:hover{border-color:var(--green-glow-strong)}
+.pb-title{font-weight:700;font-size:13px;margin-bottom:3px;display:flex;align-items:center;gap:8px}
+.pb-desc{font-size:12px;color:var(--gray-3);line-height:1.6;margin-bottom:4px}
+.pb-out{font-size:10px;font-weight:600;color:var(--green);text-transform:uppercase;letter-spacing:.5px}
+
+/* ===== BADGES ===== */
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px}
+.badge-g{background:var(--green-glow);color:var(--green)}
+.badge-b{background:var(--blue-soft);color:var(--blue)}
+.badge-p{background:var(--purple-soft);color:var(--purple)}
+.badge-r{background:var(--red-soft);color:var(--red)}
+.badge-o{background:var(--orange-soft);color:var(--orange)}
+
+/* ===== CLUSTER CARDS ===== */
+.cl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin:18px 0}
+.cl-card{border:1px solid var(--dark-4);border-radius:10px;overflow:hidden}
+.cl-hdr{background:var(--dark-4);padding:11px 15px}
+.cl-hdr span{display:block;font-size:10px;color:var(--green);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:2px}
+.cl-hdr strong{font-size:13px}
+.cl-body{padding:11px 15px}
+.cl-body li{font-size:11px;color:var(--gray-3);margin-bottom:3px;list-style:none;padding-left:12px;position:relative}
+.cl-body li::before{content:'';position:absolute;left:0;top:6px;width:4px;height:4px;background:var(--green);border-radius:50%}
+
+/* ===== FOOTER ===== */
+.footer{background:var(--dark);border-top:1px solid var(--dark-4);padding:50px 40px;text-align:center;position:relative}
+.footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--green-glow-strong),transparent)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+  .hero{padding:60px 20px 50px}
+  .hero-grid{grid-template-columns:repeat(3,1fr)}
+  .s,.s-full{padding:50px 20px}
+  .nav{display:none}
+  .funnel{flex-direction:column}
+  .fn-arr{transform:rotate(90deg)}
+}
+@media print{
+  .nav{display:none}
+  body{background:#fff;color:#111;font-size:11px}
+  .hero{background:#111;padding:30px}
+  .s,.s-full{padding:20px 0;break-inside:avoid}
+  .card,.pb,.sc{border-color:#ddd}
+  th{background:#333}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">The <span class="a">Signal</span> — Proposal</div>
+    <div class="nav-links">
+      <a href="#exec">Executive Summary</a>
+      <a href="#positioning">Positioning</a>
+      <a href="#voice">Atlas Voice</a>
+      <a href="#tiers">Product Tiers</a>
+      <a href="#cadence">Cadence</a>
+      <a href="#revenue">Revenue</a>
+      <a href="#upsell">Upsell Engine</a>
+      <a href="#welcome">Welcome</a>
+      <a href="#engine">AI Engine</a>
+      <a href="#seo">SEO Strategy</a>
+      <a href="#tech">Tech Stack</a>
+      <a href="#acquisition">Acquisition</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#kpis">KPIs</a>
+      <a href="#risks">Risks</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-chip"><span class="dot"></span> Complete Structure Proposal</div>
+    <h1>The <span class="accent">Signal</span><br>Newsletter Architecture</h1>
+    <p class="subtitle">A unified proposal synthesized from 16 research documents: strategic positioning, content framework, five-tier revenue model, AI portfolio engine, and 90-day launch roadmap.</p>
+    <div class="hero-grid">
+      <div class="hero-metric"><span class="val">5</span><span class="lbl">Tiers</span></div>
+      <div class="hero-metric"><span class="val">60-80M</span><span class="lbl">Target Market</span></div>
+      <div class="hero-metric"><span class="val">488</span><span class="lbl">AI Trade Events</span></div>
+      <div class="hero-metric"><span class="val">$17.6M</span><span class="lbl">Y3 ARR Target</span></div>
+      <div class="hero-metric"><span class="val">60%+</span><span class="lbl">Target Margin</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ EXECUTIVE SUMMARY ═══════════════ -->
+<div id="exec" class="s">
+  <div class="s-label">Overview</div>
+  <div class="s-title">Executive Summary</div>
+  <div class="s-desc">This proposal synthesizes all existing TradeAlgo research into a unified newsletter structure for The Signal. The core insight across every document is consistent:</div>
+
+  <div class="callout">
+    <strong>The Core Insight:</strong> TradeAlgo possesses something no competitor has — five AI-managed portfolios trading real capital with 11+ months of auditable, timestamped performance data across 488 rebalancing events and 504 unique securities. The newsletter sells progressively deeper visibility into these real AI decisions. This creates a natural monetization ladder from free subscribers ($0) to managed accounts ($50K–$400K).
+  </div>
+
+  <h3>The Opportunity at a Glance</h3>
+  <table>
+    <thead><tr><th>Metric</th><th>Value</th><th>Source / Benchmark</th></tr></thead>
+    <tbody>
+      <tr><td style="font-weight:600;color:var(--white);">Addressable Market</td><td>60–80M Americans</td><td>Stock owners vs. 2–5M options traders</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Proven Model Revenue</td><td>$409M (Stansberry/MarketWise)</td><td>FY2024 reported</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">AI Portfolio Data</td><td>488 rebalancing events, 504 tickers</td><td>11 months live trading</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Target Y1 ARR</td><td>$1.5M–$2.3M</td><td>Conservative to hybrid model</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Target Y3 ARR</td><td>$10.7M–$17.6M</td><td>22K+ paid at $800 ARPU</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Target Net Margin</td><td>60%+</td><td>vs. Stansberry's 22.8%</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Breakeven</td><td>5–8 months</td><td>At $20K/day ad spend</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════════ STRATEGIC POSITIONING ═══════════════ -->
+<div id="positioning" class="s-full s-alt">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="s-label">Strategy</div>
+    <div class="s-title">1. Strategic Positioning</div>
+    <div class="s-desc">Every $100M+ financial publisher serves equity investors. TradeAlgo's current $5,000/yr entry point prices out 95% of the market. The Signal creates a free-to-paid funnel targeting the 60–80 million stock-owning Americans.</div>
+
+    <h3>Competitive Moat</h3>
+    <p style="color:var(--gray-3);font-size:13px;margin-bottom:16px;">The Signal's differentiation is structural, not incremental. No competitor can replicate this without 12+ months of live AI trading with transparent losses.</p>
+    <table>
+      <thead><tr><th>Feature</th><th>Motley Fool</th><th>Stansberry</th><th>Seeking Alpha</th><th>Morning Brew</th><th>The Signal</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:600;color:var(--white);">Live AI portfolio</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Verifiable track record</td><td class="no">No</td><td class="no">No</td><td>Partial</td><td class="no">N/A</td><td class="yes">Yes</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Transparent losses</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">N/A</td><td class="yes">Yes</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Multi-strategy</td><td class="no">No</td><td>Limited</td><td class="no">No</td><td class="no">No</td><td class="yes">8+ strategies</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Path to managed money</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes ($50K+)</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Content production cost</td><td>700 employees</td><td>Large team</td><td>Crowdsourced</td><td>Editorial team</td><td class="yes">Near zero (AI)</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Target Audience Segments</h3>
+    <p style="color:var(--gray-3);font-size:13px;margin-bottom:16px;">Five primary segments, prioritized by lifetime value and strategic importance:</p>
+    <table>
+      <thead><tr><th>Segment</th><th>Age</th><th>Income</th><th>Assets</th><th>Market Share</th><th>WTP/Year</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:600;color:var(--white);">Anxious Retiree</td><td>55–75</td><td>$100–300K</td><td>$500K–5M+</td><td>30%</td><td>$500–$5,000</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Ambitious Accumulator</td><td>30–50</td><td>$150–400K</td><td>$100K–1M</td><td>25%</td><td>$149–$1,000</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Curious Learner</td><td>28–45</td><td>$75–200K</td><td>$25–200K</td><td>20%</td><td>$0–$149</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Active Trader</td><td>25–55</td><td>$150K+</td><td>$200K–2M+</td><td>15%</td><td>$1,000–$5,000+</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">HNW Delegator</td><td>45–70</td><td>$300K+</td><td>$1M+</td><td>10%</td><td>$5,000–$50,000+</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════ ATLAS VOICE ═══════════════ -->
+<div id="voice" class="s">
+  <div class="s-label">Personality</div>
+  <div class="s-title">2. The Atlas Voice</div>
+  <div class="s-desc">Atlas is the AI personality that writes The Signal. Not a mascot — the communicator layer for TradeAlgo's scoring engine. Voice is version-controlled via Masterfile in GitHub.</div>
+
+  <h3>Six Core Personality Traits</h3>
+  <div class="trait-grid">
+    <div class="trait"><strong>Analytically Rigorous</strong><p>Data first, narrative second. Every claim backed by a number. No vague assertions.</p></div>
+    <div class="trait"><strong>Quietly Confident</strong><p>Conviction without arrogance. Uses probability language, not certainty. "72% of the time" not "always."</p></div>
+    <div class="trait"><strong>Emotionally Intelligent</strong><p>Reads market mood, adjusts tone accordingly. Knows when subscribers are scared and meets them there.</p></div>
+    <div class="trait"><strong>Dry Humor</strong><p>One smile per email, maximum. Never forced, never meme-based. The kind of wit that makes you think.</p></div>
+    <div class="trait"><strong>Radically Honest</strong><p>Shows losses alongside wins. Admits uncertainty. Publishes past misses. Trust is the product.</p></div>
+    <div class="trait"><strong>Protective</strong><p>Coaches against destructive trading behavior. Identifies emotional decision-making. Addresses cognitive biases.</p></div>
+  </div>
+
+  <h3>Tone Calibration by Market Regime</h3>
+  <table>
+    <thead><tr><th>Regime</th><th>Emotional Register</th><th>Behavioral Coaching</th></tr></thead>
+    <tbody>
+      <tr><td style="font-weight:600;color:var(--white);">Bullish</td><td>Energetic, exploratory</td><td>Caution against overconfidence</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Neutral</td><td>Curious, balanced</td><td>Patience emphasis</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Cautious</td><td>Measured, risk-aware</td><td>Position sizing focus</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Correction (−10%+)</td><td>Steady, reassuring</td><td>Disposition effect coaching</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Crash (−20%+)</td><td>Calm, direct, anchoring</td><td>Full behavioral coaching mode</td></tr>
+    </tbody>
+  </table>
+
+  <h3>What Atlas Never Does</h3>
+  <p style="color:var(--gray-3);font-size:13px;line-height:1.7;">Exclamation marks. Meme language. Guaranteed returns. Countdown timers. Condescension. Personalized investment advice. Hidden losses. Dashes in prose. Hype-driven language. Fear-mongering to drive upgrades.</p>
+</div>
+
+<!-- ═══════════════ FIVE-TIER PRODUCT ═══════════════ -->
+<div id="tiers" class="s-full s-alt">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="s-label">Monetization</div>
+    <div class="s-title">3. Five-Tier Product Structure</div>
+    <div class="s-desc">One product — visibility into five AI portfolios — at five access levels. The AI portfolios are a fixed cost already being paid. The newsletter is almost pure margin.</div>
+
+    <!-- FUNNEL -->
+    <div class="funnel">
+      <div class="fn-step"><div class="fn-icon" style="background:var(--dark-4);color:var(--white);border-color:var(--dark-5);">F</div><div class="fn-lbl">Free</div><div class="fn-sub">$0</div></div>
+      <div class="fn-arr">&rarr;</div>
+      <div class="fn-step"><div class="fn-icon" style="background:var(--green-glow);color:var(--green);border-color:var(--green);">P</div><div class="fn-lbl">Premium</div><div class="fn-sub">$149/yr</div></div>
+      <div class="fn-arr">&rarr;</div>
+      <div class="fn-step"><div class="fn-icon" style="background:var(--blue-soft);color:var(--blue);border-color:var(--blue);">$</div><div class="fn-lbl">Pro</div><div class="fn-sub">$499/yr</div></div>
+      <div class="fn-arr">&rarr;</div>
+      <div class="fn-step"><div class="fn-icon" style="background:var(--purple-soft);color:var(--purple);border-color:var(--purple);">E</div><div class="fn-lbl">Elite</div><div class="fn-sub">$2,500/yr</div></div>
+      <div class="fn-arr">&rarr;</div>
+      <div class="fn-step"><div class="fn-icon" style="background:var(--orange-soft);color:var(--orange);border-color:var(--orange);">M</div><div class="fn-lbl">Managed</div><div class="fn-sub">$50K–$400K</div></div>
+    </div>
+
+    <h3>Tier Details</h3>
+    <table>
+      <thead><tr><th>Tier</th><th>Price</th><th>What You See</th><th>Strategic Role</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:600;color:var(--white);">Free</td><td>$0</td><td>Daily P&L totals, market regime, 1 portfolio highlight, Three Things, weekly summary</td><td>Acquisition vehicle. CPA ad revenue from Day 1 (~$0.50/sub/month).</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Premium</td><td>$149/yr</td><td>Everything Free + full trade history (what was bought/sold/when) + Atlas Score breakdowns</td><td>Self-liquidating entry. Breaks even on customer acquisition cost.</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Pro</td><td>$499/yr</td><td>Everything Premium + current positions held NOW + real-time SMS trade alerts + options education</td><td>First real profit tier. Most compelling upgrade: what AI holds RIGHT NOW.</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Elite</td><td>$2,500/yr</td><td>Everything Pro + exact position sizing + options overlay + weekly video + analyst access</td><td>High-margin core engine. Enables precise portfolio mirroring.</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Managed</td><td>$50K–$400K</td><td>AI manages your capital directly through existing Wealth Series products</td><td>Endgame. Newsletter is lead-gen for this existing product.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Data Access Matrix</h3>
+    <table>
+      <thead><tr><th>Data Point</th><th>Free</th><th>Premium</th><th>Pro</th><th>Elite</th><th>Managed</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:600;color:var(--white);">Daily P&L (total return)</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Trade history (past buys/sells)</td><td class="no">—</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Current positions held</td><td class="no">—</td><td class="no">—</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Real-time SMS trade alerts</td><td class="no">—</td><td class="no">—</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Exact position sizing</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Options overlay data</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Weekly video + analyst access</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">AI manages your capital</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="yes">&#10003;</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════ CADENCE ═══════════════ -->
+<div id="cadence" class="s">
+  <div class="s-label">Content</div>
+  <div class="s-title">4. Content Structure & Weekly Cadence</div>
+  <div class="s-desc">The hybrid model (10–14 emails/week for active subscribers) borrows Stansberry's proven revenue mechanics while avoiding the email fatigue that drove their 47% subscriber loss.</div>
+
+  <h3>Weekly Email Calendar</h3>
+  <table>
+    <thead><tr><th>Day</th><th>Content Type</th><th>Source Data</th><th>Free Sees</th><th>Paid Sees</th></tr></thead>
+    <tbody>
+      <tr><td style="font-weight:600;color:var(--white);">Monday</td><td>The Week Ahead — Regime, positioning, watch list</td><td>Portfolio state, regime model</td><td>Regime + 1 portfolio</td><td>All 5 portfolios</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Tuesday</td><td>Trade Recap — What AI bought/sold in rebalance</td><td>Rebalancing diffs, exits</td><td>Count + 1 highlight</td><td>Full trade log</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Wednesday</td><td>Deep Dive — Stock/sector analysis, why AI holds position</td><td>High-conviction bets, re-entries</td><td>Thesis + teaser</td><td>Full breakdown</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Thursday</td><td>Strategy Spotlight — How strategies handle same market</td><td>Atlas Growth vs Everest vs Titan</td><td>Summary only</td><td>Full comparison</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Friday</td><td>The Scorecard — Weekly P&L, win/loss, benchmarks</td><td>All portfolio performance</td><td>Headlines only</td><td>Trade-by-trade</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Saturday</td><td>Weekly Recap — Top trades, performance, week ahead</td><td>Aggregate weekly data</td><td>Summary</td><td>Full + next week</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Sunday</td><td>Sunday Deep Dive — Long-form, behavioral coaching</td><td>Regime shifts, bias coaching</td><td>Complete (trust-builder)</td><td>Complete + bonus</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Email Segmentation by Engagement</h3>
+  <p style="color:var(--gray-3);font-size:13px;margin-bottom:14px;">The critical distinction from Stansberry: promotional emails go only to subscribers showing upgrade intent, not the entire list.</p>
+  <table>
+    <thead><tr><th>Segment</th><th>Definition</th><th>Weekly Volume</th><th>Content Mix</th></tr></thead>
+    <tbody>
+      <tr><td style="font-weight:600;color:var(--green);">Active</td><td>Opened in last 30 days</td><td>10–14 emails</td><td>7 content + 2–4 targeted promos + triggered alerts</td></tr>
+      <tr><td style="font-weight:600;color:var(--orange);">Cooling</td><td>No open in 30–90 days</td><td>6 emails</td><td>Content only, zero promos (protect deliverability)</td></tr>
+      <tr><td style="font-weight:600;color:var(--red);">Inactive</td><td>No open 90+ days</td><td>1 email</td><td>Single re-engagement. After 4 weeks, suppress.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>The Daily Email Format (Under 5 Minutes to Read)</h3>
+  <div class="cg" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));">
+    <div class="card" style="border-top:2px solid var(--green);"><h4>The Opening Line</h4><p>Specific, data-driven hook tied to today's markets. Never generic. ("The S&P recaptured 5,200 on volume 23% above average. Atlas sees a setup.")</p></div>
+    <div class="card" style="border-top:2px solid var(--blue);"><h4>Three Things</h4><p>Three most important developments, 2–3 sentences each with data. Consistent structure creates a daily reading habit.</p></div>
+    <div class="card" style="border-top:2px solid var(--purple);"><h4>Portfolio Update</h4><p>Running P&L, recent trades, market regime traffic light. Tier-gated: free sees totals, paid sees details.</p></div>
+    <div class="card" style="border-top:2px solid var(--orange);"><h4>The Number</h4><p>One surprising statistic to close. Memorable, shareable, conversation-starting.</p></div>
+    <div class="card" style="border-top:2px solid var(--cyan);"><h4>Signal CTA</h4><p>One natural, embedded upsell. Never a separate promo block. Locked content shows next tier.</p></div>
+  </div>
+
+  <div class="callout" style="margin-top:24px;">
+    <strong>Sunday Deep Dive — The Anchor:</strong> The most important email of the week. Long-form (2,000–3,500 words) demonstrating Atlas's analytical depth. Always free — this is the trust-builder. Topics rotate: stock deep dives, sector analysis, portfolio strategy, behavioral coaching, regime analysis. This is what gets forwarded to friends and what drives referral growth.
+  </div>
+</div>
+
+<!-- ═══════════════ REVENUE MODEL ═══════════════ -->
+<div id="revenue" class="s-full s-alt">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="s-label">Economics</div>
+    <div class="s-title">5. Revenue Model & Unit Economics</div>
+    <div class="s-desc">Six revenue streams, from Day 1 CPA advertising through managed accounts. The AI portfolios are a fixed cost — every subscriber is near-pure margin.</div>
+
+    <h3>Revenue Streams</h3>
+    <table>
+      <thead><tr><th>Stream</th><th>Unit Economics</th><th>Notes</th><th>Revenue Starts</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:600;color:var(--white);">CPA Advertising</td><td>$15–50 CPM, ~$0.50+/sub/month</td><td>Finance CPMs highest in industry</td><td>Day 1</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Premium ($149/yr)</td><td>3–5% conversion from free</td><td>Self-liquidating: breaks even on CAC</td><td>Month 2–3</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Pro ($499/yr)</td><td>15–25% upgrade from Premium</td><td>Most compelling: see positions NOW</td><td>Month 3–4</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Elite ($2,500/yr)</td><td>5–10% upgrade from Pro</td><td>Position sizing enables mirroring</td><td>Month 4–6</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Managed ($50K–400K)</td><td>Mgmt fees on AUM</td><td>Best lead-gen for existing product</td><td>Month 6+</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Referral/Affiliate</td><td>$5–50 per referral</td><td>Natural: "AI uses these tools"</td><td>Month 3+</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Revenue Projections (Hybrid Model)</h3>
+    <table>
+      <thead><tr><th>Milestone</th><th>Free Subs</th><th>Paid Subs</th><th>Blended ARPU</th><th>Est. ARR</th><th>Timeline</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:600;color:var(--white);">Launch</td><td>1,000</td><td>0</td><td>—</td><td>$6K (ads)</td><td>Month 2</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Traction</td><td>10,000</td><td>400</td><td>$300</td><td>$120K</td><td>Month 4</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Growth</td><td>25,000</td><td>1,500</td><td>$420</td><td>$630K</td><td>Month 6</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Scale</td><td>50,000</td><td>4,500</td><td>$520</td><td style="color:var(--green);font-weight:700;">$2.3M</td><td>Year 1</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Expansion</td><td>120,000</td><td>10,500</td><td>$680</td><td style="color:var(--green);font-weight:700;">$7.1M</td><td>Year 2</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Maturity</td><td>200,000</td><td>22,000</td><td>$800</td><td style="color:var(--green);font-weight:700;">$17.6M</td><td>Year 3</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Key Financial Metrics</h3>
+    <div class="cg" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));">
+      <div class="sc"><div class="n">$3</div><div class="l">Target CPA (Free)</div></div>
+      <div class="sc"><div class="n">3–5%</div><div class="l">Free → Paid Conv.</div></div>
+      <div class="sc"><div class="n">25–50</div><div class="l">Emails to First Sale</div></div>
+      <div class="sc"><div class="n">51%</div><div class="l">Less Churn (Annual)</div></div>
+      <div class="sc"><div class="n">3x+</div><div class="l">LTV:CAC by Y2</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ UPSELL ENGINE ═══════════════ -->
+<div id="upsell" class="s">
+  <div class="s-label">Growth Engine</div>
+  <div class="s-title">6. The Upsell Engine</div>
+  <div class="s-desc">Performance-triggered and embedded in the product, not blasted to the entire list. 70% content / 30% targeted promos — the inverse of Stansberry's 75% promo ratio.</div>
+
+  <h3>Seven Embedded Upsell Mechanisms</h3>
+  <table>
+    <thead><tr><th>Mechanism</th><th>Frequency</th><th>How It Works</th><th>Psychology</th></tr></thead>
+    <tbody>
+      <tr><td style="font-weight:600;color:var(--white);">Score Lock</td><td>Wed + Sun</td><td>Thesis visible, full score breakdown locked. "See the complete Atlas Score in Premium."</td><td>Curiosity gap + proof of value</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Sunday Proof</td><td>Weekly</td><td>Show what Premium/Pro subscribers received that week.</td><td>Social proof + FOMO</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Track Record Depth</td><td>Tue + Thu</td><td>Summary free, trade-by-trade history in Premium.</td><td>Transparency builds trust</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Regime Tease</td><td>Daily</td><td>One line under traffic light: "Premium sees full regime analysis."</td><td>Low intensity, high frequency</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Referral Backdoor</td><td>Ongoing</td><td>Earn Premium trial by referring 3 friends. Near-zero CAC.</td><td>Reciprocity + viral growth</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">SMS Milestone</td><td>Triggered</td><td>Pro alert: "Atlas's pick is up 15%." Free sees 6 weeks later.</td><td>FOMO + concrete proof</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Big Win Email</td><td>Triggered</td><td>AI closes 28% gain. Show what each tier saw and when.</td><td>Performance = best marketing</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Promotional Sequences (Stansberry's Cash Machine, Fixed)</h3>
+  <p style="color:var(--gray-3);font-size:13px;margin-bottom:14px;">Multi-email sequences generate 50% higher conversion and 320% more revenue. The Signal triggers these only for subscribers showing upgrade intent — not blasting the entire list.</p>
+  <table>
+    <thead><tr><th>Sequence</th><th>Trigger</th><th>Emails</th><th>Target</th><th>Est. Conversion</th></tr></thead>
+    <tbody>
+      <tr><td style="font-weight:600;color:var(--white);">Free → Premium</td><td>7 days + 3+ opens</td><td>5 over 10 days</td><td>Engaged free subs</td><td>5–8%</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Premium → Pro</td><td>60 days + opened trade proof</td><td>4 over 8 days</td><td>Active Premium</td><td>8–12%</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Pro → Elite</td><td>6+ months + high engagement</td><td>3 + phone call</td><td>Loyal Pro</td><td>3–5%</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Elite → Managed</td><td>12+ months + account signals</td><td>2 + dedicated call</td><td>Large portfolios</td><td>1–3%</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Event (Market Crash)</td><td>Major market move</td><td>5 over 5 days</td><td>Entire engaged list</td><td>2–3x normal</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Black Friday / Anniversary</td><td>Calendar</td><td>4 over 4 days</td><td>All tiers</td><td>1.5–2x normal</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════════ WELCOME SEQUENCE ═══════════════ -->
+<div id="welcome" class="s-full s-alt">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="s-label">Onboarding</div>
+    <div class="s-title">7. The Welcome Sequence (Days 0–10)</div>
+    <div class="s-desc">The welcome sequence determines whether a subscriber becomes a 5-year reader or a 30-day churn statistic. Atlas doesn't launch — it arrives.</div>
+
+    <div class="callout"><strong>The First 60 Seconds:</strong> Seconds 0–5: "This is different" (witty, specific opener). Seconds 5–15: "This is smart" (real data they haven't seen). Seconds 15–30: "I trust this" (acknowledges uncertainty, shows a miss). Seconds 30–60: "I need to keep reading" (subscriber feels smarter, not sold to).</div>
+
+    <h3>The 10-Day Sequence</h3>
+    <table>
+      <thead><tr><th>Day</th><th>Email</th><th>Purpose</th><th>Key Rule</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:600;color:var(--green);">0</td><td>Welcome (within 90 sec)</td><td>Atlas introduces itself with an insight, not a bio</td><td>Must be live AI data, not canned</td></tr>
+        <tr><td style="font-weight:600;color:var(--green);">1</td><td>First full Signal issue</td><td>Non-negotiable: one of the best issues ever written</td><td>Subscriber judges entire product on this</td></tr>
+        <tr><td style="font-weight:600;color:var(--green);">3</td><td>Atlas Score Explainer</td><td>How the scoring engine works, what 94/100 means</td><td>Education builds trust + creates curiosity</td></tr>
+        <tr><td style="font-weight:600;color:var(--green);">5</td><td>Track Record</td><td>Published wins AND losses. Radical transparency.</td><td>Showing losses is the trust accelerant</td></tr>
+        <tr><td style="font-weight:600;color:var(--green);">7</td><td>Sunday Deep Dive</td><td>Flagship long-form analysis</td><td>This is what gets forwarded to friends</td></tr>
+        <tr><td style="font-weight:600;color:var(--green);">10</td><td>Soft Premium invitation</td><td>First and only upsell in first 10 days</td><td>No-pressure, one paragraph, easy opt-out</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Eight Operating Rules</h3>
+    <div class="cg" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
+      <div class="card"><h4>1. Lead with intelligence, not identity</h4><p>Atlas's first words should be a market insight, not "Hi, I'm Atlas."</p></div>
+      <div class="card"><h4>2. Be specific immediately</h4><p>No vague promises. First email must contain a real number, a real analysis.</p></div>
+      <div class="card"><h4>3. Show track record within 5 days</h4><p>Wins and losses. Radical transparency is the product differentiator.</p></div>
+      <div class="card"><h4>4. Free must be embarrassingly good</h4><p>If the free product isn't worth paying for, the paid product won't sell.</p></div>
+      <div class="card"><h4>5. Zero selling before Day 10</h4><p>Build habit and trust first. The product earns the right to ask.</p></div>
+      <div class="card"><h4>6. Every new subscriber is Issue #1</h4><p>Welcome sequence treats Day 0 as the debut, regardless of publication history.</p></div>
+      <div class="card"><h4>7. Landing page IS a sample issue</h4><p>Not a marketing page. The product sells itself.</p></div>
+      <div class="card"><h4>8. 30+ test issues before public launch</h4><p>Launch only when you'd bet your reputation on it.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ AI PORTFOLIO ENGINE ═══════════════ -->
+<div id="engine" class="s">
+  <div class="s-label">The Machine</div>
+  <div class="s-title">8. The AI Portfolio Engine</div>
+  <div class="s-desc">Five portfolio families running real capital across 8+ strategies. 11 months of production data. Not a prototype — a verified, autonomous system.</div>
+
+  <h3>Portfolio Architecture</h3>
+  <table>
+    <thead><tr><th>Portfolio</th><th>Strategies</th><th>Positions</th><th>Rebalances</th><th>Character</th></tr></thead>
+    <tbody>
+      <tr><td style="font-weight:600;color:var(--white);">Atlas</td><td>Fundamental, Growth</td><td>11–14</td><td>89</td><td>Concentrated, high-conviction stock picker</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Everest</td><td>Balanced, Defensive, Fundamental, Growth</td><td>19–31</td><td>176</td><td>Broadest platform, 4 strategies, 454 unique symbols</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Titan</td><td>Fundamental, Growth, Low Risk Volatility</td><td>19–27</td><td>89</td><td>Growth/value balance with low-volatility strategy</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Key Performance Data</h3>
+  <div class="cg" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr));">
+    <div class="sc"><div class="n">488</div><div class="l">Rebalancing Events</div></div>
+    <div class="sc"><div class="n">504</div><div class="l">Unique Tickers</div></div>
+    <div class="sc"><div class="n">26.8d</div><div class="l">Avg Hold Period</div></div>
+    <div class="sc"><div class="n">37%</div><div class="l">Re-entry Rate</div></div>
+    <div class="sc"><div class="n">15–25</div><div class="l">Trade Actions/Week</div></div>
+  </div>
+
+  <div class="callout" style="margin-top:20px;">
+    <strong>Content Generation Capacity:</strong> With 8+ strategies rebalancing weekly and a 26.8-day average hold period, the AI generates 15–25 trade actions per week. Most newsletters struggle to find one story. The Signal has new entries, exits, re-entries, strategy divergences, high-conviction holds, regime shifts, scorecards, and behavioral coaching moments — an embarrassment of riches.
+  </div>
+</div>
+
+<!-- ═══════════════ SEO STRATEGY ═══════════════ -->
+<div id="seo" class="s-full s-alt">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="s-label">Organic Growth</div>
+    <div class="s-title">9. SEO Content Strategy</div>
+    <div class="s-desc">A 10-agent AI content engine produces institutional-grade articles for news.tradealgo.com — the organic search front door that converts equity investors into Signal subscribers.</div>
+
+    <h3>Five Content Clusters</h3>
+    <div class="cl-grid">
+      <div class="cl-card"><div class="cl-hdr"><span>Cluster 1 / Ambitious Accumulators + Active Traders</span><strong>AI-Powered Investing</strong></div><div class="cl-body"><p style="font-size:10px;color:var(--green);font-weight:600;margin-bottom:6px;">PILLAR: "How AI Is Changing Investing in 2026"</p><ul style="margin:0;padding:0;"><li>AI Stock Screeners: How They Work</li><li>Machine Learning vs. Traditional TA</li><li>How Hedge Funds Use AI</li><li>Alternative Data: Satellites, Credit Cards</li><li>Backtesting AI Models</li></ul></div></div>
+      <div class="cl-card"><div class="cl-hdr"><span>Cluster 2 / Curious Learners + Ambitious Accumulators</span><strong>Stock Analysis & Research</strong></div><div class="cl-body"><p style="font-size:10px;color:var(--green);font-weight:600;margin-bottom:6px;">PILLAR: "How to Research Stocks Like a Professional"</p><ul style="margin:0;padding:0;"><li>Reading Financial Statements: 20-Min Method</li><li>Valuation Models: DCF, Comps</li><li>Red Flags in Earnings Reports</li><li>Free Cash Flow: The One Metric</li><li>Building a Watchlist That Works</li></ul></div></div>
+      <div class="cl-card"><div class="cl-hdr"><span>Cluster 3 / Anxious Retirees + HNW Delegators</span><strong>Portfolio Strategy</strong></div><div class="cl-body"><p style="font-size:10px;color:var(--green);font-weight:600;margin-bottom:6px;">PILLAR: "Portfolio Management for Serious Investors"</p><ul style="margin:0;padding:0;"><li>Asset Allocation by Age</li><li>Tax-Loss Harvesting Guide</li><li>Dividend Growth Investing</li><li>Retirement Portfolio Stress Testing</li><li>Factor Investing: Value, Momentum</li></ul></div></div>
+      <div class="cl-card"><div class="cl-hdr"><span>Cluster 4 / All Segments (Universal)</span><strong>Market Psychology</strong></div><div class="cl-body"><p style="font-size:10px;color:var(--green);font-weight:600;margin-bottom:6px;">PILLAR: "The Psychology of Investing"</p><ul style="margin:0;padding:0;"><li>Loss Aversion: The $100 Problem</li><li>Recency Bias and Your Outlook</li><li>FOMO Investing Data</li><li>Decisions Under Uncertainty</li><li>Confirmation Bias in Research</li></ul></div></div>
+      <div class="cl-card"><div class="cl-hdr"><span>Cluster 5 / Active Traders + Ambitious Accumulators</span><strong>TradeAlgo Tools</strong></div><div class="cl-body"><p style="font-size:10px;color:var(--green);font-weight:600;margin-bottom:6px;">PILLAR: "How TradeAlgo's AI Scores 500+ Stocks"</p><ul style="margin:0;padding:0;"><li>Understanding the Composite Score</li><li>Dark Pool Activity Analysis</li><li>Options Flow: Smart Money</li><li>TradeAlgo vs. Traditional Screeners</li><li>Case Studies: Major Moves Flagged</li></ul></div></div>
+    </div>
+
+    <h3>Production Pipeline: 10 Agents, 4 Phases</h3>
+    <div class="cg">
+      <div class="card" style="border-top:2px solid var(--blue);"><h4>Phase 1: Research & Strategy (3 Agents)</h4><p>Marketing Director + Market Intelligence Researcher + SEO Strategist. Output: strategic brief, research brief, SEO outline.</p></div>
+      <div class="card" style="border-top:2px solid var(--purple);"><h4>Phase 2: Content Creation (2 Agents)</h4><p>Lead Writer (Atlas-adjacent voice, 2,000–3,500 words) + Supporting Writer (FAQ, TLDR, Pros/Cons, CTA). Output: complete article.</p></div>
+      <div class="card" style="border-top:2px solid var(--red);"><h4>Phase 3: Triple Review (3 Agents)</h4><p>Critical Analysis + Significance + Quality. All three must independently score 8+/10 across 7 dimensions. Max 3 revision cycles.</p></div>
+      <div class="card" style="border-top:2px solid var(--orange);"><h4>Phase 4: Publish & Distribute (2 Agents)</h4><p>Technical Publisher (Notion API) + SEO Analyst (GSC submission, SERP baseline). Articles live in under 1 hour via ISR.</p></div>
+    </div>
+
+    <div class="callout"><strong>Year 1 Target:</strong> 200+ articles across all 5 clusters, targeting 5,000+ organic sessions/week by month 3.</div>
+  </div>
+</div>
+
+<!-- ═══════════════ TECH STACK ═══════════════ -->
+<div id="tech" class="s">
+  <div class="s-label">Infrastructure</div>
+  <div class="s-title">10. Technical Architecture</div>
+  <div class="s-desc">The entire system runs from a single GitHub repository. Claude Code reads the repo, pulls from TradeAlgo APIs, and generates content governed by the Masterfile.</div>
+
+  <h3>Daily Newsletter Pipeline (4:00–6:30 AM ET)</h3>
+  <table>
+    <thead><tr><th>Time</th><th>Step</th><th>Details</th></tr></thead>
+    <tbody>
+      <tr><td style="font-weight:600;color:var(--green);">4:00 AM</td><td>Data Refresh</td><td>Atlas Scores, market regime, risk scanner pull from TradeAlgo APIs</td></tr>
+      <tr><td style="font-weight:600;color:var(--green);">4:15 AM</td><td>Prompt Assembly</td><td>Masterfile + daily template + fresh data → generation prompt</td></tr>
+      <tr><td style="font-weight:600;color:var(--green);">4:30 AM</td><td>Content Generation</td><td>Claude Opus 4.6 generates day's email following Atlas personality rules</td></tr>
+      <tr><td style="font-weight:600;color:var(--green);">4:45 AM</td><td>Quality Check</td><td>5-layer automated: compliance, forbidden phrases, data accuracy, tone, structure</td></tr>
+      <tr><td style="font-weight:600;color:var(--green);">5:00 AM</td><td>Human Review</td><td>60-minute editorial window for accuracy/compliance review</td></tr>
+      <tr><td style="font-weight:600;color:var(--green);">6:00 AM</td><td>Approval Trigger</td><td>Editor approves or requests revision</td></tr>
+      <tr><td style="font-weight:600;color:var(--green);">6:15 AM</td><td>ESP Upload</td><td>Segments applied, A/B variants created, tier-specific content blocks set</td></tr>
+      <tr><td style="font-weight:600;color:var(--green);">6:30 AM</td><td>Send</td><td>The Signal hits inboxes. Same email, different visibility per tier.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Tech Stack</h3>
+  <div class="cg" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));">
+    <div class="card"><h4>AI Generation</h4><p>Claude Opus 4.6 (writer) + Haiku 4.5 (QA pass). Cost: ~$0.50–$2.00 per edition.</p></div>
+    <div class="card"><h4>Version Control</h4><p>GitHub + GitHub Actions for CI/CD pipeline automation.</p></div>
+    <div class="card"><h4>CMS</h4><p>Notion with structured database schema for SEO properties and article management.</p></div>
+    <div class="card"><h4>Front-end</h4><p>Next.js on Vercel with ISR, auto-rendering from Notion.</p></div>
+    <div class="card"><h4>ESP</h4><p>Beehiiv or ConvertKit with tier-based content blocks and engagement segmentation.</p></div>
+    <div class="card"><h4>SMS Alerts</h4><p>Twilio for Pro+ real-time trade alerts when AI executes trades.</p></div>
+  </div>
+</div>
+
+<!-- ═══════════════ ACQUISITION ═══════════════ -->
+<div id="acquisition" class="s-full s-alt">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="s-label">Growth</div>
+    <div class="s-title">11. Subscriber Acquisition Strategy</div>
+    <div class="s-desc">Five channels, no VSLs. The AI's track record IS the marketing.</div>
+
+    <div class="cg">
+      <div class="card" style="border-top:2px solid var(--green);">
+        <h4>1. Live Portfolio Scoreboard</h4>
+        <p>Public page showing real-time AI performance. The VSL replacement — a 24/7 marketing asset people bookmark, share, and screenshot. When AI closes a big win, the scoreboard tells the story.</p>
+      </div>
+      <div class="card" style="border-top:2px solid var(--blue);">
+        <h4>2. Short Social Clips (30–60 sec)</h4>
+        <p>Screen recordings of the dashboard after big wins. "AI bought NVDA at $X three weeks ago. Here's the P&L." TikTok, YouTube Shorts, Facebook.</p>
+      </div>
+      <div class="card" style="border-top:2px solid var(--purple);">
+        <h4>3. Referral Program</h4>
+        <p>Morning Brew model. Refer 3 friends, earn Premium trial. Near-zero CAC, highest-quality subscriber source.</p>
+      </div>
+      <div class="card" style="border-top:2px solid var(--orange);">
+        <h4>4. SEO + Lead Magnets</h4>
+        <p>200+ AI-generated articles targeting stock tickers and investment queries. MarketBeat built 5.5M subs with 18 people using this approach.</p>
+      </div>
+      <div class="card" style="border-top:2px solid var(--cyan);">
+        <h4>5. Paid Acquisition</h4>
+        <p>Meta + Google ads targeting stock owners. At $3 CPA and $20K/day spend = ~200K free subscribers/month.</p>
+      </div>
+    </div>
+
+    <h3>Acquisition Economics</h3>
+    <div class="cg" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));">
+      <div class="sc"><div class="n">$3</div><div class="l">Target CPA (Free)</div></div>
+      <div class="sc"><div class="n">Email Only</div><div class="l">Signup Form</div></div>
+      <div class="sc"><div class="n">Sample Issue</div><div class="l">Landing Page IS</div></div>
+      <div class="sc"><div class="n">3x+</div><div class="l">LTV:CAC Target by Y2</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ ROADMAP ═══════════════ -->
+<div id="roadmap" class="s">
+  <div class="s-label">Execution</div>
+  <div class="s-title">12. Launch Roadmap</div>
+  <div class="s-desc">From foundation to domination in 12 months.</div>
+
+  <div class="tl">
+    <div class="tl-item"><div class="tl-dot">0</div><div class="tl-body"><h4>Phase 0: Foundation (Weeks 1–4)</h4><p>Masterfile, voice calibration with 30+ test issues, data pipeline, ESP setup, templates, quality automation. First AI-generated test email that passes all quality gates.</p><div class="tl-tags"><span class="tl-tag">Masterfile locked</span><span class="tl-tag">30+ test issues</span><span class="tl-tag">Pipeline verified</span></div></div></div>
+    <div class="tl-item"><div class="tl-dot">1</div><div class="tl-body"><h4>Phase 1: Free Launch (Month 2)</h4><p>Launch free Signal. Landing page = sample issue. Referral program live. Seed with existing TradeAlgo users. Begin paid acquisition on Meta + Google.</p><div class="tl-tags"><span class="tl-tag">1K subs</span><span class="tl-tag">>45% open rate</span><span class="tl-tag">Daily sends consistent</span></div></div></div>
+    <div class="tl-item"><div class="tl-dot">2</div><div class="tl-body"><h4>Phase 2: Monetize (Months 2–4)</h4><p>Launch Premium + Pro tiers. Enable CPA advertising. Locked content blocks active. Day 10 upsell sequence. One-Time Offer after Premium purchase → Pro at $299 first year.</p><div class="tl-tags"><span class="tl-tag">10K free subs</span><span class="tl-tag">First paid conversions</span><span class="tl-tag">CPA revenue live</span></div></div></div>
+    <div class="tl-item"><div class="tl-dot">3</div><div class="tl-body"><h4>Phase 3: Scale (Months 4–6)</h4><p>Launch Elite + SMS alerts. PR push: "AI newsletter publishes its losses." Performance-triggered upsells at volume. Managed account funnel operational.</p><div class="tl-tags"><span class="tl-tag">25K free</span><span class="tl-tag">1K+ paid</span><span class="tl-tag">Press coverage</span></div></div></div>
+    <div class="tl-item"><div class="tl-dot">4</div><div class="tl-body"><h4>Phase 4: Dominate (Months 6–12)</h4><p>Scale acquisition. SEO content at volume (200+ articles). Quarterly performance reports as viral marketing. Managed account conversions from Elite. Path to $10M+ ARR visible.</p><div class="tl-tags"><span class="tl-tag">50K+ free</span><span class="tl-tag">4,500 paid</span><span class="tl-tag">$2.3M ARR</span></div></div></div>
+  </div>
+
+  <h3>90-Day Content Engine Deployment</h3>
+  <table>
+    <thead><tr><th>Weeks</th><th>Deliverables</th></tr></thead>
+    <tbody>
+      <tr><td style="font-weight:600;color:var(--white);">1–2: Foundation</td><td>Calibrate voice with 5 test articles across 3 clusters. Score against 7-dimension rubric. Iterate Masterfile until 8+/10 consistent.</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">3–4: Refinement</td><td>Publish 10 articles (2 per cluster). Track all metrics. Refine agent prompts. Draft first pillar page.</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">5–8: Scale</td><td>Ramp to 5 articles/day. All 5 pillar pages live. Full clusters with internal linking. First organic traffic in GSC.</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">9–12: Optimize</td><td>A/B test CTAs and titles. Backlink outreach. Refresh top 20 articles. Analyze Signal attribution by cluster.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════════ KPIs ═══════════════ -->
+<div id="kpis" class="s-full s-alt">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="s-label">Measurement</div>
+    <div class="s-title">13. Performance Targets & KPIs</div>
+    <div class="s-desc">Clear, measurable targets for email performance, SEO, and subscriber growth.</div>
+
+    <h3>Email Performance</h3>
+    <table>
+      <thead><tr><th>Metric</th><th>Target</th><th>Benchmark</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:600;color:var(--white);">Open Rate</td><td style="color:var(--green);font-weight:600;">>50%</td><td>Morning Brew: 50%+. P&L-driven subject lines help.</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Click Rate</td><td style="color:var(--green);font-weight:600;">>5%</td><td>Financial newsletters average 2–3%.</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Unsubscribe Rate</td><td style="color:var(--green);font-weight:600;"><0.1%/send</td><td>Industry avg ~0.2%. Content-first protects this.</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Free → Premium</td><td style="color:var(--green);font-weight:600;">10%</td><td>Locked content + performance proof</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Premium → Pro</td><td style="color:var(--green);font-weight:600;">15%</td><td>"See what AI holds NOW" is compelling</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Annual Churn (paid)</td><td style="color:var(--green);font-weight:600;"><27%</td><td>Annual billing reduces by 51% vs. monthly</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Deliverability</td><td style="color:var(--green);font-weight:600;">>95% inbox</td><td>Dedicated IP, engagement segmentation</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">NPS</td><td style="color:var(--green);font-weight:600;">>50</td><td>Best-in-class newsletter benchmark</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Per-Article SEO Performance</h3>
+    <table>
+      <thead><tr><th>Metric</th><th>Target</th><th>Why It Matters</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:600;color:var(--white);">Organic Traffic</td><td>500+ sessions / 30 days</td><td>Validates keyword targeting</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Time on Page</td><td>4+ minutes</td><td>Signals content quality to Google</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Signal Signups</td><td>2–5% of readers</td><td>The metric that drives revenue</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Scroll Depth</td><td>70%+ reach bottom</td><td>Article holds attention</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Bounce Rate</td><td>Under 55%</td><td>Content matched search intent</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Internal Clicks</td><td>15%+ of readers</td><td>Drives deeper site exploration</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════ RISKS ═══════════════ -->
+<div id="risks" class="s">
+  <div class="s-label">Risk Management</div>
+  <div class="s-title">14. Risk Analysis & Mitigations</div>
+  <div class="s-desc">Honest assessment of risks with concrete mitigations. Every risk has a playbook.</div>
+
+  <table>
+    <thead><tr><th>Risk</th><th>Severity</th><th>Mitigation</th></tr></thead>
+    <tbody>
+      <tr><td style="font-weight:600;color:var(--white);">AI underperformance</td><td><span class="badge badge-r">High</span></td><td>Multi-strategy diversification means some portfolios up when others down. Radical transparency builds trust. Behavioral coaching normalizes losses. 11-month track record stress-tested before launch.</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Regulatory/compliance</td><td><span class="badge badge-o">Medium</span></td><td>Newsletter provides data/education, not personalized advice. Mandatory disclaimers in every issue. Depersonalization rules in Masterfile. Legal review of tier descriptions.</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Email deliverability</td><td><span class="badge badge-o">Medium</span></td><td>Warm domain slowly, dedicated IP, monitor engagement obsessively. P&L-driven content drives high opens. Three-tier engagement segmentation protects sender reputation.</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Front-running concerns</td><td><span class="badge badge-o">Medium</span></td><td>Pro/Elite see positions after execution, never before. SMS alerts sent after trades placed. Always retrospective for subscribers.</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Voice consistency</td><td><span class="badge badge-o">Medium</span></td><td>Masterfile version-controlled in GitHub. Persona-drift-detector.py catches tone deviations. Quality gates enforce 8+/10 on tone dimension.</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Market saturation</td><td><span class="badge badge-g">Low</span></td><td>No competitor has AI trading real money with verifiable, transparent losses. 12+ month moat to replicate.</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Cannibalization</td><td><span class="badge badge-g">Low</span></td><td>Newsletter reaches different market ($149–$2,500 vs $50K–$400K managed). Actually drives managed account leads at zero additional cost.</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Competitor copies approach</td><td><span class="badge badge-g">Low</span></td><td>Requires 500+ stock scoring engine + live portfolios + behavioral coaching. 12–18 months minimum to replicate.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════════ STANSBERRY ═══════════════ -->
+<div class="s-full s-alt">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="s-label">Competitive Intelligence</div>
+    <div class="s-title">15. Stansberry Tactics: Copy vs. Skip</div>
+    <div class="s-desc">Stansberry generates $409M. Their revenue mechanics are proven. Their execution drove 47% subscriber loss. Copy the first. Avoid the second.</div>
+
+    <table>
+      <thead><tr><th>Tactic</th><th>Verdict</th><th>Implementation</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:600;color:var(--white);">Price escalation ladder ($49→$5K+)</td><td><span class="badge badge-g">Copy</span></td><td>$0 → $149 → $499 → $2,500 → $50K+ managed. 65% of Stansberry revenue from $500+ spend.</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Multi-email promo sequences</td><td><span class="badge badge-g">Copy</span></td><td>Triggered by engagement signals, not blasted. 50% higher conversion, 320% more revenue.</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Credit-based refunds</td><td><span class="badge badge-g">Copy</span></td><td>30-day guarantee. Refunds as 12-month credit toward any tier. 2% revenue recaptured.</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Event-driven launches</td><td><span class="badge badge-g">Copy</span></td><td>Market crashes = highest conversion moments. AI's real-time performance is the proof.</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Alliance membership ($25K+)</td><td><span class="badge badge-b">Later</span></td><td>Phase 3: Signal Lifetime bundle, $10K–$15K + $299/yr renewal.</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Software tools add-on</td><td><span class="badge badge-b">Later</span></td><td>Phase 3: Portfolio Dashboard Pro, $199–$499/yr. 11% of MarketWise billings.</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">4–7 emails/day</td><td><span class="badge badge-r">Skip</span></td><td>Max 2/day for active (1 content + 1 targeted promo). Protect deliverability.</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">Multi-brand email stacking</td><td><span class="badge badge-r">Skip</span></td><td>One brand, one list, segmented by engagement.</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">75% promo / 25% content</td><td><span class="badge badge-r">Skip</span></td><td>Inverted: 70% content / 30% targeted promos.</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">VSL-based acquisition</td><td><span class="badge badge-r">Skip</span></td><td>Live scoreboard + social clips + trade proofs replace 77-minute sales videos.</td></tr>
+        <tr><td style="font-weight:600;color:var(--white);">No engagement segmentation</td><td><span class="badge badge-r">Skip</span></td><td>Active/Cooling/Inactive three-tier approach protects sender reputation.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════ CONCLUSION ═══════════════ -->
+<div class="s">
+  <div class="s-label">Conclusion</div>
+  <div class="s-title">The Bottom Line</div>
+
+  <div class="cg" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-bottom:24px;">
+    <div class="sc"><div class="n">60–80M</div><div class="l">Target Market Size</div></div>
+    <div class="sc"><div class="n">488</div><div class="l">Auditable Trade Events</div></div>
+    <div class="sc"><div class="n">5–8mo</div><div class="l">Breakeven Timeline</div></div>
+    <div class="sc"><div class="n">60%+</div><div class="l">Target Net Margin</div></div>
+  </div>
+
+  <div class="callout">
+    <strong>Stansberry built $409M selling human opinions through email.</strong> The Signal runs the same playbook with a fundamentally better product (AI portfolios running real money), better ethics (radical transparency, behavioral coaching vs. fear exploitation), and a superior endgame (managed accounts vs. lifetime newsletters). The AI is ready. The data exists. The market is waiting. Build it.
+  </div>
+</div>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<div class="footer">
+  <div style="max-width:800px;margin:0 auto;">
+    <div style="display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin-bottom:24px;">
+      <div style="text-align:center;"><div style="font-size:26px;font-weight:800;color:var(--green);">5</div><div style="font-size:10px;color:var(--gray-3);text-transform:uppercase;letter-spacing:1px;">Revenue Tiers</div></div>
+      <div style="text-align:center;"><div style="font-size:26px;font-weight:800;color:var(--green);">15</div><div style="font-size:10px;color:var(--gray-3);text-transform:uppercase;letter-spacing:1px;">Sections Covered</div></div>
+      <div style="text-align:center;"><div style="font-size:26px;font-weight:800;color:var(--green);">16</div><div style="font-size:10px;color:var(--gray-3);text-transform:uppercase;letter-spacing:1px;">Source Documents</div></div>
+      <div style="text-align:center;"><div style="font-size:26px;font-weight:800;color:var(--green);">$17.6M</div><div style="font-size:10px;color:var(--gray-3);text-transform:uppercase;letter-spacing:1px;">Y3 ARR Target</div></div>
+    </div>
+    <p style="color:var(--green);font-weight:800;font-size:20px;margin-bottom:4px;letter-spacing:-0.5px;">The Signal — Complete Newsletter Structure Proposal</p>
+    <p style="color:var(--gray-3);font-size:12px;margin-bottom:16px;">Synthesized from competitive intelligence, unit economics, audience profiles, content strategy, and technical architecture research.</p>
+    <div style="border-top:1px solid var(--dark-4);padding-top:16px;">
+      <p style="font-size:11px;color:var(--gray-3);">TradeAlgo &middot; Confidential &middot; February 2026</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

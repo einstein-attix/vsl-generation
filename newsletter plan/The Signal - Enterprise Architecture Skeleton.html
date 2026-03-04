@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Signal — Enterprise Architecture Skeleton</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green: #0D9F5F;
+  --green-light: #E8F7F0;
+  --green-dark: #0A7D4A;
+  --green-glow: rgba(13,159,95,0.10);
+  --green-glow-strong: rgba(13,159,95,0.22);
+  --dark: #09090b;
+  --dark-2: #111113;
+  --dark-3: #1a1a1f;
+  --dark-4: #252529;
+  --dark-5: #32323a;
+  --gray-1: #3f3f46;
+  --gray-2: #52525b;
+  --gray-3: #71717a;
+  --gray-4: #a1a1aa;
+  --gray-5: #d4d4d8;
+  --white: #fafafa;
+  --red: #ef4444;
+  --red-soft: rgba(239,68,68,0.08);
+  --orange: #f59e0b;
+  --orange-soft: rgba(245,158,11,0.08);
+  --blue: #3b82f6;
+  --blue-soft: rgba(59,130,246,0.08);
+  --purple: #8b5cf6;
+  --purple-soft: rgba(139,92,246,0.08);
+  --cyan: #06b6d4;
+  --cyan-soft: rgba(6,182,212,0.08);
+  --yellow: #eab308;
+  --yellow-soft: rgba(234,179,8,0.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--dark);color:var(--white);line-height:1.7;font-size:15px;-webkit-font-smoothing:antialiased}
+a{color:var(--green);text-decoration:none}
+a:hover{text-decoration:underline}
+code{font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--dark-4);padding:2px 6px;border-radius:4px;color:var(--green)}
+
+/* NAV */
+.nav{background:rgba(17,17,19,0.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--dark-4);padding:10px 32px;position:sticky;top:0;z-index:200}
+.nav-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-size:15px;font-weight:800;letter-spacing:-0.5px}
+.nav-logo .a{color:var(--green)}
+.nav-links{display:flex;gap:3px;flex-wrap:wrap}
+.nav-links a{color:var(--gray-3);font-size:10px;font-weight:500;padding:4px 8px;border-radius:6px;transition:all .15s;white-space:nowrap}
+.nav-links a:hover{background:var(--dark-3);color:var(--green);text-decoration:none}
+
+/* HERO */
+.hero{background:var(--dark);padding:100px 40px 80px;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid var(--dark-4)}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(13,159,95,0.06),transparent 70%)}
+.hero-inner{position:relative;z-index:1;max-width:960px;margin:0 auto}
+.hero-chip{display:inline-flex;align-items:center;gap:8px;background:var(--dark-3);border:1px solid var(--dark-5);color:var(--gray-4);padding:6px 16px;border-radius:100px;font-size:12px;font-weight:500;margin-bottom:28px}
+.hero-chip .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:.5}50%{opacity:1}}
+.hero h1{font-size:clamp(34px,5vw,58px);font-weight:900;line-height:1.05;letter-spacing:-2px;margin-bottom:18px}
+.hero h1 .accent{background:linear-gradient(135deg,var(--green),#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero .subtitle{font-size:16px;color:var(--gray-3);max-width:620px;margin:0 auto 44px;line-height:1.7}
+.hero-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;max-width:900px;margin:0 auto}
+.hero-metric{background:var(--dark-2);border:1px solid var(--dark-4);border-radius:12px;padding:16px 8px;text-align:center}
+.hero-metric .val{font-size:22px;font-weight:800;color:var(--green);letter-spacing:-1px;display:block}
+.hero-metric .lbl{font-size:9px;color:var(--gray-3);text-transform:uppercase;letter-spacing:1px;margin-top:2px;display:block}
+
+/* SECTIONS */
+.s{max-width:1200px;margin:0 auto;padding:80px 40px}
+.s-full{padding:80px 40px}
+.s-alt{background:var(--dark-2)}
+.s-label{font-size:11px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px}
+.s-title{font-size:clamp(24px,3.5vw,36px);font-weight:800;line-height:1.15;letter-spacing:-0.5px;margin-bottom:10px}
+.s-desc{font-size:15px;color:var(--gray-3);max-width:700px;margin-bottom:40px;line-height:1.7}
+h3{font-size:17px;font-weight:700;margin:32px 0 12px;color:var(--white)}
+h4{font-size:14px;font-weight:700;margin-bottom:5px}
+p.body{color:var(--gray-3);font-size:13px;line-height:1.7;margin-bottom:14px}
+
+/* CARDS */
+.card{background:var(--dark-3);border:1px solid var(--dark-4);border-radius:12px;padding:22px;transition:border-color .2s}
+.card:hover{border-color:rgba(13,159,95,0.22)}
+.card p{color:var(--gray-3);font-size:12px;margin:0;line-height:1.6}
+.cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:18px 0}
+
+/* SYSTEM CARDS */
+.sys-card{background:var(--dark-3);border:1px solid var(--dark-4);border-radius:12px;overflow:hidden;transition:border-color .2s}
+.sys-card:hover{border-color:rgba(13,159,95,0.3)}
+.sys-hdr{padding:16px 20px;display:flex;align-items:center;gap:10px}
+.sys-num{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0}
+.sys-hdr h4{font-size:14px;font-weight:700;margin:0}
+.sys-hdr span{display:block;font-size:10px;color:var(--gray-3);font-weight:500;margin-top:1px}
+.sys-body{padding:0 20px 18px}
+.sys-body p{color:var(--gray-3);font-size:12px;line-height:1.6;margin-bottom:10px}
+.sys-files{list-style:none;padding:0;margin:0}
+.sys-files li{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gray-4);padding:3px 0;border-bottom:1px solid var(--dark-4);display:flex;align-items:baseline;gap:8px}
+.sys-files li:last-child{border-bottom:none}
+.sys-files .dir{color:var(--blue);font-weight:600}
+.sys-files .file{color:var(--green)}
+.sys-files .desc{color:var(--gray-3);font-size:10px;margin-left:auto;text-align:right;font-family:'Inter',sans-serif}
+
+/* TABLES */
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
+th{background:var(--dark-4);color:var(--gray-5);padding:10px 13px;text-align:left;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+td{padding:10px 13px;border-bottom:1px solid var(--dark-4);color:var(--gray-4)}
+tr:hover td{background:rgba(255,255,255,0.015)}
+th:first-child{border-radius:8px 0 0 0}
+th:last-child{border-radius:0 8px 0 0}
+
+/* CALLOUT */
+.callout{background:var(--green-glow);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:16px 20px;margin:20px 0;font-size:13px;color:var(--gray-4);line-height:1.7}
+.callout strong{color:var(--green)}
+.callout-blue{background:var(--blue-soft);border-left-color:var(--blue)}
+.callout-blue strong{color:var(--blue)}
+.callout-orange{background:var(--orange-soft);border-left-color:var(--orange)}
+.callout-orange strong{color:var(--orange)}
+.callout-red{background:var(--red-soft);border-left-color:var(--red)}
+.callout-red strong{color:var(--red)}
+.callout-purple{background:var(--purple-soft);border-left-color:var(--purple)}
+.callout-purple strong{color:var(--purple)}
+
+/* FILE TREE */
+.tree{background:var(--dark-3);border:1px solid var(--dark-4);border-radius:10px;padding:20px 24px;margin:20px 0;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:2;color:var(--gray-4);overflow-x:auto}
+.tree .d{color:var(--blue);font-weight:600}
+.tree .y{color:var(--orange)}
+.tree .p{color:var(--cyan)}
+.tree .h{color:var(--green)}
+.tree .m{color:var(--purple)}
+.tree .r{color:var(--red)}
+.tree .g{color:var(--gray-3)}
+
+/* BADGES */
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px}
+.badge-g{background:var(--green-glow);color:var(--green)}
+.badge-b{background:var(--blue-soft);color:var(--blue)}
+.badge-p{background:var(--purple-soft);color:var(--purple)}
+.badge-r{background:var(--red-soft);color:var(--red)}
+.badge-o{background:var(--orange-soft);color:var(--orange)}
+.badge-c{background:var(--cyan-soft);color:var(--cyan)}
+.badge-y{background:var(--yellow-soft);color:var(--yellow)}
+
+/* ARCH FLOW */
+.arch-flow{display:flex;align-items:center;justify-content:center;gap:0;margin:28px 0;flex-wrap:wrap}
+.arch-node{background:var(--dark-3);border:1px solid var(--dark-4);border-radius:10px;padding:14px 18px;text-align:center;min-width:130px}
+.arch-node strong{display:block;font-size:12px;margin-bottom:2px}
+.arch-node span{font-size:10px;color:var(--gray-3)}
+.arch-node-active{border-color:var(--green);background:linear-gradient(135deg,var(--dark-3),#0a1f14)}
+.arch-arrow{color:var(--green);font-size:20px;font-weight:700;padding:0 5px;flex-shrink:0}
+
+/* PRIORITY */
+.priority-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin:18px 0}
+.priority-card{border-radius:12px;padding:20px;border:1px solid var(--dark-4)}
+.priority-card h4{margin-bottom:4px;font-size:13px}
+.priority-card p{color:var(--gray-3);font-size:12px;line-height:1.5;margin:0}
+.p-critical{background:linear-gradient(135deg,var(--dark-3),rgba(239,68,68,0.05));border-color:rgba(239,68,68,0.2)}
+.p-critical h4{color:var(--red)}
+.p-high{background:linear-gradient(135deg,var(--dark-3),rgba(245,158,11,0.05));border-color:rgba(245,158,11,0.2)}
+.p-high h4{color:var(--orange)}
+.p-medium{background:linear-gradient(135deg,var(--dark-3),rgba(59,130,246,0.05));border-color:rgba(59,130,246,0.2)}
+.p-medium h4{color:var(--blue)}
+.p-later{background:linear-gradient(135deg,var(--dark-3),rgba(139,92,246,0.05));border-color:rgba(139,92,246,0.2)}
+.p-later h4{color:var(--purple)}
+
+/* SC */
+.sc{background:var(--dark-3);border:1px solid var(--dark-4);border-radius:12px;padding:18px;text-align:center}
+.sc .n{font-size:22px;font-weight:800;color:var(--green);letter-spacing:-1px}
+.sc .l{font-size:9px;color:var(--gray-3);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+
+/* FOOTER */
+.footer{background:var(--dark);border-top:1px solid var(--dark-4);padding:50px 40px;text-align:center}
+.footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--green-glow-strong),transparent)}
+
+@media(max-width:768px){
+  .hero{padding:60px 20px 50px}
+  .hero-grid{grid-template-columns:repeat(3,1fr)}
+  .s,.s-full{padding:50px 20px}
+  .nav{display:none}
+  .arch-flow{flex-direction:column}
+  .arch-arrow{transform:rotate(90deg)}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">The <span class="a">Signal</span> — Architecture</div>
+    <div class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#systems">16 Systems</a>
+      <a href="#tree">File Tree</a>
+      <a href="#s01">Data Ingestion</a>
+      <a href="#s02">Content Engine</a>
+      <a href="#s03">Newsletter Gen</a>
+      <a href="#s04">Delivery</a>
+      <a href="#s05">Sales Funnels</a>
+      <a href="#s06">Sales Sequences</a>
+      <a href="#s07">Personalization</a>
+      <a href="#s08">Reply Engine</a>
+      <a href="#s09">Analytics</a>
+      <a href="#s10">Subscriber CRM</a>
+      <a href="#s11">Revenue</a>
+      <a href="#s12">SEO</a>
+      <a href="#s13">Referral</a>
+      <a href="#s14">SMS/Push</a>
+      <a href="#s15">Compliance</a>
+      <a href="#s16">Infrastructure</a>
+      <a href="#deps">Dependencies</a>
+      <a href="#roadmap">Build Order</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-chip"><span class="dot"></span> Enterprise Architecture Skeleton</div>
+    <h1>The Signal<br><span class="accent">GitHub Skeleton</span></h1>
+    <p class="subtitle">The complete repository architecture for an enterprise-grade AI newsletter platform. 16 systems. Every file. Every config. Every integration point. Ready to build.</p>
+    <div class="hero-grid">
+      <div class="hero-metric"><span class="val">16</span><span class="lbl">Core Systems</span></div>
+      <div class="hero-metric"><span class="val">140+</span><span class="lbl">Files Mapped</span></div>
+      <div class="hero-metric"><span class="val">24</span><span class="lbl">Integrations</span></div>
+      <div class="hero-metric"><span class="val">7</span><span class="lbl">AI Pipelines</span></div>
+      <div class="hero-metric"><span class="val">4</span><span class="lbl">Databases</span></div>
+      <div class="hero-metric"><span class="val">100%</span><span class="lbl">Automated</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ OVERVIEW ═══════════════ -->
+<div id="overview" class="s">
+  <div class="s-label">Architecture Map</div>
+  <div class="s-title">What This System Actually Does</div>
+  <div class="s-desc">The Signal isn't a newsletter — it's an autonomous content, sales, and analytics platform that happens to output emails. Here's every system it needs, and why.</div>
+
+  <div class="callout">
+    <strong>Design Principle:</strong> Monorepo. One repository. Every system lives here. Shared types, shared configs, shared deployment. If a new developer clones this repo, they can understand the entire business in one afternoon. No microservice sprawl. No "which repo is that in?"
+  </div>
+
+  <h3>The 16 Core Systems</h3>
+  <p class="body">Each system is a top-level directory with its own agents, configs, tests, and documentation. Systems communicate through a shared event bus and typed interfaces. Here's what you asked for — plus everything you're missing.</p>
+
+  <div id="systems" class="cg" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">
+    <div class="card" style="border-top:2px solid var(--green);"><h4>01. Data Ingestion</h4><p>Portfolio feeds, market data, subscriber events, third-party APIs → unified data lake</p></div>
+    <div class="card" style="border-top:2px solid var(--blue);"><h4>02. Content Engine</h4><p>AI agents, Masterfile, quality gates, editorial pipeline → institutional-grade articles</p></div>
+    <div class="card" style="border-top:2px solid var(--purple);"><h4>03. Newsletter Generation</h4><p>Daily email assembly, template rendering, tier-gating, A/B variants → send-ready HTML</p></div>
+    <div class="card" style="border-top:2px solid var(--orange);"><h4>04. Delivery Infrastructure</h4><p>ESP integration, segmentation, send orchestration, deliverability monitoring → inbox</p></div>
+    <div class="card" style="border-top:2px solid var(--red);"><h4>05. Sales Funnel Builder</h4><p>Landing pages, lead magnets, scoreboard, signup flows, OTO → subscriber acquisition</p></div>
+    <div class="card" style="border-top:2px solid var(--cyan);"><h4>06. Sales Sequence Engine</h4><p>Behavioral triggers, drip campaigns, upgrade flows, win-back, event sequences → revenue</p></div>
+    <div class="card" style="border-top:2px solid var(--yellow);"><h4>07. Personalization Engine</h4><p>Subscriber profiles, content adaptation, tier-specific rendering, dynamic blocks → relevance</p></div>
+    <div class="card" style="border-top:2px solid var(--green);"><h4>08. Reply & Engagement Engine</h4><p>Inbound email parsing, AI draft responses, sentiment analysis, escalation → relationship</p></div>
+    <div class="card" style="border-top:2px solid var(--blue);"><h4>09. Analytics & Intelligence</h4><p>Email metrics, revenue attribution, cohort analysis, churn prediction, dashboards → decisions</p></div>
+    <div class="card" style="border-top:2px solid var(--purple);"><h4>10. Subscriber CRM</h4><p>Lifecycle management, engagement scoring, segmentation, preference center → subscriber health</p></div>
+    <div class="card" style="border-top:2px solid var(--orange);"><h4>11. Revenue & Billing</h4><p>Stripe integration, tier management, credit system, refund flows, dunning → money</p></div>
+    <div class="card" style="border-top:2px solid var(--red);"><h4>12. SEO Content System</h4><p>Article pipeline, Notion CMS, pillar/spoke clusters, schema generation → organic traffic</p></div>
+    <div class="card" style="border-top:2px solid var(--cyan);"><h4>13. Referral & Viral Engine</h4><p>Referral tracking, reward tiers, share mechanics, leaderboard → zero-CAC growth</p></div>
+    <div class="card" style="border-top:2px solid var(--yellow);"><h4>14. SMS & Push Notifications</h4><p>Trade alerts, price triggers, milestone notifications, opt-in management → real-time</p></div>
+    <div class="card" style="border-top:2px solid var(--green);"><h4>15. Compliance & Legal</h4><p>Disclaimer injection, regulatory checks, depersonalization, audit trail → protection</p></div>
+    <div class="card" style="border-top:2px solid var(--blue);"><h4>16. Infrastructure & DevOps</h4><p>CI/CD, monitoring, secrets, environments, testing framework, error tracking → reliability</p></div>
+  </div>
+
+  <h3 style="margin-top:40px;">What You Were Missing</h3>
+  <p class="body">Your original list covered 7 areas. Here are the 9 you didn't mention that will kill the project without:</p>
+
+  <table>
+    <thead><tr><th>System</th><th>Why It's Non-Negotiable</th><th>What Breaks Without It</th></tr></thead>
+    <tbody>
+      <tr><td style="font-weight:600;color:var(--white);">Newsletter Generation (#3)</td><td>Separate from content writing — this is the daily assembly pipeline that turns raw content + data into tier-gated, A/B-tested, send-ready email HTML</td><td>Content exists but can't ship</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Delivery Infrastructure (#4)</td><td>ESP integration, warm-up schedules, deliverability monitoring, bounce handling — without this, emails go to spam</td><td>50% open rate drops to 5%</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Subscriber CRM (#10)</td><td>Engagement scoring, lifecycle tracking, segment management — the brain that tells every other system who each subscriber is</td><td>Sequences, personalization, analytics all blind</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Revenue & Billing (#11)</td><td>Stripe integration, tier upgrades/downgrades, credit-based refunds, dunning sequences — this is how money moves</td><td>Can't charge anyone</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">SEO Content System (#12)</td><td>The organic traffic front door. 200+ articles feeding The Signal subscriber base. Separate pipeline from newsletter content.</td><td>Only paid acquisition (expensive, fragile)</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Referral Engine (#13)</td><td>Morning Brew's #1 growth channel. Near-zero CAC. Viral loops compound exponentially.</td><td>Miss your cheapest, highest-quality growth channel</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">SMS & Push (#14)</td><td>Pro/Elite trade alerts are the #1 upsell driver. "Pro members got SMS 6 weeks ago" is the FOMO trigger.</td><td>Pro tier has no real-time value prop</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Compliance (#15)</td><td>Financial newsletter without compliance = lawsuit. Disclaimer injection, depersonalization, regulatory audit trail.</td><td>Legal risk, SEC attention, platform shutdown</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">Infrastructure (#16)</td><td>CI/CD, monitoring, error tracking, secrets management, testing. Without this, everything else is fragile.</td><td>First production bug takes down all 15 systems</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════════ HIGH-LEVEL ARCHITECTURE ═══════════════ -->
+<div class="s-full s-alt">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="s-label">System Architecture</div>
+    <div class="s-title">How the 16 Systems Connect</div>
+    <div class="s-desc">Data flows left to right. Every system publishes events to a shared bus. Every system can be developed, tested, and deployed independently.</div>
+
+    <div class="arch-flow">
+      <div class="arch-node arch-node-active"><strong>Data Ingestion</strong><span>Portfolios, Markets, Subs</span></div>
+      <div class="arch-arrow">&rarr;</div>
+      <div class="arch-node"><strong>Content Engine</strong><span>AI Agents + Quality</span></div>
+      <div class="arch-arrow">&rarr;</div>
+      <div class="arch-node"><strong>Newsletter Gen</strong><span>Assembly + Gating</span></div>
+      <div class="arch-arrow">&rarr;</div>
+      <div class="arch-node arch-node-active"><strong>Delivery</strong><span>ESP + Segmentation</span></div>
+      <div class="arch-arrow">&rarr;</div>
+      <div class="arch-node"><strong>Analytics</strong><span>Metrics + Attribution</span></div>
+    </div>
+    <div class="arch-flow" style="margin-top:12px;">
+      <div class="arch-node"><strong>Subscriber CRM</strong><span>Profiles + Scoring</span></div>
+      <div class="arch-arrow">&rarr;</div>
+      <div class="arch-node"><strong>Personalization</strong><span>Dynamic Content</span></div>
+      <div class="arch-arrow">&rarr;</div>
+      <div class="arch-node"><strong>Sales Sequences</strong><span>Triggers + Drips</span></div>
+      <div class="arch-arrow">&rarr;</div>
+      <div class="arch-node"><strong>Sales Funnels</strong><span>Pages + Conversion</span></div>
+      <div class="arch-arrow">&rarr;</div>
+      <div class="arch-node arch-node-active"><strong>Revenue</strong><span>Stripe + Billing</span></div>
+    </div>
+    <div class="arch-flow" style="margin-top:12px;">
+      <div class="arch-node"><strong>Reply Engine</strong><span>Inbound + AI Draft</span></div>
+      <div class="arch-arrow">&harr;</div>
+      <div class="arch-node"><strong>SEO System</strong><span>Articles + Notion</span></div>
+      <div class="arch-arrow">&harr;</div>
+      <div class="arch-node"><strong>Referral</strong><span>Viral + Rewards</span></div>
+      <div class="arch-arrow">&harr;</div>
+      <div class="arch-node"><strong>SMS/Push</strong><span>Trade Alerts</span></div>
+      <div class="arch-arrow">&harr;</div>
+      <div class="arch-node"><strong>Compliance</strong><span>Legal + Audit</span></div>
+    </div>
+
+    <div class="callout" style="margin-top:28px;">
+      <strong>Shared Infrastructure Layer (System 16):</strong> CI/CD, monitoring, secrets, error tracking, and the event bus sit underneath all 15 systems. Every system publishes typed events (<code>subscriber.upgraded</code>, <code>trade.executed</code>, <code>email.opened</code>) and any other system can subscribe. This is how sales sequences know when to fire, analytics knows what happened, and personalization knows who you are.
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ MASTER FILE TREE ═══════════════ -->
+<div id="tree" class="s">
+  <div class="s-label">Repository Structure</div>
+  <div class="s-title">The Complete File Tree</div>
+  <div class="s-desc">Every directory, every config file, every agent prompt. This is what you clone on Day 1. We'll deep-dive each system after this.</div>
+
+  <div class="tree">
+<span class="d">the-signal/</span>
+├── <span class="y">.github/</span>
+│   ├── <span class="g">workflows/</span>
+│   │   ├── <span class="y">ci.yml</span>                          <span class="g"># Lint + type-check + test on every PR</span>
+│   │   ├── <span class="y">deploy-staging.yml</span>               <span class="g"># Auto-deploy to staging on merge to develop</span>
+│   │   ├── <span class="y">deploy-production.yml</span>            <span class="g"># Manual approval deploy to production</span>
+│   │   ├── <span class="y">daily-newsletter.yml</span>             <span class="g"># Cron: 4:00 AM ET — triggers full pipeline</span>
+│   │   ├── <span class="y">seo-publisher.yml</span>                <span class="g"># Cron: publishes queued SEO articles</span>
+│   │   └── <span class="y">data-ingestion.yml</span>               <span class="g"># Cron: portfolio + market data refresh</span>
+│   ├── <span class="y">CODEOWNERS</span>                           <span class="g"># System-level ownership mapping</span>
+│   └── <span class="y">pull_request_template.md</span>             <span class="g"># PR checklist with system impact assessment</span>
+│
+├── <span class="d">packages/</span>                                <span class="g"># Shared libraries (monorepo packages)</span>
+│   ├── <span class="d">shared-types/</span>                        <span class="g"># TypeScript interfaces shared across ALL systems</span>
+│   │   ├── <span class="h">subscriber.ts</span>                    <span class="g"># Subscriber, Tier, Engagement, Preferences</span>
+│   │   ├── <span class="h">portfolio.ts</span>                     <span class="g"># Position, Rebalance, Trade, Strategy</span>
+│   │   ├── <span class="h">content.ts</span>                       <span class="g"># Article, Newsletter, Template, Component</span>
+│   │   ├── <span class="h">events.ts</span>                        <span class="g"># All event types for the event bus</span>
+│   │   ├── <span class="h">analytics.ts</span>                     <span class="g"># Metric, Cohort, Attribution, Dashboard</span>
+│   │   ├── <span class="h">billing.ts</span>                       <span class="g"># Subscription, Invoice, Credit, Refund</span>
+│   │   └── <span class="h">compliance.ts</span>                    <span class="g"># Disclaimer, AuditEntry, RegCheck</span>
+│   ├── <span class="d">event-bus/</span>                           <span class="g"># Typed pub/sub — Redis Streams or BullMQ</span>
+│   │   ├── <span class="h">publisher.ts</span>                     <span class="g"># Publish typed events</span>
+│   │   ├── <span class="h">subscriber.ts</span>                    <span class="g"># Subscribe to event patterns</span>
+│   │   └── <span class="h">events.registry.ts</span>               <span class="g"># Central event catalog with schemas</span>
+│   ├── <span class="d">database/</span>                            <span class="g"># Shared DB client, migrations, seeds</span>
+│   │   ├── <span class="h">client.ts</span>                        <span class="g"># Prisma or Drizzle ORM client</span>
+│   │   ├── <span class="h">schema.prisma</span>                    <span class="g"># Complete database schema</span>
+│   │   ├── <span class="g">migrations/</span>                      <span class="g"># Versioned schema migrations</span>
+│   │   └── <span class="g">seeds/</span>                           <span class="g"># Test data for development</span>
+│   ├── <span class="d">ai-client/</span>                           <span class="g"># Unified AI API wrapper</span>
+│   │   ├── <span class="h">claude.ts</span>                        <span class="g"># Anthropic API client (Opus, Sonnet, Haiku)</span>
+│   │   ├── <span class="h">prompt-builder.ts</span>                <span class="g"># Masterfile + context → prompt assembly</span>
+│   │   ├── <span class="h">rate-limiter.ts</span>                  <span class="g"># Token budget management</span>
+│   │   └── <span class="h">cost-tracker.ts</span>                  <span class="g"># Per-pipeline AI spend tracking</span>
+│   └── <span class="d">utils/</span>                               <span class="g"># Shared utilities</span>
+│       ├── <span class="h">logger.ts</span>                        <span class="g"># Structured logging (Pino)</span>
+│       ├── <span class="h">retry.ts</span>                         <span class="g"># Exponential backoff wrapper</span>
+│       ├── <span class="h">cache.ts</span>                         <span class="g"># Redis cache helpers</span>
+│       └── <span class="h">date.ts</span>                          <span class="g"># Market hours, timezone, trading day utils</span>
+│
+├── <span class="d">masterfile/</span>                              <span class="g"># THE source of truth</span>
+│   ├── <span class="y">atlas-voice.yaml</span>                     <span class="g"># Personality traits, tone rules, forbidden phrases</span>
+│   ├── <span class="y">market-regimes.yaml</span>                  <span class="g"># 5 regimes → tone calibration mapping</span>
+│   ├── <span class="y">audience-segments.yaml</span>               <span class="g"># 5 segments → content adaptation rules</span>
+│   ├── <span class="y">quality-rubric.yaml</span>                  <span class="g"># 7-dimension scoring (8+/10 minimum)</span>
+│   ├── <span class="y">compliance-rules.yaml</span>                <span class="g"># Disclaimers, forbidden claims, depersonalization</span>
+│   ├── <span class="y">content-templates.yaml</span>               <span class="g"># Daily email structures, Sunday Deep Dive format</span>
+│   ├── <span class="y">upsell-rules.yaml</span>                    <span class="g"># Placement, frequency caps, intensity per tier</span>
+│   ├── <span class="y">seo-guidelines.yaml</span>                  <span class="g"># Keyword rules, schema requirements, link strategy</span>
+│   └── <span class="y">changelog.md</span>                         <span class="g"># Version history of every Masterfile change</span>
+│
+├── <span class="d">systems/</span>                                 <span class="g"># THE 16 CORE SYSTEMS</span>
+│
+│   ├── <span class="d">01-data-ingestion/</span>                   <span class="g"># ═══ SYSTEM 01: DATA INGESTION ═══</span>
+│   │   ├── <span class="d">sources/</span>
+│   │   │   ├── <span class="h">portfolio-feed.ts</span>            <span class="g"># Parse Wealth Series rebalancing xlsx → JSON</span>
+│   │   │   ├── <span class="h">market-data.ts</span>               <span class="g"># S&P, indices, VIX, sector data from APIs</span>
+│   │   │   ├── <span class="h">atlas-scores.ts</span>              <span class="g"># Pull composite scores from TradeAlgo API</span>
+│   │   │   ├── <span class="h">regime-detector.ts</span>           <span class="g"># Market regime classification (bull/neutral/bear/crash)</span>
+│   │   │   └── <span class="h">news-scanner.ts</span>              <span class="g"># Breaking news feed for context injection</span>
+│   │   ├── <span class="d">transforms/</span>
+│   │   │   ├── <span class="h">portfolio-differ.ts</span>          <span class="g"># Diff rebalancing files → new buys, sells, holds</span>
+│   │   │   ├── <span class="h">pnl-calculator.ts</span>            <span class="g"># Daily P&L for each portfolio/strategy</span>
+│   │   │   ├── <span class="h">position-tracker.ts</span>          <span class="g"># Current positions, entry dates, avg cost</span>
+│   │   │   ├── <span class="h">benchmark-comparator.ts</span>      <span class="g"># Portfolio vs S&P, Nasdaq, sector benchmarks</span>
+│   │   │   └── <span class="h">holding-period-analyzer.ts</span>   <span class="g"># Avg hold, re-entry rate, conviction metrics</span>
+│   │   ├── <span class="d">storage/</span>
+│   │   │   ├── <span class="h">data-lake.ts</span>                 <span class="g"># Write to PostgreSQL + time-series store</span>
+│   │   │   └── <span class="h">cache-warmer.ts</span>              <span class="g"># Pre-compute daily data for newsletter gen</span>
+│   │   ├── <span class="h">orchestrator.ts</span>                  <span class="g"># Cron scheduler — runs at 4:00 AM ET</span>
+│   │   ├── <span class="h">health-check.ts</span>                  <span class="g"># Verify all data sources responding</span>
+│   │   └── <span class="g">__tests__/</span>
+│   │
+│   ├── <span class="d">02-content-engine/</span>                   <span class="g"># ═══ SYSTEM 02: AI CONTENT ENGINE ═══</span>
+│   │   ├── <span class="d">agents/</span>
+│   │   │   ├── <span class="m">00-editor-in-chief.md</span>        <span class="g"># Pipeline orchestrator — the only agent with publish authority</span>
+│   │   │   ├── <span class="m">01-marketing-director.md</span>     <span class="g"># Strategic brief, audience targeting, calendar alignment</span>
+│   │   │   ├── <span class="m">02-market-researcher.md</span>      <span class="g"># Competitor analysis, data gathering, unique angle</span>
+│   │   │   ├── <span class="m">03-seo-strategist.md</span>         <span class="g"># Keywords, title, meta, H2/H3 outline, internal links</span>
+│   │   │   ├── <span class="m">04-lead-writer.md</span>            <span class="g"># Primary draft in Atlas voice, 2K-3.5K words</span>
+│   │   │   ├── <span class="m">05-supporting-writer.md</span>      <span class="g"># FAQ, TLDR, Pros/Cons, CTA, Signal integration</span>
+│   │   │   ├── <span class="m">06-reviewer-accuracy.md</span>      <span class="g"># Fact-checking, source verification, compliance</span>
+│   │   │   ├── <span class="m">07-reviewer-relevance.md</span>     <span class="g"># "Would a $200K/yr investor care?" gate</span>
+│   │   │   ├── <span class="m">08-reviewer-quality.md</span>       <span class="g"># Voice, tone, readability, formatting gate</span>
+│   │   │   ├── <span class="m">09-technical-publisher.md</span>    <span class="g"># Notion API publishing agent</span>
+│   │   │   └── <span class="m">10-seo-distribution.md</span>       <span class="g"># Post-publish verification, GSC submission</span>
+│   │   ├── <span class="d">quality/</span>
+│   │   │   ├── <span class="p">quality-checker.py</span>           <span class="g"># 13-check master QA (word count, structure, links)</span>
+│   │   │   ├── <span class="p">forbidden-phrase-scanner.py</span>  <span class="g"># 48 phrases + AI-tell detection</span>
+│   │   │   ├── <span class="p">readability-scorer.py</span>        <span class="g"># FK Grade 10-12, sentence/paragraph length</span>
+│   │   │   ├── <span class="p">link-validator.py</span>            <span class="g"># Check all links, auto-fix broken ones</span>
+│   │   │   ├── <span class="p">tone-analyzer.py</span>             <span class="g"># Atlas voice consistency scoring</span>
+│   │   │   └── <span class="p">persona-drift-detector.py</span>    <span class="g"># Catches Atlas voice degradation over time</span>
+│   │   ├── <span class="d">pipeline/</span>
+│   │   │   ├── <span class="h">article-pipeline.ts</span>          <span class="g"># Orchestrates 10 agents for SEO articles</span>
+│   │   │   ├── <span class="h">newsletter-pipeline.ts</span>       <span class="g"># Orchestrates daily email content generation</span>
+│   │   │   ├── <span class="h">sunday-deep-dive-pipeline.ts</span> <span class="g"># Special pipeline for long-form Sunday issue</span>
+│   │   │   └── <span class="h">revision-manager.ts</span>          <span class="g"># Handles reviewer → writer revision cycles (max 3)</span>
+│   │   └── <span class="g">__tests__/</span>
+│   │
+│   ├── <span class="d">03-newsletter-generation/</span>            <span class="g"># ═══ SYSTEM 03: NEWSLETTER ASSEMBLY ═══</span>
+│   │   ├── <span class="d">templates/</span>
+│   │   │   ├── <span class="h">daily-brief.hbs</span>              <span class="g"># Mon-Fri template (Handlebars)</span>
+│   │   │   ├── <span class="h">trade-recap.hbs</span>              <span class="g"># Tuesday rebalancing recap</span>
+│   │   │   ├── <span class="h">deep-dive.hbs</span>               <span class="g"># Wednesday stock analysis</span>
+│   │   │   ├── <span class="h">strategy-spotlight.hbs</span>       <span class="g"># Thursday strategy comparison</span>
+│   │   │   ├── <span class="h">scorecard.hbs</span>                <span class="g"># Friday weekly performance</span>
+│   │   │   ├── <span class="h">weekly-recap.hbs</span>             <span class="g"># Saturday summary</span>
+│   │   │   ├── <span class="h">sunday-deep-dive.hbs</span>         <span class="g"># Sunday long-form</span>
+│   │   │   └── <span class="d">partials/</span>
+│   │   │       ├── <span class="h">header.hbs</span>               <span class="g"># Email header with regime traffic light</span>
+│   │   │       ├── <span class="h">footer.hbs</span>               <span class="g"># Disclaimer, unsubscribe, referral link</span>
+│   │   │       ├── <span class="h">three-things.hbs</span>         <span class="g"># "Three Things" component</span>
+│   │   │       ├── <span class="h">portfolio-update.hbs</span>     <span class="g"># P&L display (tier-gated)</span>
+│   │   │       ├── <span class="h">locked-content.hbs</span>       <span class="g"># Grayed-out upsell block</span>
+│   │   │       ├── <span class="h">the-number.hbs</span>           <span class="g"># Closing statistic component</span>
+│   │   │       ├── <span class="h">cta-block.hbs</span>            <span class="g"># Upgrade CTA (tier-aware)</span>
+│   │   │       └── <span class="h">referral-widget.hbs</span>      <span class="g"># "Share The Signal" component</span>
+│   │   ├── <span class="d">assembly/</span>
+│   │   │   ├── <span class="h">assembler.ts</span>                 <span class="g"># Content + data + template → raw HTML</span>
+│   │   │   ├── <span class="h">tier-gater.ts</span>                <span class="g"># Apply visibility rules per subscriber tier</span>
+│   │   │   ├── <span class="h">ab-variant-builder.ts</span>        <span class="g"># Generate subject line + content A/B variants</span>
+│   │   │   ├── <span class="h">inline-css.ts</span>                <span class="g"># Inline all styles for email client compatibility</span>
+│   │   │   └── <span class="h">preview-generator.ts</span>         <span class="g"># Web preview + screenshot for QA</span>
+│   │   ├── <span class="h">scheduler.ts</span>                     <span class="g"># Day-of-week → template routing</span>
+│   │   └── <span class="g">__tests__/</span>
+│   │
+│   ├── <span class="d">04-delivery/</span>                         <span class="g"># ═══ SYSTEM 04: EMAIL DELIVERY ═══</span>
+│   │   ├── <span class="d">esp/</span>
+│   │   │   ├── <span class="h">beehiiv-client.ts</span>            <span class="g"># Beehiiv API integration</span>
+│   │   │   ├── <span class="h">convertkit-client.ts</span>         <span class="g"># ConvertKit API integration (fallback)</span>
+│   │   │   └── <span class="h">esp-adapter.ts</span>               <span class="g"># Unified interface — swap ESPs without changing code</span>
+│   │   ├── <span class="d">segmentation/</span>
+│   │   │   ├── <span class="h">segment-builder.ts</span>           <span class="g"># Active/Cooling/Inactive classification</span>
+│   │   │   ├── <span class="h">tier-filter.ts</span>               <span class="g"># Free/Premium/Pro/Elite content filtering</span>
+│   │   │   └── <span class="h">suppression-manager.ts</span>       <span class="g"># Manage suppression lists, bounces, complaints</span>
+│   │   ├── <span class="d">deliverability/</span>
+│   │   │   ├── <span class="h">warmup-scheduler.ts</span>          <span class="g"># IP/domain warm-up plan (30-60 day ramp)</span>
+│   │   │   ├── <span class="h">reputation-monitor.ts</span>        <span class="g"># Track sender score, inbox rate, spam rate</span>
+│   │   │   ├── <span class="h">bounce-handler.ts</span>            <span class="g"># Process hard/soft bounces, auto-suppress</span>
+│   │   │   └── <span class="h">dkim-dmarc-checker.ts</span>        <span class="g"># Verify auth records before send</span>
+│   │   ├── <span class="h">send-orchestrator.ts</span>             <span class="g"># Time-zone optimized send, throttling, retry</span>
+│   │   └── <span class="g">__tests__/</span>
+│   │
+│   ├── <span class="d">05-sales-funnels/</span>                    <span class="g"># ═══ SYSTEM 05: SALES FUNNEL BUILDER ═══</span>
+│   │   ├── <span class="d">pages/</span>
+│   │   │   ├── <span class="h">landing-page.tsx</span>             <span class="g"># Main signup page (IS a sample issue)</span>
+│   │   │   ├── <span class="h">scoreboard.tsx</span>               <span class="g"># Live portfolio performance page (public)</span>
+│   │   │   ├── <span class="h">premium-checkout.tsx</span>         <span class="g"># Premium tier purchase page</span>
+│   │   │   ├── <span class="h">pro-checkout.tsx</span>             <span class="g"># Pro tier purchase page</span>
+│   │   │   ├── <span class="h">elite-checkout.tsx</span>           <span class="g"># Elite tier purchase page</span>
+│   │   │   ├── <span class="h">one-time-offer.tsx</span>           <span class="g"># Post-purchase OTO: Pro at $299 first year</span>
+│   │   │   ├── <span class="h">lead-magnet.tsx</span>              <span class="g"># "Top 10 AI Stock Picks" gated download</span>
+│   │   │   └── <span class="h">managed-inquiry.tsx</span>          <span class="g"># Managed accounts interest form</span>
+│   │   ├── <span class="d">components/</span>
+│   │   │   ├── <span class="h">pricing-table.tsx</span>            <span class="g"># Tier comparison component</span>
+│   │   │   ├── <span class="h">testimonial-card.tsx</span>         <span class="g"># Social proof component</span>
+│   │   │   ├── <span class="h">performance-chart.tsx</span>        <span class="g"># Live portfolio chart (Recharts)</span>
+│   │   │   ├── <span class="h">countdown-timer.tsx</span>          <span class="g"># Event/sale urgency timer</span>
+│   │   │   └── <span class="h">signup-form.tsx</span>              <span class="g"># Email-only capture (no extra fields)</span>
+│   │   ├── <span class="d">tracking/</span>
+│   │   │   ├── <span class="h">utm-manager.ts</span>              <span class="g"># UTM parameter handling + persistence</span>
+│   │   │   ├── <span class="h">conversion-pixel.ts</span>         <span class="g"># Meta, Google, TikTok conversion tracking</span>
+│   │   │   └── <span class="h">funnel-analytics.ts</span>         <span class="g"># Step-by-step funnel conversion tracking</span>
+│   │   └── <span class="g">__tests__/</span>
+│   │
+│   ├── <span class="d">06-sales-sequences/</span>                  <span class="g"># ═══ SYSTEM 06: SALES SEQUENCE ENGINE ═══</span>
+│   │   ├── <span class="d">sequences/</span>
+│   │   │   ├── <span class="d">welcome/</span>
+│   │   │   │   ├── <span class="y">config.yaml</span>              <span class="g"># Trigger: signup. 10-day sequence. 6 emails.</span>
+│   │   │   │   ├── <span class="h">day-00-welcome.hbs</span>       <span class="g"># Atlas intro with live insight (within 90 sec)</span>
+│   │   │   │   ├── <span class="h">day-01-first-signal.hbs</span>  <span class="g"># First full issue (must be exceptional)</span>
+│   │   │   │   ├── <span class="h">day-03-atlas-score.hbs</span>   <span class="g"># How the scoring engine works</span>
+│   │   │   │   ├── <span class="h">day-05-track-record.hbs</span>  <span class="g"># Wins AND losses — radical transparency</span>
+│   │   │   │   ├── <span class="h">day-07-deep-dive.hbs</span>     <span class="g"># Sunday long-form showcase</span>
+│   │   │   │   └── <span class="h">day-10-soft-upgrade.hbs</span>  <span class="g"># First Premium invitation (no-pressure)</span>
+│   │   │   ├── <span class="d">free-to-premium/</span>
+│   │   │   │   ├── <span class="y">config.yaml</span>              <span class="g"># Trigger: 7 days + 3+ opens. 5 emails over 10 days.</span>
+│   │   │   │   ├── <span class="h">email-1-value-proof.hbs</span>  <span class="g"># What Premium subs got this week that you didn't</span>
+│   │   │   │   ├── <span class="h">email-2-trade-reveal.hbs</span> <span class="g"># A specific winning trade + history locked</span>
+│   │   │   │   ├── <span class="h">email-3-social-proof.hbs</span> <span class="g"># Subscriber count + open rates + testimonials</span>
+│   │   │   │   ├── <span class="h">email-4-scarcity.hbs</span>     <span class="g"># "Last 48 hours at founding rate"</span>
+│   │   │   │   └── <span class="h">email-5-final.hbs</span>        <span class="g"># Direct ask + money-back guarantee</span>
+│   │   │   ├── <span class="d">premium-to-pro/</span>
+│   │   │   │   ├── <span class="y">config.yaml</span>              <span class="g"># Trigger: 60 days active + opened trade proof. 4 emails.</span>
+│   │   │   │   ├── <span class="h">email-1-positions-tease.hbs</span>
+│   │   │   │   ├── <span class="h">email-2-sms-proof.hbs</span>    <span class="g"># "Pro members got SMS at entry. You saw this 6 weeks later."</span>
+│   │   │   │   ├── <span class="h">email-3-comparison.hbs</span>
+│   │   │   │   └── <span class="h">email-4-upgrade.hbs</span>
+│   │   │   ├── <span class="d">pro-to-elite/</span>
+│   │   │   │   └── <span class="y">config.yaml</span>              <span class="g"># 3 emails + phone call trigger</span>
+│   │   │   ├── <span class="d">elite-to-managed/</span>
+│   │   │   │   └── <span class="y">config.yaml</span>              <span class="g"># 2 emails + dedicated call</span>
+│   │   │   ├── <span class="d">win-back/</span>
+│   │   │   │   ├── <span class="y">config.yaml</span>              <span class="g"># Trigger: 30 days inactive. Re-engagement.</span>
+│   │   │   │   ├── <span class="h">day-01-miss-you.hbs</span>
+│   │   │   │   ├── <span class="h">day-07-best-of.hbs</span>       <span class="g"># "Here's what you missed this month"</span>
+│   │   │   │   └── <span class="h">day-14-final.hbs</span>
+│   │   │   ├── <span class="d">cancellation-save/</span>
+│   │   │   │   └── <span class="y">config.yaml</span>              <span class="g"># Trigger: cancellation initiated. Credit offer.</span>
+│   │   │   ├── <span class="d">event-crash/</span>
+│   │   │   │   └── <span class="y">config.yaml</span>              <span class="g"># Trigger: VIX > 30 or S&P -5% in day. 5 emails.</span>
+│   │   │   └── <span class="d">event-black-friday/</span>
+│   │   │       └── <span class="y">config.yaml</span>              <span class="g"># Calendar: annual sale. 4 emails.</span>
+│   │   ├── <span class="d">engine/</span>
+│   │   │   ├── <span class="h">trigger-evaluator.ts</span>         <span class="g"># Evaluate subscriber events against sequence triggers</span>
+│   │   │   ├── <span class="h">sequence-runner.ts</span>           <span class="g"># Execute sequence steps with delays and conditions</span>
+│   │   │   ├── <span class="h">conflict-resolver.ts</span>         <span class="g"># Prevent multiple sequences firing simultaneously</span>
+│   │   │   ├── <span class="h">frequency-cap.ts</span>             <span class="g"># Max 1 promo/day, max 3 promos/week</span>
+│   │   │   └── <span class="h">ab-tester.ts</span>                 <span class="g"># A/B test subject lines, CTAs, send times</span>
+│   │   └── <span class="g">__tests__/</span>
+│   │
+│   ├── <span class="d">07-personalization/</span>                  <span class="g"># ═══ SYSTEM 07: PERSONALIZATION ENGINE ═══</span>
+│   │   ├── <span class="d">profiles/</span>
+│   │   │   ├── <span class="h">profile-builder.ts</span>           <span class="g"># Aggregate subscriber data into rich profile</span>
+│   │   │   ├── <span class="h">segment-classifier.ts</span>        <span class="g"># Classify into 5 audience segments</span>
+│   │   │   └── <span class="h">interest-tracker.ts</span>          <span class="g"># Track which clusters/topics subscriber engages with</span>
+│   │   ├── <span class="d">content/</span>
+│   │   │   ├── <span class="h">dynamic-block-renderer.ts</span>    <span class="g"># Render content blocks based on subscriber profile</span>
+│   │   │   ├── <span class="h">portfolio-focus-selector.ts</span>  <span class="g"># Choose which portfolio to highlight per subscriber</span>
+│   │   │   ├── <span class="h">subject-line-personalizer.ts</span> <span class="g"># Personalize subject lines based on engagement</span>
+│   │   │   └── <span class="h">send-time-optimizer.ts</span>       <span class="g"># Per-subscriber optimal send time</span>
+│   │   ├── <span class="d">recommendations/</span>
+│   │   │   ├── <span class="h">article-recommender.ts</span>       <span class="g"># Suggest relevant SEO articles in email</span>
+│   │   │   └── <span class="h">tier-recommender.ts</span>          <span class="g"># Determine best upgrade path per subscriber</span>
+│   │   └── <span class="g">__tests__/</span>
+│   │
+│   ├── <span class="d">08-reply-engine/</span>                     <span class="g"># ═══ SYSTEM 08: REPLY & ENGAGEMENT ═══</span>
+│   │   ├── <span class="d">inbound/</span>
+│   │   │   ├── <span class="h">email-parser.ts</span>              <span class="g"># Parse inbound reply emails (via webhook)</span>
+│   │   │   ├── <span class="h">intent-classifier.ts</span>         <span class="g"># Classify: question, complaint, praise, cancel, support</span>
+│   │   │   └── <span class="h">sentiment-analyzer.ts</span>        <span class="g"># Positive/neutral/negative + urgency scoring</span>
+│   │   ├── <span class="d">response/</span>
+│   │   │   ├── <span class="h">ai-draft-generator.ts</span>        <span class="g"># Claude generates draft reply in Atlas voice</span>
+│   │   │   ├── <span class="h">template-matcher.ts</span>          <span class="g"># Match common questions to pre-approved responses</span>
+│   │   │   └── <span class="h">escalation-router.ts</span>         <span class="g"># Route to human: cancel, complaint, managed inquiry</span>
+│   │   ├── <span class="d">automation/</span>
+│   │   │   ├── <span class="h">auto-responder.ts</span>            <span class="g"># Auto-send approved template responses</span>
+│   │   │   ├── <span class="h">review-queue.ts</span>              <span class="g"># Queue AI drafts for human review before send</span>
+│   │   │   └── <span class="h">feedback-logger.ts</span>           <span class="g"># Log all replies for content improvement signals</span>
+│   │   └── <span class="g">__tests__/</span>
+│   │
+│   ├── <span class="d">09-analytics/</span>                        <span class="g"># ═══ SYSTEM 09: ANALYTICS & INTELLIGENCE ═══</span>
+│   │   ├── <span class="d">collectors/</span>
+│   │   │   ├── <span class="h">email-metrics.ts</span>             <span class="g"># Opens, clicks, unsubscribes, bounces per send</span>
+│   │   │   ├── <span class="h">revenue-tracker.ts</span>           <span class="g"># MRR, ARR, ARPU, LTV by tier and cohort</span>
+│   │   │   ├── <span class="h">funnel-tracker.ts</span>            <span class="g"># Step-by-step conversion from visit → paid</span>
+│   │   │   ├── <span class="h">seo-metrics.ts</span>               <span class="g"># GSC data, organic traffic, rankings, signups</span>
+│   │   │   ├── <span class="h">content-performance.ts</span>       <span class="g"># Which content drives opens, clicks, upgrades</span>
+│   │   │   └── <span class="h">ad-spend-tracker.ts</span>          <span class="g"># CPA by channel, ROAS, attribution</span>
+│   │   ├── <span class="d">analysis/</span>
+│   │   │   ├── <span class="h">cohort-analyzer.ts</span>           <span class="g"># Retention curves by signup month, channel, tier</span>
+│   │   │   ├── <span class="h">churn-predictor.ts</span>           <span class="g"># ML model: predict churn risk 30 days ahead</span>
+│   │   │   ├── <span class="h">ltv-calculator.ts</span>            <span class="g"># Projected LTV by segment, tier, channel</span>
+│   │   │   ├── <span class="h">attribution-engine.ts</span>        <span class="g"># Which email/article/ad → which conversion</span>
+│   │   │   ├── <span class="h">ab-test-analyzer.ts</span>          <span class="g"># Statistical significance calculator for A/B tests</span>
+│   │   │   └── <span class="h">revenue-forecaster.ts</span>        <span class="g"># Project revenue based on current growth curves</span>
+│   │   ├── <span class="d">dashboards/</span>
+│   │   │   ├── <span class="h">executive-dashboard.ts</span>       <span class="g"># ARR, subs, churn, ARPU — the CEO view</span>
+│   │   │   ├── <span class="h">content-dashboard.ts</span>         <span class="g"># Open rates, click rates, best performing content</span>
+│   │   │   ├── <span class="h">acquisition-dashboard.ts</span>     <span class="g"># CPA, conversion rates, channel performance</span>
+│   │   │   └── <span class="h">portfolio-dashboard.ts</span>       <span class="g"># AI portfolio performance for internal tracking</span>
+│   │   ├── <span class="d">reports/</span>
+│   │   │   ├── <span class="h">daily-report.ts</span>              <span class="g"># Auto-generated daily performance summary</span>
+│   │   │   ├── <span class="h">weekly-report.ts</span>             <span class="g"># Weekly business review with trends</span>
+│   │   │   └── <span class="h">monthly-report.ts</span>            <span class="g"># Monthly P&L with cohort analysis</span>
+│   │   └── <span class="g">__tests__/</span>
+│   │
+│   ├── <span class="d">10-subscriber-crm/</span>                  <span class="g"># ═══ SYSTEM 10: SUBSCRIBER CRM ═══</span>
+│   │   ├── <span class="d">lifecycle/</span>
+│   │   │   ├── <span class="h">state-machine.ts</span>             <span class="g"># Subscriber states: new → engaged → paying → champion → churned</span>
+│   │   │   ├── <span class="h">engagement-scorer.ts</span>         <span class="g"># 0-100 score based on opens, clicks, replies, shares</span>
+│   │   │   ├── <span class="h">health-monitor.ts</span>            <span class="g"># Track subscriber health trends over time</span>
+│   │   │   └── <span class="h">milestone-tracker.ts</span>         <span class="g"># Track key moments: 100th open, first click, first share</span>
+│   │   ├── <span class="d">segments/</span>
+│   │   │   ├── <span class="h">dynamic-segments.ts</span>          <span class="g"># Real-time segment membership based on behavior</span>
+│   │   │   ├── <span class="h">static-segments.ts</span>           <span class="g"># Manual segments (VIP, press, beta testers)</span>
+│   │   │   └── <span class="h">segment-sync.ts</span>              <span class="g"># Sync segments to ESP for send targeting</span>
+│   │   ├── <span class="d">preferences/</span>
+│   │   │   ├── <span class="h">preference-center.tsx</span>        <span class="g"># Self-service preference page</span>
+│   │   │   ├── <span class="h">frequency-manager.ts</span>         <span class="g"># Let subscribers choose email frequency</span>
+│   │   │   └── <span class="h">topic-selector.ts</span>            <span class="g"># Interest-based content selection</span>
+│   │   └── <span class="g">__tests__/</span>
+│   │
+│   ├── <span class="d">11-revenue/</span>                          <span class="g"># ═══ SYSTEM 11: REVENUE & BILLING ═══</span>
+│   │   ├── <span class="d">stripe/</span>
+│   │   │   ├── <span class="h">stripe-client.ts</span>             <span class="g"># Stripe API wrapper</span>
+│   │   │   ├── <span class="h">webhook-handler.ts</span>           <span class="g"># Process Stripe webhooks (payment, failure, cancel)</span>
+│   │   │   ├── <span class="h">product-catalog.ts</span>           <span class="g"># Define tiers as Stripe products/prices</span>
+│   │   │   └── <span class="h">checkout-session.ts</span>          <span class="g"># Create checkout sessions for upgrades</span>
+│   │   ├── <span class="d">subscriptions/</span>
+│   │   │   ├── <span class="h">tier-manager.ts</span>              <span class="g"># Handle upgrades, downgrades, tier changes</span>
+│   │   │   ├── <span class="h">billing-cycle.ts</span>             <span class="g"># Monthly vs annual billing logic</span>
+│   │   │   └── <span class="h">grace-period.ts</span>              <span class="g"># Handle payment failures with grace period</span>
+│   │   ├── <span class="d">credits/</span>
+│   │   │   ├── <span class="h">credit-system.ts</span>             <span class="g"># Issue, track, redeem credits (Stansberry model)</span>
+│   │   │   ├── <span class="h">refund-handler.ts</span>            <span class="g"># 30-day guarantee → credit (not cash)</span>
+│   │   │   └── <span class="h">credit-upsell.ts</span>             <span class="g"># Trigger upsell when credit issued</span>
+│   │   ├── <span class="d">dunning/</span>
+│   │   │   ├── <span class="h">dunning-sequence.ts</span>          <span class="g"># Payment failure → retry → email → downgrade</span>
+│   │   │   └── <span class="h">card-update-page.tsx</span>         <span class="g"># Self-service card update page</span>
+│   │   └── <span class="g">__tests__/</span>
+│   │
+│   ├── <span class="d">12-seo-system/</span>                      <span class="g"># ═══ SYSTEM 12: SEO CONTENT SYSTEM ═══</span>
+│   │   ├── <span class="d">clusters/</span>
+│   │   │   ├── <span class="y">ai-investing.yaml</span>            <span class="g"># Pillar + spoke keywords, internal links</span>
+│   │   │   ├── <span class="y">stock-research.yaml</span>
+│   │   │   ├── <span class="y">portfolio-strategy.yaml</span>
+│   │   │   ├── <span class="y">market-psychology.yaml</span>
+│   │   │   └── <span class="y">tradealgo-tools.yaml</span>
+│   │   ├── <span class="d">publishing/</span>
+│   │   │   ├── <span class="h">notion-publisher.ts</span>          <span class="g"># Push articles to Notion via API</span>
+│   │   │   ├── <span class="h">schema-generator.ts</span>          <span class="g"># TechArticle, FAQPage, BreadcrumbList JSON-LD</span>
+│   │   │   ├── <span class="h">sitemap-builder.ts</span>           <span class="g"># Auto-generate XML sitemap</span>
+│   │   │   └── <span class="h">gsc-submitter.ts</span>             <span class="g"># Submit new URLs to Google Search Console</span>
+│   │   ├── <span class="d">optimization/</span>
+│   │   │   ├── <span class="h">keyword-tracker.ts</span>           <span class="g"># Track ranking positions over time</span>
+│   │   │   ├── <span class="h">content-refresher.ts</span>         <span class="g"># Flag stale content for update</span>
+│   │   │   └── <span class="h">internal-link-manager.ts</span>     <span class="g"># Ensure proper pillar ↔ spoke linking</span>
+│   │   └── <span class="g">__tests__/</span>
+│   │
+│   ├── <span class="d">13-referral/</span>                         <span class="g"># ═══ SYSTEM 13: REFERRAL & VIRAL ENGINE ═══</span>
+│   │   ├── <span class="h">referral-tracker.ts</span>              <span class="g"># Track referral links, conversions, rewards</span>
+│   │   ├── <span class="h">reward-tiers.ts</span>                  <span class="g"># 3 refs = Premium trial, 10 = month free, 25 = merch</span>
+│   │   ├── <span class="h">share-page.tsx</span>                   <span class="g"># "Share The Signal" page with unique link</span>
+│   │   ├── <span class="h">leaderboard.tsx</span>                  <span class="g"># Top referrers leaderboard</span>
+│   │   ├── <span class="h">viral-coefficient.ts</span>             <span class="g"># Track K-factor (invites sent × conversion rate)</span>
+│   │   └── <span class="g">__tests__/</span>
+│   │
+│   ├── <span class="d">14-sms-push/</span>                         <span class="g"># ═══ SYSTEM 14: SMS & PUSH NOTIFICATIONS ═══</span>
+│   │   ├── <span class="d">sms/</span>
+│   │   │   ├── <span class="h">twilio-client.ts</span>             <span class="g"># Twilio API integration</span>
+│   │   │   ├── <span class="h">trade-alert-sender.ts</span>        <span class="g"># Send SMS when AI executes trade (Pro+ only)</span>
+│   │   │   ├── <span class="h">milestone-alert.ts</span>           <span class="g"># "Atlas's pick is up 15%" notifications</span>
+│   │   │   └── <span class="h">opt-in-manager.ts</span>            <span class="g"># TCPA compliance, opt-in/out management</span>
+│   │   ├── <span class="d">push/</span>
+│   │   │   ├── <span class="h">web-push.ts</span>                  <span class="g"># Browser push notifications</span>
+│   │   │   └── <span class="h">mobile-push.ts</span>               <span class="g"># Future: iOS/Android push</span>
+│   │   └── <span class="g">__tests__/</span>
+│   │
+│   ├── <span class="d">15-compliance/</span>                       <span class="g"># ═══ SYSTEM 15: COMPLIANCE & LEGAL ═══</span>
+│   │   ├── <span class="h">disclaimer-injector.ts</span>           <span class="g"># Auto-inject required disclaimers into all content</span>
+│   │   ├── <span class="h">depersonalization-checker.ts</span>     <span class="g"># Ensure no "you should buy" language</span>
+│   │   ├── <span class="h">regulatory-scanner.ts</span>            <span class="g"># Flag potential compliance violations</span>
+│   │   ├── <span class="h">audit-trail.ts</span>                   <span class="g"># Log every content publish, edit, send</span>
+│   │   ├── <span class="h">gdpr-manager.ts</span>                  <span class="g"># Data export, deletion requests, consent</span>
+│   │   ├── <span class="h">can-spam-compliance.ts</span>           <span class="g"># Unsubscribe processing, physical address, etc.</span>
+│   │   ├── <span class="d">templates/</span>
+│   │   │   ├── <span class="y">disclaimer-standard.md</span>       <span class="g"># Standard newsletter disclaimer text</span>
+│   │   │   ├── <span class="y">disclaimer-performance.md</span>    <span class="g"># When showing returns/P&L</span>
+│   │   │   └── <span class="y">disclaimer-managed.md</span>        <span class="g"># Managed account specific disclaimers</span>
+│   │   └── <span class="g">__tests__/</span>
+│   │
+│   └── <span class="d">16-infrastructure/</span>                   <span class="g"># ═══ SYSTEM 16: INFRASTRUCTURE & DEVOPS ═══</span>
+│       ├── <span class="d">docker/</span>
+│       │   ├── <span class="y">Dockerfile</span>                   <span class="g"># Multi-stage build for all services</span>
+│       │   └── <span class="y">docker-compose.yml</span>           <span class="g"># Local dev: Postgres, Redis, Mailhog</span>
+│       ├── <span class="d">terraform/</span>
+│       │   ├── <span class="h">main.tf</span>                      <span class="g"># AWS/GCP infrastructure as code</span>
+│       │   ├── <span class="h">database.tf</span>                  <span class="g"># RDS/Cloud SQL provisioning</span>
+│       │   ├── <span class="h">redis.tf</span>                     <span class="g"># ElastiCache/Memorystore for event bus</span>
+│       │   └── <span class="h">monitoring.tf</span>                <span class="g"># CloudWatch/Datadog setup</span>
+│       ├── <span class="d">monitoring/</span>
+│       │   ├── <span class="h">health-checks.ts</span>             <span class="g"># System-wide health endpoint</span>
+│       │   ├── <span class="h">alerting.ts</span>                  <span class="g"># PagerDuty/Slack alerts for failures</span>
+│       │   └── <span class="h">uptime-monitor.ts</span>            <span class="g"># External uptime monitoring</span>
+│       ├── <span class="d">secrets/</span>
+│       │   ├── <span class="y">.env.example</span>                 <span class="g"># Template for all environment variables</span>
+│       │   └── <span class="h">vault-client.ts</span>              <span class="g"># HashiCorp Vault or AWS Secrets Manager</span>
+│       └── <span class="d">testing/</span>
+│           ├── <span class="h">test-setup.ts</span>                <span class="g"># Shared test configuration</span>
+│           ├── <span class="h">factories.ts</span>                 <span class="g"># Test data factories for all entities</span>
+│           └── <span class="h">integration-runner.ts</span>        <span class="g"># Run integration tests against staging</span>
+│
+├── <span class="d">apps/</span>                                    <span class="g"># Deployed applications</span>
+│   ├── <span class="d">web/</span>                                 <span class="g"># Next.js marketing site + article renderer</span>
+│   │   ├── <span class="h">next.config.js</span>
+│   │   ├── <span class="d">app/</span>
+│   │   │   ├── <span class="h">page.tsx</span>                     <span class="g"># Landing page (IS a sample issue)</span>
+│   │   │   ├── <span class="d">trading-guides/[slug]/</span>
+│   │   │   │   └── <span class="h">page.tsx</span>                 <span class="g"># SEO article renderer from Notion</span>
+│   │   │   ├── <span class="d">scoreboard/</span>
+│   │   │   │   └── <span class="h">page.tsx</span>                 <span class="g"># Live portfolio scoreboard</span>
+│   │   │   ├── <span class="d">pricing/</span>
+│   │   │   │   └── <span class="h">page.tsx</span>                 <span class="g"># Tier comparison + checkout</span>
+│   │   │   ├── <span class="d">preferences/</span>
+│   │   │   │   └── <span class="h">page.tsx</span>                 <span class="g"># Subscriber preference center</span>
+│   │   │   ├── <span class="d">refer/</span>
+│   │   │   │   └── <span class="h">page.tsx</span>                 <span class="g"># Referral sharing page</span>
+│   │   │   └── <span class="d">api/</span>
+│   │   │       ├── <span class="h">webhooks/stripe/route.ts</span> <span class="g"># Stripe webhook endpoint</span>
+│   │   │       ├── <span class="h">webhooks/esp/route.ts</span>    <span class="g"># ESP webhook endpoint (opens, clicks)</span>
+│   │   │       ├── <span class="h">webhooks/reply/route.ts</span>  <span class="g"># Inbound email webhook</span>
+│   │   │       └── <span class="h">cron/daily/route.ts</span>      <span class="g"># Vercel cron endpoint for daily pipeline</span>
+│   │   └── <span class="d">public/</span>
+│   │
+│   └── <span class="d">dashboard/</span>                           <span class="g"># Internal analytics dashboard (React)</span>
+│       ├── <span class="h">executive.tsx</span>
+│       ├── <span class="h">content.tsx</span>
+│       ├── <span class="h">acquisition.tsx</span>
+│       └── <span class="h">subscribers.tsx</span>
+│
+├── <span class="y">package.json</span>                             <span class="g"># Monorepo root (pnpm workspaces)</span>
+├── <span class="y">pnpm-workspace.yaml</span>                      <span class="g"># Workspace configuration</span>
+├── <span class="y">turbo.json</span>                               <span class="g"># Turborepo build pipeline</span>
+├── <span class="y">tsconfig.json</span>                            <span class="g"># Root TypeScript config</span>
+├── <span class="y">.env.example</span>                             <span class="g"># All required environment variables</span>
+└── <span class="y">README.md</span>                                <span class="g"># Setup guide + system overview</span>
+  </div>
+</div>
+
+<!-- ═══════════════ INTEGRATION MAP ═══════════════ -->
+<div class="s-full s-alt">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="s-label">External Dependencies</div>
+    <div class="s-title">24 Integration Points</div>
+    <div class="s-desc">Every external service this system touches. Each has an adapter layer so it can be swapped without changing business logic.</div>
+
+    <table>
+      <thead><tr><th>Category</th><th>Service</th><th>System</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:600;color:var(--green);">AI</td><td>Anthropic API (Claude)</td><td>#2, #3, #8, #12</td><td>Content generation, reply drafts, SEO articles</td></tr>
+        <tr><td style="font-weight:600;color:var(--green);">AI</td><td>OpenAI API (fallback)</td><td>#2</td><td>Backup model for content generation</td></tr>
+        <tr><td style="font-weight:600;color:var(--blue);">Email</td><td>Beehiiv</td><td>#4</td><td>Primary ESP — send, segments, analytics</td></tr>
+        <tr><td style="font-weight:600;color:var(--blue);">Email</td><td>ConvertKit</td><td>#4</td><td>Backup ESP</td></tr>
+        <tr><td style="font-weight:600;color:var(--blue);">Email</td><td>Postmark / SendGrid</td><td>#4, #8</td><td>Transactional email (receipts, password resets)</td></tr>
+        <tr><td style="font-weight:600;color:var(--purple);">Payments</td><td>Stripe</td><td>#11</td><td>Subscriptions, payments, invoices, refunds</td></tr>
+        <tr><td style="font-weight:600;color:var(--orange);">CMS</td><td>Notion API</td><td>#12</td><td>SEO article storage + publishing</td></tr>
+        <tr><td style="font-weight:600;color:var(--orange);">Hosting</td><td>Vercel</td><td>#16</td><td>Next.js deployment + edge functions + ISR</td></tr>
+        <tr><td style="font-weight:600;color:var(--cyan);">SMS</td><td>Twilio</td><td>#14</td><td>Trade alerts, milestone notifications</td></tr>
+        <tr><td style="font-weight:600;color:var(--red);">Data</td><td>TradeAlgo API</td><td>#1</td><td>Atlas Scores, portfolio data, risk signals</td></tr>
+        <tr><td style="font-weight:600;color:var(--red);">Data</td><td>Alpha Vantage / Polygon</td><td>#1</td><td>Market data, indices, sector performance</td></tr>
+        <tr><td style="font-weight:600;color:var(--red);">Data</td><td>News API / Benzinga</td><td>#1</td><td>Breaking news feed for context injection</td></tr>
+        <tr><td style="font-weight:600;color:var(--yellow);">Analytics</td><td>PostHog / Mixpanel</td><td>#9</td><td>Product analytics, funnel tracking, A/B tests</td></tr>
+        <tr><td style="font-weight:600;color:var(--yellow);">Analytics</td><td>Google Search Console</td><td>#12</td><td>SEO performance, indexing, rankings</td></tr>
+        <tr><td style="font-weight:600;color:var(--yellow);">Analytics</td><td>Google Analytics 4</td><td>#9</td><td>Web traffic, conversions, attribution</td></tr>
+        <tr><td style="font-weight:600;color:var(--green);">Ads</td><td>Meta Ads API</td><td>#5, #9</td><td>Acquisition campaigns, conversion tracking</td></tr>
+        <tr><td style="font-weight:600;color:var(--green);">Ads</td><td>Google Ads API</td><td>#5, #9</td><td>Search/display acquisition, remarketing</td></tr>
+        <tr><td style="font-weight:600;color:var(--green);">Ads</td><td>TikTok Ads API</td><td>#5, #9</td><td>Short-form video acquisition</td></tr>
+        <tr><td style="font-weight:600;color:var(--blue);">Database</td><td>PostgreSQL (Supabase/RDS)</td><td>All</td><td>Primary data store — subscribers, content, analytics</td></tr>
+        <tr><td style="font-weight:600;color:var(--blue);">Database</td><td>Redis (Upstash/ElastiCache)</td><td>All</td><td>Event bus, caching, rate limiting, queues</td></tr>
+        <tr><td style="font-weight:600;color:var(--blue);">Database</td><td>TimescaleDB / ClickHouse</td><td>#9</td><td>Time-series analytics for high-volume metrics</td></tr>
+        <tr><td style="font-weight:600;color:var(--purple);">DevOps</td><td>GitHub Actions</td><td>#16</td><td>CI/CD, cron jobs, automated deployments</td></tr>
+        <tr><td style="font-weight:600;color:var(--purple);">DevOps</td><td>Sentry</td><td>#16</td><td>Error tracking, performance monitoring</td></tr>
+        <tr><td style="font-weight:600;color:var(--purple);">DevOps</td><td>PagerDuty / Slack</td><td>#16</td><td>Alerting for critical failures</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════ DATABASE SCHEMA ═══════════════ -->
+<div class="s">
+  <div class="s-label">Data Layer</div>
+  <div class="s-title">Database Schema (Core Tables)</div>
+  <div class="s-desc">PostgreSQL with Prisma ORM. Every system reads/writes to shared tables through typed interfaces. No direct SQL from application code.</div>
+
+  <table>
+    <thead><tr><th>Table</th><th>Key Fields</th><th>Used By</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td style="font-weight:600;color:var(--white);">subscribers</td><td>id, email, tier, status, engagement_score, signup_source, utm_params, created_at</td><td>#4, #6, #7, #10</td><td>Master subscriber record</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">subscriber_events</td><td>id, subscriber_id, event_type, metadata, timestamp</td><td>#9, #10, #6</td><td>Every action a subscriber takes</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">subscriptions</td><td>id, subscriber_id, tier, stripe_sub_id, status, billing_cycle, started_at, expires_at</td><td>#11</td><td>Billing state</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">credits</td><td>id, subscriber_id, amount, source, redeemed_at, expires_at</td><td>#11</td><td>Credit-based refund system</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">portfolios</td><td>id, name, strategy, current_positions (JSON), last_rebalance, total_return</td><td>#1, #3</td><td>AI portfolio state</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">trades</td><td>id, portfolio_id, ticker, action, price, quantity, date, rationale</td><td>#1, #3, #14</td><td>Trade history</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">newsletters</td><td>id, type, subject, content_html, tier_variants (JSON), sent_at, metrics</td><td>#3, #4, #9</td><td>Newsletter archive</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">articles</td><td>id, title, slug, cluster, status, notion_page_id, published_at, metrics</td><td>#2, #12</td><td>SEO content</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">sequences</td><td>id, subscriber_id, sequence_name, current_step, started_at, completed_at</td><td>#6</td><td>Active sequence tracking</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">sequence_events</td><td>id, sequence_id, step, email_id, sent_at, opened, clicked, converted</td><td>#6, #9</td><td>Per-step performance</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">referrals</td><td>id, referrer_id, referred_id, reward_tier, status, converted_at</td><td>#13</td><td>Referral tracking</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">email_metrics</td><td>id, newsletter_id, opens, clicks, unsubscribes, bounces, complaints</td><td>#9</td><td>Per-send performance</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">replies</td><td>id, subscriber_id, subject, body, intent, sentiment, status, response_draft</td><td>#8</td><td>Inbound email replies</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">audit_log</td><td>id, system, action, actor, details, timestamp</td><td>#15</td><td>Compliance audit trail</td></tr>
+      <tr><td style="font-weight:600;color:var(--white);">ab_tests</td><td>id, name, variants (JSON), traffic_split, started_at, winner, significance</td><td>#6, #9</td><td>A/B test management</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════════ EVENT BUS ═══════════════ -->
+<div class="s-full s-alt">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="s-label">System Communication</div>
+    <div class="s-title">Event Bus — How Systems Talk</div>
+    <div class="s-desc">Every system publishes typed events. Any system can subscribe. This is the nervous system of the entire platform. Built on Redis Streams or BullMQ.</div>
+
+    <table>
+      <thead><tr><th>Event</th><th>Published By</th><th>Consumed By</th><th>Triggers</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:600;color:var(--green);font-family:'JetBrains Mono',monospace;font-size:12px;">subscriber.created</td><td>#4 Delivery</td><td>#6, #7, #10, #13</td><td>Welcome sequence, profile creation, referral check</td></tr>
+        <tr><td style="font-weight:600;color:var(--green);font-family:'JetBrains Mono',monospace;font-size:12px;">subscriber.upgraded</td><td>#11 Revenue</td><td>#4, #6, #9, #10</td><td>Stop upgrade sequence, update segments, log revenue</td></tr>
+        <tr><td style="font-weight:600;color:var(--green);font-family:'JetBrains Mono',monospace;font-size:12px;">subscriber.churned</td><td>#11 Revenue</td><td>#6, #9, #10</td><td>Start win-back sequence, log churn, update health</td></tr>
+        <tr><td style="font-weight:600;color:var(--blue);font-family:'JetBrains Mono',monospace;font-size:12px;">email.sent</td><td>#4 Delivery</td><td>#9, #15</td><td>Track deliverability, audit log</td></tr>
+        <tr><td style="font-weight:600;color:var(--blue);font-family:'JetBrains Mono',monospace;font-size:12px;">email.opened</td><td>#4 Delivery</td><td>#6, #7, #9, #10</td><td>Update engagement score, evaluate sequence triggers</td></tr>
+        <tr><td style="font-weight:600;color:var(--blue);font-family:'JetBrains Mono',monospace;font-size:12px;">email.clicked</td><td>#4 Delivery</td><td>#6, #7, #9, #10</td><td>Track content performance, upgrade intent signals</td></tr>
+        <tr><td style="font-weight:600;color:var(--blue);font-family:'JetBrains Mono',monospace;font-size:12px;">email.replied</td><td>#8 Reply</td><td>#10, #9</td><td>Update engagement, track sentiment trends</td></tr>
+        <tr><td style="font-weight:600;color:var(--purple);font-family:'JetBrains Mono',monospace;font-size:12px;">trade.executed</td><td>#1 Data</td><td>#3, #14, #9</td><td>Include in newsletter, send SMS alert, log trade</td></tr>
+        <tr><td style="font-weight:600;color:var(--purple);font-family:'JetBrains Mono',monospace;font-size:12px;">trade.big_win</td><td>#1 Data</td><td>#6, #3</td><td>Trigger Big Win upsell email, feature in newsletter</td></tr>
+        <tr><td style="font-weight:600;color:var(--orange);font-family:'JetBrains Mono',monospace;font-size:12px;">regime.changed</td><td>#1 Data</td><td>#2, #3, #7</td><td>Adjust Atlas tone, modify content templates</td></tr>
+        <tr><td style="font-weight:600;color:var(--orange);font-family:'JetBrains Mono',monospace;font-size:12px;">market.crash</td><td>#1 Data</td><td>#6, #3</td><td>Trigger crash sequence, switch to crisis content</td></tr>
+        <tr><td style="font-weight:600;color:var(--red);font-family:'JetBrains Mono',monospace;font-size:12px;">payment.failed</td><td>#11 Revenue</td><td>#6, #10</td><td>Start dunning sequence, update subscriber health</td></tr>
+        <tr><td style="font-weight:600;color:var(--red);font-family:'JetBrains Mono',monospace;font-size:12px;">payment.recovered</td><td>#11 Revenue</td><td>#6, #10</td><td>Stop dunning, restore access, celebrate</td></tr>
+        <tr><td style="font-weight:600;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:12px;">article.published</td><td>#12 SEO</td><td>#9, #15</td><td>Track in analytics, log for audit</td></tr>
+        <tr><td style="font-weight:600;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:12px;">referral.converted</td><td>#13 Referral</td><td>#10, #11</td><td>Issue reward, update referrer profile</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════ BUILD ORDER ═══════════════ -->
+<div id="roadmap" class="s">
+  <div class="s-label">Execution</div>
+  <div class="s-title">Build Order — What to Build First</div>
+  <div class="s-desc">Not everything ships at once. Here's the dependency-aware build order across 4 phases.</div>
+
+  <h3>Phase 1: Foundation (Weeks 1–4) — "Can We Send One Email?"</h3>
+  <div class="priority-grid">
+    <div class="priority-card p-critical"><h4>Masterfile</h4><p>Atlas voice, compliance rules, quality rubric. Everything else references this. Build first.</p></div>
+    <div class="priority-card p-critical"><h4>Shared Types + Database</h4><p>TypeScript interfaces + Prisma schema. The skeleton everything hangs on.</p></div>
+    <div class="priority-card p-critical"><h4>Data Ingestion (System 01)</h4><p>Portfolio data → JSON. Without data, no content.</p></div>
+    <div class="priority-card p-critical"><h4>Content Engine (System 02)</h4><p>AI agents + quality gates. Without content, no email.</p></div>
+    <div class="priority-card p-critical"><h4>Newsletter Generation (System 03)</h4><p>Templates + assembly. Without assembly, content can't ship.</p></div>
+    <div class="priority-card p-critical"><h4>Delivery Infrastructure (System 04)</h4><p>ESP integration + segmentation. Without this, emails don't arrive.</p></div>
+    <div class="priority-card p-critical"><h4>Compliance (System 15)</h4><p>Disclaimer injection from Day 1. Non-negotiable for financial content.</p></div>
+    <div class="priority-card p-critical"><h4>Infrastructure (System 16)</h4><p>CI/CD, env setup, Docker, monitoring. The rails everything runs on.</p></div>
+  </div>
+
+  <h3>Phase 2: Monetization (Weeks 5–8) — "Can We Charge Money?"</h3>
+  <div class="priority-grid">
+    <div class="priority-card p-high"><h4>Revenue & Billing (System 11)</h4><p>Stripe integration, tier management, checkout flows. Must work before paid launch.</p></div>
+    <div class="priority-card p-high"><h4>Sales Funnels (System 05)</h4><p>Landing page, scoreboard, checkout pages. The front door for paid subscribers.</p></div>
+    <div class="priority-card p-high"><h4>Sales Sequences (System 06)</h4><p>Welcome sequence + free-to-premium sequence. The upgrade engine.</p></div>
+    <div class="priority-card p-high"><h4>Subscriber CRM (System 10)</h4><p>Lifecycle tracking, engagement scoring. Needed for sequence targeting.</p></div>
+    <div class="priority-card p-high"><h4>Analytics (System 09)</h4><p>Email metrics, revenue tracking, executive dashboard. Can't improve what you can't measure.</p></div>
+  </div>
+
+  <h3>Phase 3: Scale (Weeks 9–16) — "Can We Grow Efficiently?"</h3>
+  <div class="priority-grid">
+    <div class="priority-card p-medium"><h4>Personalization (System 07)</h4><p>Dynamic content, send-time optimization, portfolio focus per subscriber.</p></div>
+    <div class="priority-card p-medium"><h4>SEO Content System (System 12)</h4><p>Article pipeline, Notion publishing, cluster strategy. Organic acquisition channel.</p></div>
+    <div class="priority-card p-medium"><h4>Referral Engine (System 13)</h4><p>Referral tracking, rewards, share page. Near-zero CAC growth.</p></div>
+    <div class="priority-card p-medium"><h4>SMS & Push (System 14)</h4><p>Trade alerts for Pro+. The #1 upsell driver for Pro tier.</p></div>
+  </div>
+
+  <h3>Phase 4: Dominate (Weeks 17–24) — "Can We Be Best-in-Class?"</h3>
+  <div class="priority-grid">
+    <div class="priority-card p-later"><h4>Reply Engine (System 08)</h4><p>AI-drafted replies, sentiment analysis, escalation routing. Builds relationship at scale.</p></div>
+    <div class="priority-card p-later"><h4>Advanced Analytics</h4><p>Churn prediction ML, LTV forecasting, revenue modeling, cohort analysis.</p></div>
+    <div class="priority-card p-later"><h4>Advanced Sequences</h4><p>Pro→Elite, Elite→Managed, event-driven (crash, Black Friday), cancellation save.</p></div>
+    <div class="priority-card p-later"><h4>Portfolio Dashboard Pro</h4><p>Future standalone product ($199–$499/yr). Software tool add-on. Phase 4+ revenue stream.</p></div>
+  </div>
+</div>
+
+<!-- ═══════════════ ENV VARS ═══════════════ -->
+<div class="s-full s-alt">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="s-label">Configuration</div>
+    <div class="s-title">Environment Variables (.env.example)</div>
+    <div class="s-desc">Every secret and config value the system needs. In production, these live in a secrets manager — never committed to Git.</div>
+
+    <table>
+      <thead><tr><th>Variable</th><th>System</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green);">ANTHROPIC_API_KEY</td><td>#2, #8, #12</td><td>Claude API key for content generation</td></tr>
+        <tr><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green);">OPENAI_API_KEY</td><td>#2</td><td>Fallback AI model</td></tr>
+        <tr><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue);">BEEHIIV_API_KEY</td><td>#4</td><td>Primary ESP</td></tr>
+        <tr><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--blue);">BEEHIIV_PUBLICATION_ID</td><td>#4</td><td>Publication identifier</td></tr>
+        <tr><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--purple);">STRIPE_SECRET_KEY</td><td>#11</td><td>Stripe payment processing</td></tr>
+        <tr><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--purple);">STRIPE_WEBHOOK_SECRET</td><td>#11</td><td>Verify Stripe webhook signatures</td></tr>
+        <tr><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--orange);">NOTION_API_KEY</td><td>#12</td><td>Notion CMS integration</td></tr>
+        <tr><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--orange);">NOTION_DATABASE_ID</td><td>#12</td><td>Articles database</td></tr>
+        <tr><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--cyan);">TWILIO_ACCOUNT_SID</td><td>#14</td><td>SMS service</td></tr>
+        <tr><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--cyan);">TWILIO_AUTH_TOKEN</td><td>#14</td><td>SMS authentication</td></tr>
+        <tr><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--red);">TRADEALGO_API_KEY</td><td>#1</td><td>Portfolio + scoring data</td></tr>
+        <tr><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--red);">MARKET_DATA_API_KEY</td><td>#1</td><td>Alpha Vantage / Polygon</td></tr>
+        <tr><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--white);">DATABASE_URL</td><td>All</td><td>PostgreSQL connection string</td></tr>
+        <tr><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--white);">REDIS_URL</td><td>All</td><td>Redis connection for event bus + cache</td></tr>
+        <tr><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--yellow);">POSTHOG_API_KEY</td><td>#9</td><td>Product analytics</td></tr>
+        <tr><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--yellow);">SENTRY_DSN</td><td>#16</td><td>Error tracking</td></tr>
+        <tr><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--yellow);">PAGERDUTY_KEY</td><td>#16</td><td>Critical alerting</td></tr>
+        <tr><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green);">META_PIXEL_ID</td><td>#5</td><td>Facebook conversion tracking</td></tr>
+        <tr><td style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green);">GOOGLE_ADS_ID</td><td>#5</td><td>Google conversion tracking</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════ DEEP DIVE PREVIEW ═══════════════ -->
+<div class="s">
+  <div class="s-label">Next Steps</div>
+  <div class="s-title">Ready to Deep-Dive Each System</div>
+  <div class="s-desc">This document covers the major strokes — the 16 systems, file tree, integrations, database schema, event bus, and build order. Now we go system by system.</div>
+
+  <div class="callout">
+    <strong>What Each Deep-Dive Will Cover:</strong> For each of the 16 systems: complete file-by-file specification, function signatures, data flow diagrams, configuration schemas, test strategies, error handling patterns, monitoring requirements, and deployment considerations. Pick any system and we'll go line-by-line.
+  </div>
+
+  <h3>Suggested Deep-Dive Order</h3>
+  <table>
+    <thead><tr><th>#</th><th>System</th><th>Why This Order</th><th>Dependency</th></tr></thead>
+    <tbody>
+      <tr><td style="font-weight:700;color:var(--green);">1</td><td style="font-weight:600;color:var(--white);">Masterfile (the-signal/masterfile/)</td><td>Everything else references this. Voice, rules, quality, compliance.</td><td>None — root dependency</td></tr>
+      <tr><td style="font-weight:700;color:var(--green);">2</td><td style="font-weight:600;color:var(--white);">Data Ingestion (System 01)</td><td>Without data, nothing generates. Portfolio feeds are the fuel.</td><td>Masterfile (for regime config)</td></tr>
+      <tr><td style="font-weight:700;color:var(--green);">3</td><td style="font-weight:600;color:var(--white);">Content Engine (System 02)</td><td>The AI writing pipeline. Most complex system. Most critical to quality.</td><td>Masterfile + Data Ingestion</td></tr>
+      <tr><td style="font-weight:700;color:var(--green);">4</td><td style="font-weight:600;color:var(--white);">Newsletter Generation (System 03)</td><td>Assembly layer — turns content + data into send-ready HTML.</td><td>Content Engine + Data</td></tr>
+      <tr><td style="font-weight:700;color:var(--green);">5</td><td style="font-weight:600;color:var(--white);">Delivery (System 04)</td><td>ESP integration — the system that actually puts email in inboxes.</td><td>Newsletter Gen</td></tr>
+      <tr><td style="font-weight:700;color:var(--orange);">6</td><td style="font-weight:600;color:var(--white);">Sales Sequences (System 06)</td><td>The revenue engine. Welcome + upgrade sequences.</td><td>Delivery + CRM</td></tr>
+      <tr><td style="font-weight:700;color:var(--orange);">7</td><td style="font-weight:600;color:var(--white);">Sales Funnels (System 05)</td><td>Landing pages, checkout, scoreboard. The acquisition front door.</td><td>Revenue + Analytics</td></tr>
+      <tr><td style="font-weight:700;color:var(--orange);">8</td><td style="font-weight:600;color:var(--white);">Revenue & Billing (System 11)</td><td>Stripe integration, tier management. Required for paid launch.</td><td>Subscriber CRM</td></tr>
+      <tr><td style="font-weight:700;color:var(--blue);">9</td><td style="font-weight:600;color:var(--white);">Analytics (System 09)</td><td>Measurement layer. Can't improve what you can't track.</td><td>All sending systems</td></tr>
+      <tr><td style="font-weight:700;color:var(--blue);">10</td><td style="font-weight:600;color:var(--white);">Everything Else (07, 08, 10, 12–14)</td><td>Personalization, replies, CRM details, SEO, referral, SMS.</td><td>Core systems running</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<div class="footer" style="position:relative;">
+  <div style="max-width:900px;margin:0 auto;">
+    <div style="display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin-bottom:24px;">
+      <div style="text-align:center;"><div style="font-size:24px;font-weight:800;color:var(--green);">16</div><div style="font-size:10px;color:var(--gray-3);text-transform:uppercase;letter-spacing:1px;">Core Systems</div></div>
+      <div style="text-align:center;"><div style="font-size:24px;font-weight:800;color:var(--green);">140+</div><div style="font-size:10px;color:var(--gray-3);text-transform:uppercase;letter-spacing:1px;">Files Mapped</div></div>
+      <div style="text-align:center;"><div style="font-size:24px;font-weight:800;color:var(--green);">24</div><div style="font-size:10px;color:var(--gray-3);text-transform:uppercase;letter-spacing:1px;">Integrations</div></div>
+      <div style="text-align:center;"><div style="font-size:24px;font-weight:800;color:var(--green);">15</div><div style="font-size:10px;color:var(--gray-3);text-transform:uppercase;letter-spacing:1px;">DB Tables</div></div>
+      <div style="text-align:center;"><div style="font-size:24px;font-weight:800;color:var(--green);">15</div><div style="font-size:10px;color:var(--gray-3);text-transform:uppercase;letter-spacing:1px;">Event Types</div></div>
+      <div style="text-align:center;"><div style="font-size:24px;font-weight:800;color:var(--green);">4</div><div style="font-size:10px;color:var(--gray-3);text-transform:uppercase;letter-spacing:1px;">Build Phases</div></div>
+    </div>
+    <p style="color:var(--green);font-weight:800;font-size:20px;margin-bottom:4px;letter-spacing:-0.5px;">The Signal — Enterprise Architecture Skeleton</p>
+    <p style="color:var(--gray-3);font-size:12px;margin-bottom:16px;">16 systems. 140+ files. Every integration point, database table, and event mapped. Ready for deep-dives.</p>
+    <div style="border-top:1px solid var(--dark-4);padding-top:16px;">
+      <p style="font-size:11px;color:var(--gray-3);">TradeAlgo &middot; Confidential &middot; February 2026</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

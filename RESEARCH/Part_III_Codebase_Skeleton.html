@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Signal — Part III: Codebase Skeleton</title>
+<style>
+  :root {
+    --green: #0D9F5F;
+    --green-bg: #E6F7EF;
+    --dark: #111111;
+    --text: #555555;
+    --muted: #999999;
+    --blue: #1A6DDB;
+    --blue-bg: #E8F0FE;
+    --amber: #C77D00;
+    --amber-bg: #FEF3E0;
+    --red: #D93025;
+    --red-bg: #FCE8E6;
+    --purple: #7C3AED;
+    --purple-bg: #F3E8FF;
+    --card: #F8F9FA;
+    --border: #E0E2E6;
+    --white: #FFFFFF;
+    --cyan: #0891B2;
+    --cyan-bg: #ECFEFF;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #F0F2F5;
+    color: var(--text);
+    line-height: 1.65;
+    font-size: 16px;
+  }
+  .page-container {
+    max-width: 940px;
+    margin: 0 auto;
+    background: var(--white);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 8px 30px rgba(0,0,0,0.05);
+  }
+
+  /* ── HEADER BAR ── */
+  .header-bar {
+    background: var(--dark);
+    color: var(--white);
+    padding: 14px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .header-bar .tag {
+    background: var(--green);
+    color: var(--white);
+    padding: 3px 10px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  /* ── TITLE ── */
+  .title-page {
+    text-align: center;
+    padding: 90px 48px 70px;
+    border-bottom: 1px solid var(--border);
+  }
+  .title-page .eyebrow {
+    color: var(--green);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .title-page h1 {
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--dark);
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+  .title-page .subtitle {
+    font-size: 18px;
+    color: var(--text);
+    line-height: 1.6;
+    max-width: 640px;
+    margin: 0 auto 40px;
+  }
+  .title-page .meta { color: var(--muted); font-size: 14px; }
+
+  /* ── PART HEADER ── */
+  .part-header {
+    padding: 48px 48px 36px;
+    border-bottom: 1px solid var(--border);
+    background: var(--dark);
+    color: var(--white);
+  }
+  .part-header .part-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+  .part-header h2 {
+    font-size: 30px;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+  .part-header p {
+    color: rgba(255,255,255,0.65);
+    font-size: 15px;
+  }
+
+  /* ── TOC ── */
+  .toc {
+    padding: 40px 48px;
+    border-bottom: 1px solid var(--border);
+    background: var(--card);
+  }
+  .toc h2 { font-size: 14px; font-weight: 700; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
+  .toc ol { list-style: none; max-width: 400px; }
+  .toc ol li a {
+    display: block;
+    padding: 6px 0;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 14px;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s;
+  }
+  .toc ol li a:hover { color: var(--green); }
+  .toc ol li a .n { color: var(--green); font-weight: 700; margin-right: 8px; }
+
+  /* ── SECTIONS ── */
+  .section {
+    padding: 48px 48px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-number {
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  h2.section-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--dark);
+    line-height: 1.25;
+    margin-bottom: 20px;
+  }
+  h3 { font-size: 19px; font-weight: 700; color: var(--dark); margin: 28px 0 14px; }
+  h3.green { color: var(--green); }
+  h4 { font-size: 16px; font-weight: 700; color: var(--dark); margin: 22px 0 10px; }
+  p { margin-bottom: 14px; }
+  strong { color: var(--dark); font-weight: 600; }
+
+  /* ── CALLOUTS ── */
+  .callout {
+    border-left: 4px solid var(--green);
+    background: var(--green-bg);
+    padding: 18px 22px;
+    margin: 20px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--dark);
+  }
+  .callout.blue { border-color: var(--blue); background: var(--blue-bg); }
+  .callout.amber { border-color: var(--amber); background: var(--amber-bg); }
+
+  /* ── TABLES ── */
+  .table-wrap {
+    margin: 20px 0;
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  thead th {
+    background: var(--dark);
+    color: var(--white);
+    font-weight: 600;
+    text-align: left;
+    padding: 11px 14px;
+    font-size: 12px;
+    letter-spacing: 0.3px;
+  }
+  tbody td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tbody td:first-child { font-weight: 600; color: var(--dark); }
+  tbody tr:nth-child(even) { background: var(--card); }
+  tbody tr:last-child td { border-bottom: none; }
+
+  /* ── CODE BLOCKS ── */
+  .code-block {
+    background: #1e1e2e;
+    color: #cdd6f4;
+    padding: 24px 28px;
+    border-radius: 8px;
+    font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.65;
+    overflow-x: auto;
+    margin: 20px 0;
+    white-space: pre;
+  }
+  .code-block .comment { color: #6c7086; }
+  .code-block .folder { color: #89b4fa; font-weight: 600; }
+  .code-block .file { color: #a6e3a1; }
+  .code-block .important { color: #f9e2af; font-weight: 600; }
+  .code-block .dim { color: #585b70; }
+
+  /* ── FOOTER ── */
+  .footer { text-align: center; padding: 40px 48px; color: var(--muted); font-size: 13px; font-style: italic; }
+
+  @media (max-width: 700px) {
+    .header-bar, .section, .toc, .title-page, .part-header { padding-left: 24px; padding-right: 24px; }
+    .title-page h1 { font-size: 30px; }
+    h2.section-title { font-size: 24px; }
+    table { font-size: 12px; }
+    thead th, tbody td { padding: 8px 10px; }
+    .code-block { font-size: 11px; padding: 16px; }
+  }
+  @media print {
+    body { background: white; }
+    .page-container { box-shadow: none; }
+    .section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-container">
+
+  <!-- ═══════ HEADER ═══════ -->
+  <div class="header-bar">
+    <span>The Signal &mdash; Part III: Codebase Skeleton</span>
+    <span class="tag">Confidential</span>
+  </div>
+
+  <!-- ═══════ TITLE ═══════ -->
+  <div class="title-page">
+    <div class="eyebrow">The Signal &mdash; Part III of III</div>
+    <h1>Codebase Skeleton</h1>
+    <div class="subtitle">The complete technical architecture for how Claude Code generates, reviews, optimizes, and delivers The Signal.</div>
+    <div class="meta">February 2026 &mdash; TradeAlgo Internal</div>
+  </div>
+
+  <!-- ═══════ TOC ═══════ -->
+  <div class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#s9"><span class="n">9</span> System Overview</a></li>
+      <li><a href="#s10"><span class="n">10</span> Repository Structure</a></li>
+      <li><a href="#s11"><span class="n">11</span> The Masterfile</a></li>
+      <li><a href="#s12"><span class="n">12</span> Daily Pipeline</a></li>
+      <li><a href="#s13"><span class="n">13</span> Every Obstacle, Pre-Solved</a></li>
+    </ol>
+  </div>
+
+  <!-- Section 9 -->
+  <div class="section" id="s9">
+    <div class="section-number">Section 09</div>
+    <h2 class="section-title">System Overview</h2>
+
+    <p>The entire Signal operation lives in a single GitHub repository. Claude Code (Opus 4.6) is the engine that reads the repository, pulls data from TradeAlgo's APIs, generates content, and outputs production-ready emails. Here's how the pieces fit together:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Component</th><th>What It Does</th><th>Who Touches It</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Masterfile</td><td>Defines Atlas's personality, tone rules, content structure, compliance guardrails, and upsell placement. The "brain" of the system.</td><td>Founder + editor. Version-controlled. Every change is a PR with review.</td></tr>
+          <tr><td>Content Templates</td><td>Structural blueprints for every email type. Defines sections, word counts, data requirements, and formatting rules.</td><td>Founder. Rarely changes after initial calibration.</td></tr>
+          <tr><td>Data Layer</td><td>API configurations for Atlas Score Engine, Market Regime Model, Risk Scanner, and external market data. Feeds real-time data into generation.</td><td>Engineering team. API endpoints and auth.</td></tr>
+          <tr><td>Generation Pipeline</td><td>The orchestration layer. Reads masterfile + template + data, passes everything to Claude Opus, validates output, commits to repo for review.</td><td>Automated. Runs on schedule (4:30 AM ET).</td></tr>
+          <tr><td>Email Delivery</td><td>Takes approved HTML email and sends to subscriber segments via ESP. Handles free/premium content blocks, personalization tokens, tracking.</td><td>Automated after human approval. ESP manages delivery.</td></tr>
+          <tr><td>Analytics Engine</td><td>Ingests ESP data (opens, clicks, conversions), generates daily/weekly reports, identifies optimization opportunities, runs A/B test analysis.</td><td>Claude Code generates reports. Founder reviews.</td></tr>
+          <tr><td>Landing Pages</td><td>AI-generated, data-driven landing pages and lead magnets. Updated weekly with current scores and analysis.</td><td>Claude Code generates. Founder approves. Deploys automatically.</td></tr>
+          <tr><td>Optimization Loop</td><td>Weekly cycle: analyze performance → identify what worked → update masterfile → generate better content. The system that makes the system smarter.</td><td>Claude Code proposes changes. Founder approves via PR review.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout blue"><strong>Why a Git repo?</strong> Because every change to Atlas's personality, every content template modification, every optimization decision is tracked, reversible, and auditable. If a masterfile change causes open rates to drop, we can revert to the exact previous version. If a compliance issue arises, we can trace exactly when a phrase was added and by whom. The repo IS the institutional memory of the entire operation.</div>
+  </div>
+
+  <!-- Section 10 -->
+  <div class="section" id="s10">
+    <div class="section-number">Section 10</div>
+    <h2 class="section-title">Repository Structure</h2>
+
+    <p>The complete directory structure for the <code>the-signal</code> repository:</p>
+
+    <div class="code-block"><span class="folder">the-signal/</span>
+<span class="dim">│</span>
+<span class="dim">├──</span> <span class="file">README.md</span>                              <span class="comment"># System overview, setup instructions, daily ops guide</span>
+<span class="dim">│</span>
+<span class="dim">├──</span> <span class="folder">atlas/</span>                                   <span class="comment"># ══ THE BRAIN ══ Everything that defines who Atlas is</span>
+<span class="dim">│   ├──</span> <span class="important">masterfile.yaml</span>                      <span class="comment"># THE master document. Personality + rules + structure.</span>
+<span class="dim">│   ├──</span> <span class="folder">personality/</span>
+<span class="dim">│   │   ├──</span> <span class="file">voice-rules.yaml</span>                 <span class="comment"># 6 personality traits, language patterns, forbidden phrases</span>
+<span class="dim">│   │   ├──</span> <span class="file">tone-calibration.yaml</span>            <span class="comment"># Market regime → emotional register mapping</span>
+<span class="dim">│   │   ├──</span> <span class="file">behavioral-coaching.yaml</span>         <span class="comment"># Bias library, triggers, coaching scripts</span>
+<span class="dim">│   │   └──</span> <span class="file">examples/</span>                        <span class="comment"># 50+ example outputs showing ideal Atlas voice</span>
+<span class="dim">│   │       ├──</span> <span class="file">bullish-market.md</span>
+<span class="dim">│   │       ├──</span> <span class="file">crash-mode.md</span>
+<span class="dim">│   │       ├──</span> <span class="file">stock-analysis.md</span>
+<span class="dim">│   │       └──</span> <span class="file">behavioral-coaching.md</span>
+<span class="dim">│   ├──</span> <span class="folder">principles/</span>
+<span class="dim">│   │   ├──</span> <span class="file">star-is-born.yaml</span>                <span class="comment"># First impression protocol. Welcome sequence rules.</span>
+<span class="dim">│   │   ├──</span> <span class="file">guiding-principles.yaml</span>          <span class="comment"># All N/A/C/B principles from Part II above</span>
+<span class="dim">│   │   └──</span> <span class="file">ethics.yaml</span>                      <span class="comment"># What Atlas never does. Hard ethical lines.</span>
+<span class="dim">│   └──</span> <span class="folder">compliance/</span>
+<span class="dim">│       ├──</span> <span class="file">disclaimers.yaml</span>                 <span class="comment"># Required legal text by content type</span>
+<span class="dim">│       ├──</span> <span class="file">forbidden-phrases.yaml</span>            <span class="comment"># Words/phrases Atlas never uses</span>
+<span class="dim">│       └──</span> <span class="file">depersonalization.yaml</span>            <span class="comment"># Rules for non-personalized financial content</span>
+<span class="dim">│</span>
+<span class="dim">├──</span> <span class="folder">content/</span>                                 <span class="comment"># ══ THE CONTENT ENGINE ══ Templates + generation</span>
+<span class="dim">│   ├──</span> <span class="folder">templates/</span>
+<span class="dim">│   │   ├──</span> <span class="file">daily-briefing.yaml</span>              <span class="comment"># Mon-Fri structure: opening, Three Things, regime, Number</span>
+<span class="dim">│   │   ├──</span> <span class="file">wednesday-analysis.yaml</span>          <span class="comment"># Deep stock analysis template with score integration</span>
+<span class="dim">│   │   ├──</span> <span class="file">friday-risk-check.yaml</span>           <span class="comment"># Risk/regime template with behavioral coaching slot</span>
+<span class="dim">│   │   ├──</span> <span class="file">sunday-deep-dive.yaml</span>            <span class="comment"># Weekend analysis: full thesis, risks, score breakdown</span>
+<span class="dim">│   │   ├──</span> <span class="file">special-editions.yaml</span>            <span class="comment"># Templates for: earnings season, Fed days, crash mode</span>
+<span class="dim">│   │   └──</span> <span class="file">content-calendar.yaml</span>            <span class="comment"># Weekly topic rotation: sectors, themes, recurring series</span>
+<span class="dim">│   ├──</span> <span class="folder">generation/</span>
+<span class="dim">│   │   ├──</span> <span class="important">pipeline.py</span>                      <span class="comment"># MAIN ORCHESTRATOR. Reads masterfile → pulls data → calls</span>
+<span class="dim">│   │   │</span>                                      <span class="comment">#   Claude Opus → validates → outputs HTML email</span>
+<span class="dim">│   │   ├──</span> <span class="file">data-ingestion.py</span>                <span class="comment"># Calls scoring engine API, market data, regime model</span>
+<span class="dim">│   │   ├──</span> <span class="file">prompt-builder.py</span>                <span class="comment"># Assembles the prompt: masterfile + template + data + date</span>
+<span class="dim">│   │   ├──</span> <span class="file">quality-check.py</span>                 <span class="comment"># Pre-review validation: compliance, tone, data accuracy</span>
+<span class="dim">│   │   ├──</span> <span class="file">subject-line-generator.py</span>        <span class="comment"># Generates 5 subject line options with A/B test variants</span>
+<span class="dim">│   │   └──</span> <span class="file">html-renderer.py</span>                 <span class="comment"># Converts generated content into email HTML template</span>
+<span class="dim">│   ├──</span> <span class="folder">archive/</span>                             <span class="comment"># Every generated email, versioned by date</span>
+<span class="dim">│   │   └──</span> <span class="file">YYYY-MM-DD/</span>
+<span class="dim">│   │       ├──</span> <span class="file">generated.md</span>                 <span class="comment"># Raw AI output</span>
+<span class="dim">│   │       ├──</span> <span class="file">reviewed.md</span>                  <span class="comment"># After human review</span>
+<span class="dim">│   │       ├──</span> <span class="file">final.html</span>                   <span class="comment"># Sent version</span>
+<span class="dim">│   │       └──</span> <span class="file">data-snapshot.json</span>            <span class="comment"># Exact data used for generation (reproducibility)</span>
+<span class="dim">│   └──</span> <span class="folder">track-record/</span>
+<span class="dim">│       ├──</span> <span class="file">picks.json</span>                       <span class="comment"># Every stock mentioned with score, date, and outcome</span>
+<span class="dim">│       ├──</span> <span class="file">performance-calculator.py</span>         <span class="comment"># Computes win rate, avg return, Sharpe, max drawdown</span>
+<span class="dim">│       └──</span> <span class="file">track-record-template.yaml</span>       <span class="comment"># How Atlas presents the track record in emails</span>
+<span class="dim">│</span>
+<span class="dim">├──</span> <span class="folder">emails/</span>                                  <span class="comment"># ══ EMAIL SEQUENCES ══ Everything beyond the daily</span>
+<span class="dim">│   ├──</span> <span class="folder">welcome-sequence/</span>
+<span class="dim">│   │   ├──</span> <span class="important">star-is-born-config.yaml</span>         <span class="comment"># Timing, triggers, rules from Part I</span>
+<span class="dim">│   │   ├──</span> <span class="file">day-00-welcome.yaml</span>              <span class="comment"># Instant welcome. Lead with insight, not identity.</span>
+<span class="dim">│   │   ├──</span> <span class="file">day-03-atlas-score.yaml</span>          <span class="comment"># Score explainer embedded in daily</span>
+<span class="dim">│   │   ├──</span> <span class="file">day-05-track-record.yaml</span>         <span class="comment"># Wins AND losses. The trust moment.</span>
+<span class="dim">│   │   └──</span> <span class="file">day-10-soft-invitation.yaml</span>      <span class="comment"># The one and only dedicated upsell. Gentle.</span>
+<span class="dim">│   ├──</span> <span class="folder">upsell-sequences/</span>
+<span class="dim">│   │   ├──</span> <span class="file">score-lock.yaml</span>                  <span class="comment"># Wed + Sun embedded score tease</span>
+<span class="dim">│   │   ├──</span> <span class="file">sunday-proof.yaml</span>                <span class="comment"># "Here's what Premium got this week"</span>
+<span class="dim">│   │   ├──</span> <span class="file">track-record-depth.yaml</span>          <span class="comment"># Summary vs trade-by-trade access</span>
+<span class="dim">│   │   ├──</span> <span class="file">regime-tease.yaml</span>                <span class="comment"># One line under traffic light, daily</span>
+<span class="dim">│   │   ├──</span> <span class="file">referral-backdoor.yaml</span>           <span class="comment"># Earn Premium trial via 3 referrals</span>
+<span class="dim">│   │   └──</span> <span class="file">sms-milestone.yaml</span>               <span class="comment"># "Atlas's pick is up 15%" text</span>
+<span class="dim">│   ├──</span> <span class="folder">win-back/</span>
+<span class="dim">│   │   ├──</span> <span class="file">inactive-30-day.yaml</span>             <span class="comment"># Re-engage after 30 days no opens</span>
+<span class="dim">│   │   ├──</span> <span class="file">cancellation-save.yaml</span>           <span class="comment"># Last-ditch before cancel</span>
+<span class="dim">│   │   └──</span> <span class="file">churned-reactivation.yaml</span>        <span class="comment"># Win-back 60 days after cancel</span>
+<span class="dim">│   └──</span> <span class="folder">html-templates/</span>
+<span class="dim">│       ├──</span> <span class="file">daily-email.html</span>                 <span class="comment"># Master HTML template for daily Signal</span>
+<span class="dim">│       ├──</span> <span class="file">sunday-email.html</span>                <span class="comment"># Extended template for Deep Dive</span>
+<span class="dim">│       ├──</span> <span class="file">welcome-email.html</span>               <span class="comment"># First-contact template</span>
+<span class="dim">│       └──</span> <span class="file">components/</span>                      <span class="comment"># Reusable: header, footer, score card, regime badge</span>
+<span class="dim">│</span>
+<span class="dim">├──</span> <span class="folder">landing-pages/</span>                           <span class="comment"># ══ ACQUISITION ══ Where subscribers come from</span>
+<span class="dim">│   ├──</span> <span class="file">main-signup.html</span>                     <span class="comment"># Primary landing page (contains sample issue)</span>
+<span class="dim">│   ├──</span> <span class="file">premium-upgrade.html</span>                 <span class="comment"># Free → Premium conversion page</span>
+<span class="dim">│   ├──</span> <span class="file">pro-upgrade.html</span>                     <span class="comment"># Premium → Pro conversion page</span>
+<span class="dim">│   ├──</span> <span class="folder">lead-magnets/</span>
+<span class="dim">│   │   ├──</span> <span class="file">generator.py</span>                     <span class="comment"># AI generates lead magnets from current scores</span>
+<span class="dim">│   │   ├──</span> <span class="file">templates/</span>                       <span class="comment"># "Top 10 AI Stocks" / "5 Undervalued Dividend Plays"</span>
+<span class="dim">│   │   └──</span> <span class="file">archive/</span>                         <span class="comment"># Generated lead magnets by date</span>
+<span class="dim">│   └──</span> <span class="folder">ab-tests/</span>
+<span class="dim">│       ├──</span> <span class="file">active/</span>                          <span class="comment"># Currently running landing page tests</span>
+<span class="dim">│       └──</span> <span class="file">results/</span>                         <span class="comment"># Historical test results</span>
+<span class="dim">│</span>
+<span class="dim">├──</span> <span class="folder">data/</span>                                    <span class="comment"># ══ DATA LAYER ══ APIs, scores, market data</span>
+<span class="dim">│   ├──</span> <span class="folder">api-integrations/</span>
+<span class="dim">│   │   ├──</span> <span class="file">scoring-engine.yaml</span>              <span class="comment"># Atlas Score API: endpoints, auth, rate limits</span>
+<span class="dim">│   │   ├──</span> <span class="file">market-regime.yaml</span>               <span class="comment"># Regime model API: bull/bear/crash classification</span>
+<span class="dim">│   │   ├──</span> <span class="file">risk-scanner.yaml</span>                <span class="comment"># Anomaly detection API: real-time alerts</span>
+<span class="dim">│   │   └──</span> <span class="file">market-data.yaml</span>                 <span class="comment"># External: prices, earnings, macro, news feeds</span>
+<span class="dim">│   ├──</span> <span class="folder">subscribers/</span>
+<span class="dim">│   │   ├──</span> <span class="file">segments.yaml</span>                    <span class="comment"># Free / Premium / Pro / Inactive definitions</span>
+<span class="dim">│   │   ├──</span> <span class="file">personalization.yaml</span>             <span class="comment"># Phase 1: survey. Phase 2: behavioral. Phase 3: portfolio.</span>
+<span class="dim">│   │   └──</span> <span class="file">lifecycle-triggers.yaml</span>          <span class="comment"># Day 3, Day 10, 30-day inactive, etc.</span>
+<span class="dim">│   └──</span> <span class="folder">cpa-advertising/</span>
+<span class="dim">│       ├──</span> <span class="file">partners.yaml</span>                    <span class="comment"># CPA partner list: Agora, MarketWise, etc.</span>
+<span class="dim">│       ├──</span> <span class="file">triggered-email-config.yaml</span>      <span class="comment"># Behavioral targeting rules for ad emails</span>
+<span class="dim">│       └──</span> <span class="file">revenue-tracking.yaml</span>            <span class="comment"># Commission tracking per partner</span>
+<span class="dim">│</span>
+<span class="dim">├──</span> <span class="folder">sms/</span>                                     <span class="comment"># ══ SMS CHANNEL ══ Text message delivery</span>
+<span class="dim">│   ├──</span> <span class="file">templates/</span>
+<span class="dim">│   │   ├──</span> <span class="file">milestone-alerts.yaml</span>            <span class="comment"># "Atlas's pick XYZ is up 15%"</span>
+<span class="dim">│   │   ├──</span> <span class="file">regime-change-alerts.yaml</span>        <span class="comment"># "Market regime shifted to Cautious"</span>
+<span class="dim">│   │   └──</span> <span class="file">sunday-notification.yaml</span>         <span class="comment"># "Your Sunday Deep Dive is in your inbox"</span>
+<span class="dim">│   └──</span> <span class="file">delivery-config.yaml</span>                 <span class="comment"># Twilio config, TCPA compliance, opt-in rules</span>
+<span class="dim">│</span>
+<span class="dim">├──</span> <span class="folder">analytics/</span>                               <span class="comment"># ══ INTELLIGENCE ══ Performance tracking + optimization</span>
+<span class="dim">│   ├──</span> <span class="folder">dashboards/</span>
+<span class="dim">│   │   ├──</span> <span class="important">daily-report.yaml</span>                <span class="comment"># Opens, clicks, unsubs, conversions, revenue</span>
+<span class="dim">│   │   ├──</span> <span class="file">weekly-review.yaml</span>               <span class="comment"># What worked, what didn't, optimization recs</span>
+<span class="dim">│   │   └──</span> <span class="file">monthly-strategy.yaml</span>            <span class="comment"># LTV, CAC, NPS, subscriber growth, churn analysis</span>
+<span class="dim">│   ├──</span> <span class="folder">optimization/</span>
+<span class="dim">│   │   ├──</span> <span class="file">subject-line-analysis.py</span>         <span class="comment"># A/B test results → update subject line patterns</span>
+<span class="dim">│   │   ├──</span> <span class="file">content-scoring.py</span>               <span class="comment"># Which topics/formats drive opens, clicks, conversions</span>
+<span class="dim">│   │   ├──</span> <span class="file">upsell-effectiveness.py</span>          <span class="comment"># Which of the 7 upsell types converts best</span>
+<span class="dim">│   │   ├──</span> <span class="file">churn-prediction.py</span>              <span class="comment"># Early warning: subscribers likely to cancel</span>
+<span class="dim">│   │   └──</span> <span class="file">masterfile-optimizer.py</span>          <span class="comment"># PROPOSES masterfile changes based on performance data</span>
+<span class="dim">│   │</span>                                          <span class="comment">#   Human approves via PR. Never auto-applies.</span>
+<span class="dim">│   └──</span> <span class="folder">reports/</span>
+<span class="dim">│       └──</span> <span class="file">YYYY-MM-DD/</span>                      <span class="comment"># Generated analysis reports</span>
+<span class="dim">│</span>
+<span class="dim">├──</span> <span class="folder">automation/</span>                               <span class="comment"># ══ ORCHESTRATION ══ Schedules + workflows</span>
+<span class="dim">│   ├──</span> <span class="important">daily-pipeline.yaml</span>                  <span class="comment"># The 4:30 AM → 6:30 AM daily workflow</span>
+<span class="dim">│   ├──</span> <span class="file">weekly-optimization.yaml</span>             <span class="comment"># Sunday: review analytics → propose improvements</span>
+<span class="dim">│   ├──</span> <span class="file">monthly-strategy.yaml</span>                <span class="comment"># 1st of month: full performance review + roadmap</span>
+<span class="dim">│   ├──</span> <span class="file">lead-magnet-refresh.yaml</span>             <span class="comment"># Weekly: regenerate lead magnets with fresh scores</span>
+<span class="dim">│   └──</span> <span class="file">track-record-update.yaml</span>             <span class="comment"># Daily: update pick performance tracking</span>
+<span class="dim">│</span>
+<span class="dim">├──</span> <span class="folder">tests/</span>                                   <span class="comment"># ══ QUALITY ASSURANCE ══ Automated testing</span>
+<span class="dim">│   ├──</span> <span class="folder">personality/</span>
+<span class="dim">│   │   ├──</span> <span class="file">voice-consistency.py</span>             <span class="comment"># Does output match masterfile personality?</span>
+<span class="dim">│   │   ├──</span> <span class="file">tone-calibration.py</span>              <span class="comment"># Does tone match market regime?</span>
+<span class="dim">│   │   └──</span> <span class="file">persona-drift-detector.py</span>        <span class="comment"># Alert if Atlas's voice is shifting over time</span>
+<span class="dim">│   ├──</span> <span class="folder">compliance/</span>
+<span class="dim">│   │   ├──</span> <span class="file">disclaimer-checker.py</span>            <span class="comment"># Are all required disclaimers present?</span>
+<span class="dim">│   │   ├──</span> <span class="file">forbidden-phrase-scanner.py</span>      <span class="comment"># Scan for forbidden language</span>
+<span class="dim">│   │   └──</span> <span class="file">personalization-guard.py</span>         <span class="comment"># Ensure no personalized advice slips through</span>
+<span class="dim">│   ├──</span> <span class="folder">data/</span>
+<span class="dim">│   │   ├──</span> <span class="file">score-accuracy.py</span>                <span class="comment"># Do scores in email match API output?</span>
+<span class="dim">│   │   ├──</span> <span class="file">stale-data-detector.py</span>           <span class="comment"># Is any data >24 hours old?</span>
+<span class="dim">│   │   └──</span> <span class="file">track-record-integrity.py</span>        <span class="comment"># Are all picks tracked? Any missing?</span>
+<span class="dim">│   └──</span> <span class="folder">rendering/</span>
+<span class="dim">│       ├──</span> <span class="file">email-preview.py</span>                 <span class="comment"># Render in Gmail, Apple Mail, Outlook</span>
+<span class="dim">│       └──</span> <span class="file">dark-mode-check.py</span>               <span class="comment"># Does the email work in dark mode?</span>
+<span class="dim">│</span>
+<span class="dim">└──</span> <span class="folder">config/</span>                                  <span class="comment"># ══ CONFIGURATION ══ Environment + settings</span>
+    <span class="dim">├──</span> <span class="file">.env.example</span>                         <span class="comment"># Template for API keys (actual .env is gitignored)</span>
+    <span class="dim">├──</span> <span class="file">esp-config.yaml</span>                     <span class="comment"># Beehiiv/ConvertKit settings, webhooks, segments</span>
+    <span class="dim">├──</span> <span class="file">feature-flags.yaml</span>                  <span class="comment"># A/B tests, gradual rollouts, beta features</span>
+    <span class="dim">└──</span> <span class="file">version.yaml</span>                        <span class="comment"># System version, last masterfile update, changelog</span></div>
+  </div>
+
+  <!-- Section 11 -->
+  <div class="section" id="s11">
+    <div class="section-number">Section 11</div>
+    <h2 class="section-title">The Masterfile — The Most Important File in the Repo</h2>
+
+    <p>The <code>atlas/masterfile.yaml</code> is the single file that controls everything about how Atlas behaves. Here's its structure:</p>
+
+    <div class="code-block"><span class="comment"># ══════════════════════════════════════════════════════════════</span>
+<span class="comment"># THE SIGNAL — ATLAS MASTERFILE</span>
+<span class="comment"># Version: 1.0.0</span>
+<span class="comment"># Last updated: 2026-02-24</span>
+<span class="comment"># Owner: [Founder Name]</span>
+<span class="comment"># ══════════════════════════════════════════════════════════════</span>
+
+<span class="important">identity:</span>
+  <span class="folder">name:</span> Atlas
+  <span class="folder">role:</span> Communicator and market analyst (NOT a trader)
+  <span class="folder">nature:</span> AI — openly, proudly, transparently
+  <span class="folder">powered_by:</span> TradeAlgo's scoring engine (500+ stocks, 0-100 scale)
+  <span class="folder">mission:</span> Make every subscriber feel smarter, calmer, and more confident about their investments
+
+<span class="important">personality:</span>
+  <span class="folder">traits:</span>
+    - <span class="file">Analytically rigorous</span>: Data first, always. Never speculation without evidence.
+    - <span class="file">Quietly confident</span>: Conviction without arrogance. Uses probability, not certainty.
+    - <span class="file">Emotionally intelligent</span>: Reads market conditions, adjusts tone accordingly.
+    - <span class="file">Dry humor</span>: Witty but never forced. One smile per email, max.
+    - <span class="file">Radically honest</span>: Shows losses. Admits uncertainty. Says "I was wrong."
+    - <span class="file">Protective</span>: Coaches against destructive behavior. Genuinely cares about outcomes.
+  <span class="folder">never_does:</span>
+    - Uses exclamation marks excessively
+    - Says "to the moon," "diamond hands," "HODL," or meme language
+    - Makes guarantees or promises about future performance
+    - Uses countdown timers, fake urgency, or scarcity tactics
+    - Talks down to the reader or uses unexplained jargon
+    - Gives personalized investment advice ("you should buy")
+    - Hides losses or cherry-picks the track record
+
+<span class="important">tone_calibration:</span>
+  <span class="folder">bullish:</span>
+    register: Energetic, forward-looking, exploratory
+    coaching_focus: Overconfidence caution
+    example_opening: "Three sectors hit 52-week highs. Let's find the ones with room to run."
+  <span class="folder">neutral:</span>
+    register: Curious, balanced, pattern-seeking
+    coaching_focus: Patience
+    example_opening: "Money is moving but not leaving. Here's where it's going."
+  <span class="folder">cautious:</span>
+    register: Measured, focused, risk-aware
+    coaching_focus: Position sizing
+    example_opening: "Breadth narrowed again. Third time in two weeks."
+  <span class="folder">correction:</span>
+    register: Steady, reassuring, protective
+    coaching_focus: Disposition effect
+    example_opening: "Your portfolio is down. Your instincts say sell. Let's talk about that."
+  <span class="folder">crash:</span>
+    register: Calm, direct, anchoring
+    coaching_focus: Full behavioral coaching mode
+    example_opening: "A note about your brain during days like this."
+
+<span class="important">content_structure:</span>
+  <span class="folder">daily_briefing:</span>
+    sections:
+      - opening_line: {max_words: 30, must_contain: specific_data_point}
+      - three_things: {count: 3, max_words_each: 60}
+      - market_regime: {source: api/market-regime, display: traffic_light}
+      - featured_content: {varies_by_day: true}  <span class="comment"># See daily rotation below</span>
+      - the_number: {format: "one striking data point", shareable: true}
+      - atlas_footnote: {max_words: 20, personality_moment: true}
+    total_read_time: "5 minutes"
+
+  <span class="folder">daily_rotation:</span>
+    monday: "Week Ahead — catalysts, earnings, macro events"
+    tuesday: "Trend Spotlight — sector/theme with data"
+    wednesday: "Stock Analysis — full thesis (UPSELL: score lock for Premium)"
+    thursday: "Education — methodology, bias coaching, investing principles"
+    friday: "Risk Check — regime, heat map, behavioral coaching"
+    sunday: "Deep Dive — comprehensive stock analysis (flagship content)"
+
+<span class="important">upsell_rules:</span>
+  <span class="folder">before_day_10:</span> ZERO upsell mentions. None. Not even subtle ones.
+  <span class="folder">after_day_10:</span>
+    max_intensity: "very low" for embedded content upsells
+    frequency_cap: "10 touchpoints/week, 8 must be very low intensity"
+    standalone_upsell_emails: NEVER
+    countdown_timers: NEVER
+    scarcity_language: NEVER
+    format: "one line embedded in content, not a banner or callout"
+
+<span class="important">compliance:</span>
+  <span class="folder">required_disclaimers:</span>
+    every_email: "The Signal is for informational purposes only. Not investment advice."
+    stock_mentions: "Past performance does not guarantee future results."
+    score_mentions: "Atlas Scores reflect model output, not recommendations."
+  <span class="folder">depersonalization:</span>
+    never_say: ["you should buy", "you should sell", "I recommend"]
+    always_say: ["the models suggest", "the data indicates", "historically"]
+
+<span class="important">data_sources:</span>
+  <span class="folder">atlas_score_api:</span> {endpoint: "$SCORING_API_URL", refresh: "daily 4:00 AM ET"}
+  <span class="folder">market_regime_api:</span> {endpoint: "$REGIME_API_URL", refresh: "every 15 min"}
+  <span class="folder">risk_scanner_api:</span> {endpoint: "$RISK_API_URL", refresh: "real-time"}
+  <span class="folder">market_data:</span> {source: "polygon.io + internal", refresh: "real-time"}</div>
+
+    <div class="callout"><strong>The masterfile is the strategic document.</strong> Every decision about Atlas's personality, every content rule, every upsell boundary, every compliance guardrail lives here. When the team debates "should Atlas be more aggressive with upsells?" — the answer is in the masterfile. When a new team member asks "what is Atlas's voice?" — the answer is in the masterfile. When Claude Code generates an email, it reads this file first. This is the single source of truth for the entire operation.</div>
+  </div>
+
+  <!-- Section 12 -->
+  <div class="section" id="s12">
+    <div class="section-number">Section 12</div>
+    <h2 class="section-title">The Daily Pipeline — 4:30 AM to 6:30 AM</h2>
+
+    <p>Every weekday morning, the following automated pipeline runs:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Time (ET)</th><th>Step</th><th>What Happens</th><th>Automated?</th></tr>
+        </thead>
+        <tbody>
+          <tr><td style="color: var(--blue); font-weight:700;">4:00 AM</td><td>Data refresh</td><td><code>data-ingestion.py</code> pulls fresh Atlas Scores (500+ stocks), market regime, risk scanner output, overnight market data, pre-market movers, earnings calendar.</td><td>Fully automated</td></tr>
+          <tr><td style="color: var(--blue); font-weight:700;">4:15 AM</td><td>Prompt assembly</td><td><code>prompt-builder.py</code> reads masterfile + today's content template + ingested data + today's date/day-of-week. Assembles the complete prompt for Claude Opus.</td><td>Fully automated</td></tr>
+          <tr><td style="color: var(--blue); font-weight:700;">4:30 AM</td><td>Content generation</td><td><code>pipeline.py</code> sends the assembled prompt to Claude Opus 4.6 API. Receives full email content in Atlas's voice. Generates 5 subject line options.</td><td>Fully automated</td></tr>
+          <tr><td style="color: var(--blue); font-weight:700;">4:45 AM</td><td>Quality check</td><td><code>quality-check.py</code> runs all test suites: compliance scanner, forbidden phrase check, tone calibration verification, data accuracy validation, score-vs-API verification.</td><td>Fully automated</td></tr>
+          <tr><td style="color: var(--blue); font-weight:700;">4:50 AM</td><td>HTML rendering</td><td><code>html-renderer.py</code> converts content into email HTML using the daily template. Applies free/Premium content segmentation. Generates preview images.</td><td>Fully automated</td></tr>
+          <tr><td style="color: var(--amber); font-weight:700;">5:00 AM</td><td>Human review</td><td>Founder/editor receives Slack notification with preview link. Reviews content for accuracy, voice quality, and anything the automated checks might miss. Can edit directly or request regeneration.</td><td>Human step</td></tr>
+          <tr><td style="color: var(--amber); font-weight:700;">6:00 AM</td><td>Approval</td><td>Founder clicks "Approve" in Slack or review dashboard. This triggers the send pipeline.</td><td>Human trigger</td></tr>
+          <tr><td style="color: var(--green); font-weight:700;">6:15 AM</td><td>ESP upload</td><td>Approved email uploaded to ESP (Beehiiv/ConvertKit). Subscriber segments applied. A/B test variants for subject line assigned.</td><td>Fully automated</td></tr>
+          <tr><td style="color: var(--green); font-weight:700;">6:30 AM</td><td>Send</td><td>The Signal lands in subscriber inboxes. Same time, every day. The habit loop completes.</td><td>Fully automated</td></tr>
+          <tr><td style="color: var(--green); font-weight:700;">6:35 AM</td><td>Archive</td><td>Sent email + data snapshot committed to <code>content/archive/YYYY-MM-DD/</code>. Track record updated with any new picks.</td><td>Fully automated</td></tr>
+          <tr><td style="color: var(--purple); font-weight:700;">7:00 AM</td><td>CPA trigger</td><td>Subscribers who opened the email receive a targeted CPA ad email within 30 minutes (MarketBeat model). Behavioral targeting maximizes conversion.</td><td>Fully automated</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout amber"><strong>The human review window is sacred.</strong> 5:00&ndash;6:00 AM is a 60-minute window where a human reads every word. This is non-negotiable. AI generates the first draft. A human ensures it's correct, on-brand, and safe to send. The human doesn't rewrite &mdash; they verify. If the masterfile is calibrated correctly, the human review is a 10-15 minute scan, not a full editorial session.</div>
+  </div>
+
+  <!-- Section 13 -->
+  <div class="section" id="s13">
+    <div class="section-number">Section 13</div>
+    <h2 class="section-title">Every Obstacle, Pre-Solved</h2>
+
+    <p>Here is every foreseeable obstacle to reaching $100M, and how the system addresses each one:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Obstacle</th><th>Why It Could Kill Us</th><th>How the System Solves It</th><th>Where in the Repo</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Voice inconsistency</td>
+            <td>AI voice drifts over time. Subscribers notice "Atlas sounds different today." Trust erodes.</td>
+            <td>Masterfile locks personality. <code>persona-drift-detector.py</code> runs weekly, comparing recent outputs to golden examples. Alerts if drift exceeds threshold.</td>
+            <td><code>tests/personality/</code></td>
+          </tr>
+          <tr>
+            <td>Deliverability collapse</td>
+            <td>Emails hit spam. Open rates drop. Revenue dies. Recovery takes months.</td>
+            <td>Single sending stream. Warm-up plan in <code>esp-config.yaml</code>. Daily deliverability monitoring. Instant alert if placement drops below 95%. No tactics that risk reputation.</td>
+            <td><code>config/esp-config.yaml</code></td>
+          </tr>
+          <tr>
+            <td>Bad AI output goes live</td>
+            <td>Atlas says something wrong, offensive, or legally problematic. One bad email can destroy the brand.</td>
+            <td>5-layer quality check: compliance scanner, forbidden phrases, tone validator, data accuracy, human review. Nothing sends without human "Approve" click.</td>
+            <td><code>content/generation/quality-check.py</code></td>
+          </tr>
+          <tr>
+            <td>Data accuracy errors</td>
+            <td>Atlas quotes a wrong stock price or score. Subscribers trade on bad data. Legal exposure + trust destruction.</td>
+            <td><code>score-accuracy.py</code> cross-references every number in the email against API source data. <code>stale-data-detector.py</code> ensures no data is &gt;24h old. Human verifies key numbers in review.</td>
+            <td><code>tests/data/</code></td>
+          </tr>
+          <tr>
+            <td>Compliance / SEC risk</td>
+            <td>Atlas gives "investment advice" without being a registered advisor. Regulatory action.</td>
+            <td>Masterfile enforces depersonalization rules. <code>personalization-guard.py</code> scans for "you should" language. Required disclaimers auto-inserted. Legal review of masterfile quarterly.</td>
+            <td><code>atlas/compliance/</code></td>
+          </tr>
+          <tr>
+            <td>Subscriber churn spike</td>
+            <td>Market downturn causes mass unsubscribes. Revenue drops 30%+ in a month.</td>
+            <td>Tone calibration shifts automatically during downturns. Atlas becomes protective, not panicked. <code>churn-prediction.py</code> identifies at-risk subscribers 2 weeks before they cancel. Win-back sequences activate automatically.</td>
+            <td><code>atlas/personality/tone-calibration.yaml</code> + <code>analytics/optimization/</code></td>
+          </tr>
+          <tr>
+            <td>Content fatigue</td>
+            <td>Subscribers get bored. Same format every day feels stale after 3 months. Opens decline.</td>
+            <td>Content calendar rotates themes daily. <code>content-scoring.py</code> identifies which topics/formats drive engagement. Masterfile optimizer proposes template refinements quarterly. Special editions break the pattern during major market events.</td>
+            <td><code>content/templates/content-calendar.yaml</code></td>
+          </tr>
+          <tr>
+            <td>Upsell failure</td>
+            <td>Free subscribers won't convert. Revenue never materializes beyond CPA ads.</td>
+            <td><code>upsell-effectiveness.py</code> tracks which of the 7 upsell types converts. Underperformers get redesigned. Day 10 email A/B tested continuously. Sunday Proof email is the #1 conversion driver &mdash; it gets weekly iteration.</td>
+            <td><code>emails/upsell-sequences/</code> + <code>analytics/optimization/</code></td>
+          </tr>
+          <tr>
+            <td>API / data pipeline failure</td>
+            <td>Scoring engine goes down at 4 AM. No email generated. Habit loop breaks.</td>
+            <td>Fallback in <code>data-ingestion.py</code>: if primary API fails, use cached scores from previous day + flag as "as of yesterday." Pipeline generates email anyway with available data. Alert fires to engineering team. Never miss a send.</td>
+            <td><code>content/generation/data-ingestion.py</code></td>
+          </tr>
+          <tr>
+            <td>Competitor copies us</td>
+            <td>Motley Fool launches an "AI newsletter." Morning Brew adds stock scores. Our differentiation erodes.</td>
+            <td>The masterfile IS the moat. Our 500+ stock scoring engine took tens of millions to build. A competitor can copy the format but not the data. Atlas's track record compounds over time &mdash; the longer we run, the more proof we have. Behavioral coaching (Gap 7) is genuinely unique and extremely hard to replicate without our research.</td>
+            <td>Entire <code>atlas/</code> directory + <code>data/api-integrations/</code></td>
+          </tr>
+          <tr>
+            <td>Founder dependency</td>
+            <td>Only one person understands the system. They get sick / leave / burn out. Everything stops.</td>
+            <td>Everything is in the repo. The masterfile documents every decision. The pipeline is automated. A new editor needs only: (1) read the masterfile, (2) understand the daily review process, (3) click "Approve" each morning. The system is designed to run without any single person.</td>
+            <td><code>README.md</code> + entire repo structure</td>
+          </tr>
+          <tr>
+            <td>Scaling past 100K subs</td>
+            <td>ESP costs explode. Send times vary. Deliverability degrades at scale.</td>
+            <td>ESP evaluation criteria in <code>esp-config.yaml</code> include cost-per-send at scale. Dedicated IP warmup plan. Send-time optimization per timezone. At 100K+, negotiate enterprise ESP pricing or migrate to self-hosted (Amazon SES).</td>
+            <td><code>config/esp-config.yaml</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout"><strong>The system is designed to be anti-fragile.</strong> Every obstacle above has a specific file, script, or process that addresses it. Nothing is left to "we'll figure it out when it happens." The repo contains the plan for every failure mode before it occurs. This is what separates a $10M newsletter from a $100M one &mdash; not better content, but better systems.</div>
+  </div>
+
+  <div class="footer">
+    &mdash; End of Part III &mdash;
+  </div>
+
+</div>
+
+</body>
+</html>

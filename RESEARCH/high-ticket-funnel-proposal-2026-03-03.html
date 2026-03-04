@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Signal — High-Ticket Funnel Proposal: Newsletter as Lead Engine</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', -apple-system, sans-serif; background: #fff; color: #1a1a1a; line-height: 1.7; }
+.doc { max-width: 780px; margin: 0 auto; padding: 48px 40px 80px; }
+
+/* Header */
+.doc-header { border-bottom: 3px solid #111; padding-bottom: 24px; margin-bottom: 40px; }
+.doc-header .brand { font-size: 14px; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; color: #888; margin-bottom: 8px; }
+.doc-header .brand span { color: #0D9F5F; }
+.doc-header h1 { font-size: 30px; font-weight: 900; color: #111; line-height: 1.2; margin-bottom: 8px; }
+.doc-header .subtitle { font-size: 18px; color: #555; font-weight: 500; }
+.doc-header .meta { font-size: 13px; color: #999; margin-top: 16px; }
+
+h2 { font-size: 22px; font-weight: 800; color: #111; margin: 48px 0 20px; padding-bottom: 8px; border-bottom: 2px solid #0D9F5F; }
+h3 { font-size: 17px; font-weight: 700; color: #111; margin: 32px 0 12px; }
+h4 { font-size: 14px; font-weight: 700; color: #0D9F5F; text-transform: uppercase; letter-spacing: 1px; margin: 24px 0 8px; }
+p { margin-bottom: 14px; font-size: 15px; color: #333; }
+strong { color: #111; }
+
+table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 16px 0 24px; }
+thead tr { background: #f8f9fa; }
+th { padding: 10px 8px; border-bottom: 2px solid #e0e2e6; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: #666; font-weight: 700; }
+th.right, th.r { text-align: right; }
+td { padding: 10px 8px; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+td.right, td.r { text-align: right; font-variant-numeric: tabular-nums; }
+td.bold, td.b { font-weight: 700; color: #111; }
+tr.total td { border-top: 2px solid #111; font-weight: 800; color: #111; background: #f8f9fa; }
+tr.sub td { border-top: 2px solid #0D9F5F; font-weight: 700; }
+
+.callout { padding: 20px 24px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+.callout p { margin: 0 0 8px; font-size: 14px; }
+.callout p:last-child { margin: 0; }
+.callout .label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.cg { background: #E6F7EF; border-left: 4px solid #0D9F5F; }
+.cg .label { color: #0D9F5F; }
+.cg p { color: #1a4a32; }
+.ca { background: #FEF3E0; border-left: 4px solid #C77D00; }
+.ca .label { color: #C77D00; }
+.ca p { color: #5a4200; }
+.cr { background: #FEF2F2; border-left: 4px solid #D93025; }
+.cr .label { color: #D93025; }
+.cr p { color: #7a1a1a; }
+.cd { background: #111; border-left: 4px solid #0D9F5F; border-radius: 8px; }
+.cd .label { color: #0D9F5F; }
+.cd p { color: #ccc; }
+.cd strong { color: #fff; }
+
+.bn { background: #111; border-radius: 12px; padding: 32px; margin: 28px 0; text-align: center; color: #fff; }
+.bn .label { font-size: 11px; color: #0D9F5F; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; font-weight: 700; }
+.bn .num { font-size: 52px; font-weight: 900; margin-bottom: 4px; }
+.bn .context { font-size: 14px; color: #888; max-width: 540px; margin: 0 auto; }
+
+.rec { background: #f8f9fa; border: 2px solid #0D9F5F; border-radius: 8px; padding: 24px; margin: 24px 0; }
+.rec .badge { display: inline-block; background: #0D9F5F; color: #fff; font-size: 10px; font-weight: 800; padding: 3px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+.rec p { font-size: 14px; color: #333; margin-bottom: 8px; }
+.rec p:last-child { margin-bottom: 0; }
+
+ol.steps { counter-reset: step; list-style: none; padding: 0; margin: 16px 0; }
+ol.steps li { counter-increment: step; padding: 12px 0 12px 48px; position: relative; font-size: 14px; color: #333; border-bottom: 1px solid #f0f0f0; }
+ol.steps li:last-child { border: none; }
+ol.steps li::before { content: counter(step); position: absolute; left: 0; top: 12px; width: 32px; height: 32px; background: #0D9F5F; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; }
+
+/* Funnel visualization */
+.funnel { margin: 28px 0; text-align: center; }
+.funnel-stage { margin: 0 auto; padding: 14px 24px; color: #fff; font-weight: 700; font-size: 14px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+.funnel-stage .stage-label { text-align: left; }
+.funnel-stage .stage-numbers { text-align: right; font-size: 12px; opacity: 0.85; font-weight: 600; }
+.funnel-arrow { text-align: center; color: #ccc; font-size: 16px; margin: 2px 0; }
+.f1 { background: #555; max-width: 100%; }
+.f2 { background: #777; max-width: 88%; }
+.f3 { background: #C77D00; max-width: 72%; }
+.f4 { background: #1A6DDB; max-width: 56%; }
+.f5 { background: #7C5CFC; max-width: 42%; }
+.f6 { background: #D93025; max-width: 30%; }
+.f7 { background: #111; max-width: 22%; }
+
+/* Score model */
+.score-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+.score-card { background: #f8f9fa; border-radius: 6px; padding: 12px 16px; border-left: 3px solid #0D9F5F; }
+.score-card .signal { font-size: 13px; font-weight: 700; color: #111; }
+.score-card .pts { font-size: 22px; font-weight: 900; color: #0D9F5F; margin: 2px 0; }
+.score-card .why { font-size: 11px; color: #888; }
+
+/* Product cards */
+.product-row { display: flex; gap: 12px; margin: 16px 0; flex-wrap: wrap; }
+.product-card { flex: 1; min-width: 160px; background: #f8f9fa; border-radius: 8px; padding: 16px; border-top: 3px solid #0D9F5F; }
+.product-card .pname { font-size: 14px; font-weight: 800; color: #111; margin-bottom: 2px; }
+.product-card .pprice { font-size: 18px; font-weight: 900; color: #0D9F5F; margin-bottom: 6px; }
+.product-card .pdetail { font-size: 11px; color: #666; line-height: 1.4; }
+
+/* Timeline */
+.tl-item { display: flex; gap: 16px; margin-bottom: 20px; }
+.tl-dot { flex-shrink: 0; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: #fff; }
+.tl-green { background: #0D9F5F; }
+.tl-amber { background: #C77D00; }
+.tl-blue { background: #1A6DDB; }
+.tl-dark { background: #111; }
+.tl-red { background: #D93025; }
+.tl-content { flex: 1; }
+.tl-content .phase { font-size: 12px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+.tl-content .title { font-size: 15px; font-weight: 700; color: #111; margin: 2px 0 4px; }
+.tl-content .desc { font-size: 13px; color: #555; line-height: 1.5; }
+
+.doc-footer { margin-top: 64px; padding-top: 24px; border-top: 2px solid #111; font-size: 12px; color: #999; }
+@media print { .doc { padding: 24px; } }
+</style>
+</head>
+<body>
+<div class="doc">
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- HEADER                                      -->
+<!-- ═══════════════════════════════════════════ -->
+
+<div class="doc-header">
+  <div class="brand">THE <span>SIGNAL</span> by TradeAlgo</div>
+  <h1>The Newsletter as Lead Engine</h1>
+  <div class="subtitle">High-Ticket Funnel Strategy: From Free Subscriber to $250K Sale</div>
+  <div class="meta">Prepared March 3, 2026 &middot; V2 &middot; Confidential &middot; For Carlos &amp; Leadership</div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- EXECUTIVE SUMMARY                           -->
+<!-- ═══════════════════════════════════════════ -->
+
+<h2>Executive Summary</h2>
+
+<p>V1 of this proposal modeled the newsletter as a standalone subscription business. Carlos's feedback reframes the strategy: <strong>the newsletter isn't the product. It's the most efficient lead generation engine ever built for TradeAlgo's existing high-ticket product line.</strong></p>
+
+<p>TradeAlgo already has a sales team billing <strong>$30M/year</strong> selling products from $2K to $250K. The bottleneck isn't closing — it's pipeline. The Signal solves this by generating a river of warm, pre-qualified, AI-impressed leads who have watched the portfolio outperform the S&amp;P 500 for weeks or months before they ever talk to a salesperson.</p>
+
+<div class="bn">
+  <div class="label">The Core Math</div>
+  <div class="num" style="font-size:28px;line-height:1.4">$10K/day &times; 365 = $3.65M ad spend<br>&#8594; 730K+ warm leads/year<br>&#8594; $30M-$100M+ in high-ticket revenue</div>
+  <div class="context" style="margin-top:12px">If 1 in 1,000 free subscribers converts to a $50K Wealth Series sale, that's $36.5M from a $3.65M spend. <strong>10:1 ROAS.</strong></div>
+</div>
+
+<p>Stansberry Research's single VSL campaign — "The End of America" — generated 600,000 subscribers and <strong>$300 million in total revenue</strong> through their ascending product ladder. TradeAlgo has something Stansberry never had: live AI portfolio performance data that proves the thesis in every free email. The newsletter doesn't just generate leads. It pre-sells them.</p>
+
+<div class="callout cd">
+  <div class="label">The Paradigm Shift</div>
+  <p>The old model: Sales team cold-calls and runs ads to book appointments. CAC is high, lead quality is variable, trust is zero at first contact.</p>
+  <p><strong>The new model: Every morning, 730K+ people open an email showing Cai's AI portfolios beating the market. By the time they book a call, they've already seen the proof. The sales team isn't selling — they're closing.</strong></p>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- TRADEALGO PRODUCT MAP                       -->
+<!-- ═══════════════════════════════════════════ -->
+
+<h2>1. TradeAlgo Product Map</h2>
+
+<p>Before designing the funnel, here's what we're selling — organized by price point and sales motion required:</p>
+
+<div class="product-row">
+  <div class="product-card">
+    <div class="pname">Options Dashboard</div>
+    <div class="pprice">$2K/yr</div>
+    <div class="pdetail"><strong>Sell via:</strong> Email + landing page<br><strong>Friction:</strong> Low<br><strong>Decision maker:</strong> Individual<br>Up to $5K lifetime</div>
+  </div>
+  <div class="product-card" style="border-top-color:#1A6DDB">
+    <div class="pname">AI Neural Alerts</div>
+    <div class="pprice">$15K / 2yr</div>
+    <div class="pdetail"><strong>Sell via:</strong> Webinar + call<br><strong>Friction:</strong> Medium<br><strong>Decision maker:</strong> Individual / couple</div>
+  </div>
+  <div class="product-card" style="border-top-color:#7C5CFC">
+    <div class="pname">Wealth Series</div>
+    <div class="pprice">$25K-$250K</div>
+    <div class="pdetail"><strong>Sell via:</strong> Sales team<br><strong>Friction:</strong> High<br><strong>Decision maker:</strong> Individual / family<br>Auto $25K &middot; Atlas $50K &middot; Everest $100K &middot; Midas Link $250K</div>
+  </div>
+  <div class="product-card" style="border-top-color:#111">
+    <div class="pname">506(c) Offering</div>
+    <div class="pprice">$200K+ min</div>
+    <div class="pdetail"><strong>Sell via:</strong> Accredited investor funnel<br><strong>Friction:</strong> Highest<br><strong>Compliance:</strong> SEC verification required</div>
+  </div>
+</div>
+
+<div class="callout cg">
+  <div class="label">Key Insight</div>
+  <p><strong>Each product has a different sales motion.</strong> The Options Dashboard can sell itself via email. The Wealth Series needs a human closer. The 506(c) needs accredited investor verification. One funnel doesn't fit all — we need product-specific paths that share a common top-of-funnel (the newsletter) but diverge at the qualification stage.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 2. THE COMPLETE FUNNEL FLOW                 -->
+<!-- ═══════════════════════════════════════════ -->
+
+<h2>2. The Complete Funnel Flow</h2>
+
+<div class="funnel">
+  <div class="funnel-stage f1">
+    <span class="stage-label">Free Newsletter Subscriber</span>
+    <span class="stage-numbers">100,000/mo &middot; $3-5 CAC</span>
+  </div>
+  <div class="funnel-arrow">&#9660;</div>
+  <div class="funnel-stage f2">
+    <span class="stage-label">Engaged Subscriber (opens 5+ of first 10)</span>
+    <span class="stage-numbers">60,000/mo &middot; 60% engagement</span>
+  </div>
+  <div class="funnel-arrow">&#9660;</div>
+  <div class="funnel-stage f3">
+    <span class="stage-label">Behaviorally Scored Lead (score 50+)</span>
+    <span class="stage-numbers">15,000/mo &middot; 25% of engaged</span>
+  </div>
+  <div class="funnel-arrow">&#9660;</div>
+  <div class="funnel-stage f4">
+    <span class="stage-label">Nurture Sequence Activated</span>
+    <span class="stage-numbers">15,000/mo &middot; auto-enrolled</span>
+  </div>
+  <div class="funnel-arrow">&#9660;</div>
+  <div class="funnel-stage f5">
+    <span class="stage-label">Webinar / VSL Attendee</span>
+    <span class="stage-numbers">2,400/mo &middot; 16% attend</span>
+  </div>
+  <div class="funnel-arrow">&#9660;</div>
+  <div class="funnel-stage f6">
+    <span class="stage-label">Appointment Booked (Strategy Session)</span>
+    <span class="stage-numbers">480/mo &middot; 20% of attendees</span>
+  </div>
+  <div class="funnel-arrow">&#9660;</div>
+  <div class="funnel-stage f7">
+    <span class="stage-label">Sale Closed (High-Ticket)</span>
+    <span class="stage-numbers">96-144/mo &middot; 20-30% close rate</span>
+  </div>
+</div>
+
+<p>This funnel has <strong>seven stages</strong>, each with a specific conversion mechanism. Let's break down each one.</p>
+
+<h3>Stage 1: Free Subscriber Acquisition</h3>
+<p>At $10K/day and $3-5 per subscriber, we acquire <strong>2,000-3,333 new free subscribers daily</strong> (60K-100K/month). Channels: Facebook/Instagram ads targeting self-directed investors, newsletter cross-promotions ($1-2/sub), boost networks (beehiiv, SparkLoop at $2-3/sub), and organic/referral (free).</p>
+
+<h3>Stage 2: Engagement Qualification</h3>
+<p>Not every subscriber is a lead. We filter for engagement: <strong>subscribers who open 5+ of their first 10 emails</strong> demonstrate the reading habit that precedes purchase intent. Industry benchmark: 60% of financial newsletter subscribers maintain this engagement level in the first 30 days. The other 40% are ad-revenue-only subscribers.</p>
+
+<h3>Stage 3: Behavioral Scoring</h3>
+<p>Engaged subscribers accumulate a lead score based on specific actions (detailed in Section 3). When a subscriber crosses the <strong>score threshold of 50 points</strong>, they enter the active nurture pipeline. Approximately 25% of engaged subscribers reach this threshold within 60 days.</p>
+
+<h3>Stage 4: Automated Nurture Sequences</h3>
+<p>Scored leads enter product-specific email sequences (detailed in Section 4). The sequences are designed around "aha moments" — the instant a lead viscerally understands the value. For TradeAlgo, the biggest aha moment is seeing the AI's portfolio beat the market during a volatile week.</p>
+
+<h3>Stage 5: Webinar / VSL Attendance</h3>
+<p>Financial services webinars achieve <strong>61% attendance rate</strong> — the highest of any industry (ON24 Benchmarks 2025). We target 16% of scored leads attending at least one webinar or watching a VSL to completion. Stansberry's "End of America" VSL — 77 minutes, single take — generated $300M in total revenue. The content quality here is everything.</p>
+
+<h3>Stage 6: Appointment Booking</h3>
+<p>Webinar attendees who show purchase signals (stayed for the CTA, clicked the booking link, visited the pricing page) are routed to a <strong>setter</strong> who qualifies them and books a strategy session with a closer. Industry benchmark: 20% of engaged webinar attendees book an appointment. In financial services, reaching out within 5 minutes of a high-intent action is <strong>21x more effective</strong> than waiting 30 minutes.</p>
+
+<h3>Stage 7: Sales Team Closes</h3>
+<p>The closer conducts a strategy session or portfolio review. These leads have been reading the newsletter for weeks, attended a webinar, and self-selected for a call. <strong>Close rates of 20-30% on booked appointments</strong> are realistic for this quality of lead (industry average for high-ticket qualified appointments: 15-29%).</p>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 3. LEAD SCORING MODEL                       -->
+<!-- ═══════════════════════════════════════════ -->
+
+<h2>3. Lead Scoring Model</h2>
+
+<p>Not all subscribers are created equal. The scoring model identifies who's ready for a $25K conversation vs. who needs more time with the free content. Based on Agora Financial's behavioral segmentation (which produced a <strong>167% increase in monthly revenue</strong> when implemented via Lytics CDP).</p>
+
+<h3>Engagement Signals &amp; Point Values</h3>
+
+<div class="score-grid">
+  <div class="score-card">
+    <div class="signal">Pricing page visit (3+ min)</div>
+    <div class="pts">+40 pts</div>
+    <div class="why">Active cost evaluation = high intent</div>
+  </div>
+  <div class="score-card">
+    <div class="signal">Webinar attendance (full)</div>
+    <div class="pts">+45 pts</div>
+    <div class="why">45-60 min commitment = serious</div>
+  </div>
+  <div class="score-card">
+    <div class="signal">Strategy session request</div>
+    <div class="pts">+50 pts</div>
+    <div class="why">Explicit sales intent</div>
+  </div>
+  <div class="score-card">
+    <div class="signal">Product page views (3+)</div>
+    <div class="pts">+35 pts</div>
+    <div class="why">Shortlist/comparison behavior</div>
+  </div>
+  <div class="score-card">
+    <div class="signal">Portfolio dashboard visits</div>
+    <div class="pts">+30 pts</div>
+    <div class="why">Evaluating the AI's track record</div>
+  </div>
+  <div class="score-card">
+    <div class="signal">Premium content click-through</div>
+    <div class="pts">+15 pts</div>
+    <div class="why">Interest in gated content = upgrade potential</div>
+  </div>
+  <div class="score-card">
+    <div class="signal">Email opens (consistent 5+ days)</div>
+    <div class="pts">+10 pts</div>
+    <div class="why">Habit formation = trust building</div>
+  </div>
+  <div class="score-card">
+    <div class="signal">Return visit within 7 days</div>
+    <div class="pts">+25 pts</div>
+    <div class="why">Sustained interest beyond email</div>
+  </div>
+</div>
+
+<h3>Score Thresholds &amp; Actions</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Score Range</th>
+      <th>Classification</th>
+      <th>Automated Action</th>
+      <th>Sales Team Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="b">0-25</td>
+      <td>Cold subscriber</td>
+      <td>Daily newsletter only</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td class="b">25-50</td>
+      <td>Warming lead</td>
+      <td>Add to general nurture sequence</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td class="b">50-75</td>
+      <td>Marketing Qualified Lead (MQL)</td>
+      <td>Product-specific nurture + webinar invite</td>
+      <td>None yet</td>
+    </tr>
+    <tr>
+      <td class="b">75-100</td>
+      <td>Sales Qualified Lead (SQL)</td>
+      <td>Urgency-triggered emails + booking CTA</td>
+      <td>Setter outreach within 24 hours</td>
+    </tr>
+    <tr>
+      <td class="b">100+</td>
+      <td>Hot lead</td>
+      <td>Real-time alert to sales team</td>
+      <td>Setter calls within 5 minutes of trigger</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout ca">
+  <div class="label">Demographic Scoring Overlay</div>
+  <p>Behavioral scores are enhanced by demographic signals when available: <strong>self-reported portfolio size</strong> (captured via onboarding survey or content quiz), <strong>job title/industry</strong> (LinkedIn integration), and <strong>geographic location</strong> (high-net-worth zip codes). A subscriber with a $500K+ portfolio who attends a webinar fast-tracks to SQL regardless of cumulative score.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 4. NURTURE SEQUENCE DESIGN                  -->
+<!-- ═══════════════════════════════════════════ -->
+
+<h2>4. Nurture Sequence Design</h2>
+
+<h3>The 90-Day Automated Journey</h3>
+
+<p>Every free subscriber enters the same top-of-funnel journey. The sequence branches based on behavioral signals. The key principle: <strong>the newsletter itself is the primary nurture tool.</strong> Dedicated sequence emails supplement — they don't replace — the daily Signal.</p>
+
+<div class="tl-item">
+  <div class="tl-dot tl-green">D0</div>
+  <div class="tl-content">
+    <div class="phase">Day 0</div>
+    <div class="title">Welcome: "Here's What You'll See Every Morning"</div>
+    <div class="desc">Portfolio snapshot + explanation of the 3 AI portfolios. No product pitch. Ends with: "Tomorrow's email will have real numbers." Sets expectation of daily value.</div>
+  </div>
+</div>
+
+<div class="tl-item">
+  <div class="tl-dot tl-green">D2</div>
+  <div class="tl-content">
+    <div class="phase">Day 2</div>
+    <div class="title">"How to Read The Signal in 3 Minutes"</div>
+    <div class="desc">Format guide: Three Things, The Number, Looking Ahead. Makes them an efficient reader. Efficient readers become daily readers. Daily readers convert.</div>
+  </div>
+</div>
+
+<div class="tl-item">
+  <div class="tl-dot tl-green">D4</div>
+  <div class="tl-content">
+    <div class="phase">Day 4</div>
+    <div class="title">"The AI Behind the Portfolios"</div>
+    <div class="desc">One-page explainer: how Cai's AI works, what it looks at, why it rebalances weekly. Credibility builder. Includes a link to the live portfolio dashboard — <strong>first scoring trigger</strong> (dashboard visit = +30 pts).</div>
+  </div>
+</div>
+
+<div class="tl-item">
+  <div class="tl-dot tl-green">D7</div>
+  <div class="tl-content">
+    <div class="phase">Day 7</div>
+    <div class="title">"Your First Week: What the AI Did"</div>
+    <div class="desc">Recap of the week's portfolio performance vs. S&amp;P. First soft mention: "Subscribers who upgrade to Premium also see the specific positions and rebalance moves." Links to comparison page (+35 pts if visited).</div>
+  </div>
+</div>
+
+<div class="tl-item">
+  <div class="tl-dot tl-amber">D10</div>
+  <div class="tl-content">
+    <div class="phase">Day 10 (triggered)</div>
+    <div class="title">AHA MOMENT #1: "The AI Called It"</div>
+    <div class="desc"><strong>Only fires when the AI outperforms the S&amp;P by 2%+ in a given week.</strong> Shows what happened, what the AI saw early, and what paid subscribers received in advance. This is the single highest-converting email in the sequence — because the proof is irrefutable and time-stamped. Subject line: "The AI was positioned for this 2 weeks ago. Here's how."</div>
+  </div>
+</div>
+
+<div class="tl-item">
+  <div class="tl-dot tl-amber">D14</div>
+  <div class="tl-content">
+    <div class="phase">Day 14</div>
+    <div class="title">"The Options Dashboard: See What Cai Sees"</div>
+    <div class="desc">Introduction to the Options Dashboard ($2K/yr). Not a hard sell — a product demo via email. Shows a real screenshot of the dashboard with live data. CTA: "Try it for 14 days" or direct purchase link. <strong>This is the low-friction entry product — many subscribers convert here without needing a sales call.</strong></div>
+  </div>
+</div>
+
+<div class="tl-item">
+  <div class="tl-dot tl-amber">D21</div>
+  <div class="tl-content">
+    <div class="phase">Day 21</div>
+    <div class="title">AHA MOMENT #2: "The Rebalance That Saved 3.2%"</div>
+    <div class="desc">Case study email: picks a specific rebalance where the AI rotated out of a position that subsequently dropped. Shows the before/after. Makes it visceral — "if you held what the S&amp;P held, you lost 3.2% on this name. The AI sold it 2 weeks before." CTA: webinar registration.</div>
+  </div>
+</div>
+
+<div class="tl-item">
+  <div class="tl-dot tl-blue">D28</div>
+  <div class="tl-content">
+    <div class="phase">Day 28</div>
+    <div class="title">Webinar Invitation: "How Cai's AI Manages $10M+"</div>
+    <div class="desc">Invite to a weekly or bi-weekly live webinar (or evergreen replay). Financial services webinar attendance: <strong>61%</strong> (industry high). The webinar covers: AI methodology, live portfolio walkthrough, Q&amp;A. The CTA at the end is a strategy session booking — not a direct sale.</div>
+  </div>
+</div>
+
+<div class="tl-item">
+  <div class="tl-dot tl-blue">D35</div>
+  <div class="tl-content">
+    <div class="phase">Day 35</div>
+    <div class="title">"Your Portfolio vs. Cai's: A Side-by-Side"</div>
+    <div class="desc">Interactive email or landing page where the subscriber enters their portfolio return (or estimates it) and sees it compared to Cai's AI portfolios. Personalization creates ownership of the gap. CTA: "Let's close this gap. Book a free strategy session."</div>
+  </div>
+</div>
+
+<div class="tl-item">
+  <div class="tl-dot tl-blue">D42</div>
+  <div class="tl-content">
+    <div class="phase">Day 42</div>
+    <div class="title">AHA MOMENT #3: "What $100K Looks Like in Cai's Hands"</div>
+    <div class="desc">Shows the $100K model sizing from Elite tier — but as a teaser. "If you'd invested $100K with Cai's Growth portfolio on October 1, it would be worth $132,000 today. Here's exactly how it would be allocated." Links to a landing page with the full breakdown + booking CTA. <strong>This email bridges from newsletter reader to Wealth Series prospect.</strong></div>
+  </div>
+</div>
+
+<div class="tl-item">
+  <div class="tl-dot tl-dark">D60</div>
+  <div class="tl-content">
+    <div class="phase">Day 60 (for non-converters)</div>
+    <div class="title">"60 Days of Proof: Here's What You've Seen"</div>
+    <div class="desc">Cumulative performance summary over 60 days. Every week's newsletter call, every portfolio move, charted. Social proof: "X,XXX investors have already joined. Here's what they told us convinced them." CTA: strategy session or Options Dashboard purchase.</div>
+  </div>
+</div>
+
+<div class="tl-item">
+  <div class="tl-dot tl-red">D90</div>
+  <div class="tl-content">
+    <div class="phase">Day 90 (for high-score non-converters)</div>
+    <div class="title">Final Sequence: "We've Been Showing You the Proof for 3 Months"</div>
+    <div class="desc">Direct, honest email. "You've opened XX of 90 newsletters. You've seen the AI outperform the S&amp;P by XX% over this period. You've watched XX rebalances. At some point, watching beats doing." CTA: book a call or purchase Options Dashboard. After this, non-converters move to long-term nurture (monthly performance recaps only).</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 5. APPOINTMENT FUNNEL MECHANICS              -->
+<!-- ═══════════════════════════════════════════ -->
+
+<h2>5. Appointment Funnel Mechanics</h2>
+
+<h3>How Warm Leads Become Booked Calls</h3>
+
+<p>The goal is simple: get pre-qualified leads in front of the sales team with <strong>maximum context and minimum friction</strong>. Four pathways lead to a booked appointment:</p>
+
+<h4>Pathway 1: Webinar &#8594; Strategy Session</h4>
+<p>The primary appointment engine. Weekly live webinar (or evergreen replay) ends with a direct booking CTA. Webinar attendees who stay past the 40-minute mark are the highest-intent leads. <strong>Smaller webinars convert dramatically better</strong> — 100-200 attendees convert at 50% vs. 6% for 1,000+ (ON24 data). Recommendation: run niche-targeted webinars ("How AI Manages a $500K Portfolio") rather than broad ones.</p>
+
+<h4>Pathway 2: Portfolio Review Offer</h4>
+<p>Subscribers who visit the portfolio dashboard 3+ times or click on the $100K model sizing content receive a personalized email: "Want a free portfolio review? We'll show you how Cai's AI would allocate your specific portfolio." This is a Trojan horse for the sales conversation — the review naturally surfaces where TradeAlgo's products solve gaps in their current strategy.</p>
+
+<h4>Pathway 3: Urgency Triggers</h4>
+<p>Market events create natural urgency windows. When the VIX spikes above 25 or the S&amp;P drops 2%+ in a day, high-score leads receive: "Markets just dropped X%. Here's what Cai's AI did — and what you should consider for your own portfolio. Book a 15-minute strategy call." <strong>These time-sensitive offers convert 3-5x higher than scheduled emails</strong> because the need is felt, not manufactured.</p>
+
+<h4>Pathway 4: Direct Setter Outreach</h4>
+<p>When a lead crosses the 100-point score threshold, the setter receives a real-time alert with full engagement history: every email opened, every link clicked, every page visited, webinar attendance, portfolio size (if captured). The setter calls within 5 minutes. <strong>Contacting within 5 minutes of a high-intent action is 21x more effective than waiting 30 minutes</strong> (Drift/Harvard Business Review). The setter's job: qualify and book a strategy session with a closer within 48 hours.</p>
+
+<h3>The Setter/Closer Model</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Role</th>
+      <th>Responsibility</th>
+      <th>Key Metrics</th>
+      <th class="r">Target</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="b">Setter</td>
+      <td>Qualifies leads, books strategy sessions, confirms appointments</td>
+      <td>Bookings/week, show-up rate, lead quality score</td>
+      <td class="r">30-50 bookings/week</td>
+    </tr>
+    <tr>
+      <td class="b">Closer</td>
+      <td>Conducts strategy sessions, presents product recommendations, closes deals</td>
+      <td>Close rate, revenue generated, avg deal size</td>
+      <td class="r">20-30% close rate</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="rec">
+  <span class="badge">Critical Detail</span>
+  <p><strong>The handoff packet.</strong> When a setter books an appointment with a closer, the closer receives a one-page lead brief: subscriber since [date], opened [X/Y] emails, attended webinar on [date], visited pricing page [X] times, estimated portfolio size [$X], specific products they clicked on. The closer walks into the call already knowing the lead's journey. This is the difference between a cold pitch and a warm conversation.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 6. UNIT ECONOMICS                           -->
+<!-- ═══════════════════════════════════════════ -->
+
+<h2>6. Unit Economics: The Waterfall</h2>
+
+<div class="bn">
+  <div class="label">$10K / Day Ad Spend</div>
+  <div class="num">$3.65M/yr</div>
+  <div class="context">Here's exactly where every dollar goes and what it produces.</div>
+</div>
+
+<h3>The Waterfall: From Ad Spend to Revenue</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Funnel Stage</th>
+      <th class="r">Volume/Year</th>
+      <th class="r">Conv. Rate</th>
+      <th class="r">Avg Revenue</th>
+      <th class="r">Annual Revenue</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="b">Free subscribers acquired</td>
+      <td class="r">730,000</td>
+      <td class="r">&mdash;</td>
+      <td class="r">$0</td>
+      <td class="r">($3.65M cost)</td>
+    </tr>
+    <tr>
+      <td class="b">Options Dashboard ($2K/yr)</td>
+      <td class="r">7,300</td>
+      <td class="r">1.0% of free</td>
+      <td class="r">$2,000</td>
+      <td class="r bold" style="color:#0D9F5F">$14,600,000</td>
+    </tr>
+    <tr>
+      <td class="b">AI Neural Alerts ($15K/2yr)</td>
+      <td class="r">730</td>
+      <td class="r">0.1% of free</td>
+      <td class="r">$15,000</td>
+      <td class="r bold" style="color:#0D9F5F">$10,950,000</td>
+    </tr>
+    <tr>
+      <td class="b">Wealth Auto ($25K)</td>
+      <td class="r">365</td>
+      <td class="r">0.05% of free</td>
+      <td class="r">$25,000</td>
+      <td class="r bold" style="color:#0D9F5F">$9,125,000</td>
+    </tr>
+    <tr>
+      <td class="b">Wealth Atlas ($50K)</td>
+      <td class="r">146</td>
+      <td class="r">0.02% of free</td>
+      <td class="r">$50,000</td>
+      <td class="r bold" style="color:#0D9F5F">$7,300,000</td>
+    </tr>
+    <tr>
+      <td class="b">Wealth Everest ($100K)</td>
+      <td class="r">73</td>
+      <td class="r">0.01% of free</td>
+      <td class="r">$100,000</td>
+      <td class="r bold" style="color:#0D9F5F">$7,300,000</td>
+    </tr>
+    <tr>
+      <td class="b">Wealth Midas Link ($250K)</td>
+      <td class="r">15</td>
+      <td class="r">0.002% of free</td>
+      <td class="r">$250,000</td>
+      <td class="r bold" style="color:#0D9F5F">$3,750,000</td>
+    </tr>
+    <tr>
+      <td class="b">506(c) Offering ($200K+ min)</td>
+      <td class="r">20</td>
+      <td class="r">Qualified</td>
+      <td class="r">$300,000 avg</td>
+      <td class="r bold" style="color:#0D9F5F">$6,000,000</td>
+    </tr>
+    <tr>
+      <td class="b">Newsletter ad revenue</td>
+      <td class="r">730K subs</td>
+      <td class="r">&mdash;</td>
+      <td class="r">$2 RPM</td>
+      <td class="r bold" style="color:#0D9F5F">$1,460,000</td>
+    </tr>
+    <tr class="sub">
+      <td>Total Revenue</td>
+      <td class="r"></td>
+      <td class="r"></td>
+      <td class="r"></td>
+      <td class="r" style="color:#0D9F5F">$60,485,000</td>
+    </tr>
+    <tr>
+      <td style="color:#D93025">Less: Ad Spend</td>
+      <td class="r"></td>
+      <td class="r"></td>
+      <td class="r"></td>
+      <td class="r" style="color:#D93025">($3,650,000)</td>
+    </tr>
+    <tr>
+      <td style="color:#D93025">Less: Sales Team Cost (est.)</td>
+      <td class="r"></td>
+      <td class="r"></td>
+      <td class="r"></td>
+      <td class="r" style="color:#D93025">($3,000,000)</td>
+    </tr>
+    <tr class="total">
+      <td>Net Revenue</td>
+      <td class="r"></td>
+      <td class="r"></td>
+      <td class="r"></td>
+      <td class="r">$53,835,000</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>ROAS by Product</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th class="r">CAC (implied)</th>
+      <th class="r">Revenue per Sale</th>
+      <th class="r">ROAS</th>
+      <th class="r">Subscribers per Sale</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="b">Options Dashboard</td>
+      <td class="r">$500</td>
+      <td class="r">$2,000</td>
+      <td class="r bold" style="color:#0D9F5F">4.0x</td>
+      <td class="r">1 in 100</td>
+    </tr>
+    <tr>
+      <td class="b">AI Neural Alerts</td>
+      <td class="r">$5,000</td>
+      <td class="r">$15,000</td>
+      <td class="r bold" style="color:#0D9F5F">3.0x</td>
+      <td class="r">1 in 1,000</td>
+    </tr>
+    <tr>
+      <td class="b">Wealth Auto</td>
+      <td class="r">$10,000</td>
+      <td class="r">$25,000</td>
+      <td class="r bold" style="color:#0D9F5F">2.5x</td>
+      <td class="r">1 in 2,000</td>
+    </tr>
+    <tr>
+      <td class="b">Wealth Atlas</td>
+      <td class="r">$25,000</td>
+      <td class="r">$50,000</td>
+      <td class="r bold" style="color:#0D9F5F">2.0x</td>
+      <td class="r">1 in 5,000</td>
+    </tr>
+    <tr>
+      <td class="b">Wealth Everest</td>
+      <td class="r">$50,000</td>
+      <td class="r">$100,000</td>
+      <td class="r bold" style="color:#0D9F5F">2.0x</td>
+      <td class="r">1 in 10,000</td>
+    </tr>
+    <tr>
+      <td class="b">Wealth Midas Link</td>
+      <td class="r">$243,000</td>
+      <td class="r">$250,000</td>
+      <td class="r bold" style="color:#0D9F5F">1.0x</td>
+      <td class="r">1 in 48,667</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout cg">
+  <div class="label">The Key Insight</div>
+  <p><strong>The ROAS improves as you include the full product ladder.</strong> A single free subscriber who eventually buys Options Dashboard ($2K) then upgrades to Wealth Auto ($25K) has generated $27K from a $5 acquisition cost — a <strong>5,400x return</strong>. The newsletter subscriber isn't worth $5. They're worth the full lifetime value across every product they'll ever buy. MarketWise's "True Fans" — 140,000 subscribers spending $5,000+ each — prove this pattern scales.</p>
+</div>
+
+<h3>Three Scenarios</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Scenario</th>
+      <th class="r">Ad Spend</th>
+      <th class="r">Free Subs/Yr</th>
+      <th class="r">Gross Revenue</th>
+      <th class="r">Net Revenue</th>
+      <th class="r">Blended ROAS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="b">Conservative</td>
+      <td class="r">$3.65M</td>
+      <td class="r">730K</td>
+      <td class="r">$30M</td>
+      <td class="r">$23M</td>
+      <td class="r bold">8.2x</td>
+    </tr>
+    <tr>
+      <td class="b">Base Case</td>
+      <td class="r">$3.65M</td>
+      <td class="r">730K</td>
+      <td class="r">$60M</td>
+      <td class="r">$54M</td>
+      <td class="r bold" style="color:#0D9F5F">16.6x</td>
+    </tr>
+    <tr>
+      <td class="b">Aggressive</td>
+      <td class="r">$3.65M</td>
+      <td class="r">730K</td>
+      <td class="r">$100M</td>
+      <td class="r">$93M</td>
+      <td class="r bold" style="color:#0D9F5F">27.4x</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Even the conservative scenario — where conversion rates are halved across every product — produces <strong>$30M in revenue from $3.65M in ad spend.</strong> That matches TradeAlgo's current annual sales team revenue, generated from a new, scalable channel.</p>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 7. PRODUCT-SPECIFIC FUNNELS                 -->
+<!-- ═══════════════════════════════════════════ -->
+
+<h2>7. Product-Specific Funnels</h2>
+
+<p>Each product has a different buyer, a different decision process, and a different sales motion. Here's the optimized path for each:</p>
+
+<h3>A. Options Dashboard ($2K/yr) — Self-Serve Email Funnel</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Stage</th>
+      <th>Mechanism</th>
+      <th class="r">Conv. Rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="b">Awareness</td>
+      <td>Free newsletter mentions options flow data in market analysis</td>
+      <td class="r">Passive</td>
+    </tr>
+    <tr>
+      <td class="b">Interest</td>
+      <td>Day 14 nurture email: "The Options Dashboard: See What Cai Sees"</td>
+      <td class="r">15% click</td>
+    </tr>
+    <tr>
+      <td class="b">Trial</td>
+      <td>14-day free trial (card required) or $1 first month</td>
+      <td class="r">8-10% of clicks</td>
+    </tr>
+    <tr>
+      <td class="b">Conversion</td>
+      <td>Auto-renew at $2K/yr after trial. Retention emails at Day 7 and Day 12 of trial.</td>
+      <td class="r">49% of trials (opt-out model)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Why this works:</strong> At $2K/yr ($167/mo), this is a low-friction decision for an active trader. No sales call needed. The trial-to-paid model (opt-out with card required) converts at <strong>49% industry average</strong> per Seeking Alpha benchmarks. This is the Stansberry "self-liquidating offer" equivalent — it pays for subscriber acquisition on its own.</p>
+
+<h3>B. AI Neural Alerts ($15K/2yr) — Hybrid: Webinar + Call</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Stage</th>
+      <th>Mechanism</th>
+      <th class="r">Conv. Rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="b">Awareness</td>
+      <td>Newsletter shows AI rebalance decisions; weekly "What the AI did" recaps</td>
+      <td class="r">Passive</td>
+    </tr>
+    <tr>
+      <td class="b">Education</td>
+      <td>Webinar: "How Cai's AI Generates Real-Time Trading Signals"</td>
+      <td class="r">61% attendance</td>
+    </tr>
+    <tr>
+      <td class="b">Qualification</td>
+      <td>Post-webinar survey: portfolio size, trading frequency, current tools</td>
+      <td class="r">40% complete</td>
+    </tr>
+    <tr>
+      <td class="b">Strategy Call</td>
+      <td>Setter books 15-min call; closer demos the Neural Alerts platform live</td>
+      <td class="r">20% book, 25% close</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Why this works:</strong> At $15K, a webinar alone won't close — but a webinar + live demo + strategy call sequence will. The webinar builds understanding, the demo creates desire, and the strategy call removes objections. Key message: "You've been watching the AI's decisions in the newsletter. Neural Alerts gives you the signals in real-time, before the next newsletter."</p>
+
+<h3>C. Wealth Series ($25K-$250K) — Full Sales Team Funnel</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Stage</th>
+      <th>Mechanism</th>
+      <th class="r">Conv. Rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="b">Nurture (0-60 days)</td>
+      <td>Daily newsletter builds trust. Performance data creates FOMO. Portfolio comparison email at Day 35.</td>
+      <td class="r">Passive scoring</td>
+    </tr>
+    <tr>
+      <td class="b">Activation trigger</td>
+      <td>Score 75+ OR attends webinar OR visits Wealth Series page OR market volatility event</td>
+      <td class="r">15% of engaged</td>
+    </tr>
+    <tr>
+      <td class="b">Setter qualification</td>
+      <td>Phone call or video: confirm portfolio size, investment timeline, risk tolerance, accredited status</td>
+      <td class="r">50% qualified</td>
+    </tr>
+    <tr>
+      <td class="b">Portfolio Review (closer)</td>
+      <td>45-min session: current portfolio analysis, AI allocation comparison, specific Wealth Series recommendation (Auto/Atlas/Everest/Midas Link based on portfolio size)</td>
+      <td class="r">20-30% close</td>
+    </tr>
+    <tr>
+      <td class="b">Onboarding</td>
+      <td>White-glove setup. First 90 days: weekly check-in emails showing portfolio vs. AI benchmark</td>
+      <td class="r">Retention play</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>The key to the Wealth Series close:</strong> The subscriber has been watching the AI outperform for 30-90 days. The portfolio review makes it personal: "Here's what your $250K looks like now. Here's what it would look like with Cai's AI managing it. The gap compounds." This isn't a hypothetical pitch — the data is live and verifiable from the newsletter they've been reading daily.</p>
+
+<div class="callout cd">
+  <div class="label">The Wealth Series Upsell Ladder</div>
+  <p>Within the Wealth Series, the setter qualifies which tier based on portfolio size: <strong>$50K-$100K portfolio &#8594; Auto ($25K)</strong> &middot; <strong>$100K-$250K &#8594; Atlas ($50K)</strong> &middot; <strong>$250K-$500K &#8594; Everest ($100K)</strong> &middot; <strong>$500K+ &#8594; Midas Link ($250K)</strong>. The closer recommends based on AUM. This is the Motley Fool's 140x pricing ladder principle applied to managed capital.</p>
+</div>
+
+<h3>D. 506(c) Offering ($200K+ minimum) — Accredited Investor Funnel</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Stage</th>
+      <th>Mechanism</th>
+      <th>Compliance Note</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="b">Identification</td>
+      <td>Lead scoring identifies high-net-worth signals: Elite tier subscriber, $500K+ portfolio indication, accredited investor self-report</td>
+      <td>No compliance issue at identification stage</td>
+    </tr>
+    <tr>
+      <td class="b">Invitation</td>
+      <td>Personal email from TradeAlgo leadership: "You've been an Elite subscriber for X months. We're offering qualified investors direct participation in Cai's AI strategy."</td>
+      <td>506(c) permits general solicitation. Must file Form D 15 days before.</td>
+    </tr>
+    <tr>
+      <td class="b">Qualification</td>
+      <td>Self-certification of accredited status + minimum $200K investment commitment</td>
+      <td><strong>March 2025 SEC no-action letter</strong> created a bright-line test: $200K+ minimum investment + written self-certification = verified. No third-party verification needed.</td>
+    </tr>
+    <tr>
+      <td class="b">Closing</td>
+      <td>Dedicated relationship manager conducts investor call, reviews offering docs, processes investment</td>
+      <td>Standard private placement compliance</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout cg">
+  <div class="label">SEC Game-Changer</div>
+  <p>The <strong>March 2025 SEC no-action letter</strong> dramatically simplified 506(c) verification. Previously, issuers needed third-party verification (CPA letters, tax returns, etc.) costing $250-$500 per investor. Now, a $200K minimum investment + written self-certification satisfies the "reasonable steps" requirement. <strong>TradeAlgo's $250K Midas Link tier naturally meets this threshold</strong>, potentially allowing seamless integration between the Wealth Series and the 506(c) offering.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 8. NEWSLETTER TIERS AS QUALIFICATION STAGES -->
+<!-- ═══════════════════════════════════════════ -->
+
+<h2>8. Newsletter Tiers as Qualification Stages</h2>
+
+<p>The free/premium/pro/elite tier system isn't just a content business. It's a <strong>self-selecting qualification funnel</strong> for high-ticket products. Each tier upgrade is a behavioral signal of willingness to pay — and a data point for lead scoring.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tier</th>
+      <th>Funnel Stage</th>
+      <th>Buyer Intent Signal</th>
+      <th>Product Pathway</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="b">Free</td>
+      <td>Awareness</td>
+      <td>"I'm interested in AI-managed investing"</td>
+      <td>Options Dashboard ($2K) via email</td>
+    </tr>
+    <tr>
+      <td class="b">Premium ($149/yr)</td>
+      <td>Interest</td>
+      <td>"I'm willing to pay for AI portfolio insights"</td>
+      <td>Options Dashboard ($2K) + Neural Alerts ($15K) via webinar</td>
+    </tr>
+    <tr>
+      <td class="b">Pro ($499/yr)</td>
+      <td>Consideration</td>
+      <td>"I want to see every position and act on it"</td>
+      <td>Neural Alerts ($15K) + Wealth Auto ($25K) via strategy call</td>
+    </tr>
+    <tr>
+      <td class="b">Elite ($2,500/yr)</td>
+      <td>Decision</td>
+      <td>"I want the full picture and I have capital to deploy"</td>
+      <td>Wealth Series ($25K-$250K) + 506(c) via relationship manager</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="rec">
+  <span class="badge">The Qualification Insight</span>
+  <p><strong>Every Elite subscriber is a pre-qualified Wealth Series prospect.</strong> They've already spent $2,500/year on AI portfolio intelligence. They've seen every holding, every risk metric, every conviction ranking. They know the AI works. The Wealth Series pitch to an Elite subscriber isn't "trust us" — it's "let us do for your money what you've been watching us do for 6 months." This is the shortest path to a $25K-$250K close in financial services.</p>
+  <p>At 5,000 Elite subscribers (Year 7 projection from V1 model), if just <strong>10% convert to Wealth Series</strong> at an average $75K deal size, that's <strong>$37.5M in additional revenue</strong> from a base that's already paying us $12.5M/year in Elite subscriptions.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 9. TECH STACK                               -->
+<!-- ═══════════════════════════════════════════ -->
+
+<h2>9. Tech Stack</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Function</th>
+      <th>Tool</th>
+      <th>Why</th>
+      <th class="r">Est. Cost/mo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="b">Newsletter delivery</td>
+      <td>beehiiv or ConvertKit</td>
+      <td>Native referral programs, segmentation, analytics. beehiiv's boost network enables paid cross-promotion.</td>
+      <td class="r">$500-$1,000</td>
+    </tr>
+    <tr>
+      <td class="b">CRM</td>
+      <td>HubSpot (Sales Hub Enterprise)</td>
+      <td>Lead scoring, pipeline management, deal tracking, sales automation. Integrates with everything. The Hustle was acquired BY HubSpot — they understand the newsletter-to-CRM pipeline.</td>
+      <td class="r">$1,500-$3,000</td>
+    </tr>
+    <tr>
+      <td class="b">Customer Data Platform</td>
+      <td>Lytics or Segment</td>
+      <td>Behavioral scoring, cross-channel identity resolution. <strong>Agora Financial used Lytics to achieve 167% revenue increase.</strong> Motley Fool used Lytics to decrease CPA by 20%.</td>
+      <td class="r">$2,000-$5,000</td>
+    </tr>
+    <tr>
+      <td class="b">Marketing automation</td>
+      <td>HubSpot Marketing Hub or ActiveCampaign</td>
+      <td>Nurture sequences, triggered emails, A/B testing, landing pages</td>
+      <td class="r">Incl. in HubSpot</td>
+    </tr>
+    <tr>
+      <td class="b">Appointment booking</td>
+      <td>Calendly (Teams) or HubSpot Meetings</td>
+      <td>Round-robin assignment to setters/closers, automatic reminders, CRM sync</td>
+      <td class="r">$200-$500</td>
+    </tr>
+    <tr>
+      <td class="b">Webinar platform</td>
+      <td>EverWebinar + Zoom (hybrid)</td>
+      <td>EverWebinar for evergreen automated replays (65% attendance rate). Zoom for weekly live sessions. ON24 for enterprise-grade analytics if we scale.</td>
+      <td class="r">$300-$800</td>
+    </tr>
+    <tr>
+      <td class="b">Ad management</td>
+      <td>Meta Ads Manager + SparkLoop</td>
+      <td>Meta for paid acquisition. SparkLoop for newsletter cross-promotion marketplace. Taboola/Outbrain for native ad distribution (Agora's primary acquisition channel).</td>
+      <td class="r">$333K (ad spend)</td>
+    </tr>
+    <tr>
+      <td class="b">Analytics</td>
+      <td>Mixpanel or Amplitude</td>
+      <td>Event tracking across newsletter, website, and product. Funnel conversion analytics. Attribution modeling.</td>
+      <td class="r">$500-$1,500</td>
+    </tr>
+    <tr>
+      <td class="b">Sales enablement</td>
+      <td>Gong or Chorus</td>
+      <td>Call recording, coaching, conversion analysis for closer team. Critical for optimizing strategy session scripts.</td>
+      <td class="r">$500-$1,500</td>
+    </tr>
+    <tr class="sub">
+      <td colspan="3"><strong>Total tech stack (excl. ad spend)</strong></td>
+      <td class="r bold">$6K-$14K/mo</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout ca">
+  <div class="label">Build vs. Buy Decision</div>
+  <p>The CDP (Lytics/Segment) is the highest-leverage investment. It unifies newsletter engagement data, website behavior, product usage, and CRM data into a single lead score. Without it, the lead scoring model is manual and fragile. <strong>Agora Financial credits their CDP implementation with the single largest revenue increase in their history.</strong> Budget $3-5K/month here — it pays for itself in one additional Wealth Series close per month.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 10. REVENUE MODEL: THREE SCENARIOS          -->
+<!-- ═══════════════════════════════════════════ -->
+
+<h2>10. Revenue Model</h2>
+
+<h3>Year 1 Projections (Ramp Period)</h3>
+
+<p>Months 1-3 are infrastructure build. Months 4-12 are the revenue ramp. Year 1 reflects 9 months of active operation.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th class="r">Conservative</th>
+      <th class="r">Base Case</th>
+      <th class="r">Aggressive</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="b">Free subscribers (9 months)</td>
+      <td class="r">400K</td>
+      <td class="r">550K</td>
+      <td class="r">750K</td>
+    </tr>
+    <tr>
+      <td class="b">Options Dashboard ($2K)</td>
+      <td class="r">$2.0M (1,000 sales)</td>
+      <td class="r">$5.5M (2,750)</td>
+      <td class="r">$11.3M (5,625)</td>
+    </tr>
+    <tr>
+      <td class="b">AI Neural Alerts ($15K)</td>
+      <td class="r">$1.5M (100)</td>
+      <td class="r">$4.1M (275)</td>
+      <td class="r">$8.4M (563)</td>
+    </tr>
+    <tr>
+      <td class="b">Wealth Auto ($25K)</td>
+      <td class="r">$1.3M (50)</td>
+      <td class="r">$3.4M (138)</td>
+      <td class="r">$7.0M (281)</td>
+    </tr>
+    <tr>
+      <td class="b">Wealth Atlas ($50K)</td>
+      <td class="r">$0.5M (10)</td>
+      <td class="r">$1.4M (28)</td>
+      <td class="r">$2.8M (56)</td>
+    </tr>
+    <tr>
+      <td class="b">Wealth Everest ($100K)</td>
+      <td class="r">$0.3M (3)</td>
+      <td class="r">$0.7M (7)</td>
+      <td class="r">$1.4M (14)</td>
+    </tr>
+    <tr>
+      <td class="b">Wealth Midas Link ($250K)</td>
+      <td class="r">$0.3M (1)</td>
+      <td class="r">$0.5M (2)</td>
+      <td class="r">$1.3M (5)</td>
+    </tr>
+    <tr>
+      <td class="b">506(c) Offering</td>
+      <td class="r">$0M (not launched Y1)</td>
+      <td class="r">$0.6M (2)</td>
+      <td class="r">$1.5M (5)</td>
+    </tr>
+    <tr>
+      <td class="b">Newsletter subscriptions</td>
+      <td class="r">$0.5M</td>
+      <td class="r">$1.0M</td>
+      <td class="r">$2.0M</td>
+    </tr>
+    <tr>
+      <td class="b">Ad revenue</td>
+      <td class="r">$0.3M</td>
+      <td class="r">$0.5M</td>
+      <td class="r">$0.8M</td>
+    </tr>
+    <tr class="sub">
+      <td>Newsletter-Sourced Revenue</td>
+      <td class="r bold">$6.7M</td>
+      <td class="r bold" style="color:#0D9F5F">$17.7M</td>
+      <td class="r bold" style="color:#0D9F5F">$36.5M</td>
+    </tr>
+    <tr>
+      <td style="color:#D93025">Less: Ad spend (9 months)</td>
+      <td class="r" style="color:#D93025">($2.7M)</td>
+      <td class="r" style="color:#D93025">($2.7M)</td>
+      <td class="r" style="color:#D93025">($2.7M)</td>
+    </tr>
+    <tr>
+      <td style="color:#D93025">Less: Tech + team</td>
+      <td class="r" style="color:#D93025">($1.5M)</td>
+      <td class="r" style="color:#D93025">($2.0M)</td>
+      <td class="r" style="color:#D93025">($3.0M)</td>
+    </tr>
+    <tr class="total">
+      <td>Year 1 Net from Newsletter</td>
+      <td class="r">$2.5M</td>
+      <td class="r" style="color:#0D9F5F">$13.0M</td>
+      <td class="r" style="color:#0D9F5F">$30.8M</td>
+    </tr>
+    <tr>
+      <td class="b">Plus: Existing Sales Team Revenue</td>
+      <td class="r">$30M</td>
+      <td class="r">$30M</td>
+      <td class="r">$30M</td>
+    </tr>
+    <tr class="total">
+      <td>Total Year 1 Company Revenue</td>
+      <td class="r">$32.5M</td>
+      <td class="r" style="color:#0D9F5F">$43.0M</td>
+      <td class="r" style="color:#0D9F5F">$60.8M</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Year 3 Projection: The $100M Target</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Revenue Stream</th>
+      <th class="r">Conservative</th>
+      <th class="r">Base Case</th>
+      <th class="r">Aggressive</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="b">Free subscriber base (cumulative)</td>
+      <td class="r">1.5M</td>
+      <td class="r">2.2M</td>
+      <td class="r">3.0M</td>
+    </tr>
+    <tr>
+      <td class="b">Newsletter-sourced product revenue</td>
+      <td class="r">$25M</td>
+      <td class="r">$55M</td>
+      <td class="r">$90M</td>
+    </tr>
+    <tr>
+      <td class="b">Newsletter subscription revenue</td>
+      <td class="r">$5M</td>
+      <td class="r">$10M</td>
+      <td class="r">$18M</td>
+    </tr>
+    <tr>
+      <td class="b">Existing sales team (+ newsletter leads)</td>
+      <td class="r">$35M</td>
+      <td class="r">$40M</td>
+      <td class="r">$45M</td>
+    </tr>
+    <tr class="total">
+      <td>Total Year 3 Revenue</td>
+      <td class="r">$65M</td>
+      <td class="r bold" style="color:#0D9F5F">$105M</td>
+      <td class="r bold" style="color:#0D9F5F">$153M</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="bn">
+  <div class="label">Base Case: Year 3</div>
+  <div class="num">$105M</div>
+  <div class="context">$55M from newsletter-sourced high-ticket sales + $10M newsletter subscriptions + $40M existing sales team (boosted by newsletter pipeline). $100M by Year 3, not Year 7.</div>
+</div>
+
+<p>The V1 proposal projected $100M at Year 7 because it modeled the newsletter as a standalone business. <strong>With the high-ticket product ladder, the timeline compresses to Year 3.</strong> The newsletter doesn't need to be a $100M subscription business. It needs to be a $3.65M lead-gen engine that produces $55M+ in high-ticket sales.</p>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 11. IMPLEMENTATION ROADMAP                  -->
+<!-- ═══════════════════════════════════════════ -->
+
+<h2>11. Implementation Roadmap: 90 Days</h2>
+
+<h3>Phase 1: Foundation (Days 1-30)</h3>
+
+<ol class="steps">
+  <li><strong>CRM setup (HubSpot).</strong> Configure deal pipeline stages matching the funnel: Free &#8594; Engaged &#8594; MQL &#8594; SQL &#8594; Appointment &#8594; Closed. Import existing customer data. Set up lead scoring rules. <em>Owner: Marketing Ops.</em></li>
+  <li><strong>Newsletter infrastructure.</strong> Migrate or configure newsletter platform (beehiiv). Set up automated welcome sequence (5 emails, Days 0-14). Configure engagement tracking (opens, clicks, page visits). <em>Owner: Content + Engineering.</em></li>
+  <li><strong>Tracking &amp; attribution.</strong> Implement UTM framework across all newsletter links. Set up Mixpanel/Amplitude event tracking on website (pricing pages, product pages, portfolio dashboard). Connect newsletter engagement data to HubSpot via API or CDP. <em>Owner: Engineering.</em></li>
+  <li><strong>Build the first webinar.</strong> Script a 45-minute "How Cai's AI Manages $10M+" webinar. Record an evergreen version. Set up registration page + post-webinar email sequence. <em>Owner: Content + Leadership.</em></li>
+  <li><strong>Sales team alignment.</strong> Brief the setter/closer team on the newsletter funnel. Define the handoff packet format. Set SLAs: setters respond within 5 minutes for 100+ score leads, within 24 hours for 75+ score leads. <em>Owner: Sales Leadership.</em></li>
+</ol>
+
+<h3>Phase 2: Launch (Days 30-60)</h3>
+
+<ol class="steps">
+  <li><strong>Turn on paid acquisition.</strong> Start at $5K/day (not $10K) to test and optimize. Target: $3-5 per free subscriber via Meta ads, newsletter cross-promotions, and SparkLoop boost network. Monitor Day 7 and Day 14 engagement rates to assess lead quality by channel. <em>Owner: Growth.</em></li>
+  <li><strong>Launch the Options Dashboard self-serve funnel.</strong> Day 14 nurture email + landing page + 14-day trial with card required. This is the fastest revenue win — expect first sales within 3 weeks of launch. <em>Owner: Product + Marketing.</em></li>
+  <li><strong>Run the first live webinar.</strong> Target 200-300 attendees (smaller converts better). Record it. Deploy the evergreen version the following week. Measure: attendance rate, watch time, booking rate. <em>Owner: Content + Sales.</em></li>
+  <li><strong>Activate the lead scoring system.</strong> Begin scoring all subscribers. After 30 days, review the distribution: what % are reaching 50+, 75+, 100+? Calibrate thresholds based on actual data. <em>Owner: Marketing Ops.</em></li>
+  <li><strong>Launch the referral program.</strong> 3 referrals = 1 month Premium free. Build a viral loop that reduces blended CAC over time. Morning Brew drove 30% of all growth via referrals at peak. <em>Owner: Growth.</em></li>
+</ol>
+
+<h3>Phase 3: Optimize (Days 60-90)</h3>
+
+<ol class="steps">
+  <li><strong>Scale ad spend to $10K/day.</strong> Only after Day 30-60 data confirms CAC is sustainable and lead quality is sufficient. If CAC is above $5, optimize creative before scaling. <em>Owner: Growth.</em></li>
+  <li><strong>Launch product-specific nurture sequences.</strong> Options Dashboard email series, Neural Alerts webinar funnel, Wealth Series strategy session pipeline. Each with its own metrics dashboard. <em>Owner: Marketing Ops.</em></li>
+  <li><strong>Implement the performance-triggered email system.</strong> Automated email when AI outperforms S&amp;P by 2%+ in a week. This is the highest-ROI engineering investment — it converts off real-time portfolio performance, which is unique to The Signal. <em>Owner: Engineering.</em></li>
+  <li><strong>First 90-day review.</strong> Full funnel analysis: subscribers acquired, engagement rates, lead scores, appointments booked, deals closed, revenue generated, CAC by channel, ROAS by product. Present findings to Carlos. Adjust plan for Q2. <em>Owner: Marketing + Sales Leadership.</em></li>
+  <li><strong>Begin 506(c) preparation.</strong> File Form D. Build accredited investor qualification flow. Identify Elite subscribers and high-score leads who meet accredited criteria. Plan the invitation campaign for Month 4. <em>Owner: Legal + Sales.</em></li>
+</ol>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- 12. KEY RISKS                               -->
+<!-- ═══════════════════════════════════════════ -->
+
+<h2>12. Key Risks &amp; Mitigations</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Risk</th>
+      <th>Impact</th>
+      <th>Mitigation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="b">CAC rises above $5</td>
+      <td>Unit economics break at lower tiers</td>
+      <td>Diversify channels (referral, organic, cross-promo). Referral program reduces blended CAC. Even at $8 CAC, high-ticket ROAS remains positive.</td>
+    </tr>
+    <tr>
+      <td class="b">AI underperforms for extended period</td>
+      <td>Core conversion engine weakens</td>
+      <td>Three risk profiles provide diversification. In a bear market, the Low Risk portfolio's resilience becomes the selling point. Drawdowns are addressed honestly in the newsletter — trust > cherry-picking.</td>
+    </tr>
+    <tr>
+      <td class="b">Lead quality is low</td>
+      <td>Sales team wastes time on unqualified leads</td>
+      <td>Lead scoring model filters before handoff. Setter qualification adds a human layer. Continuous calibration of score thresholds based on close rate data.</td>
+    </tr>
+    <tr>
+      <td class="b">Sales team capacity constrained</td>
+      <td>Booked appointments back up</td>
+      <td>Scale setter/closer team in line with lead volume. At 480 appointments/month, need 3-4 closers doing 120-160 calls each. Plan hiring in Phase 2.</td>
+    </tr>
+    <tr>
+      <td class="b">Regulatory risk on 506(c)</td>
+      <td>Compliance burden slows launch</td>
+      <td>March 2025 SEC no-action letter simplifies verification. Engage securities counsel in Phase 1. Separate entity for investment vehicle. Conservative approach to general solicitation messaging.</td>
+    </tr>
+    <tr>
+      <td class="b">Newsletter fatigue / churn</td>
+      <td>Subscriber base shrinks</td>
+      <td>Content quality is paramount — maintain A-grade quality established in v7. Engagement-based sending frequency (reduce to 3x/week for low-engagement subscribers). The daily number (AI performance) keeps people opening.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- CLOSING                                     -->
+<!-- ═══════════════════════════════════════════ -->
+
+<h2>13. The Bottom Line</h2>
+
+<p>Stansberry Research generated <strong>$300 million</strong> from a single 77-minute video and an ascending product ladder. They didn't have live AI portfolio data. They didn't have a daily newsletter showing real-time proof. They didn't have three transparent portfolios beating the S&amp;P by 5x.</p>
+
+<p>TradeAlgo has all of this. And a sales team that already knows how to close $25K-$250K deals.</p>
+
+<p>The newsletter is the missing piece: a <strong>scalable, automated, trust-building machine</strong> that turns $10K/day in ad spend into a river of warm leads who've watched the AI work for weeks before they ever pick up the phone.</p>
+
+<div class="bn">
+  <div class="label">V1 vs. V2</div>
+  <div class="num" style="font-size:24px;line-height:1.5">V1: Newsletter as product &#8594; $100M at Year 7<br>V2: Newsletter as lead engine &#8594; $100M at Year 3</div>
+  <div class="context" style="margin-top:12px">Same newsletter. Same content. Same $3.65M ad spend.<br>Different mental model. 4 years faster.</div>
+</div>
+
+<p>The 90-day plan is ready. The content is A-grade. The AI portfolios are live. The sales team is standing by.</p>
+
+<p><strong>Let's turn the newsletter on.</strong></p>
+
+<div style="text-align:center;margin:40px 0 0;padding:24px;background:#f8f9fa;border-radius:8px">
+  <p style="font-size:16px;font-weight:700;color:#111;margin:0 0 4px 0">Prepared for Carlos &amp; the TradeAlgo Leadership Team</p>
+  <p style="font-size:13px;color:#888;margin:0">The Signal &middot; March 3, 2026 &middot; V2: High-Ticket Funnel Strategy &middot; Confidential</p>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- APPENDIX                                    -->
+<!-- ═══════════════════════════════════════════ -->
+
+<h2>Appendix: Research Sources</h2>
+
+<p style="font-size:12px;color:#888;line-height:1.8">
+<strong>MarketWise:</strong> 2024 Full Year Results (public filing): $408.7M revenue, 506K paid subscribers, $93.1M net income. Net Interest deep-dive analysis of subscriber segmentation and True Fans cohort.<br>
+<strong>Agora/Stansberry:</strong> "End of America" VSL analysis (Strategicopy): 600K subscribers, $300M total campaign value. Agora case study (HackerNoon, Beehiiv): profit pyramid structure, automated funnel architecture.<br>
+<strong>CDP Implementation:</strong> Lytics case study (Agora Financial): 167% increase in monthly revenue. Lytics case study (Motley Fool): 20% CPA decrease.<br>
+<strong>Webinar Benchmarks:</strong> DemandSage 2026 webinar statistics: 61% financial services attendance. ON24 2025 Benchmarks Report: conversion by audience size, post-event sales data.<br>
+<strong>Lead Scoring:</strong> Gartner intent signal framework. ActiveCampaign lead scoring methodology. SalesPanel behavioral scoring best practices.<br>
+<strong>High-Ticket Sales:</strong> TheBusinessAdvisory high-ticket closing guide: 29% average close rate. Dial A Closer setter/closer model analysis. Harvard Business Review: 21x improvement from 5-minute response time.<br>
+<strong>Appointment Setting:</strong> Leads at Scale 2025 pricing guide: $200-$800 per qualified appointment. Martal Group conversion statistics: 2.23% average, 25.56% referral-sourced.<br>
+<strong>506(c) Compliance:</strong> SEC Rule 506(c) general solicitation guidance. Gibson Dunn: March 2025 SEC no-action letter bright-line test. Morgan Lewis verification requirements analysis. Accredd investor verification pricing.<br>
+<strong>CAC Benchmarks:</strong> UserMaven industry CAC data. Vena Solutions wealth management CAC: $2,167-$4,056. Newsletter Operator subscriber acquisition channel benchmarks.<br>
+<strong>Previous proposal (V1):</strong> Competitive analysis of Morning Brew, Hustle, Axios, The Information, Stratechery, Lenny's Newsletter, Daily Upside, Chartr, Finimize, Motley Fool, Seeking Alpha.
+</p>
+
+<div class="doc-footer">
+  <strong>THE SIGNAL</strong> by TradeAlgo &middot; High-Ticket Funnel Strategy &middot; V2 &middot; March 2026<br>
+  Built on competitive research across MarketWise ($409M rev), Agora ($1B+ rev), and 10+ newsletter businesses.
+</div>
+
+</div>
+</body>
+</html>

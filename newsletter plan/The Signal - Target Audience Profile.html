@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Signal — Target Audience Profile</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+  :root {
+    --navy: #1B2A4A;
+    --accent: #2E75B6;
+    --accent-light: #E8F1FA;
+    --dark: #1a1a2e;
+    --text: #333;
+    --text-light: #666;
+    --border: #e0e4ea;
+    --bg: #ffffff;
+    --card-bg: #fafbfd;
+    --green: #27AE60;
+    --red: #C0392B;
+    --orange: #E67E22;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* ─── COVER ─── */
+  .cover {
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 80px 40px;
+    border-bottom: 4px solid var(--accent);
+  }
+  .cover-brand {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .cover h1 {
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+  .cover .subtitle {
+    font-size: 18px;
+    color: var(--text-light);
+    max-width: 600px;
+    font-style: italic;
+  }
+  .cover .meta {
+    margin-top: 40px;
+    font-size: 13px;
+    color: #999;
+    letter-spacing: 1px;
+  }
+
+  /* ─── LAYOUT ─── */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 60px 40px;
+  }
+
+  /* ─── TYPOGRAPHY ─── */
+  h2 {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--navy);
+    margin-top: 56px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid var(--accent);
+  }
+  h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-top: 36px;
+    margin-bottom: 12px;
+  }
+  h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-top: 28px;
+    margin-bottom: 8px;
+  }
+  p { margin-bottom: 16px; }
+  strong { color: var(--navy); font-weight: 600; }
+
+  /* ─── EXECUTIVE SUMMARY BOX ─── */
+  .exec-summary {
+    background: var(--accent-light);
+    border-left: 5px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 28px 32px;
+    margin: 32px 0;
+  }
+  .exec-summary p { margin-bottom: 12px; }
+  .exec-summary p:last-child { margin-bottom: 0; }
+
+  /* ─── CALLOUT BOX ─── */
+  .callout {
+    background: var(--accent-light);
+    border-left: 5px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 20px 24px;
+    margin: 20px 0;
+  }
+  .callout.warning {
+    background: #fef3e6;
+    border-left-color: var(--orange);
+  }
+  .callout .callout-title {
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+    font-size: 15px;
+  }
+  .callout p { margin-bottom: 8px; font-size: 14px; }
+  .callout p:last-child { margin-bottom: 0; }
+
+  /* ─── SEGMENT CARDS ─── */
+  .segment-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 32px;
+    margin: 28px 0;
+  }
+  .segment-card h3 {
+    margin-top: 0;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .segment-card .voice {
+    font-style: italic;
+    color: var(--text-light);
+    font-size: 15px;
+    margin-bottom: 20px;
+    padding-left: 16px;
+    border-left: 3px solid var(--border);
+  }
+
+  /* ─── MINI TABLES (inside cards) ─── */
+  .attr-grid {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 0;
+    margin: 16px 0 20px;
+    font-size: 14px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .attr-grid .label {
+    background: var(--navy);
+    color: #fff;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .attr-grid .value {
+    padding: 8px 14px;
+    border-bottom: 1px solid var(--border);
+    background: #fff;
+  }
+  .attr-grid .label:last-of-type,
+  .attr-grid .value:last-of-type { border-bottom: none; }
+
+  /* ─── TABLES ─── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 14px;
+  }
+  thead th {
+    background: var(--navy);
+    color: #fff;
+    font-weight: 600;
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 13px;
+    letter-spacing: 0.3px;
+  }
+  tbody td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: var(--card-bg); }
+  tbody tr:hover { background: var(--accent-light); }
+
+  /* ─── DRIVER CARDS ─── */
+  .driver {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 14px 0;
+  }
+  .driver .driver-num {
+    display: inline-block;
+    background: var(--navy);
+    color: #fff;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    margin-right: 8px;
+  }
+  .driver .driver-name {
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 16px;
+  }
+  .driver .driver-voice {
+    font-style: italic;
+    color: var(--text-light);
+    margin: 6px 0 10px;
+    font-size: 14px;
+  }
+  .driver p { font-size: 14px; margin-bottom: 8px; }
+  .driver p:last-child { margin-bottom: 0; }
+
+  /* ─── TONE TABLE ─── */
+  .regime-tag {
+    display: inline-block;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 2px 10px;
+    border-radius: 4px;
+  }
+  .regime-tag.bullish { background: #e8f8ef; color: var(--green); }
+  .regime-tag.neutral { background: #f0f0f0; color: #555; }
+  .regime-tag.cautious { background: #fef3e6; color: var(--orange); }
+  .regime-tag.correction { background: #fce8e6; color: var(--red); }
+  .regime-tag.crash { background: #f5d0cc; color: #8b1a10; }
+
+  /* ─── LISTS ─── */
+  ul, ol { margin: 12px 0 20px 24px; }
+  li { margin-bottom: 8px; }
+
+  /* ─── NEVER LIST ─── */
+  .never-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 16px 0;
+    list-style: none;
+    padding: 0;
+  }
+  .never-list li {
+    background: #fce8e6;
+    color: var(--red);
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    margin: 0;
+  }
+  .never-list li::before { content: "\2717\00a0\00a0"; font-weight: 700; }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    border: none;
+    border-top: 2px solid var(--border);
+    margin: 48px 0;
+  }
+
+  /* ─── HERO QUOTE ─── */
+  .hero-quote {
+    background: var(--navy);
+    color: #fff;
+    border-radius: 10px;
+    padding: 36px 40px;
+    margin: 40px 0;
+    text-align: center;
+  }
+  .hero-quote p {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ─── STEP GRID ─── */
+  .welcome-grid {
+    display: grid;
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .welcome-step {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .welcome-step .day-label {
+    background: var(--navy);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .welcome-step .day-content {
+    padding: 14px 18px;
+  }
+  .welcome-step .day-content .theme {
+    font-weight: 700;
+    color: var(--navy);
+    font-size: 14px;
+  }
+  .welcome-step .day-content .desc {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 4px;
+  }
+
+  /* ─── METRIC CARDS ─── */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .metric-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+  }
+  .metric-card .metric-value {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+  .metric-card .metric-label {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  /* ─── CHANNEL CARDS ─── */
+  .channel-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 20px 0;
+  }
+  .channel-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .channel-card .channel-num {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 26px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .channel-card h4 { margin: 0 0 6px; color: var(--navy); font-size: 15px; }
+  .channel-card p { font-size: 13px; color: var(--text-light); margin: 0; }
+
+  /* ─── TIER CARDS ─── */
+  .tier-row {
+    display: grid;
+    grid-template-columns: 120px 90px 1fr;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 8px 0;
+  }
+  .tier-row .tier-name {
+    background: var(--navy);
+    color: #fff;
+    font-weight: 700;
+    padding: 14px 16px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+  }
+  .tier-row .tier-price {
+    background: var(--accent-light);
+    font-weight: 700;
+    color: var(--accent);
+    padding: 14px 12px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+  }
+  .tier-row .tier-desc {
+    padding: 14px 18px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+  }
+
+  @media (max-width: 700px) {
+    .cover h1 { font-size: 32px; }
+    .container { padding: 40px 20px; }
+    .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+    .channel-grid { grid-template-columns: 1fr; }
+    .never-list { grid-template-columns: 1fr; }
+    .attr-grid { grid-template-columns: 120px 1fr; }
+    .tier-row { grid-template-columns: 100px 80px 1fr; }
+  }
+
+  @media print {
+    .cover { min-height: auto; padding: 40px; }
+    .segment-card, .driver, .callout { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ COVER ═══ -->
+<section class="cover">
+  <div class="cover-brand">The Signal &mdash; by TradeAlgo</div>
+  <h1>Target Audience Profile</h1>
+  <p class="subtitle">Who we&rsquo;re writing for, how we reach them, and how we talk to them.</p>
+  <p class="meta">FEBRUARY 2026 &nbsp;&bull;&nbsp; INTERNAL STRATEGY DOCUMENT &nbsp;&bull;&nbsp; PREPARED FOR CARLOS CRUZ</p>
+</section>
+
+<div class="container">
+
+<!-- ═══ EXECUTIVE SUMMARY ═══ -->
+<h2>Executive Summary</h2>
+
+<div class="exec-summary">
+  <p>The Signal targets <strong>60&ndash;80 million Americans who own individual stocks</strong> &mdash; not day traders, not passive index-fund-only investors, but people who actively hold equities and want to be smarter about it. They earn $100K&ndash;$500K+, are aged 28&ndash;65, and feel the tension between wanting to grow their wealth and being terrified of losing it. They are time-starved, overwhelmed by noise, and deeply skeptical of the financial media they currently consume.</p>
+  <p>Our competitive edge: we are <strong>not selling opinions</strong>. We are selling visibility into 5 real AI-managed portfolios running real capital. Atlas doesn&rsquo;t guess &mdash; it shows what the machine is actually doing with real money. That&rsquo;s a fundamentally different value proposition than every human-written newsletter in the market.</p>
+</div>
+
+<hr class="divider">
+
+<!-- ═══ PRIMARY SEGMENTS ═══ -->
+<h2>Primary Audience Segments</h2>
+<p>We serve five distinct investor types. Each has different motivations, different pain points, and a different willingness to pay. They all share one thing: they own stocks and they want an edge.</p>
+
+<!-- Segment 1 -->
+<div class="segment-card">
+  <h3>The Ambitious Accumulator</h3>
+  <p class="voice">&ldquo;Make me smarter about my money without making it a full-time job.&rdquo;</p>
+  <div class="attr-grid">
+    <div class="label">Age Range</div><div class="value">30&ndash;50 years old</div>
+    <div class="label">Income</div><div class="value">$150K&ndash;$400K (high-income professionals)</div>
+    <div class="label">Assets</div><div class="value">$100K&ndash;$1M investable</div>
+    <div class="label">Experience</div><div class="value">5&ndash;20 years investing</div>
+    <div class="label">Drivers</div><div class="value">Alpha generation, time savings, staying ahead of trends</div>
+    <div class="label">WTP</div><div class="value">$149&ndash;$1,000/year</div>
+    <div class="label">Our Tier</div><div class="value">Premium ($149/yr) &rarr; Pro ($499/yr)</div>
+    <div class="label">Market Share</div><div class="value">~25% of US newsletter market</div>
+  </div>
+  <p>This is our <strong>core growth engine</strong>. Busy professionals &mdash; software engineers, doctors, lawyers, executives &mdash; who have money to invest but not time to research. They&rsquo;re smart enough to know they&rsquo;re not beating the market alone, and tired of spending weekends on earnings reports. The AI angle resonates strongly because it matches their worldview: technology solves problems.</p>
+  <p><strong>How we reach them:</strong> SEO content targeting stock tickers, social clips showing AI portfolio performance, lead magnets (&ldquo;Top 10 AI-Scored Stocks This Month&rdquo;), referral programs. They discover us through content, not ads.</p>
+  <p><strong>Retention risk:</strong> Greed-motivated subscribers churn at 40&ndash;60% annually vs. 70&ndash;85% for fear-motivated ones. We counter this with education (they understand <em>why</em> the AI made a call) and radical transparency (showing losses builds trust that survives drawdowns).</p>
+</div>
+
+<!-- Segment 2 -->
+<div class="segment-card">
+  <h3>The Anxious Retiree</h3>
+  <p class="voice">&ldquo;Don&rsquo;t let me lose what I&rsquo;ve spent 40 years building.&rdquo;</p>
+  <div class="attr-grid">
+    <div class="label">Age Range</div><div class="value">55&ndash;75 years old</div>
+    <div class="label">Income</div><div class="value">$100K&ndash;$300K (often retired/semi-retired)</div>
+    <div class="label">Assets</div><div class="value">$500K&ndash;$5M+ (life savings at stake)</div>
+    <div class="label">Experience</div><div class="value">20&ndash;40+ years investing</div>
+    <div class="label">Drivers</div><div class="value">Fear/loss prevention, conviction, portfolio management</div>
+    <div class="label">WTP</div><div class="value">$500&ndash;$5,000/year</div>
+    <div class="label">Our Tier</div><div class="value">Pro ($499/yr) &rarr; Elite ($2,500/yr) &rarr; Managed</div>
+    <div class="label">Market Share</div><div class="value">~30% of US newsletter market</div>
+  </div>
+  <p>This is our <strong>highest-LTV segment</strong>. Loss aversion is 2x stronger than the desire for equivalent gains (Kahneman &amp; Tversky). They aren&rsquo;t chasing gains &mdash; they&rsquo;re protecting a nest egg. They read every word, stay subscribed for years, and are the reason Stansberry generates $500M+ in revenue: fear-driven subscribers retain at 70&ndash;85% annually.</p>
+  <p>Atlas speaks to them differently. Where the Accumulator wants opportunity, the Retiree wants <strong>reassurance</strong>. Atlas&rsquo;s protective instinct &mdash; coaching against panic selling, framing drawdowns historically, flagging disposition bias &mdash; is built for this segment. During market crashes, these subscribers don&rsquo;t leave; they lean in. Crashes are historically our strongest conversion periods (2&ndash;3x normal rates).</p>
+  <p><strong>How we reach them:</strong> Track record content showing real AI performance through multiple market cycles, risk management lead magnets, referrals from financial advisors. They respond to proof, not hype.</p>
+</div>
+
+<!-- Segment 3 -->
+<div class="segment-card">
+  <h3>The Curious Learner</h3>
+  <p class="voice">&ldquo;I want to understand how this actually works.&rdquo;</p>
+  <div class="attr-grid">
+    <div class="label">Age Range</div><div class="value">28&ndash;45 years old</div>
+    <div class="label">Income</div><div class="value">$75K&ndash;$200K</div>
+    <div class="label">Assets</div><div class="value">$25K&ndash;$200K investable</div>
+    <div class="label">Experience</div><div class="value">&lt;5 years investing</div>
+    <div class="label">Drivers</div><div class="value">Education, entertainment, community, belonging</div>
+    <div class="label">WTP</div><div class="value">$0&ndash;$149/year (mostly free tier)</div>
+    <div class="label">Our Tier</div><div class="value">Free &rarr; Premium ($149/yr)</div>
+    <div class="label">Market Share</div><div class="value">~20% of US newsletter market</div>
+  </div>
+  <p>This is our <strong>volume engine</strong>. They fill the free tier, drive referrals, and create the subscriber base that makes CPA advertising viable. They&rsquo;re not buying Pro on day one, but they&rsquo;re learning, building conviction, and many will graduate to Accumulator behavior as their portfolio grows. Educational newsletters retain 2&ndash;3x better than pick-only newsletters, so Atlas&rsquo;s teaching is both altruistic and a retention strategy.</p>
+  <p><strong>How we reach them:</strong> Social media clips, TikTok/YouTube explainers of how AI picks stocks, SEO articles targeting &ldquo;how to&rdquo; investing queries, and the live scoreboard. Drawn by the novelty of an AI-written newsletter, they stay for the education.</p>
+</div>
+
+<!-- Segment 4 -->
+<div class="segment-card">
+  <h3>The Active Trader</h3>
+  <p class="voice">&ldquo;Tell me exactly what to do. Ticker, price, allocation.&rdquo;</p>
+  <div class="attr-grid">
+    <div class="label">Age Range</div><div class="value">25&ndash;55 years old</div>
+    <div class="label">Income</div><div class="value">$150K+</div>
+    <div class="label">Assets</div><div class="value">$200K&ndash;$2M+ trading capital</div>
+    <div class="label">Experience</div><div class="value">10+ years, high frequency</div>
+    <div class="label">Drivers</div><div class="value">Actionability, specificity, real-time alerts</div>
+    <div class="label">WTP</div><div class="value">$1,000&ndash;$5,000+/year</div>
+    <div class="label">Our Tier</div><div class="value">Pro ($499/yr) &rarr; Elite ($2,500/yr)</div>
+    <div class="label">Market Share</div><div class="value">~15% of US newsletter market</div>
+  </div>
+  <p>Smaller segment, but <strong>highest per-subscriber revenue</strong>. General commentary is worth $0 to them &mdash; specific trade data is worth $5,000/yr. They want current positions, exact sizing, options overlays, and real-time SMS alerts when the AI trades. Our Pro and Elite tiers are built for this segment. The AI&rsquo;s actual trade data &mdash; not opinions, not models, <em>real trades</em> &mdash; is something no human-written newsletter can match at this specificity.</p>
+</div>
+
+<!-- Segment 5 -->
+<div class="segment-card">
+  <h3>The High-Net-Worth Delegator</h3>
+  <p class="voice">&ldquo;Just manage it for me.&rdquo;</p>
+  <div class="attr-grid">
+    <div class="label">Age Range</div><div class="value">45&ndash;70 years old</div>
+    <div class="label">Income</div><div class="value">$300K+</div>
+    <div class="label">Assets</div><div class="value">$1M+ investable</div>
+    <div class="label">Experience</div><div class="value">Varies (often delegated historically)</div>
+    <div class="label">Drivers</div><div class="value">Time savings, status, conviction, exclusivity</div>
+    <div class="label">WTP</div><div class="value">$5,000&ndash;$50,000+/year</div>
+    <div class="label">Our Tier</div><div class="value">Elite ($2,500/yr) &rarr; Managed ($50K&ndash;$400K AUM)</div>
+    <div class="label">Market Share</div><div class="value">~10% of US newsletter market</div>
+  </div>
+  <p>This is where TradeAlgo <strong>leapfrogs the entire newsletter industry</strong>. Every competitor&rsquo;s product stops at &ldquo;here&rsquo;s what to buy.&rdquo; Ours ends with &ldquo;or we&rsquo;ll buy it for you.&rdquo; The managed accounts tier converts the newsletter from information product to financial service. These subscribers view the subscription as a status marker &mdash; membership signals sophistication. Stansberry&rsquo;s Alliance members pay $25K+ lifetime and cite identity and exclusivity as top-3 reasons for staying.</p>
+</div>
+
+<hr class="divider">
+
+<!-- ═══ PSYCHOLOGICAL DRIVERS ═══ -->
+<h2>What Drives Them: The 12 Psychological Motivators</h2>
+<p>Every subscriber is motivated by a cocktail of psychological drivers. The highest-revenue newsletters activate multiple drivers simultaneously. Our research identified 12, ranked by revenue impact.</p>
+
+<h3>Revenue Drivers &mdash; These Make People Pay</h3>
+
+<div class="driver">
+  <span class="driver-num">#1</span><span class="driver-name">Fear &amp; Loss Prevention</span>
+  <div class="driver-voice">&ldquo;Don&rsquo;t let me lose my money.&rdquo;</div>
+  <p>The single most powerful motivator in financial publishing. Loss aversion is 2x stronger than equivalent gain desire. Drives $2,000&ndash;$5,000/yr tier purchases. Stansberry&rsquo;s fear-based campaigns generated $100M+. Atlas leverages this ethically: we don&rsquo;t manufacture fear, we address the fear that already exists with data and protective coaching.</p>
+</div>
+
+<div class="driver">
+  <span class="driver-num">#2</span><span class="driver-name">Greed &amp; Alpha Generation</span>
+  <div class="driver-voice">&ldquo;Make me money. Give me the winning picks.&rdquo;</div>
+  <p>Most obvious driver but actually second to fear in revenue. Drives entry-level subscriptions ($49&ndash;$199). Primary hook in acquisition marketing. Weakness: 40&ndash;60% 12-month retention vs. 70&ndash;85% for fear-motivated subscribers. When picks don&rsquo;t immediately work, they leave.</p>
+</div>
+
+<div class="driver">
+  <span class="driver-num">#3</span><span class="driver-name">Conviction &amp; Decision Confidence</span>
+  <div class="driver-voice">&ldquo;Tell me I&rsquo;m making the right decision.&rdquo;</div>
+  <p>Most investors are paralyzed by uncertainty. They have money to deploy but are terrified of deploying it wrong. Atlas provides psychological permission to act through data-backed authority. An AI with a verifiable track record is the ultimate credibility &mdash; editor credibility commands 2&ndash;3x higher pricing.</p>
+</div>
+
+<div class="driver">
+  <span class="driver-num">#4</span><span class="driver-name">Time Savings &amp; Cognitive Offloading</span>
+  <div class="driver-voice">&ldquo;I don&rsquo;t have time to research this myself.&rdquo;</div>
+  <p>Primary value driver for high-income professionals ($200K+). Willing to pay $500&ndash;$5,000/yr for someone or something to do the research. Our 5-minute daily + Sunday deep dive respects their time while delivering comprehensive coverage.</p>
+</div>
+
+<h3>Retention Drivers &mdash; These Make People Stay</h3>
+
+<table>
+  <thead>
+    <tr><th>Driver</th><th>The Voice in Their Head</th><th>How Atlas Delivers</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>#5 Staying Ahead</strong></td><td><em>&ldquo;What&rsquo;s happening before everyone knows?&rdquo;</em></td><td>Daily Three Things section + regime monitoring</td></tr>
+    <tr><td><strong>#6 Education</strong></td><td><em>&ldquo;Make me a better investor.&rdquo;</em></td><td>Every pick comes with thesis + reasoning</td></tr>
+    <tr><td><strong>#7 Community</strong></td><td><em>&ldquo;I want to be around smart investors.&rdquo;</em></td><td>Shared identity around AI-driven investing</td></tr>
+    <tr><td><strong>#8 Status/Identity</strong></td><td><em>&ldquo;I&rsquo;m the kind of person who&hellip;&rdquo;</em></td><td>Premium/Elite tiers as identity markers</td></tr>
+  </tbody>
+</table>
+
+<h3>Engagement Drivers &mdash; These Make People Open Every Email</h3>
+
+<table>
+  <thead>
+    <tr><th>Driver</th><th>The Voice in Their Head</th><th>How Atlas Delivers</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>#9 Entertainment</strong></td><td><em>&ldquo;I genuinely enjoy reading this.&rdquo;</em></td><td>Dry humor, strong opening lines, narrative arc</td></tr>
+    <tr><td><strong>#10 Actionability</strong></td><td><em>&ldquo;Tell me exactly what to do.&rdquo;</em></td><td>Real AI trades with tickers, scores, sizing</td></tr>
+    <tr><td><strong>#11 Portfolio Mgmt</strong></td><td><em>&ldquo;Help me manage what I own.&rdquo;</em></td><td>Ongoing position tracking + regime alerts</td></tr>
+    <tr><td><strong>#12 Macro Clarity</strong></td><td><em>&ldquo;Help me understand the chaos.&rdquo;</em></td><td>Market regime framework + behavioral context</td></tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <div class="callout-title">Critical Insight</div>
+  <p>The highest-revenue newsletters activate multiple drivers simultaneously. Stansberry = Fear + Conviction + Actionability + Status. Motley Fool = Greed + Education + Community + Time Savings. <strong>We combine all twelve</strong> through Atlas&rsquo;s emotional intelligence and the depth of our tier structure.</p>
+</div>
+
+<hr class="divider">
+
+<!-- ═══ COGNITIVE BIASES ═══ -->
+<h2>Cognitive Biases We Address</h2>
+<p>Most financial newsletters <em>exploit</em> cognitive biases. We <em>address</em> them. This is Atlas&rsquo;s most differentiated trait and the foundation of our ethical positioning.</p>
+
+<ul>
+  <li><strong>Loss Aversion:</strong> Subscribers feel losses ~2x more intensely than equivalent gains. Atlas never hides losses and frames drawdowns historically: &ldquo;This is the 3rd drawdown of 10%+ since inception; all prior recovered within X months.&rdquo;</li>
+  <li><strong>Disposition Effect:</strong> Investors hold losers too long, sell winners too early. Atlas proactively flags this: &ldquo;This position has declined 30%. Our model suggests the thesis changed &mdash; consider whether you&rsquo;re holding due to anchoring on purchase price.&rdquo; <strong>No competitor does this.</strong></li>
+  <li><strong>Overconfidence:</strong> After winning streaks, investors increase risk. Atlas cautions during bull runs: &ldquo;Winning streaks feel permanent. They aren&rsquo;t.&rdquo;</li>
+  <li><strong>Recency Bias:</strong> Subscribers anchor to last quarter, not 5-year track record. Atlas always shows long-term performance as the default, with recent results secondary.</li>
+  <li><strong>Anchoring:</strong> AI scores become reference points. We show confidence intervals, not just point estimates. &ldquo;91/100 (high conviction)&rdquo; not &ldquo;this stock is going up.&rdquo;</li>
+  <li><strong>Herding:</strong> When the crowd is extreme, Atlas surfaces contrarian signals and pairs crowd data with independent AI analysis.</li>
+  <li><strong>Narrative Fallacy:</strong> Every Atlas narrative is accompanied by probabilistic assessment. &ldquo;We believe this likely (65% confidence) based on these 4 data points.&rdquo; Never stories without alternatives.</li>
+</ul>
+
+<hr class="divider">
+
+<!-- ═══ HOW WE WRITE ═══ -->
+<h2>How We Write to Them: Atlas&rsquo;s Voice</h2>
+
+<h3>The Six Core Traits</h3>
+
+<table>
+  <thead>
+    <tr><th>Trait</th><th>What It Means in Practice</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Analytically Rigorous</strong></td><td>Data first, always. Never speculation without evidence. Every claim backed by a number.</td></tr>
+    <tr><td><strong>Quietly Confident</strong></td><td>Conviction without arrogance. Uses probability, not certainty. &ldquo;Our models suggest&rdquo; not &ldquo;you should buy.&rdquo;</td></tr>
+    <tr><td><strong>Emotionally Intelligent</strong></td><td>Reads the market mood and adjusts. Protective during crashes, exploratory during rallies, measured during uncertainty.</td></tr>
+    <tr><td><strong>Dry Humor</strong></td><td>Witty but never forced. One smile per email, maximum. The humor earns trust by showing self-awareness.</td></tr>
+    <tr><td><strong>Radically Honest</strong></td><td>Shows losses. Admits uncertainty. Says &ldquo;I was wrong.&rdquo; Single biggest trust differentiator vs. every competitor.</td></tr>
+    <tr><td><strong>Protective</strong></td><td>Coaches against destructive behavior. Genuinely cares about subscriber outcomes, not just engagement metrics.</td></tr>
+  </tbody>
+</table>
+
+<h3>Tone Calibration by Market Regime</h3>
+<p>Atlas doesn&rsquo;t use the same voice in every market. The emotional register shifts with conditions. No competitor does this, and it&rsquo;s deeply felt by subscribers experiencing those conditions in real time.</p>
+
+<table>
+  <thead>
+    <tr><th>Regime</th><th>Emotional Register</th><th>Opening Line Feels Like&hellip;</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="regime-tag bullish">Bullish</span></td>
+      <td>Energetic, exploratory</td>
+      <td><em>&ldquo;Three sectors just hit 52-week highs. Let&rsquo;s find the ones with room to run.&rdquo;</em></td>
+    </tr>
+    <tr>
+      <td><span class="regime-tag neutral">Neutral</span></td>
+      <td>Curious, balanced</td>
+      <td><em>&ldquo;Money is moving but not leaving. Here&rsquo;s where it&rsquo;s going.&rdquo;</em></td>
+    </tr>
+    <tr>
+      <td><span class="regime-tag cautious">Cautious</span></td>
+      <td>Measured, risk-aware</td>
+      <td><em>&ldquo;Breadth narrowed again yesterday. That&rsquo;s the third time in two weeks.&rdquo;</em></td>
+    </tr>
+    <tr>
+      <td><span class="regime-tag correction">Correction</span></td>
+      <td>Steady, reassuring</td>
+      <td><em>&ldquo;Your portfolio is down. Your instincts say sell. Let&rsquo;s talk about that.&rdquo;</em></td>
+    </tr>
+    <tr>
+      <td><span class="regime-tag crash">Crash</span></td>
+      <td>Calm, direct, anchoring</td>
+      <td><em>&ldquo;A note about your brain during days like this.&rdquo;</em></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>What Atlas Never Does</h3>
+<ul class="never-list">
+  <li>Uses exclamation marks excessively</li>
+  <li>Says &ldquo;to the moon,&rdquo; &ldquo;diamond hands,&rdquo; &ldquo;HODL&rdquo;</li>
+  <li>Makes guarantees about future performance</li>
+  <li>Uses countdown timers or fake urgency</li>
+  <li>Talks down to the reader</li>
+  <li>Gives personalized investment advice</li>
+  <li>Hides losses or cherry-picks track record</li>
+  <li>Sends standalone upsell emails</li>
+</ul>
+
+<h3>The Anti-Stansberry Positioning</h3>
+<p>Our competitors built empires on fear-based hype marketing, 77-minute video sales letters, and 28&ndash;49 emails per week. Stansberry&rsquo;s #1 documented subscriber complaint is promotional email spam. Our positioning is the opposite: one email per day, same time, every time. No standalone promotions. No manufactured urgency. The content sells itself because the AI&rsquo;s track record is visible to everyone. We don&rsquo;t need to convince &mdash; we need to <em>show</em>.</p>
+
+<hr class="divider">
+
+<!-- ═══ ACQUISITION ═══ -->
+<h2>How We Acquire Them</h2>
+
+<h3>Primary Acquisition Channels</h3>
+
+<div class="channel-grid">
+  <div class="channel-card">
+    <div class="channel-num">1</div>
+    <h4>Live Portfolio Scoreboard</h4>
+    <p>A public web page showing real AI portfolio performance in real time. Our single most powerful acquisition tool &mdash; verifiable proof, not marketing claims.</p>
+  </div>
+  <div class="channel-card">
+    <div class="channel-num">2</div>
+    <h4>Social Clips</h4>
+    <p>30&ndash;60 second video clips of the scoreboard for Facebook, YouTube, TikTok. Portfolio performance is inherently visual and shareable.</p>
+  </div>
+  <div class="channel-card">
+    <div class="channel-num">3</div>
+    <h4>Lead Magnets</h4>
+    <p>AI-generated reports refreshed weekly: &ldquo;Top 10 AI-Scored Stocks This Month,&rdquo; &ldquo;Stocks the AI Is Avoiding.&rdquo; Capture emails and demonstrate scoring engine value.</p>
+  </div>
+  <div class="channel-card">
+    <div class="channel-num">4</div>
+    <h4>SEO Articles</h4>
+    <p>AI-generated articles targeting stock ticker keywords. We compete with fresher, AI-scored content updated daily.</p>
+  </div>
+  <div class="channel-card">
+    <div class="channel-num">5</div>
+    <h4>Referral Program</h4>
+    <p>Morning Brew model. Earn a Premium trial by referring 3 friends. Creates viral loops among the Curious Learner segment.</p>
+  </div>
+  <div class="channel-card">
+    <div class="channel-num">6</div>
+    <h4>CPA Advertising</h4>
+    <p>At 10K+ subscribers: promote other publishers&rsquo; products at $100&ndash;$250/sale commission. Funds growth before Premium revenue materializes.</p>
+  </div>
+</div>
+
+<div class="callout warning">
+  <div class="callout-title">What We Do NOT Do</div>
+  <p>No 77-minute video sales letters (VSLs). No fear-based acquisition campaigns (&ldquo;The End of America&rdquo;). No fake scarcity. No manufactured urgency. Our acquisition is built on showing real AI performance, not selling fear narratives.</p>
+</div>
+
+<h3>Acquisition Economics</h3>
+
+<div class="metrics-grid">
+  <div class="metric-card">
+    <div class="metric-value">~$120</div>
+    <div class="metric-label">Target CAC</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value">10%</div>
+    <div class="metric-label">Free&rarr;Premium</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value">15%</div>
+    <div class="metric-label">Premium&rarr;Pro</div>
+  </div>
+  <div class="metric-card">
+    <div class="metric-value">3x+</div>
+    <div class="metric-label">LTV:CAC by Yr 2</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ═══ RETENTION ═══ -->
+<h2>How We Retain Them</h2>
+
+<h3>The Content Architecture</h3>
+<p>One email per day. Same time (6:30 AM ET). Every day. No exceptions. This creates a habit loop &mdash; subscribers feel anxious missing an issue because they might miss a trend. The daily email is 5 minutes to read. The Sunday Deep Dive is 10&ndash;15 minutes and serves as the anchor of the week.</p>
+
+<h4>Daily Structure</h4>
+<ul>
+  <li><strong>Opening Line:</strong> Hooks immediately. Tone-matched to market regime.</li>
+  <li><strong>Three Things:</strong> Three things that matter today. Even a 30-second skim delivers value.</li>
+  <li><strong>Market Regime:</strong> Traffic light indicator &mdash; bullish, cautious, or correction.</li>
+  <li><strong>Featured Content:</strong> Rotates daily &mdash; Mon: Week Ahead, Tue: Trend Spotlight, Wed: Stock Analysis, Thu: Education, Fri: Risk Check, Sun: Deep Dive.</li>
+  <li><strong>The Number:</strong> One data point that matters. Memorable, shareable, conversation-starting.</li>
+  <li><strong>Atlas Footnote:</strong> Personal sign-off that builds parasocial connection with the AI.</li>
+</ul>
+
+<h3>The Welcome Sequence (Days 0&ndash;10)</h3>
+
+<div class="callout">
+  <div class="callout-title">Critical Rule</div>
+  <p>The welcome sequence is NOT an upsell funnel. Days 1&ndash;9 contain ZERO selling. The only job is to make the subscriber feel brilliant for signing up. Day 10 earns the right to make one gentle invitation because of 9 days of pure value delivery.</p>
+</div>
+
+<div class="welcome-grid">
+  <div class="welcome-step">
+    <div class="day-label">Day 0</div>
+    <div class="day-content">
+      <div class="theme">Welcome</div>
+      <div class="desc">Atlas introduces itself with an insight, not a bio. Arrives within 90 seconds of signup.</div>
+    </div>
+  </div>
+  <div class="welcome-step">
+    <div class="day-label">Day 1</div>
+    <div class="day-content">
+      <div class="theme">First Daily</div>
+      <div class="desc">Their first full Signal. Must be one of the best issues ever written. Non-negotiable.</div>
+    </div>
+  </div>
+  <div class="welcome-step">
+    <div class="day-label">Day 3</div>
+    <div class="day-content">
+      <div class="theme">Atlas Score Explainer</div>
+      <div class="desc">Short explainer woven into daily: &ldquo;MRVL is scoring 94/100. Here&rsquo;s what that means.&rdquo;</div>
+    </div>
+  </div>
+  <div class="welcome-step">
+    <div class="day-label">Day 5</div>
+    <div class="day-content">
+      <div class="theme">Track Record</div>
+      <div class="desc">Wins AND losses. &ldquo;12 stocks, 9 up, 3 down. Here&rsquo;s every one.&rdquo; The trust moment.</div>
+    </div>
+  </div>
+  <div class="welcome-step">
+    <div class="day-label">Day 7</div>
+    <div class="day-content">
+      <div class="theme">Sunday Deep Dive</div>
+      <div class="desc">Deepest, most valuable content of first week. The email they save, re-read, share.</div>
+    </div>
+  </div>
+  <div class="welcome-step">
+    <div class="day-label">Day 10</div>
+    <div class="day-content">
+      <div class="theme">Soft Invitation</div>
+      <div class="desc">One gentle ask: &ldquo;If useful, Premium gives you [X]. If not, free Signal isn&rsquo;t going anywhere.&rdquo;</div>
+    </div>
+  </div>
+</div>
+
+<h3>Embedded Upsell Mechanisms (Post Day 10)</h3>
+<p>All upselling is embedded naturally within content. Never standalone. Never aggressive. Max 10 touchpoints/week, of which 8 must be &ldquo;very low&rdquo; intensity.</p>
+
+<ul>
+  <li><strong>Score Lock</strong> (Wed + Sun) &mdash; thesis visible, score breakdown locked for Premium.</li>
+  <li><strong>Sunday Proof</strong> &mdash; &ldquo;This is what Premium subscribers got this week.&rdquo; Shows value, doesn&rsquo;t sell.</li>
+  <li><strong>Track Record Depth</strong> &mdash; free gets summary, paid gets trade-by-trade access.</li>
+  <li><strong>Regime Tease</strong> &mdash; one line under traffic light, daily. Hints at deeper regime analysis.</li>
+  <li><strong>Referral Backdoor</strong> &mdash; earn Premium trial by referring 3 friends.</li>
+  <li><strong>SMS Milestone</strong> &mdash; Pro alert: &ldquo;Atlas&rsquo;s pick is up 15%.&rdquo; Triggers upgrade curiosity.</li>
+  <li><strong>Win-Back</strong> &mdash; 30-day inactive, cancellation save, and 60-day reactivation sequences.</li>
+</ul>
+
+<h3>Churn Prevention</h3>
+
+<table>
+  <thead>
+    <tr><th>Churn Trigger</th><th>Why It Happens</th><th>How We Counter</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Underperformance</strong></td><td>Recency bias; anchor to last quarter</td><td>Always show long-term first; frame drawdowns historically</td></tr>
+    <tr><td><strong>Too many promos</strong></td><td>Stansberry&rsquo;s #1 complaint</td><td>Zero standalone promotions; all embedded</td></tr>
+    <tr><td><strong>Trust erosion</strong></td><td>Hiding losses, cherry-picking</td><td>Radical transparency; show wins AND losses</td></tr>
+    <tr><td><strong>Irrelevant content</strong></td><td>Doesn&rsquo;t match needs</td><td>Tier-based visibility; education + actionability</td></tr>
+  </tbody>
+</table>
+
+<hr class="divider">
+
+<!-- ═══ TIERS ═══ -->
+<h2>The Tier Structure: One Email, Five Experiences</h2>
+<p>Every subscriber gets the same email at the same time. What differs is how much they can see. Free is a complete product. Each paid tier reveals more of the AI&rsquo;s actual portfolio data.</p>
+
+<div class="callout">
+  <div class="callout-title">The Key Rule for Lock Blocks</div>
+  <p>Show what they&rsquo;re missing, not just that something is locked. &ldquo;Premium subscribers saw Atlas&rsquo;s full MRVL analysis &mdash; Score: 94/100, risk flags: none&rdquo; beats &ldquo;Upgrade to Premium&rdquo; every time.</p>
+</div>
+
+<div class="tier-row">
+  <div class="tier-name">Free</div>
+  <div class="tier-price">$0</div>
+  <div class="tier-desc">Full daily briefing, Three Things, market regime traffic light, weekly scoreboard summary, daily P&amp;L totals</div>
+</div>
+<div class="tier-row">
+  <div class="tier-name">Premium</div>
+  <div class="tier-price">$149/yr</div>
+  <div class="tier-desc">Everything Free + full trade history (bought/sold/when) + Atlas Score breakdowns on Wed/Sun</div>
+</div>
+<div class="tier-row">
+  <div class="tier-name">Pro</div>
+  <div class="tier-price">$499/yr</div>
+  <div class="tier-desc">Everything Premium + current positions held + real-time SMS trade alerts + options education</div>
+</div>
+<div class="tier-row">
+  <div class="tier-name">Elite</div>
+  <div class="tier-price">$2,500/yr</div>
+  <div class="tier-desc">Everything Pro + exact position sizing + options overlay + weekly video briefing</div>
+</div>
+<div class="tier-row">
+  <div class="tier-name">Managed</div>
+  <div class="tier-price">$50K&ndash;$400K</div>
+  <div class="tier-desc">The AI manages your capital directly. No newsletter needed.</div>
+</div>
+
+<h3>Revenue Targets</h3>
+<table>
+  <thead>
+    <tr><th>Period</th><th>Free</th><th>Premium</th><th>Pro</th><th>Elite</th><th>ARR</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Month 6</td><td>10,000</td><td>500</td><td>50</td><td>0</td><td>$99K</td></tr>
+    <tr><td>Year 1</td><td>50,000</td><td>5,000</td><td>750</td><td>50</td><td>$1.49M</td></tr>
+    <tr><td>Year 2</td><td>100,000</td><td>15,000</td><td>2,500</td><td>200</td><td>$4.23M</td></tr>
+    <tr><td>Year 3</td><td>200,000</td><td>30,000</td><td>5,000</td><td>500</td><td>$10.72M</td></tr>
+  </tbody>
+</table>
+<p><strong>Margin target:</strong> 60%+ net (vs. Stansberry&rsquo;s 22.8%) due to AI-native cost structure. No human editors. No trading desk. No per-publication compliance. One AI, one pipeline, one repo.</p>
+
+<hr class="divider">
+
+<!-- ═══ UNDERSERVED ═══ -->
+<h2>Underserved Segments to Watch</h2>
+<p>Not our launch audience, but significant expansion opportunities once the core product is running:</p>
+
+<ul>
+  <li><strong>Female Investors:</strong> 51% of the US population, control $10T+ in assets, but estimated &lt;30% of newsletter subscribers. The industry is overwhelmingly male-coded. Atlas&rsquo;s emotionally intelligent, goal-oriented tone naturally appeals without a separate product.</li>
+  <li><strong>Passive-Curious Investors:</strong> 40&ndash;60% of US investors hold primarily index funds but wonder &ldquo;should I put 10% into picks?&rdquo; Massive accessible entry point. Our free tier is built for this transition.</li>
+  <li><strong>International Investors:</strong> 3&ndash;5x larger than US base. India alone has 100M+ brokerage accounts. Current newsletters are overwhelmingly US-centric.</li>
+  <li><strong>Crypto-Native Investors:</strong> ~50M global crypto wallets. High LTV if retained as they diversify into equities. Comfortable with AI; view traditional newsletters as &ldquo;boomer media.&rdquo;</li>
+  <li><strong>Gen Z / TikTok-Native:</strong> ~30M US Gen Z with brokerage accounts. Video-first expectations. Social scoreboard clips are our bridge.</li>
+</ul>
+
+<hr class="divider">
+
+<!-- ═══ PERFORMANCE METRICS ═══ -->
+<h2>How We Know It&rsquo;s Working</h2>
+
+<table>
+  <thead>
+    <tr><th>Metric</th><th>Target</th><th>Why This Number</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Open Rate</strong></td><td>&gt;50%</td><td>Morning Brew achieved this. Industry average is 20&ndash;30%.</td></tr>
+    <tr><td><strong>Click Rate</strong></td><td>&gt;5%</td><td>Indicates content drives action, not just reading.</td></tr>
+    <tr><td><strong>Unsubscribe Rate</strong></td><td>&lt;0.1%/send</td><td>Below this = content is valued, not tolerated.</td></tr>
+    <tr><td><strong>Free&rarr;Premium</strong></td><td>10%</td><td>1 in 10 free subscribers converts within 6 months.</td></tr>
+    <tr><td><strong>Premium&rarr;Pro</strong></td><td>15%</td><td>OTA upsell after Premium purchase.</td></tr>
+    <tr><td><strong>Annual Churn</strong></td><td>&lt;27%</td><td>Below industry average = compounding growth.</td></tr>
+    <tr><td><strong>Deliverability</strong></td><td>&gt;95% inbox</td><td>SPF/DKIM/DMARC + dedicated IP + list hygiene.</td></tr>
+    <tr><td><strong>NPS</strong></td><td>&gt;50</td><td>World-class. Subscribers become advocates.</td></tr>
+  </tbody>
+</table>
+
+<hr class="divider">
+
+<!-- ═══ CLOSING ═══ -->
+<h2>The One-Sentence Summary</h2>
+
+<div class="hero-quote">
+  <p>A stock-owning American, aged 28&ndash;65, earning $100K+, who is smart enough to know they need help, skeptical enough to demand proof, and busy enough to pay for it &mdash; and who will stay forever if we show them our losses as honestly as our wins.</p>
+</div>
+
+<p>That&rsquo;s who Atlas writes for. Every word, every tone shift, every data point, every locked section &mdash; it all serves this person. Everything else is noise.</p>
+
+</div>
+</body>
+</html>
