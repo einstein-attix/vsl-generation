@@ -1,0 +1,16 @@
+{
+  "name": "tradealgo-vsl-production",
+  "version": "1.0.0",
+  "description": "TradeAlgo VSL Production System — automated video sales letter generation",
+  "type": "module",
+  "scripts": {
+    "generate-audio": "node src/generate-audio.mjs",
+    "generate-video": "node src/generate-video.mjs",
+    "compress": "node src/compress.mjs"
+  },
+  "dependencies": {
+    "ffmpeg-static": "^5.2.0",
+    "node-edge-tts": "^1.2.10",
+    "puppeteer-core": "^24.0.0"
+  }
+}

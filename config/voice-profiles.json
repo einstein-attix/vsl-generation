@@ -1,0 +1,41 @@
+{
+  "profiles": {
+    "andrew-authority": {
+      "voice": "en-US-AndrewNeural",
+      "rate": "-5%",
+      "pitch": "+0Hz",
+      "personality": ["Warm", "Confident", "Authentic", "Honest"],
+      "bestFor": "High-ticket financial VSLs, proof-led content, trust-building",
+      "notes": "Top pick for $25K-$100K products. Warm confidence without hype."
+    },
+    "christopher-formal": {
+      "voice": "en-US-ChristopherNeural",
+      "rate": "+0%",
+      "pitch": "-1Hz",
+      "personality": ["Reliable", "Authority"],
+      "bestFor": "Institutional credibility, formal presentations",
+      "notes": "Backup if Andrew sounds too casual. More formal authority."
+    },
+    "guy-energetic": {
+      "voice": "en-US-GuyNeural",
+      "rate": "-8%",
+      "pitch": "-2Hz",
+      "personality": ["Passion"],
+      "bestFor": "Data-heavy scripts needing energy",
+      "notes": "Wildcard. Slowed down and deepened to prevent over-animation."
+    }
+  },
+  "research": {
+    "genderRationale": "Male voice for high-ticket finance: authority + identification with target avatar (male, 35-55, $150K-$400K income)",
+    "accentRationale": "Standard American English — clean, educated, un-regional (Bloomberg/NPR tone)",
+    "ageRationale": "35-50 voice: successful + modern. Not too young (lacks authority) or old (dated for AI positioning)",
+    "paceRationale": "140-155 WPM average. Slow to 130 for data reveals. Brisk to 155 for objections. Never above 160.",
+    "toneRationale": "Calm authority > urgent > warm. Private briefing from a confident insider.",
+    "sources": [
+      "Harris Interactive: 48% say male voices sound 'more forceful'",
+      "Stansberry/Agora pattern: overwhelmingly male narrators for financial VSLs",
+      "1991 persuasion study: slower speech more persuasive when audience already agrees",
+      "Smith & Shaffer 1976: faster speakers rated 30% more competent in business contexts"
+    ]
+  }
+}

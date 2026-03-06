@@ -1,0 +1,14 @@
+node_modules/
+*.mp3
+*.mp4
+*.wav
+*.png
+*.jpg
+audio/
+video/
+frames/
+_tmp/
+manifest.json
+*.list
+/tmp/
+.DS_Store

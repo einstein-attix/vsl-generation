@@ -1,0 +1,15 @@
+{
+  "voice": "en-US-AndrewNeural",
+  "lang": "en-US",
+  "rate": "-5%",
+  "pitch": "+0Hz",
+  "resolution": { "width": 1920, "height": 1080 },
+  "audioBitrate": "48k",
+  "videoPreset": "medium",
+  "videoCrf": 23,
+  "compressedVideoBitrate": "20k",
+  "compressedAudioBitrate": "48k",
+  "ttsTimeout": 30000,
+  "slideAnimationWaitMs": 1000,
+  "rateLimitMs": 300
+}
