@@ -173,7 +173,7 @@ But here's what happened next that nobody expected.
 
 `[tone: building anticipation — don't reveal yet]`
 
-When they first ran the AI on live market data — real capital, real trades, placed through a brokerage partner — the team thought there was an error.
+When they first ran the AI on live market data — tracking real portfolios — the team thought there was an error.
 
 The numbers were too good. They ran the analysis again. Same result. They checked the data inputs. They audited the trade log. Everything checked out.
 
@@ -225,7 +225,7 @@ That's what this AI does. Except it doesn't take a team of fifty. It does it alo
 
 An AI analyzing 86 stocks across 15 sectors — with a signal track record you can verify yourself.
 
-Not a robo-advisor allocating to six ETFs. Not a chatbot picking stocks. [pause] A complete AI signal publication platform — with a documented track record you can verify — starting at $25,000.
+Not a robo-advisor allocating to six ETFs. Not a chatbot picking stocks. [pause] A complete AI signal publication platform — with a documented track record you can verify — starting at $8,333 per year.
 
 ---
 
@@ -431,7 +431,7 @@ Here's the reality — a team of ten human analysts couldn't process this volume
 
 This is not a stock screener. This is not a robo-advisor buying 6 ETFs.
 
-This is institutional-grade AI signal generation — the kind of analysis that drives the most sophisticated investment strategies on Wall Street — now available as a signal publication, starting at $25,000.
+This is institutional-grade AI signal generation — the kind of analysis that drives the most sophisticated investment strategies on Wall Street — now available as a signal publication, starting at $8,333 per year.
 
 ---
 
@@ -452,7 +452,7 @@ So how do you actually access this? [pause] It's simpler than you'd expect.
 
 Here's how it works. 3 steps.
 
-Step one: you choose your tier. Atlas at $25,000. Titan at $50,000. Or Everest at $100,000. Each tier gives you access to AI-signal-driven portfolios calibrated to different risk levels — high growth, balanced, and defensive.
+Step one: you choose your tier. Atlas, Titan, or Everest. Each tier gives you access to AI-signal-driven portfolios calibrated to different risk levels — high growth, balanced, and defensive.
 
 ---
 
@@ -462,7 +462,7 @@ Step two: you subscribe to the signal publication. You get immediate access to t
 
 [pause]
 
-TradeAlgo publishes signals. That's it. Your money stays in your own brokerage account. TradeAlgo never touches it. Ever.
+TradeAlgo publishes signals. You decide how to act on them. If you prefer hands-free execution, we work with a brokerage partner who can execute the signals in your account automatically. But that's entirely optional — the core product is the AI signals and reasoning.
 
 ---
 
@@ -495,45 +495,55 @@ That's the system. No complexity. No guesswork. Just data-driven signal publicat
 
 ---
 
-**[SLIDE 47 — 14:00]** Tier comparison.
+**[SLIDE 47 — 14:00]** Price anchor slide.
 
-`[tone: presenting options — premium, not pushy]`
+`[tone: calm, confident, peer-to-peer — the proof section did the heavy lifting]`
 
-3 tiers. Each one gives you access to AI-powered signal portfolios at a different scale.
+So at this point, you've seen exactly what this AI does. You've seen the signals. You've seen the returns. And I know what you're thinking: "What does something like this cost?"
 
----
+Let me put this in perspective. If you wanted to build an AI system like this from scratch, you'd need machine learning engineers — that's $200,000 a year, minimum. Institutional-grade data feeds — another $30,000 to $50,000 a year. Cloud computing for the models? $50,000 a year. We've invested over *twelve million dollars* and nearly a decade of development into what you're looking at right now.
 
-**[SLIDE 48 — 14:15]** Atlas card.
-
-Atlas is your starting point. $25,000. 3 portfolios — high growth, balanced, and defensive. The high-growth portfolio returned 43.9 percent in the past year.
-
-This is where you access the AI's signal publications with a meaningful but manageable allocation.
+But you don't pay twelve million dollars. You don't pay one million. Here's how it works.
 
 ---
 
-**[SLIDE 49 — 14:40]** Titan card.
+**[SLIDE 48 — 14:30]** Atlas card — per-year pricing.
 
-Titan increases the investment to $50,000 and gives you broader diversification — up to 40 stocks per portfolio. Dynamic Upside returned 45.5 percent.
+Atlas gives you the core AI signal suite. 3 portfolios — high growth, balanced, and defensive. Everything you need to start acting on high-probability signals powered by our engine.
+
+Your investment for Atlas is **$8,333 per year.**
+
+Let me say that again. For $8,333 a year, you get access to an AI system that took twelve million dollars to build. That's $23 a day. You probably spend more than that on lunch.
+
+And you'll receive roughly 200 actionable signals per year. That's about $42 per signal — each one designed to generate hundreds, sometimes thousands, of dollars in returns.
 
 ---
 
-**[SLIDE 50 — 14:55]** Everest card with glow.
+**[SLIDE 49 — 15:00]** Titan card — per-year pricing.
 
-And Everest. This is the flagship. $100,000. 5 portfolios instead of 3. Up to 51 holdings per portfolio. The deepest diversification, the broadest sector coverage, and the AI's most sophisticated signal set.
+Titan is for the serious investor who wants the full AI arsenal — broader diversification, up to 40 stocks per portfolio. Dynamic Upside returned 45.5 percent.
+
+Titan is **$16,667 per year.** About $46 a day. Less than dinner for two — for an edge that most institutional desks would pay millions to access.
+
+---
+
+**[SLIDE 50 — 15:20]** Everest card — per-year pricing.
 
 `[pace: slow — the flagship reveal]`
 
+And Everest. This is the flagship. 5 portfolios instead of 3. Up to 51 holdings per portfolio. The deepest diversification, the broadest sector coverage, and the AI's most sophisticated signal set.
+
 Momentum Ascent — the top performer at plus 52.8 percent — is an Everest-exclusive portfolio.
+
+Everest is **$33,333 per year.** That's $91 a day for what is, frankly, an institutional-grade trading intelligence system.
 
 ---
 
-**[SLIDE 51 — 15:25]** 3-year license.
+**[SLIDE 51 — 15:50]** Rate lock — 3-year as benefit.
 
-All 3 tiers are 3-year licenses. And there's a reason for that. The AI's signals are designed to compound over market cycles. Short-term volatility is noise. 3 years gives the system room to navigate full market cycles — earnings seasons, Fed decisions, corrections, and rallies.
+Now — here's what makes this even better. When you join today, you *lock in your rate* for three full years. We will never raise your price during that period. As the AI gets smarter, as we add new models, as the signals get even more precise — your rate stays exactly the same. You're grandfathered in.
 
-[pause]
-
-This is a commitment to a data-driven process — the same way institutional investors think about time horizons.
+Three years also matters for another reason. Compounding. This system is designed to build wealth over time. The AI's signals need time to navigate full market cycles — earnings seasons, Fed decisions, corrections, and rallies. A 3-year window is how institutional investors think — and it's why the results compound.
 
 ---
 
@@ -556,15 +566,13 @@ Last month, the market pulled back. The AI's portfolios drew down 2 to 3.7 perce
 
 ---
 
-**[SLIDE 53 — 16:30]** "$25,000 is a significant commitment."
+**[SLIDE 53 — 16:30]** "$8,333 a year is a lot."
 
-"$25,000 is a significant commitment."
+"$8,333 a year is a lot."
 
-It is. And it should be — this is a serious investment, not a subscription.
+It is. And it should be — this is a serious signal publication, not a newsletter with vague tips.
 
-But here's what's important: this is your invested capital. It's your money, in your own brokerage account, guided by AI-generated signal publications. It's working for you.
-
-You're allocating $25,000 to a portfolio that returned up to 43.9 percent in its first year. Every dollar is invested. Every signal is published and documented. Every trade is verifiable.
+That's $23 a day. About $42 per signal. Each signal is designed to produce hundreds — sometimes thousands — in returns. Your subscription gives you access to 11 AI-powered signal portfolios, publishing detailed buy, sell, and hold signals with written reasoning, every single week. The top portfolio returned 43.9 percent in its first year.
 
 ---
 
@@ -572,7 +580,7 @@ You're allocating $25,000 to a portfolio that returned up to 43.9 percent in its
 
 "Is AI safe for investing?"
 
-The AI doesn't have a "buy" button on your account. It publishes signals. [pause] You decide whether and how to act on those signals through your own brokerage account. Your capital stays with you, not at TradeAlgo.
+The AI doesn't have a "buy" button on your account. It publishes signals. [pause] You decide whether and how to act on those signals. Your capital stays with you, not at TradeAlgo.
 
 And the AI's reasoning is documented and transparent — you can read exactly why it generated every signal. This is the most transparent AI-driven signal publication available to individual investors.
 
@@ -602,13 +610,13 @@ And its top portfolio returned plus 52.8 percent in a year. These are fundamenta
 
 ---
 
-**[SLIDE 57 — 18:35]** "3 years is a long commitment."
+**[SLIDE 57 — 18:35]** "Why 3 years?"
 
-"3 years is a long commitment."
+"Why 3 years?"
 
-The 3-year license is designed to align with how markets actually work. AI-driven portfolio strategies perform over full cycles, not weeks. Last month, high-risk portfolios drew down 3 to 4 percent. That's normal. Over a year, those same portfolios returned 43 to 52 percent.
+Two reasons. First, your rate is *locked in.* As the AI improves and we add new models, your price never increases. You're grandfathered in at today's rate.
 
-The AI's signals need time to navigate earnings seasons, Fed decisions, corrections, and rallies. A 3-year window is how institutional investors think — and it's why the results compound.
+Second, compounding. AI-driven strategies work over full market cycles, not weeks. Last month, high-risk portfolios drew down 3 to 4 percent. Over a year, those same portfolios returned 43 to 52 percent. Three years gives the system room to deliver its full potential.
 
 ---
 
@@ -635,7 +643,7 @@ TradeAlgo built the AI. They're a technology company — not a brokerage, not a 
 
 TradeAlgo is a signal publisher — like Motley Fool or Stansberry Research, but powered by AI. They publish trading signals. They never touch your money. They never manage your account. They never place a trade on your behalf.
 
-Your capital stays in your own brokerage account. TradeAlgo's only job is to publish the best AI-generated trading signals in the market — with full transparency and verifiable data.
+Your capital stays with you. TradeAlgo's only job is to publish the best AI-generated trading signals in the market — with full transparency and verifiable data.
 
 ---
 
