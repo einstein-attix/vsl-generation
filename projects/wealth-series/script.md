@@ -501,9 +501,9 @@ That's the system. No complexity. No guesswork. Just data-driven signal publicat
 
 So at this point, you've seen exactly what this AI does. You've seen the signals. You've seen the returns. And I know what you're thinking: "What does something like this cost?"
 
-Let me put this in perspective. If you wanted to build an AI system like this from scratch, you'd need machine learning engineers — that's $200,000 a year, minimum. Institutional-grade data feeds — another $30,000 to $50,000 a year. Cloud computing for the models? $50,000 a year. We've invested over *one hundred million dollars* and three years of intensive development into what you're looking at right now.
+Let me put this in perspective. If you wanted to build an AI system like this from scratch, you'd need machine learning engineers — that's $200,000 a year, minimum. Institutional-grade data feeds — another $30,000 to $50,000 a year. Cloud computing for the models? $50,000 a year. TradeAlgo raised over *one hundred million dollars* in capital — with one prime directive: building the most powerful AI trading system ever created. Three years of intensive development went into what you're looking at right now.
 
-But you don't pay one hundred million dollars. You don't pay one million. Here's how it works.
+But you do not pay one hundred million dollars. You don't pay one million. Here's how it works.
 
 ---
 
@@ -513,7 +513,7 @@ Atlas gives you the core AI signal suite. 3 portfolios — high growth, balanced
 
 Your investment for Atlas is **$8,333 per year.**
 
-Let me say that again. For $8,333 a year, you get access to an AI system that took one hundred million dollars to build. That's $23 a day. You probably spend more than that on lunch.
+Let me say that again. For $8,333 a year, you get access to an AI system backed by one hundred million dollars in raised capital. That's $23 a day. You probably spend more than that on lunch.
 
 And you'll receive roughly 200 actionable signals per year. That's about $42 per signal — each one designed to generate hundreds, sometimes thousands, of dollars in returns.
 
