@@ -35,7 +35,7 @@ const PROJECT_DIR = path.resolve(ROOT, projectArg);
 const AUDIO_DIR = path.join(PROJECT_DIR, 'audio');
 const FRAMES_DIR = path.join(PROJECT_DIR, 'frames');
 const SLIDES_HTML = path.join(PROJECT_DIR, 'slides.html');
-const OUTPUT_MP4 = path.join(PROJECT_DIR, 'video', 'wealth-series-vsl.mp4');
+const OUTPUT_MP4 = path.join(PROJECT_DIR, 'video', 'wealth-series-vsl-hd.mp4');
 
 // Read manifest
 const manifest = JSON.parse(fs.readFileSync(path.join(AUDIO_DIR, 'manifest.json'), 'utf8'));
@@ -55,7 +55,7 @@ async function captureSlides() {
   });
 
   const page = await browser.newPage();
-  await page.setViewport({ width: defaults.resolution.width, height: defaults.resolution.height });
+  await page.setViewport({ width: defaults.resolution.width, height: defaults.resolution.height, deviceScaleFactor: 2 });
 
   await page.goto(`file://${SLIDES_HTML}`, { waitUntil: 'networkidle0', timeout: 30000 });
   await new Promise(r => setTimeout(r, 2000));
@@ -107,13 +107,14 @@ function buildVideo() {
     '-y',
     '-f', 'concat', '-safe', '0', '-i', concatFile,
     '-i', audioFile,
-    '-vf', `scale=${width}:${height}:force_original_aspect_ratio=decrease,pad=${width}:${height}:(ow-iw)/2:(oh-ih)/2`,
+    '-vf', `scale=${width}:${height}:flags=lanczos`,
     '-c:v', 'libx264',
     '-preset', defaults.videoPreset,
     '-crf', String(defaults.videoCrf),
     '-pix_fmt', 'yuv420p',
     '-c:a', 'aac',
     '-b:a', '128k',
+    '-ar', '44100',
     '-shortest',
     '-movflags', '+faststart',
     OUTPUT_MP4,

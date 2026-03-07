@@ -6,7 +6,7 @@
   "resolution": { "width": 1920, "height": 1080 },
   "audioBitrate": "48k",
   "videoPreset": "medium",
-  "videoCrf": 23,
+  "videoCrf": 18,
   "compressedVideoBitrate": "20k",
   "compressedAudioBitrate": "48k",
   "ttsTimeout": 30000,

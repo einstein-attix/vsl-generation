@@ -31,7 +31,7 @@ try {
 }
 
 const targetBits = maxSizeMB * 8 * 1024 * 1024;
-const audioBitrate = 48000;
+const audioBitrate = 128000;
 const videoBitrate = Math.floor((targetBits / durationSec - audioBitrate) * 0.9);
 
 console.log(`Duration: ${(durationSec / 60).toFixed(1)} min`);
@@ -42,7 +42,7 @@ console.log('Pass 1...');
 execFileSync(FFMPEG, [
   '-y', '-i', input,
   '-c:v', 'libx264', '-b:v', String(videoBitrate), '-preset', 'veryslow', '-pix_fmt', 'yuv420p',
-  '-c:a', 'aac', '-b:a', '48k', '-ar', '24000', '-ac', '1',
+  '-c:a', 'aac', '-b:a', '128k', '-ar', '44100',
   '-pass', '1', '-passlogfile', '/tmp/ffmpeg2pass', '-f', 'mp4', '/dev/null'
 ], { stdio: 'inherit', timeout: 600000 });
 
@@ -51,7 +51,7 @@ console.log('Pass 2...');
 execFileSync(FFMPEG, [
   '-y', '-i', input,
   '-c:v', 'libx264', '-b:v', String(videoBitrate), '-preset', 'veryslow', '-pix_fmt', 'yuv420p',
-  '-c:a', 'aac', '-b:a', '48k', '-ar', '24000', '-ac', '1',
+  '-c:a', 'aac', '-b:a', '128k', '-ar', '44100',
   '-pass', '2', '-passlogfile', '/tmp/ffmpeg2pass', '-movflags', '+faststart', output
 ], { stdio: 'inherit', timeout: 600000 });
 
