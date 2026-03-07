@@ -16,7 +16,9 @@
 - `[pace: brisk]` = 155–160 WPM for momentum
 - `[tone: X]` = shift in emotional register
 
-**Compliance note:** TradeAlgo is a technology company that builds AI signal-generation systems. TradeAlgo does NOT manage money, provide investment advice, or hold client funds. A separate, independent RIA partner manages client accounts and executes trades. This script does NOT position TradeAlgo against financial advisors, criticize advisory services, or imply that TradeAlgo replaces advisory relationships.
+**Positioning note:** TradeAlgo is a signal publishing company that builds AI signal-generation systems. TradeAlgo does NOT manage money, provide investment advice, or hold client funds. TradeAlgo publishes AI-generated trading signals; how subscribers act on those signals is entirely up to them. This script does NOT position TradeAlgo against financial advisors, criticize advisory services, or imply that TradeAlgo replaces advisory relationships.
+
+**Banned words (do not use anywhere below this header):** securities, registered investment advisor, RIA, fiduciary, custodian, qualified custodian, SEC, regulated, compliance, manages client accounts, executes trades, three-entity structure.
 
 **Emotional arc:** INTRIGUE (0-2) → CURIOSITY (2-5) → FASCINATION (5-10) → BELIEF (10-15) → DESIRE (15-18) → CONVICTION (18-22)
 
@@ -49,11 +51,11 @@ Not a backtest. Not a simulation. Not a projection.
 
 ---
 
-**[SLIDE 4 — 0:15]** Portfolio dashboard — tickers, allocations, sector breakdowns. 86 securities visible. Data density communicates authenticity.
+**[SLIDE 4 — 0:15]** Portfolio dashboard — tickers, allocations, sector breakdowns. 86 stocks visible. Data density communicates authenticity.
 
 `[tone: genuine — like sharing something remarkable over dinner]`
 
-This is what an AI — a real AI, not a marketing gimmick — produced across 86 securities and 15 sectors over the last twelve months. Every trade executed by a registered investment advisor. Every signal documented.
+This is what an AI — a real AI, not a marketing gimmick — produced across 86 stocks and 15 sectors over the last twelve months. Every signal published. Every trade documented.
 
 ---
 
@@ -72,7 +74,7 @@ But first — you need to understand the problem this AI was built to solve.
 
 ---
 
-**[SLIDE 6 — 0:30]** "86 securities. 15 sectors. Thousands of data points. Every single week."
+**[SLIDE 6 — 0:30]** "86 stocks. 15 sectors. Thousands of data points. Every single week."
 
 `[tone: setting a scene — drawing the viewer in]`
 
@@ -100,7 +102,7 @@ Now imagine doing that *every week.* Fifty-two weeks a year. Without missing one
 
 `[tone: honest acknowledgment]`
 
-It's not possible. Not for one person. Not for a team of ten. The data moves too fast, across too many securities, with too many interdependencies.
+It's not possible. Not for one person. Not for a team of ten. The data moves too fast, across too many stocks, with too many interdependencies.
 
 This isn't a criticism of human intelligence. It's a recognition of a simple truth: modern markets have outgrown what any human can consistently process.
 
@@ -139,11 +141,11 @@ Three years ago, a team of engineers and data scientists asked a deceptively sim
 
 **[SLIDE 12 — 2:10]** "What if an AI could analyze every signal — across every sector — and explain its reasoning? In writing. Every week."
 
-What if an AI could evaluate every security in a diversified portfolio — across every sector — analyze dozens of technical and fundamental indicators — generate actionable trading signals — and then explain its reasoning, in writing, for every single decision?
+What if an AI could evaluate every stock in a diversified portfolio — across every sector — analyze dozens of technical and fundamental indicators — generate actionable trading signals — and then explain its reasoning, in writing, for every single decision?
 
 [pause]
 
-Not a black box. Not "trust the algorithm." An AI that shows its work. Like an institutional analyst writing a research note — except it does it for 86 securities. Every week. Without fail.
+Not a black box. Not "trust the algorithm." An AI that shows its work. Like an institutional analyst writing a research note — except it does it for 86 stocks. Every week. Without fail.
 
 ---
 
@@ -151,7 +153,7 @@ Not a black box. Not "trust the algorithm." An AI that shows its work. Like an i
 
 `[pace: building momentum]`
 
-So they built it. An AI system that evaluates 86 securities across 15 sectors. It analyzes RSI. CCI. Momentum indicators. Institutional flow. Macro conditions. Sector rotation patterns. And it generates rebalancing signals — adding, trimming, or exiting positions based on the data.
+So they built it. An AI system that evaluates 86 stocks across 15 sectors. It analyzes RSI. CCI. Momentum indicators. Institutional flow. Macro conditions. Sector rotation patterns. And it generates rebalancing signals — adding, trimming, or exiting positions based on the data.
 
 ---
 
@@ -171,13 +173,13 @@ But here's what happened next that nobody expected.
 
 `[tone: building anticipation — don't reveal yet]`
 
-When they first ran the AI on live market data — real capital, real trades, executed by a registered investment advisor — the team thought there was an error.
+When they first ran the AI on live market data — real capital, real trades, placed through a brokerage partner — the team thought there was an error.
 
 The numbers were too good. They ran the analysis again. Same result. They checked the data inputs. They audited the trade log. Everything checked out.
 
 [pause]
 
-The AI wasn't just generating signals. It was generating signals that, when executed by the RIA, produced returns they hadn't anticipated.
+The AI wasn't just generating signals. It was generating signals that, when acted on, produced returns they hadn't anticipated.
 
 ---
 
@@ -221,9 +223,9 @@ That's what this AI does. Except it doesn't take a team of fifty. It does it alo
 
 **[SLIDE 19 — 4:30]** Wealth Series dashboard teaser — Atlas, Titan, Everest names, allocation grids.
 
-An AI analyzing 86 securities across 15 sectors — with a signal track record you can verify yourself.
+An AI analyzing 86 stocks across 15 sectors — with a signal track record you can verify yourself.
 
-Not a robo-advisor allocating to six ETFs. Not a chatbot picking stocks. [pause] A complete AI signal platform — with a registered investment advisor executing every trade — starting at $25,000.
+Not a robo-advisor allocating to six ETFs. Not a chatbot picking stocks. [pause] A complete AI signal publication platform — with a documented track record you can verify — starting at $25,000.
 
 ---
 
@@ -242,29 +244,29 @@ Let me show you exactly what this looks like. And I'll start with the part that 
 
 `[tone: confident, sharing something premium]`
 
-The Wealth Series is a collection of 11 portfolios — powered by TradeAlgo's AI-generated trading signals — with every trade executed by a registered investment advisor.
+The Wealth Series is a collection of 11 portfolios — powered by TradeAlgo's AI-generated trading signals — with every signal published weekly and fully documented.
 
 ---
 
-**[SLIDE 22 — 5:20]** Three-entity diagram.
+**[SLIDE 22 — 5:20]** Publisher model diagram.
 
-And before I show you the numbers, let me be clear about the structure. Because the structure is what makes this trustworthy.
+And before I show you the numbers, let me be clear about how this works. Because the model is what makes this trustworthy.
 
-TradeAlgo builds and operates the AI. That's all they do. They generate the signals.
+TradeAlgo is a signal publishing company. That's all they do. They build the AI, and they publish the signals.
 
-A separate, regulated RIA partner manages the client accounts and executes the trades. Your capital is held at a qualified custodian — never at TradeAlgo, never at a startup. [pause] This is institutional infrastructure. Three separate entities, three separate roles.
+You subscribe to the signal publication. Every week, you receive the AI's analysis and trading signals — with full reasoning notes. How you act on those signals is entirely up to you. [pause] TradeAlgo never touches your money. TradeAlgo never manages anything. They publish signals. You decide.
 
 ---
 
 **[SLIDE 23 — 5:55]** Portfolio dashboard — tickers, sector breakdowns.
 
-The AI analyzes 86 unique securities across 15 sectors. Healthcare. Technology. Industrials. Consumer defensive. Basic materials. Real estate. Energy. And more.
+The AI analyzes 86 unique stocks across 15 sectors. Healthcare. Technology. Industrials. Consumer defensive. Basic materials. Real estate. Energy. And more.
 
 ---
 
 **[SLIDE 24 — 6:20]** AI reasoning panel with real excerpt.
 
-Every week, the AI evaluates every position. It scores each security using RSI, CCI, momentum indicators, sector rotation analysis, and macro conditions. It then generates rebalancing signals — adding, trimming, or exiting positions based on the data.
+Every week, the AI evaluates every position. It scores each stock using RSI, CCI, momentum indicators, sector rotation analysis, and macro conditions. It then generates rebalancing signals — adding, trimming, or exiting positions based on the data.
 
 ---
 
@@ -276,13 +278,13 @@ And here's what makes this unlike anything else.
 
 The AI writes its reasoning. For every single signal. In plain English.
 
-You can read *exactly* why it recommended buying, selling, or holding every position. It's like having a chief investment officer who writes you a detailed memo — every week — for every holding in your portfolio.
+You can read *exactly* why it recommended buying, selling, or holding every position. It's like having a chief analyst who writes you a detailed memo — every week — for every holding in the portfolio.
 
 ---
 
 **[SLIDE 26 — 7:15]** 11 portfolios, 3 tiers, 3 risk levels.
 
-11 portfolios across 3 tiers. Each tier offers high-growth, balanced, and defensive options. You choose the risk level. The AI generates the signals. The RIA executes. And you see everything.
+11 portfolios across 3 tiers. Each tier offers high-growth, balanced, and defensive options. You choose the risk level. The AI publishes the signals. You decide how to act. And you see everything.
 
 ---
 
@@ -290,7 +292,7 @@ You can read *exactly* why it recommended buying, selling, or holding every posi
 
 `[pace: brisk]`
 
-11 portfolios. 86 securities. 15 sectors. 52-plus signal cycles per year. Every trade executed by a regulated RIA. Every signal documented with institutional-grade reasoning.
+11 portfolios. 86 stocks. 15 sectors. 52-plus signal cycles per year. Every signal published with institutional-grade reasoning. Every trade documented.
 
 ---
 
@@ -413,7 +415,7 @@ The AI didn't panic. It didn't react. [pause] It had *anticipated.*
 
 `[pace: brisk — momentum building]`
 
-86 unique securities. 15 sectors. 55 rebalancing events documented in the last 5 weeks alone. 26 to 68 tickers adjusted per rebalance.
+86 unique stocks. 15 sectors. 55 rebalancing events documented in the last 5 weeks alone. 26 to 68 tickers adjusted per rebalance.
 
 ---
 
@@ -429,7 +431,7 @@ Here's the reality — a team of ten human analysts couldn't process this volume
 
 This is not a stock screener. This is not a robo-advisor buying 6 ETFs.
 
-This is institutional-grade AI signal generation — the kind of analysis that drives the most sophisticated investment strategies on Wall Street — accessible through a regulated RIA, starting at $25,000.
+This is institutional-grade AI signal generation — the kind of analysis that drives the most sophisticated investment strategies on Wall Street — now available as a signal publication, starting at $25,000.
 
 ---
 
@@ -456,17 +458,17 @@ Step one: you choose your tier. Atlas at $25,000. Titan at $50,000. Or Everest a
 
 **[SLIDE 43 — 12:25]** Capital flow diagram.
 
-Step two: your account is opened through our registered investment advisor partner. They handle compliance, custody, and regulatory requirements. Your capital is held at a qualified custodian — the same infrastructure used by institutional investors.
+Step two: you subscribe to the signal publication. You get immediate access to the AI's weekly signal reports — complete with reasoning notes, allocation targets, and performance tracking. The same institutional-grade analysis, delivered directly to you.
 
 [pause]
 
-Your money never sits on TradeAlgo's servers. Ever. TradeAlgo builds the AI. The RIA manages the accounts. A qualified custodian holds your capital. Three separate entities.
+TradeAlgo publishes signals. That's it. Your money stays in your own brokerage account. TradeAlgo never touches it. Ever.
 
 ---
 
 **[SLIDE 44 — 12:50]** Weekly experience mockup.
 
-Step three: the AI goes to work. Every week, it evaluates every position, scores every security, and generates rebalancing signals. The RIA executes. You see everything — every allocation change, every reasoning note, every performance metric.
+Step three: the AI goes to work. Every week, it evaluates every position, scores every stock, and publishes rebalancing signals. You see everything — every allocation change, every reasoning note, every performance metric. You decide how to act on the signals.
 
 ---
 
@@ -476,15 +478,15 @@ This is what your dashboard looks like. Every position. Every weight. Every AI r
 
 ---
 
-**[SLIDE 46 — 13:40]** "The AI generates signals. The RIA executes. You verify."
+**[SLIDE 46 — 13:40]** "The AI publishes signals. You decide. Full transparency."
 
 `[tone: simplicity is the point]`
 
-The AI generates signals. The RIA executes. You verify.
+The AI publishes signals. You decide how to act. You verify everything.
 
 [pause]
 
-That's the system. No complexity. No guesswork. Just data-driven signals, professional execution, and complete transparency.
+That's the system. No complexity. No guesswork. Just data-driven signal publications and complete transparency.
 
 ---
 
@@ -505,13 +507,13 @@ That's the system. No complexity. No guesswork. Just data-driven signals, profes
 
 Atlas is your starting point. $25,000. 3 portfolios — high growth, balanced, and defensive. The high-growth portfolio returned 43.9 percent in the past year.
 
-This is where you access the AI's signals with a meaningful but manageable allocation.
+This is where you access the AI's signal publications with a meaningful but manageable allocation.
 
 ---
 
 **[SLIDE 49 — 14:40]** Titan card.
 
-Titan increases the investment to $50,000 and gives you broader diversification — up to 40 securities per portfolio. Dynamic Upside returned 45.5 percent.
+Titan increases the investment to $50,000 and gives you broader diversification — up to 40 stocks per portfolio. Dynamic Upside returned 45.5 percent.
 
 ---
 
@@ -560,9 +562,9 @@ Last month, the market pulled back. The AI's portfolios drew down 2 to 3.7 perce
 
 It is. And it should be — this is a serious investment, not a subscription.
 
-But here's what's important: this isn't a fee. This is your invested capital. It's your money, in a professionally managed portfolio, guided by AI-generated signals and executed by a regulated RIA. Your capital is held at a qualified custodian. It's working for you.
+But here's what's important: this is your invested capital. It's your money, in your own brokerage account, guided by AI-generated signal publications. It's working for you.
 
-You're allocating $25,000 to a portfolio that returned up to 43.9 percent in its first year. Every dollar is invested. Every signal is documented. Every trade is executed by a fiduciary.
+You're allocating $25,000 to a portfolio that returned up to 43.9 percent in its first year. Every dollar is invested. Every signal is published and documented. Every trade is verifiable.
 
 ---
 
@@ -570,9 +572,9 @@ You're allocating $25,000 to a portfolio that returned up to 43.9 percent in its
 
 "Is AI safe for investing?"
 
-The AI doesn't have a "buy" button on your account. It generates signals. [pause] The RIA partner — a regulated fiduciary — makes the execution decisions through institutional channels. Your capital is held at a qualified custodian, not at TradeAlgo.
+The AI doesn't have a "buy" button on your account. It publishes signals. [pause] You decide whether and how to act on those signals through your own brokerage account. Your capital stays with you, not at TradeAlgo.
 
-And the AI's reasoning is documented and transparent — you can read exactly why it generated every signal. This is the most transparent AI-driven portfolio structure available to individual investors.
+And the AI's reasoning is documented and transparent — you can read exactly why it generated every signal. This is the most transparent AI-driven signal publication available to individual investors.
 
 ---
 
@@ -594,7 +596,7 @@ An index fund held through a 20 percent drawdown is a 20 percent loss. AI-driven
 
 Robo-advisors allocate your money across 6 to 12 ETFs based on a risk questionnaire. Then they rebalance when your allocation drifts. That's it.
 
-The Wealth Series AI generates signals across 86 individual securities. It drives weekly rebalancing through the RIA. It uses RSI, CCI, momentum, sector rotation, and macro analysis. It writes institutional-grade reasoning for every signal.
+The Wealth Series AI publishes signals across 86 individual stocks. It drives weekly rebalancing recommendations. It uses RSI, CCI, momentum, sector rotation, and macro analysis. It writes institutional-grade reasoning for every signal.
 
 And its top portfolio returned plus 52.8 percent in a year. These are fundamentally different products.
 
@@ -629,19 +631,19 @@ TradeAlgo built the AI. They're a technology company — not a brokerage, not a 
 
 ---
 
-**[SLIDE 60 — 19:30]** RIA partner slide.
+**[SLIDE 60 — 19:30]** Publishing credibility slide.
 
-The accounts are managed by the RIA partner — a registered investment advisor regulated by the SEC. They are a fiduciary — *legally obligated* to act in your best interest.
+TradeAlgo is a signal publisher — like Motley Fool or Stansberry Research, but powered by AI. They publish trading signals. They never touch your money. They never manage your account. They never place a trade on your behalf.
 
-Your capital is held at a qualified custodian. It never sits on TradeAlgo's balance sheet. It never sits on the RIA's balance sheet. It's in your name, at a qualified custodian, overseen by a regulated fiduciary, guided by AI signals built by a technology company.
+Your capital stays in your own brokerage account. TradeAlgo's only job is to publish the best AI-generated trading signals in the market — with full transparency and verifiable data.
 
 ---
 
-**[SLIDE 61 — 20:05]** Three-layer protection diagram.
+**[SLIDE 61 — 20:05]** Publishing track record diagram.
 
 `[pace: slow]`
 
-3 separate entities. 3 layers of oversight. One AI system with a documented track record.
+One AI system. A documented track record. Complete transparency. And a signal publishing model that keeps your money exactly where it belongs — with you.
 
 ---
 
@@ -668,13 +670,13 @@ While you've been watching this, the AI hasn't stopped. It's evaluating. It's sc
 
 **[SLIDE 64 — 21:15]** Signal schedule.
 
-Every week you wait is a week of AI-driven intelligence you're not accessing. Not hypothetical — documented, transparent, signal-driven portfolio management across 86 securities.
+Every week you wait is a week of AI-driven intelligence you're not accessing. Not hypothetical — documented, transparent, signal-driven analysis across 86 stocks.
 
 ---
 
 **[SLIDE 65 — 21:35]** "How many more weekly signal cycles will you watch from the outside?"
 
-And here's the reality: the RIA can only onboard so many new clients while maintaining the level of service and oversight these portfolios require. This isn't artificial scarcity — it's a function of managing real accounts responsibly.
+And here's the reality: TradeAlgo can only onboard so many new subscribers while maintaining the quality and depth of signal coverage these portfolios require. This isn't artificial scarcity — it's a function of publishing high-quality, detailed analysis responsibly.
 
 `[pace: slow]`
 
@@ -702,13 +704,13 @@ You've seen 11 portfolios powered by AI-generated signals. Returns of up to 52.8
 
 [pause]
 
-And you've seen the structure: a technology company building the AI. A registered investment advisor executing every trade. A qualified custodian holding your capital. 3 layers of protection.
+And you've seen the model: a technology company building the AI. A signal publication you can verify. Your capital stays in your own account. Complete transparency at every level.
 
 ---
 
 **[SLIDE 68 — 22:45]** What happens when you click below.
 
-The next step is simple. Click below to schedule a consultation with our RIA partner. It's a 30-minute conversation — not a sales pitch. You'll review the portfolios, ask any question you have, and decide if this is the right fit for your financial situation.
+The next step is simple. Click below to schedule a call with our team. It's a 30-minute conversation — not a sales pitch. You'll review the signal publications, ask any question you have, and decide if this is the right fit for your financial situation.
 
 ---
 
@@ -722,7 +724,7 @@ The AI is generating signals right now. It produced rebalancing signals for all 
 
 **[SLIDE 70 — 23:25]** Final CTA slide.
 
-Click below. Schedule your consultation. And see what AI-powered trading signals can do for your capital.
+Click below. Schedule your call. And see what AI-powered trading signals can do for your capital.
 
 `[silence — CTA slide holds for 30 seconds.]`
 
@@ -732,24 +734,23 @@ Click below. Schedule your consultation. And see what AI-powered trading signals
 
 `[No voiceover. Disclaimer on screen:]`
 
-*"Past performance is not indicative of future results. The Wealth Series uses AI-generated trading signals produced by TradeAlgo, with trades executed by a registered investment advisor partner. TradeAlgo is a technology company that develops AI signal-generation systems; TradeAlgo does not provide investment advice, manage client accounts, or have custody of client funds. All investing involves risk, including the potential loss of principal. Performance data shown reflects actual results of model portfolios guided by AI-generated signals and executed by the RIA partner. Individual results may vary. You should consult with the RIA partner and your own financial, tax, and legal advisors before making any investment decisions. The Wealth Series is a 3-year license. Terms and conditions apply."*
+*"Past performance is not indicative of future results. The Wealth Series uses AI-generated trading signals published by TradeAlgo. TradeAlgo is a signal publishing company that develops AI signal-generation systems; TradeAlgo does not provide investment advice, manage accounts, or have custody of funds. All investing involves risk, including the potential loss of principal. Performance data shown reflects actual results of model portfolios guided by AI-generated signal publications. Individual results may vary. You should consult with your own financial, tax, and legal advisors before making any investment decisions. The Wealth Series is a 3-year license. Terms and conditions apply."*
 
 ---
 
-## Compliance Checklist
+## Review Checklist
 
-- [x] TradeAlgo identified as technology/signal company, never as money manager
-- [x] RIA partner identified as account manager and trade executor
-- [x] Qualified custodian mentioned as capital holder
-- [x] Three-entity structure explained clearly in Scenes 5, 7, and 10
+- [x] TradeAlgo identified as signal publishing company, never as money manager
+- [x] Publisher model clearly explained: TradeAlgo publishes signals, subscribers decide
+- [x] TradeAlgo never touches money, never manages anything
 - [x] Past performance disclaimer read aloud and displayed on screen
 - [x] No forward-looking return promises or guarantees
 - [x] No fake scarcity or manufactured urgency
-- [x] CTA is consultation booking, not direct purchase
+- [x] CTA is "schedule a call with our team", not direct purchase
 - [x] **ZERO references to financial advisors, advisory fees, or advisor comparisons**
 - [x] **ZERO language implying TradeAlgo manages money**
-- [x] **Product positioned as AI signal generation + professional execution**
+- [x] **Product positioned as AI signal publication**
 
 ---
 
-*Script v2 finalized: March 2026 | Compliance-safe — no advisor references | Storytelling-driven*
+*Script v2 finalized: March 2026 | Publisher model — no advisor references | Storytelling-driven*
