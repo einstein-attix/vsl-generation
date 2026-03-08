@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VSL Page Design Pattern — Research Report</title>
+<style>
+  :root{--brand:#1a1a2e;--accent:#e94560;--accent2:#0f3460;--bg:#ffffff;--text:#2d2d2d;--muted:#6b7280;--light:#f8f9fa;--border:#e5e7eb;--radius:8px}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:var(--text);background:var(--bg);line-height:1.7;font-size:16px}
+  .container{max-width:880px;margin:0 auto;padding:40px 24px 80px}
+  h1{font-size:2.4rem;color:var(--brand);margin-bottom:8px;letter-spacing:-.02em}
+  .subtitle{color:var(--muted);font-size:1.1rem;margin-bottom:48px;border-bottom:2px solid var(--accent);padding-bottom:16px;display:inline-block}
+  h2{font-size:1.5rem;color:var(--brand);margin:48px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+  h3{font-size:1.15rem;color:var(--accent2);margin:28px 0 10px}
+  p,li{margin-bottom:10px}
+  ul,ol{padding-left:24px}
+  .callout{background:var(--light);border-left:4px solid var(--accent);padding:16px 20px;border-radius:0 var(--radius) var(--radius) 0;margin:20px 0}
+  .callout.blue{border-left-color:var(--accent2)}
+  .callout strong{color:var(--brand)}
+  .stat{display:inline-block;background:var(--brand);color:#fff;padding:4px 12px;border-radius:20px;font-size:.85rem;font-weight:600;margin:2px 4px 2px 0}
+  table{width:100%;border-collapse:collapse;margin:20px 0;font-size:.95rem}
+  th{background:var(--brand);color:#fff;padding:10px 14px;text-align:left}
+  td{padding:10px 14px;border-bottom:1px solid var(--border)}
+  tr:nth-child(even){background:var(--light)}
+  code{background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:.9em;color:var(--accent2)}
+  pre{background:#1e293b;color:#e2e8f0;padding:20px;border-radius:var(--radius);overflow-x:auto;margin:16px 0;font-size:.85rem;line-height:1.5}
+  pre code{background:none;color:inherit;padding:0}
+  .wireframe{background:var(--light);border:2px dashed var(--border);border-radius:var(--radius);padding:32px;text-align:center;margin:20px 0}
+  .wireframe .frame{max-width:500px;margin:0 auto;border:2px solid var(--brand);border-radius:var(--radius);overflow:hidden}
+  .wireframe .vid{background:#1a1a2e;color:#fff;padding:60px 20px;font-size:1.2rem}
+  .wireframe .cta-mock{background:var(--accent);color:#fff;display:inline-block;padding:14px 36px;border-radius:6px;font-weight:700;margin-top:24px;font-size:1.05rem}
+  .wireframe .hidden-label{color:var(--muted);font-style:italic;font-size:.85rem;margin-top:8px}
+  .tag{display:inline-block;padding:2px 10px;border-radius:12px;font-size:.8rem;font-weight:600;margin:2px}
+  .tag.green{background:#d1fae5;color:#065f46}
+  .tag.red{background:#fee2e2;color:#991b1b}
+  .tag.blue{background:#dbeafe;color:#1e40af}
+  .toc{background:var(--light);padding:20px 24px;border-radius:var(--radius);margin-bottom:40px}
+  .toc ol{list-style:none;counter-reset:toc;padding-left:0}
+  .toc li{counter-increment:toc;margin-bottom:6px}
+  .toc li::before{content:counter(toc) ".";font-weight:700;color:var(--accent);margin-right:8px}
+  .toc a{color:var(--accent2);text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+  @media(max-width:600px){h1{font-size:1.7rem}.container{padding:24px 16px}pre{font-size:.75rem;padding:14px}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>The VSL Page Design Pattern</h1>
+<p class="subtitle">A Comprehensive Research Report for TradeAlgo — March 2026</p>
+
+<div class="toc">
+<strong>Contents</strong>
+<ol>
+  <li><a href="#what">What Is a VSL Page?</a></li>
+  <li><a href="#psychology">Why It Works — The Psychology</a></li>
+  <li><a href="#timing">Best Practices for CTA Timing</a></li>
+  <li><a href="#elements">Page Elements — What Belongs (and What Doesn't)</a></li>
+  <li><a href="#technical">Technical Implementation</a></li>
+  <li><a href="#examples">Companies Using This Successfully</a></li>
+  <li><a href="#variations">Common Variations</a></li>
+  <li><a href="#mobile">Mobile Responsiveness</a></li>
+  <li><a href="#ab">A/B Testing Insights</a></li>
+  <li><a href="#spec">Recommended Spec for TradeAlgo</a></li>
+</ol>
+</div>
+
+<!-- ─────────────────────────────────────────── -->
+<h2 id="what">1. What Is a VSL Page?</h2>
+
+<p>A VSL (Video Sales Letter) page is a deliberately stripped-down landing page whose sole purpose is to drive a viewer through a video presentation that sells a product or service. The defining characteristics:</p>
+
+<ul>
+  <li><strong>Near-blank page</strong> — no navigation, no footer, no sidebar, no links away from the page</li>
+  <li><strong>Single video player</strong> — the only content above the fold (and often on the entire page)</li>
+  <li><strong>No visible CTA initially</strong> — the "Buy Now" or "Get Started" button is hidden and only appears after a timed delay, synchronized to the pitch moment in the video</li>
+  <li><strong>No scroll content</strong> — the viewer has nothing to do except watch</li>
+</ul>
+
+<div class="callout">
+  <strong>Core Principle:</strong> The page is a container for the video, not a website. Every pixel that isn't the video player is a potential distraction that reduces conversion.
+</div>
+
+<!-- ─────────────────────────────────────────── -->
+<h2 id="psychology">2. Why It Works — The Psychology</h2>
+
+<h3>2.1 Eliminates Decision Fatigue</h3>
+<p>A conventional landing page presents dozens of micro-decisions: which section to read, whether to scroll, which link to click. A VSL page presents exactly <strong>one decision</strong>: watch the video or leave. This binary choice dramatically increases play rates.</p>
+
+<h3>2.2 Forces Sequential Consumption</h3>
+<p>Long-form sales copy on a page can be skimmed — readers jump to the price, skip the story. Video is inherently sequential. The viewer <em>must</em> go through the problem → agitation → solution → proof → offer sequence in the order the marketer designed.</p>
+
+<h3>2.3 Peak-End Rule &amp; Emotional Timing</h3>
+<p>The CTA appears at the exact moment of maximum emotional engagement — typically right after the offer reveal, when the viewer is thinking "I want this." Showing a button earlier (during the problem-agitation phase) catches people before desire is built. Showing it later risks losing the emotional peak. This leverages the psychological <strong>peak-end rule</strong>: people judge an experience based on its most intense point.</p>
+
+<h3>2.4 Commitment &amp; Consistency (Cialdini)</h3>
+<p>By the time the CTA appears, the viewer has invested 10–30+ minutes watching. The sunk-cost effect and Cialdini's commitment principle make them far more likely to take the next step than someone who just landed on a page with an immediate button.</p>
+
+<h3>2.5 Scarcity of Options = Higher Conversion</h3>
+<p>Hick's Law states that decision time increases with the number of choices. With zero navigation and one CTA, decision paralysis disappears. The only question becomes "yes or no" to the offer.</p>
+
+<h3>2.6 Pattern Interrupt</h3>
+<p>Most websites are visually complex. A near-blank page with just a video is startling — it breaks the viewer's auto-pilot scrolling behavior and commands full attention.</p>
+
+<div class="callout blue">
+  <strong>Key Insight:</strong> The stripped-down design isn't lazy — it's a deliberate psychological architecture that controls attention, builds emotion sequentially, and reveals the action step at peak buying intent.
+</div>
+
+<!-- ─────────────────────────────────────────── -->
+<h2 id="timing">3. Best Practices for CTA Timing</h2>
+
+<table>
+<tr><th>Strategy</th><th>Timing</th><th>Best For</th></tr>
+<tr><td>Pitch-moment sync</td><td>Exact second the offer/price is revealed in the video</td><td>Highest-converting; requires knowing your video script precisely</td></tr>
+<tr><td>Percentage-based</td><td>60–80% through the video</td><td>Good default when you don't have exact pitch timing</td></tr>
+<tr><td>Fixed delay</td><td>15–25 minutes into a 30–40 min VSL</td><td>Simple to implement; works for standard-length VSLs</td></tr>
+<tr><td>Short VSL</td><td>After 3–5 minutes in a 7–10 min video</td><td>Webinar replay snippets, lower-ticket offers</td></tr>
+</table>
+
+<h3>Timing Rules of Thumb</h3>
+<ul>
+  <li><strong>Never show the CTA before the offer is mentioned</strong> — clicking a button before knowing what's being sold creates confusion, not conversions</li>
+  <li><strong>Show it 5–15 seconds AFTER the price reveal</strong> — give the viewer a moment to process the offer before asking them to act</li>
+  <li><strong>For videos with a "stack" section</strong> (bonuses piled on): reveal the CTA at the end of the stack, when perceived value is at maximum</li>
+  <li><strong>Test ±30 seconds</strong> — small timing shifts can produce 10–20% conversion swings</li>
+</ul>
+
+<div class="callout">
+  <strong>Pro Tip:</strong> Use video platform APIs (Wistia, Vimeo) to trigger the CTA based on <em>actual playback progress</em>, not wall-clock time. This handles pausing, buffering, and seeking correctly.
+</div>
+
+<!-- ─────────────────────────────────────────── -->
+<h2 id="elements">4. Page Elements — What Belongs</h2>
+
+<h3>✅ Required Elements</h3>
+<table>
+<tr><th>Element</th><th>Details</th></tr>
+<tr><td><strong>Video Player</strong></td><td>Full-width (max ~900px), auto-play if possible, no playback controls (or minimal). Wistia and Vimeo Pro allow hiding scrubber/progress bar to prevent skipping.</td></tr>
+<tr><td><strong>Delayed CTA Button</strong></td><td>Large, high-contrast button. Appears with a fade-in or slide-up animation. Positioned directly below the video. Text: action-oriented ("Get Instant Access", "Start My Free Trial", "Yes, I Want This").</td></tr>
+</table>
+
+<h3>⚠️ Optional Elements (Use Sparingly)</h3>
+<table>
+<tr><th>Element</th><th>When to Use</th></tr>
+<tr><td>Short headline above video</td><td>"Watch This Short Video to Discover…" — only if it increases play rate. Test with/without.</td></tr>
+<tr><td>Subheadline or "sound on" reminder</td><td>"🔊 Make sure your sound is on" — helps on mobile where autoplay is muted</td></tr>
+<tr><td>Countdown timer (below video)</td><td>Appears WITH the CTA to add urgency. "This offer expires in 14:59…"</td></tr>
+<tr><td>Trust badges</td><td>Small, below CTA. SSL badge, money-back guarantee seal.</td></tr>
+<tr><td>Disclaimer/privacy text</td><td>Tiny footer text for legal compliance. Keep it minimal.</td></tr>
+</table>
+
+<h3>🚫 Elements That Do NOT Belong</h3>
+<ul>
+  <li>Navigation bar or header links</li>
+  <li>Sidebar content</li>
+  <li>Long-form text copy (before or around the video)</li>
+  <li>Multiple CTAs or competing offers</li>
+  <li>Social media links</li>
+  <li>Footer with site links</li>
+  <li>Testimonials visible before CTA appears (they belong in the video)</li>
+  <li>Pricing tables (the video handles this)</li>
+</ul>
+
+<!-- ─────────────────────────────────────────── -->
+<h2 id="technical">5. Technical Implementation</h2>
+
+<h3>5.1 Basic Structure (HTML)</h3>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Watch This Video&lt;/title&gt;
+&lt;/head&gt;
+&lt;body style="margin:0; background:#000; display:flex;
+  justify-content:center; align-items:center;
+  min-height:100vh; flex-direction:column;"&gt;
+
+  &lt;div id="video-container" style="width:100%; max-width:900px;"&gt;
+    &lt;!-- Video embed here --&gt;
+  &lt;/div&gt;
+
+  &lt;div id="cta-container" style="opacity:0; transition:opacity 0.8s;
+    pointer-events:none; text-align:center; margin-top:24px;"&gt;
+    &lt;a href="/checkout" id="cta-btn"&gt;Get Instant Access →&lt;/a&gt;
+  &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<h3>5.2 Method A: Simple Timer (Fallback)</h3>
+<pre><code>// Show CTA after 18 minutes (1080 seconds)
+setTimeout(() =&gt; {
+  const cta = document.getElementById('cta-container');
+  cta.style.opacity = '1';
+  cta.style.pointerEvents = 'auto';
+}, 1080 * 1000);</code></pre>
+
+<h3>5.3 Method B: Wistia Video Progress API (Recommended)</h3>
+<pre><code>window._wq = window._wq || [];
+_wq.push({
+  id: 'YOUR_VIDEO_ID',
+  onReady: function(video) {
+    const CTA_REVEAL_SECONDS = 1080; // 18 min mark
+
+    video.bind('timechange', function(t) {
+      if (t &gt;= CTA_REVEAL_SECONDS) {
+        const cta = document.getElementById('cta-container');
+        cta.style.opacity = '1';
+        cta.style.pointerEvents = 'auto';
+        video.unbind('timechange'); // fire once
+      }
+    });
+
+    // Optional: prevent seeking past CTA point
+    video.bind('seek', function(currentTime, lastTime) {
+      if (currentTime &gt; lastTime + 2) {
+        video.time(lastTime);
+      }
+    });
+  }
+});</code></pre>
+
+<h3>5.4 Method C: Vimeo Player API</h3>
+<pre><code>const player = new Vimeo.Player('video-container');
+const CTA_REVEAL = 1080;
+
+player.on('timeupdate', function(data) {
+  if (data.seconds &gt;= CTA_REVEAL) {
+    document.getElementById('cta-container').style.opacity = '1';
+    document.getElementById('cta-container').style.pointerEvents = 'auto';
+    player.off('timeupdate');
+  }
+});</code></pre>
+
+<h3>5.5 Method D: YouTube IFrame API</h3>
+<pre><code>let ytCheckInterval;
+function onPlayerReady(event) {
+  ytCheckInterval = setInterval(() =&gt; {
+    if (player.getCurrentTime() &gt;= 1080) {
+      document.getElementById('cta-container').style.opacity = '1';
+      document.getElementById('cta-container').style.pointerEvents = 'auto';
+      clearInterval(ytCheckInterval);
+    }
+  }, 1000);
+}</code></pre>
+
+<h3>5.6 CTA Button Animation CSS</h3>
+<pre><code>#cta-btn {
+  display: inline-block;
+  padding: 18px 48px;
+  background: #e94560;
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  border-radius: 6px;
+  text-decoration: none;
+  animation: pulse 2s infinite;
+  box-shadow: 0 4px 20px rgba(233, 69, 96, 0.4);
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Entrance animation */
+#cta-container.visible {
+  animation: slideUp 0.6s ease-out forwards;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}</code></pre>
+
+<h3>5.7 Anti-Skip Considerations</h3>
+<ul>
+  <li><strong>Wistia</strong> — hide the scrubber bar via embed options (<code>controlsVisibleOnLoad: false</code>)</li>
+  <li><strong>Vimeo Pro</strong> — use the <code>?controls=0</code> parameter or custom player skin</li>
+  <li><strong>YouTube</strong> — cannot fully hide controls; less ideal for VSL pages</li>
+  <li><strong>Self-hosted (Video.js / Plyr)</strong> — full control over UI, can remove all controls except play/pause and volume</li>
+</ul>
+
+<!-- ─────────────────────────────────────────── -->
+<h2 id="examples">6. Companies Using This Successfully</h2>
+
+<table>
+<tr><th>Company / Marketer</th><th>Niche</th><th>Notable VSL Details</th></tr>
+<tr><td><strong>ClickFunnels</strong> (Russell Brunson)</td><td>SaaS / Marketing</td><td>Pioneered the funnel-based VSL. Their own software provides VSL page templates. Dark background, Wistia player, delayed CTA at ~18 min mark.</td></tr>
+<tr><td><strong>Agora Financial</strong> / Legacy Research</td><td>Financial newsletters</td><td>Masters of the long-form VSL (30–60 min). Often use "fake documentary" style. CTA appears at the pitch with countdown timer.</td></tr>
+<tr><td><strong>VShred</strong></td><td>Fitness</td><td>Short VSLs (8–15 min) with aggressive CTA timing. Clean white background, single video, button + countdown appear simultaneously.</td></tr>
+<tr><td><strong>MindValley</strong></td><td>Personal development</td><td>Polished VSL pages with high production value. Often include a "masterclass" framing headline above the video.</td></tr>
+<tr><td><strong>DigitalMarketer</strong> (Ryan Deiss)</td><td>Marketing education</td><td>Uses VSL pages for tripwire offers. Shorter videos (5–10 min), CTA at ~60% mark.</td></tr>
+<tr><td><strong>Tai Lopez</strong> (era: 2015–2020)</td><td>Biz-op / Education</td><td>Famous "Here in my garage" VSL. YouTube-hosted, minimal page, CTA after pitch.</td></tr>
+<tr><td><strong>Primal Health / Organifi</strong></td><td>Health supplements</td><td>Long VSLs with "weird trick" hooks. Classic dark background, no navigation, delayed button with urgency timer.</td></tr>
+<tr><td><strong>Alex Hormozi</strong> (Gym Launch era)</td><td>Gym/Agency</td><td>Clean VSL pages, straightforward offer presentation, CTA at stack completion.</td></tr>
+</table>
+
+<div class="callout">
+  <strong>Industry Pattern:</strong> The VSL page dominates in info-products, financial newsletters, health supplements, SaaS trials, and high-ticket coaching. Any product requiring <em>education before purchase</em> benefits from this format.
+</div>
+
+<!-- ─────────────────────────────────────────── -->
+<h2 id="variations">7. Common Variations</h2>
+
+<h3>7.1 The "Countdown + CTA" Combo</h3>
+<p>When the CTA appears, a countdown timer appears alongside it: <em>"This special pricing expires in 14:59…"</em>. The timer adds urgency. Often paired with an "evergreen" timer that resets per user session (cookie-based).</p>
+
+<h3>7.2 "Watch This Video Now" Headline</h3>
+<p>A single line of text above the video: <em>"Watch This Short, Free Video Before It's Taken Down"</em>. Adds curiosity and urgency. The page still has no other content.</p>
+
+<h3>7.3 Sound-On Reminder</h3>
+<p>A small animated speaker icon or text: <em>"🔊 Click to enable sound"</em>. Critical for mobile where autoplay is muted by default.</p>
+
+<h3>7.4 Multi-Step CTA Reveal</h3>
+<p>First: headline text appears below video (<em>"Here's what you get…"</em>). Then 10–15 seconds later: the button slides in. Creates anticipation even after the video pitch.</p>
+
+<h3>7.5 Exit-Intent Popup</h3>
+<p>If the viewer tries to leave before the CTA appears, a popup offers an alternative: <em>"Wait! At least get our free guide before you go."</em> Captures leads who won't watch the full video.</p>
+
+<h3>7.6 Below-Video Sales Copy (Hybrid)</h3>
+<p>Some marketers add long-form text copy BELOW the fold that only becomes visible after the CTA appears. This serves viewers who prefer reading and provides SEO content. The above-the-fold experience remains pure VSL.</p>
+
+<h3>7.7 Dark vs. Light Background</h3>
+<table>
+<tr><th>Background</th><th>When to Use</th></tr>
+<tr><td><span class="tag blue">Dark (#000 or #111)</span></td><td>Most common for VSL pages. Creates theater-like experience, draws eyes to the video. Standard for info-products, finance, health.</td></tr>
+<tr><td><span class="tag green">Light (#fff or #f5f5f5)</span></td><td>Feels more professional/corporate. Better for SaaS, B2B, and brands that want trust over urgency.</td></tr>
+</table>
+
+<!-- ─────────────────────────────────────────── -->
+<h2 id="mobile">8. Mobile Responsiveness</h2>
+
+<h3>Critical Considerations</h3>
+<ul>
+  <li><strong>50–70% of traffic</strong> to VSL pages now comes from mobile (especially from social media ads)</li>
+  <li><strong>Autoplay restrictions:</strong> iOS Safari and Chrome on Android block autoplay with sound. The video must either autoplay muted (with a "tap for sound" overlay) or show a prominent play button.</li>
+  <li><strong>Video sizing:</strong> Use 16:9 aspect ratio with <code>width: 100%; max-width: 900px;</code>. On mobile, the video should span full width with small horizontal padding (8–16px).</li>
+  <li><strong>CTA button sizing:</strong> Minimum 48px tap target. On mobile, the button should be nearly full-width (with 16px padding on each side).</li>
+  <li><strong>Vertical space:</strong> On small screens, center the video vertically so it's prominent without scrolling.</li>
+  <li><strong>Sticky CTA:</strong> Once revealed, consider making the button sticky at the bottom of the viewport on mobile so it remains visible even if the user scrolls.</li>
+</ul>
+
+<h3>Responsive CSS Pattern</h3>
+<pre><code>.video-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* 16:9 aspect ratio container */
+.video-wrapper::before {
+  content: '';
+  display: block;
+  padding-top: 56.25%;
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border: none;
+}
+
+/* Mobile CTA */
+@media (max-width: 640px) {
+  #cta-btn {
+    display: block;
+    margin: 16px;
+    text-align: center;
+    font-size: 1.1rem;
+    padding: 16px;
+  }
+
+  /* Sticky CTA on mobile */
+  #cta-container.visible {
+    position: fixed;
+    bottom: 0;
+    left: 0; right: 0;
+    background: rgba(0,0,0,0.95);
+    padding: 12px 16px;
+    z-index: 100;
+  }
+}</code></pre>
+
+<!-- ─────────────────────────────────────────── -->
+<h2 id="ab">9. A/B Testing Insights</h2>
+
+<h3>Delayed CTA vs. Immediate CTA</h3>
+
+<div class="callout">
+  <strong>Consensus finding:</strong> Delayed CTA pages consistently outperform immediate-CTA pages for <em>high-ticket</em> and <em>complex</em> offers by <span class="stat">20–60% higher conversion</span> on average, because the buyer needs education before they're ready to act.
+</div>
+
+<table>
+<tr><th>Test Variable</th><th>Typical Result</th></tr>
+<tr><td>Delayed CTA (at pitch point) vs. Visible CTA from start</td><td>Delayed wins by 20–60% for offers &gt;$100. For impulse-buy offers (&lt;$20), immediate CTA can win.</td></tr>
+<tr><td>CTA at 60% vs. 80% of video</td><td>Results vary by script. The "pitch moment" matters more than percentage. Test both.</td></tr>
+<tr><td>Dark background vs. white background</td><td>Dark wins for "infomercial" style VSLs. White wins for SaaS/corporate. Always test.</td></tr>
+<tr><td>With headline above video vs. no headline</td><td>Adding a curiosity-driven headline above the video increases play rate by 5–15% in most tests.</td></tr>
+<tr><td>With countdown timer vs. without</td><td>Adding a countdown timer alongside the CTA typically increases click-through by 10–25%.</td></tr>
+<tr><td>Pulsing/animated CTA vs. static CTA</td><td>Subtle pulse animation wins by 5–10%. Aggressive animations can feel spammy.</td></tr>
+<tr><td>Scrubber visible vs. hidden</td><td>Hiding the video scrubber increases average watch time by 20–40% (viewers can't skip ahead).</td></tr>
+<tr><td>Exit-intent popup vs. no popup</td><td>Adds 3–8% additional lead capture from abandoners.</td></tr>
+</table>
+
+<h3>Key Testing Principles</h3>
+<ul>
+  <li><strong>Test one variable at a time</strong> — CTA timing, button color, headline text, background color</li>
+  <li><strong>Minimum sample size:</strong> 500–1000 unique visitors per variant before drawing conclusions</li>
+  <li><strong>Track video engagement:</strong> Average watch time, % who reach the CTA point, CTA click rate, and final conversion rate (purchase). Optimizing for clicks alone can be misleading.</li>
+  <li><strong>The video script matters more than the page design.</strong> A mediocre page with a great script will outperform a beautiful page with a weak script every time.</li>
+</ul>
+
+<!-- ─────────────────────────────────────────── -->
+<h2 id="spec">10. Recommended Spec for TradeAlgo</h2>
+
+<div class="callout blue">
+  <strong>Context:</strong> TradeAlgo is a fintech/trading-tools company. The VSL will likely target retail traders interested in algorithmic trading insights, signals, or education. This calls for a <em>professional, trust-building</em> design rather than an aggressive "internet marketing" look.
+</div>
+
+<h3>10.1 Wireframe</h3>
+
+<div class="wireframe">
+  <p style="color:var(--muted);font-size:.85rem;margin-bottom:4px;">— Above the fold (100vh) —</p>
+  <p style="margin-bottom:16px;font-weight:600;color:var(--brand);font-size:1.1rem;">"See How Traders Are Using AI to Find Winning Setups"</p>
+  <div class="frame">
+    <div class="vid">▶ &nbsp;VIDEO PLAYER<br><span style="font-size:.8rem;opacity:.7">Wistia embed · 16:9 · no scrubber · autoplay muted</span></div>
+  </div>
+  <p style="font-size:.8rem;color:var(--muted);margin-top:8px;">🔊 Make sure your sound is turned on</p>
+  <div style="margin-top:24px;">
+    <div class="hidden-label">⬇ Hidden until pitch moment ⬇</div>
+    <div class="cta-mock" style="margin-top:12px;">Start Your Free Trial →</div>
+    <p style="font-size:.85rem;color:var(--muted);margin-top:10px;">⏱ Special pricing expires in <strong>14:59</strong></p>
+  </div>
+  <p style="font-size:.7rem;color:#aaa;margin-top:24px;">Tiny footer: © 2026 TradeAlgo · Privacy Policy · Disclaimer</p>
+</div>
+
+<h3>10.2 Recommended Specifications</h3>
+
+<table>
+<tr><th>Spec</th><th>Recommendation</th></tr>
+<tr><td>Background</td><td>Dark (<code>#0a0a1a</code> or <code>#111827</code>) — creates "trading terminal" feel, matches TradeAlgo brand</td></tr>
+<tr><td>Video host</td><td><strong>Wistia</strong> — best API for CTA timing, heatmaps, and hiding controls. Vimeo Pro as alternative.</td></tr>
+<tr><td>Video max-width</td><td>900px, centered, 16:9 aspect ratio</td></tr>
+<tr><td>Headline</td><td>Single line, white text, above video. Curiosity-driven, <em>not</em> clickbait. Test with/without.</td></tr>
+<tr><td>CTA trigger</td><td>Wistia <code>timechange</code> event at the exact pitch second. Fallback: <code>setTimeout</code>.</td></tr>
+<tr><td>CTA button</td><td>Green (<code>#10b981</code>) or brand accent. Large, full-width on mobile. Subtle pulse animation. Text: "Start Your Free Trial →"</td></tr>
+<tr><td>Countdown timer</td><td>Evergreen (cookie-based, 15 min). Appears WITH the CTA. Style: clean digital clock, not aggressive.</td></tr>
+<tr><td>Mobile behavior</td><td>Full-width video, tap-to-play with sound overlay, sticky CTA at bottom once revealed.</td></tr>
+<tr><td>Exit intent</td><td>Popup offering free lead magnet (e.g., "Get 3 Free Trade Alerts"). Captures email for nurture sequence.</td></tr>
+<tr><td>Tracking</td><td>Video watch % events to GA4/Segment. CTA impression and click events. Heatmap via Wistia.</td></tr>
+<tr><td>Page speed</td><td>Target &lt;2s load. Minimal CSS (inline), defer video script, no external fonts (use system stack).</td></tr>
+<tr><td>A/B tests (Phase 1)</td><td>1) CTA timing: pitch moment vs. pitch+15s vs. pitch+30s. 2) With/without headline. 3) Green vs. blue CTA button.</td></tr>
+</table>
+
+<h3>10.3 Implementation Checklist</h3>
+<ol>
+  <li>☐ Create video script following problem → agitation → solution → proof → offer → CTA structure</li>
+  <li>☐ Produce video (screen recordings of TradeAlgo platform + talking head)</li>
+  <li>☐ Upload to Wistia, note exact pitch timestamp</li>
+  <li>☐ Build minimal HTML page (dark bg, centered video, hidden CTA)</li>
+  <li>☐ Wire Wistia API <code>timechange</code> event to CTA reveal</li>
+  <li>☐ Add evergreen countdown timer component</li>
+  <li>☐ Implement exit-intent popup with lead magnet offer</li>
+  <li>☐ Mobile test on iOS Safari, Chrome Android, Samsung Internet</li>
+  <li>☐ Set up GA4 events: page_view, video_play, video_25/50/75/100%, cta_revealed, cta_click, checkout_start</li>
+  <li>☐ Deploy and begin A/B testing CTA timing</li>
+</ol>
+
+<hr style="margin:48px 0 24px;border:none;border-top:2px solid var(--border);">
+<p style="text-align:center;color:var(--muted);font-size:.85rem;">
+  Prepared for TradeAlgo · March 2026<br>
+  Research compiled from industry best practices, conversion optimization literature, and direct-response marketing frameworks.
+</p>
+
+</div>
+</body>
+</html>
