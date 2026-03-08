@@ -254,9 +254,9 @@ The Wealth Series is a collection of 11 portfolios — powered by TradeAlgo's AI
 
 And before I show you the numbers, let me be clear about how this works. Because the model is what makes this trustworthy.
 
-TradeAlgo is a technology company. They build the AI and generate the trading signals. A licensed RIA partner manages your portfolio and executes every trade based on those signals.
+TradeAlgo is an AI analytics company. They build the AI and generate trading signals. Every week, you receive the signals, the analysis, and full reasoning notes — and you decide how to act.
 
-Your capital is held at an institutional custodian — never with TradeAlgo. Every week, you see the AI's analysis, the trading signals, and full reasoning notes. TradeAlgo builds the AI. That's their job. The RIA partner handles portfolio management. Your money stays at the custodian.
+TradeAlgo never touches your money. They generate the signals. You read the reasoning. You make the call. And if you prefer hands-free? An RIA partner can execute the signals automatically in a managed account. But that's optional — you're always in control.
 
 ---
 
@@ -286,7 +286,7 @@ You can read *exactly* why it recommended buying, selling, or holding every posi
 
 **[SLIDE 26 — 7:15]** 11 portfolios, 3 tiers, 3 risk levels.
 
-11 portfolios across 3 tiers. Each tier offers high-growth, balanced, and defensive options. You choose the risk level. The AI generates the signals. The RIA partner executes every trade. And you see everything.
+11 portfolios across 3 tiers. Each tier offers high-growth, balanced, and defensive options. You choose the risk level. The AI generates the signals with full reasoning notes. You decide how to act.
 
 ---
 
@@ -454,23 +454,23 @@ So how do you actually access this? [pause] It's simpler than you'd expect.
 
 Here's how it works. 3 steps.
 
-Step one: you apply. We review every application personally to ensure the right fit. Atlas, Titan, or Everest — each tier gives you access to AI-managed portfolios calibrated to different risk levels — high growth, balanced, and defensive.
+Step one: you apply. We review every application personally to ensure the right fit. Atlas, Titan, or Everest — each tier gives you access to AI-driven signal portfolios calibrated to different risk levels — high growth, balanced, and defensive.
 
 ---
 
 **[SLIDE 43 — 12:25]** Capital flow diagram.
 
-Step two: you onboard with our licensed RIA partner. They open a managed account for you, and your capital is held at an institutional custodian — never with TradeAlgo.
+Step two: you get access to the signal system. Every week, the AI generates signals with full reasoning notes — and you decide how to act.
 
 [pause]
 
-A licensed RIA partner manages your portfolio and executes every trade. Your capital is held at an institutional custodian. You see every signal, every reasoning note, every allocation change — but the execution is handled for you.
+TradeAlgo never touches your money. You see every signal, every reasoning note, every allocation change. Prefer hands-free? An RIA partner can execute the signals automatically in a managed account — but that's entirely optional.
 
 ---
 
 **[SLIDE 44 — 12:50]** Weekly experience mockup.
 
-Step three: the AI goes to work. Every week, it evaluates every position, scores every stock, and generates rebalancing signals. The RIA partner executes. You see everything — every allocation change, every reasoning note, every performance metric.
+Step three: the AI goes to work. Every week, it evaluates every position, scores every stock, and generates rebalancing signals. You see everything — every allocation change, every reasoning note, every performance metric. You decide how to act.
 
 ---
 
@@ -480,15 +480,15 @@ This is what your dashboard looks like. Every position. Every weight. Every AI r
 
 ---
 
-**[SLIDE 46 — 13:40]** "The AI generates signals. The RIA partner executes. You see everything."
+**[SLIDE 46 — 13:40]** "The AI generates signals. You read the reasoning. You decide how to act."
 
 `[tone: simplicity is the point]`
 
-The AI generates signals. The RIA partner executes. You see everything.
+The AI generates signals. You read the reasoning. You decide how to act.
 
 [pause]
 
-That's the system. No complexity. No guesswork. Just data-driven AI portfolio management and complete transparency.
+That's the system. No complexity. No guesswork. Just data-driven AI signals, full transparency, and you in control. Optional: have an RIA partner execute the signals automatically.
 
 ---
 
@@ -505,13 +505,13 @@ So at this point, you've seen exactly what this AI does. You've seen the signals
 
 Let me put this in perspective. If you wanted to build an AI system like this from scratch, you'd need machine learning engineers — that's $200,000 a year, minimum. Institutional-grade data feeds — another $30,000 to $50,000 a year. Cloud computing for the models? $50,000 a year. TradeAlgo raised over *one hundred million dollars* in capital — with one prime directive: building the most powerful AI trading system ever created. Three years of intensive development went into what you're looking at right now.
 
-A single Bloomberg Terminal costs $32,000 per year — and it doesn't generate signals, doesn't manage portfolios, and doesn't write reasoning notes. This AI does all of that. The technology behind this system represents over one hundred million dollars in investment. And for the first time, it's available to qualified individual investors.
+A single Bloomberg Terminal costs $32,000 per year — and it gives you data alone. No signals. No reasoning notes. This AI does all of that. The technology behind this system represents over one hundred million dollars in investment. And for the first time, it's available to qualified individual investors.
 
 ---
 
 **[SLIDE 48 — 14:30]** Atlas — Your Entry to AI-Managed Portfolios.
 
-Atlas gives you access to three AI-managed portfolios — each calibrated to a different risk level. High growth, balanced, and defensive. The AI generates signals across up to 31 holdings, and an RIA partner executes every trade.
+Atlas gives you access to three AI-driven signal portfolios — each calibrated to a different risk level. High growth, balanced, and defensive. The AI generates signals across up to 31 holdings, with full reasoning notes every week.
 
 Weekly AI rebalancing. Full reasoning documentation. Three risk levels to match your investment approach.
 
@@ -590,7 +590,7 @@ You can. And the low-volatility portfolios actually include index fund ETFs as a
 
 Active risk management. Weekly sector rotation based on data. Position trimming when technical indicators signal overbought conditions. Short positions as hedges before pullbacks.
 
-An index fund held through a 20 percent drawdown is a 20 percent loss. AI-managed portfolios with active risk management is a fundamentally different approach.
+An index fund held through a 20 percent drawdown is a 20 percent loss. AI-driven signal portfolios with active risk management is a fundamentally different approach.
 
 ---
 
@@ -600,7 +600,7 @@ An index fund held through a 20 percent drawdown is a 20 percent loss. AI-manage
 
 Robo-advisors allocate your money across 6 to 12 ETFs based on a risk questionnaire. Then they rebalance when your allocation drifts. That's it.
 
-The Wealth Series AI generates signals across 86 individual stocks. It drives weekly rebalancing. It uses RSI, CCI, momentum, sector rotation, and macro analysis. It writes institutional-grade reasoning for every signal — and the RIA partner executes.
+The Wealth Series AI generates signals across 86 individual stocks. It drives weekly rebalancing. It uses RSI, CCI, momentum, sector rotation, and macro analysis. It writes institutional-grade reasoning for every signal — and you see all of it.
 
 And its top portfolio returned plus 52.8 percent in a year. And unlike institutional platforms that require $5 million minimums, the Wealth Series is accessible to qualified investors. These are fundamentally different products.
 
@@ -631,15 +631,15 @@ Let me tell you who's behind this — because the technology only matters if you
 
 **[SLIDE 59 — 19:10]** TradeAlgo brand slide.
 
-TradeAlgo built the AI. They're a technology company — not a brokerage, not a fund. Their job is building and refining the AI signal-generation algorithms. A licensed RIA partner handles portfolio management and trade execution. Your capital is held at an institutional custodian.
+TradeAlgo built the AI. They're an AI analytics company — not a brokerage, not a fund. Their job is building and refining the AI signal-generation algorithms. You receive the signals and reasoning notes. You decide how to act. TradeAlgo never touches your money.
 
 ---
 
 **[SLIDE 60 — 19:30]** Publishing credibility slide.
 
-TradeAlgo builds institutional-grade AI systems that generate trading signals across 86 stocks and 15 sectors — the kind of analysis that hedge funds and family offices have relied on for decades, now available to individual investors.
+TradeAlgo is an AI analytics company that generates trading signals across 86 stocks and 15 sectors — the kind of analysis that hedge funds and family offices have relied on for decades, now available to individual investors.
 
-The signals power portfolios managed by a licensed RIA partner — giving you institutional-grade AI portfolio management. TradeAlgo never touches your money. Your capital stays at the institutional custodian.
+You receive the signals. You read the reasoning. You decide how to act. TradeAlgo never touches your money. Optional: an RIA partner can execute the signals automatically in a managed account.
 
 ---
 
@@ -752,8 +752,8 @@ Click below to apply. We're selective about who we work with — because signal 
 - [x] Real scarcity only (capacity limits, application exclusivity, founding member pricing)
 - [x] CTA is "Apply Now — See If You Qualify", not direct purchase
 - [x] **ZERO references to financial advisors, advisory fees, or advisor comparisons**
-- [x] **ZERO language implying TradeAlgo manages money** (RIA partner manages)
-- [x] **Product positioned as AI-managed portfolios via RIA partner**
+- [x] **ZERO language implying TradeAlgo manages money** (TradeAlgo is an AI analytics company)
+- [x] **Product positioned as AI signal system — RIA execution is optional**
 - [x] **ALL pricing removed from script — no dollar amounts for tiers**
 - [x] **Application-first model — qualify before pricing discussion**
 
