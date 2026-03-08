@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VSL Revision Proposal — Aligning with High-Ticket Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1a1f3d;--navy-light:#2d3461;
+  --green:#0a8754;--green-dark:#06693f;--green-light:#e8f5ee;--green-bg:#f0faf5;
+  --red:#c0392b;--red-light:#fdf0ee;--red-bg:#fff5f4;
+  --gold:#b8860b;--gold-light:#f8f2e0;
+  --bg:#fff;--bg-off:#f8f9fa;--border:#e4e7eb;
+  --text:#333;--text-light:#5a6270;--text-muted:#8e96a3;
+  --font:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --max-w:920px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);font-size:17px;line-height:1.72;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
+
+/* Layout */
+.wrap{max-width:var(--max-w);margin:0 auto;padding:0 28px}
+
+/* Header */
+.page-header{padding:64px 28px 48px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,#fff 60%,var(--bg-off) 100%)}
+.page-header .wrap{max-width:var(--max-w)}
+.doc-badge{display:inline-block;padding:4px 14px;background:var(--green-light);color:var(--green);border-radius:4px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:20px}
+.page-header h1{font-size:clamp(28px,4vw,40px);font-weight:900;color:var(--navy);line-height:1.15;letter-spacing:-1px;margin-bottom:12px}
+.page-header .lead{font-size:18px;color:var(--text-light);max-width:700px;line-height:1.65}
+
+/* Sticky TOC */
+.toc{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:12px 28px;overflow-x:auto;white-space:nowrap}
+.toc-inner{max-width:var(--max-w);margin:0 auto;display:flex;gap:6px;align-items:center}
+.toc a{display:inline-block;padding:6px 14px;font-size:13px;font-weight:600;color:var(--text-light);text-decoration:none;border-radius:6px;transition:all .15s;flex-shrink:0}
+.toc a:hover{background:var(--green-light);color:var(--green)}
+.toc a.active{background:var(--navy);color:#fff}
+
+/* Executive Summary Cards */
+.exec-grid{display:grid;grid-template-columns:1fr;gap:0;margin:40px 0 0;border:2px solid var(--navy);border-radius:12px;overflow:hidden}
+.exec-row{display:grid;grid-template-columns:40px 1fr 1.2fr 1.2fr;border-bottom:1px solid var(--border);font-size:14px}
+.exec-row:last-child{border-bottom:none}
+.exec-row.header{background:var(--navy);color:#fff;font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+.exec-row>div{padding:14px 16px;display:flex;align-items:center}
+.exec-row>div:not(:last-child){border-right:1px solid rgba(0,0,0,.06)}
+.exec-row.header>div:not(:last-child){border-right:1px solid rgba(255,255,255,.15)}
+.exec-num{font-weight:800;color:var(--navy);font-size:16px;justify-content:center}
+.exec-issue{font-weight:700;color:var(--navy)}
+.exec-before{background:var(--red-bg);color:var(--red);font-size:13px}
+.exec-after{background:var(--green-bg);color:var(--green-dark);font-size:13px;font-weight:600}
+
+/* Sections */
+.section{padding:56px 28px;border-bottom:1px solid var(--border)}
+.section:last-of-type{border-bottom:none}
+.section-tag{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px}
+.tag-red{background:var(--red-light);color:var(--red)}
+.tag-green{background:var(--green-light);color:var(--green)}
+.tag-gold{background:var(--gold-light);color:var(--gold)}
+.tag-navy{background:rgba(26,31,61,.08);color:var(--navy)}
+h2.section-title{font-size:clamp(24px,3vw,32px);font-weight:800;color:var(--navy);letter-spacing:-.5px;margin-bottom:8px;line-height:1.2}
+h3{font-size:20px;font-weight:700;color:var(--navy);margin:32px 0 12px;line-height:1.3}
+h4{font-size:16px;font-weight:700;color:var(--navy);margin:24px 0 8px}
+p{margin-bottom:14px}
+
+/* Blockquotes */
+blockquote{margin:20px 0;padding:20px 24px;background:var(--bg-off);border-left:4px solid var(--green);border-radius:0 8px 8px 0;font-size:15px;color:var(--text);line-height:1.7}
+blockquote cite{display:block;margin-top:8px;font-size:13px;color:var(--text-muted);font-style:normal;font-weight:600}
+
+/* Before/After Slide Cards */
+.slide-change{margin:20px 0;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#fff}
+.slide-change-header{display:flex;align-items:center;gap:12px;padding:14px 20px;background:var(--bg-off);border-bottom:1px solid var(--border)}
+.slide-num{display:inline-flex;align-items:center;justify-content:center;width:56px;height:32px;background:var(--navy);color:#fff;border-radius:6px;font-size:13px;font-weight:800;letter-spacing:.5px;flex-shrink:0}
+.slide-change-title{font-size:14px;font-weight:600;color:var(--navy)}
+.slide-change-body{display:grid;grid-template-columns:1fr 1fr;min-height:0}
+.slide-before,.slide-after{padding:16px 20px;font-size:14px;line-height:1.65}
+.slide-before{background:var(--red-bg);border-right:1px solid var(--border)}
+.slide-after{background:var(--green-bg)}
+.ba-label{display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.ba-before{background:var(--red);color:#fff}
+.ba-after{background:var(--green);color:#fff}
+.slide-before .ba-label{background:var(--red);color:#fff}
+.slide-after .ba-label{background:var(--green);color:#fff}
+.slide-before code,.slide-after code{font-size:13px;padding:1px 5px;border-radius:3px;font-family:var(--font)}
+.slide-before code{background:rgba(192,57,43,.12);color:var(--red)}
+.slide-after code{background:rgba(10,135,84,.12);color:var(--green-dark)}
+
+/* Script Change Cards */
+.script-change{margin:16px 0;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.script-label{padding:10px 16px;background:var(--bg-off);border-bottom:1px solid var(--border);font-size:13px;font-weight:700;color:var(--navy)}
+.script-ba{display:grid;grid-template-columns:1fr 1fr}
+.script-ba>div{padding:14px 16px;font-size:13px;line-height:1.6}
+.script-ba>div:first-child{background:var(--red-bg);border-right:1px solid var(--border)}
+.script-ba>div:last-child{background:var(--green-bg)}
+
+/* Tables */
+table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14px}
+th{text-align:left;padding:10px 14px;background:var(--navy);color:#fff;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+th:first-child{border-radius:6px 0 0 0}
+th:last-child{border-radius:0 6px 0 0}
+td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top}
+tr:hover td{background:var(--bg-off)}
+.t-red{color:var(--red);font-weight:600}
+.t-green{color:var(--green-dark);font-weight:600}
+
+/* Priority badges */
+.priority{display:inline-block;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:.5px;margin-right:6px}
+.p0{background:var(--red);color:#fff}
+.p1{background:var(--gold);color:#fff}
+.p2{background:var(--text-muted);color:#fff}
+
+/* Summary Stats */
+.stat-row{display:flex;gap:20px;flex-wrap:wrap;margin:24px 0}
+.stat-box{flex:1;min-width:140px;background:var(--bg-off);border-radius:10px;padding:20px;text-align:center;border:1px solid var(--border)}
+.stat-num{font-size:32px;font-weight:900;color:var(--navy);line-height:1.1}
+.stat-label{font-size:13px;color:var(--text-muted);margin-top:4px;font-weight:500}
+
+/* Lists */
+ul,ol{margin:12px 0 16px 24px}
+li{margin-bottom:6px;font-size:15px}
+li strong{color:var(--navy)}
+
+/* Misc */
+.divider{height:1px;background:var(--border);margin:40px 0}
+.note{padding:16px 20px;background:var(--gold-light);border-radius:8px;font-size:14px;color:#6b5a10;margin:20px 0;border-left:4px solid var(--gold)}
+.keep-badge{display:inline-block;padding:2px 8px;background:var(--green-light);color:var(--green);border-radius:3px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.remove-badge{display:inline-block;padding:2px 8px;background:var(--red-light);color:var(--red);border-radius:3px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.replace-badge{display:inline-block;padding:2px 8px;background:var(--gold-light);color:var(--gold);border-radius:3px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+
+/* Footer */
+.page-footer{padding:40px 28px;text-align:center;background:var(--bg-off);border-top:1px solid var(--border)}
+.page-footer p{font-size:13px;color:var(--text-muted);margin:0}
+
+/* Responsive */
+@media(max-width:768px){
+  .exec-row{grid-template-columns:32px 1fr}
+  .exec-row>div:nth-child(3),.exec-row>div:nth-child(4){display:none}
+  .exec-row.header>div:nth-child(3),.exec-row.header>div:nth-child(4){display:none}
+  .slide-change-body,.script-ba{grid-template-columns:1fr}
+  .slide-before{border-right:none;border-bottom:1px solid var(--border)}
+  .script-ba>div:first-child{border-right:none;border-bottom:1px solid var(--border)}
+  .stat-row{flex-direction:column}
+  .toc{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header class="page-header">
+<div class="wrap">
+  <div class="doc-badge">Internal Proposal</div>
+  <h1>VSL Revision Proposal</h1>
+  <p class="lead">Aligning the current VSL slides and voiceover script with high-ticket research findings for the $25K&ndash;$100K price point. Every change is documented with before/after comparisons.</p>
+</div>
+</header>
+
+<!-- ═══════════════ TOC ═══════════════ -->
+<nav class="toc">
+<div class="toc-inner">
+  <a href="#summary">Summary</a>
+  <a href="#change1">1. Pricing</a>
+  <a href="#change2">2. CTA</a>
+  <a href="#change3">3. Product Model</a>
+  <a href="#change4">4. Positioning</a>
+  <a href="#change5">5. Urgency</a>
+  <a href="#change6">6. Slide Details</a>
+  <a href="#change7">7. Script Tone</a>
+  <a href="#change8">8. Structure</a>
+  <a href="#inventory">Inventory</a>
+</div>
+</nav>
+
+<!-- ═══════════════ EXECUTIVE SUMMARY ═══════════════ -->
+<section class="section" id="summary">
+<div class="wrap">
+
+  <span class="section-tag tag-navy">Executive Summary</span>
+  <h2 class="section-title">The 5 Critical Changes</h2>
+  <p>The current VSL was built as a <strong>signal publication sales tool</strong> with visible pricing and a "Schedule a Call" CTA. The research conclusively shows this approach is wrong for $25K&ndash;$100K. The VSL must shift from <em>"here's the price, schedule a call"</em> to <em>"this is extraordinary &mdash; apply to see if you qualify."</em></p>
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-num" style="color:var(--red)">28</div><div class="stat-label">Slides Need Changes</div></div>
+    <div class="stat-box"><div class="stat-num">71</div><div class="stat-label">Total Slides</div></div>
+    <div class="stat-box"><div class="stat-num">10</div><div class="stat-label">Pricing Slides to Fix</div></div>
+    <div class="stat-box"><div class="stat-num">3</div><div class="stat-label">CTA Slides to Fix</div></div>
+  </div>
+
+  <div class="exec-grid">
+    <div class="exec-row header">
+      <div>#</div>
+      <div>Issue</div>
+      <div>Current (Wrong)</div>
+      <div>Required (Right)</div>
+    </div>
+    <div class="exec-row">
+      <div class="exec-num">1</div>
+      <div class="exec-issue">Pricing shown in VSL</div>
+      <div class="exec-before">$8,333 / $16,667 / $33,333 visible across 10+ slides</div>
+      <div class="exec-after">Remove ALL pricing &mdash; let the sales call handle it</div>
+    </div>
+    <div class="exec-row">
+      <div class="exec-num">2</div>
+      <div class="exec-issue">CTA is "Schedule a Call"</div>
+      <div class="exec-before">Passive, unqualified, no exclusivity</div>
+      <div class="exec-after">"Apply Now &mdash; See If You Qualify" (application-first)</div>
+    </div>
+    <div class="exec-row">
+      <div class="exec-num">3</div>
+      <div class="exec-issue">Product model mismatch</div>
+      <div class="exec-before">"Signal publisher &mdash; you decide how to act"</div>
+      <div class="exec-after">"AI-managed portfolios via RIA partner"</div>
+    </div>
+    <div class="exec-row">
+      <div class="exec-num">4</div>
+      <div class="exec-issue">Mass-market positioning</div>
+      <div class="exec-before">"$23/day, less than lunch"; compared to Motley Fool</div>
+      <div class="exec-after">"Private research firm"; anchor against Bloomberg ($32K/yr)</div>
+    </div>
+    <div class="exec-row">
+      <div class="exec-num">5</div>
+      <div class="exec-issue">FOMO-based urgency</div>
+      <div class="exec-before">"Watching from the outside" / pulsing "LIVE" badges</div>
+      <div class="exec-after">Capacity limits, application exclusivity, milestone-based scarcity</div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ═══════════════ CHANGE 1: PRICING ═══════════════ -->
+<section class="section" id="change1">
+<div class="wrap">
+
+  <span class="section-tag tag-red">P0 &mdash; Must Change</span>
+  <h2 class="section-title">Change 1: Remove All Pricing from the VSL</h2>
+
+  <blockquote>
+    "If you put $25K on a VSL page, you lose 90% of qualified buyers before they ever talk to you."
+    <cite>&mdash; Dan Henry</cite>
+  </blockquote>
+  <blockquote>
+    "The VSL should NOT mention specific pricing. Every expert unanimously agrees on this for $25K+."
+    <cite>&mdash; High-Ticket VSL Research Report</cite>
+  </blockquote>
+
+  <h3>Slides That Show Pricing</h3>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 20</span>
+      <span class="slide-change-title">"Introducing The Wealth Series" &mdash; Tier Introduction</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p>"A &mdash; Atlas <code>$8,333/yr</code><br>T &mdash; Titan <code>$16,667/yr</code><br>E &mdash; Everest <code>$33,333/yr</code>"</p>
+        <p style="font-size:12px;color:var(--red)">Direct price reveal on the introduction slide.</p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p>"Atlas &mdash; 3 portfolios<br>Titan &mdash; 3 portfolios<br>Everest &mdash; 5 portfolios"</p>
+        <p style="font-size:12px;color:var(--green-dark)">Show tier names and portfolio counts only. Zero pricing.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 21</span>
+      <span class="slide-change-title">Full Pricing Table</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p>Full pricing grid: Atlas <code>$8,333/yr</code>, Titan <code>$16,667/yr</code>, Everest <code>$33,333/yr</code> with portfolio counts, holdings, and risk levels per tier.</p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p>Remove all dollar amounts. Keep tier names, portfolio counts, holdings counts, and risk levels. Replace price column with "Apply for Details".</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 47</span>
+      <span class="slide-change-title">"What Does This Cost?" &mdash; Price Anchoring</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p>Development costs (<code>$200K/yr</code> ML, <code>$50K/yr</code> data, <code>$50K/yr</code> cloud, <code>$100M+</code> raised) followed by: "You do not pay $100 million. Here is how it works." &rarr; transitions to tier pricing.</p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p><span class="keep-badge">Keep</span> Development cost anchoring &mdash; it's effective.<br><br><span class="replace-badge">Replace</span> transition: "The technology behind this system represents over $100 million in investment. And for the first time, it's available to qualified individual investors."<br><br><strong>Add Bloomberg anchor:</strong> "A single Bloomberg Terminal costs $32,000/yr &mdash; and it doesn't generate signals, doesn't manage portfolios, and doesn't write reasoning notes."<br><br>Do NOT transition to tier pricing.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 48</span>
+      <span class="slide-change-title">Atlas Pricing Card</span>
+      <span class="remove-badge" style="margin-left:auto">Remove &amp; Replace</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p>"Atlas: <code>$8,333/year</code> / <code>$23/day</code> / <code>$42/signal</code>"<br>Full price breakdown with daily cost and per-signal cost.</p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p><strong>"ATLAS &mdash; Your Entry to AI-Managed Portfolios"</strong><br>3 portfolios, up to 31 holdings, three risk levels, weekly AI rebalancing, full reasoning documentation. Performance highlights. <strong>Zero pricing.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 49</span>
+      <span class="slide-change-title">Titan Pricing Card</span>
+      <span class="remove-badge" style="margin-left:auto">Remove &amp; Replace</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p>"Titan: <code>$16,667/year</code> / <code>$46/day</code> / Less than dinner for two"</p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p><strong>"TITAN &mdash; The Full Arsenal"</strong><br>3 portfolios, up to 40 holdings, expanded sector coverage, Dynamic Upside strategy spotlight. <strong>Zero pricing.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 50</span>
+      <span class="slide-change-title">Everest Pricing Card</span>
+      <span class="remove-badge" style="margin-left:auto">Remove &amp; Replace</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p>"Everest: <code>$33,333/year</code> / <code>$91/day</code> / Institutional-grade AI"</p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p><strong>"EVEREST &mdash; Maximum Intelligence"</strong><br>5 portfolios, up to 51 holdings, all 5 strategies, Momentum Ascent spotlight (+52.8%). <strong>Zero pricing.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 51</span>
+      <span class="slide-change-title">"Lock In Your Rate"</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p>3-year rate lock, grandfathering language. Implies a specific price exists that you're locking in.</p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p><strong>"Founding Member Advantage"</strong><br>"Founding members lock in their rate permanently. As the AI improves, as we add new models &mdash; founding member pricing never increases." No specific dollar amounts.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 53</span>
+      <span class="slide-change-title">FAQ: "$8,333 a year is a lot."</span>
+      <span class="remove-badge" style="margin-left:auto">Replace Entirely</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p>Literally states the price in the objection: <code>"$8,333 a year is a lot."</code> + <code>$23/day</code>, <code>$42/signal</code> breakdown.</p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p><strong>"Is this a significant investment?"</strong><br>"This is an institutional-grade AI system backed by $100M+ in development capital. We're selective about who we work with because performance matters. Your strategy call will cover exactly how the investment works &mdash; and whether it's the right fit for your portfolio."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 66</span>
+      <span class="slide-change-title">Summary Stats</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p>Includes <code>"$8,333/yr Starting tier"</code> as a summary stat.</p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p>Replace with <strong>"Selective Enrollment"</strong> or <strong>"Application Required"</strong>.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>Corresponding Script Changes</h3>
+
+  <div class="script-change">
+    <div class="script-label">Slide 19 Voiceover</div>
+    <div class="script-ba">
+      <div><span class="ba-label ba-before">Before</span><br>"starting at $8,333 per year"</div>
+      <div><span class="ba-label ba-after">After</span><br>"available to qualified investors through a selective enrollment process"</div>
+    </div>
+  </div>
+
+  <div class="script-change">
+    <div class="script-label">Slide 40 Voiceover</div>
+    <div class="script-ba">
+      <div><span class="ba-label ba-before">Before</span><br>"starting at $8,333 per year"</div>
+      <div><span class="ba-label ba-after">After</span><br>"available through our private enrollment process"</div>
+    </div>
+  </div>
+
+  <div class="script-change">
+    <div class="script-label">Slide 47 Voiceover</div>
+    <div class="script-ba">
+      <div><span class="ba-label ba-before">Before</span><br>"But you do not pay one hundred million dollars. You don't pay one million. Here's how it works."</div>
+      <div><span class="ba-label ba-after">After</span><br>"The technology behind this system represents over one hundred million dollars in investment. And for the first time, it's available to individual investors who qualify."</div>
+    </div>
+  </div>
+
+  <div class="script-change">
+    <div class="script-label">Slide 48 Voiceover &mdash; Full Atlas Pricing Paragraph</div>
+    <div class="script-ba">
+      <div><span class="ba-label ba-before">Before</span><br>"Your investment for Atlas is $8,333 per year. That's $23 a day. You probably spend more than that on lunch. And you'll receive roughly 200 actionable signals per year. That's about $42 per signal..."</div>
+      <div><span class="ba-label ba-after">After</span><br>"Atlas gives you access to three AI-managed portfolios &mdash; each calibrated to a different risk level. High growth, balanced, and defensive. The AI generates signals across up to 31 holdings, and an RIA partner executes every trade."</div>
+    </div>
+  </div>
+
+  <div class="script-change">
+    <div class="script-label">Slide 49 Voiceover &mdash; Full Titan Pricing Paragraph</div>
+    <div class="script-ba">
+      <div><span class="ba-label ba-before">Before</span><br>"Titan is $16,667 per year. About $46 a day. Less than dinner for two..."</div>
+      <div><span class="ba-label ba-after">After</span><br>"Titan expands the portfolio to 40 holdings &mdash; broader diversification, deeper sector coverage, and the AI's full analytical arsenal."</div>
+    </div>
+  </div>
+
+  <div class="script-change">
+    <div class="script-label">Slide 50 Voiceover &mdash; Full Everest Pricing Paragraph</div>
+    <div class="script-ba">
+      <div><span class="ba-label ba-before">Before</span><br>"Everest is $33,333 per year. That's $91 a day for what is, frankly, an institutional-grade trading intelligence system."</div>
+      <div><span class="ba-label ba-after">After</span><br>"Everest is the flagship. Five portfolios. Up to 51 holdings. Maximum diversification. And access to the AI's most sophisticated signal set &mdash; including Momentum Ascent, the top-performing portfolio at plus 52.8 percent."</div>
+    </div>
+  </div>
+
+  <div class="script-change">
+    <div class="script-label">Slide 53 Voiceover &mdash; "$8,333 a year is a lot" FAQ</div>
+    <div class="script-ba">
+      <div><span class="ba-label ba-before">Before</span><br>"$8,333 a year is a lot. It is. And it should be... That's $23 a day. About $42 per signal. Each signal is designed to produce hundreds &mdash; sometimes thousands &mdash; in returns."</div>
+      <div><span class="ba-label ba-after">After</span><br>"Is this a significant investment? Yes. This is institutional-grade AI &mdash; the kind of technology that drives the most sophisticated strategies on Wall Street. Your strategy call will cover exactly how the investment works for your specific portfolio size."</div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ═══════════════ CHANGE 2: CTA ═══════════════ -->
+<section class="section" id="change2">
+<div class="wrap">
+
+  <span class="section-tag tag-red">P0 &mdash; Must Change</span>
+  <h2 class="section-title">Change 2: Application-First CTA</h2>
+
+  <blockquote>
+    "Apply Now &mdash; See If You Qualify" is the highest-performing CTA text for $25K+. The Application + Call model shows 25&ndash;50% close rates vs. 15&ndash;30% for direct call booking.
+    <cite>&mdash; High-Ticket VSL Research Report</cite>
+  </blockquote>
+  <blockquote>
+    "The application is the single most important page in a high-ticket funnel."
+    <cite>&mdash; Cole Gordon</cite>
+  </blockquote>
+
+  <h3>Slide CTA Changes</h3>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 68</span>
+      <span class="slide-change-title">"What happens when you click below"</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p>1. <strong>Schedule a Call</strong> &mdash; 30-minute conversation, not a sales pitch<br>2. <strong>Review the Signals</strong><br>3. <strong>If It's Right for You</strong> &mdash; Subscribe and start receiving signals</p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p>1. <strong>Submit Your Application</strong> &mdash; We review every application personally<br>2. <strong>If You Qualify, We'll Reach Out</strong> &mdash; A private strategy session to review the AI system in detail<br>3. <strong>Your Portfolio, Managed by AI</strong> &mdash; Onboarding begins within 48 hours</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 70</span>
+      <span class="slide-change-title">Primary CTA Button</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p>Button: <code>"Schedule Your Call"</code><br>"Speak with our team. Review the signal portfolios. Ask any question. No commitment."</p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p>Button: <code>"Apply Now &mdash; See If You Qualify"</code><br>"We review every application personally. If you're a fit, we'll invite you to a private strategy session where we'll walk through the AI system and your specific portfolio."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 71</span>
+      <span class="slide-change-title">Final CTA + Disclaimer</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p>Button: <code>"Schedule Your Call"</code></p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p>Button: <code>"Apply Now &mdash; See If You Qualify"</code></p>
+      </div>
+    </div>
+  </div>
+
+  <h3>Script CTA Changes</h3>
+
+  <div class="script-change">
+    <div class="script-label">Slide 68 Voiceover</div>
+    <div class="script-ba">
+      <div><span class="ba-label ba-before">Before</span><br>"Click below to schedule a call with our team. It's a 30-minute conversation &mdash; not a sales pitch."</div>
+      <div><span class="ba-label ba-after">After</span><br>"Click below to submit your application. We review every application personally &mdash; and if you're a fit, we'll invite you to a private strategy session where we walk through the AI system, review recent signals, and discuss whether this is the right fit for your portfolio."</div>
+    </div>
+  </div>
+
+  <div class="script-change">
+    <div class="script-label">Slide 70 Voiceover</div>
+    <div class="script-ba">
+      <div><span class="ba-label ba-before">Before</span><br>"Click below. Schedule your call. And see what AI-powered trading signals can do for your capital."</div>
+      <div><span class="ba-label ba-after">After</span><br>"Click below to apply. We're selective about who we work with &mdash; because signal quality matters, and performance depends on it. If you qualify, you'll hear from us within 48 hours."</div>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>Note:</strong> The "Apply Now" button needs to link to an application page (separate from checkout.html) with a 6-question qualification form: name/email/phone, experience level, portfolio size, investment goals, referral source, and motivation (open text). Building this page is a separate deliverable.
+  </div>
+
+</div>
+</section>
+
+<!-- ═══════════════ CHANGE 3: PRODUCT MODEL ═══════════════ -->
+<section class="section" id="change3">
+<div class="wrap">
+
+  <span class="section-tag tag-red">P0 &mdash; Must Change</span>
+  <h2 class="section-title">Change 3: Signal Publisher &rarr; AI-Managed Portfolios via RIA</h2>
+
+  <p>This is the <strong>single largest content change</strong> required. The current VSL positions the product as a signal publication &mdash; "you decide how to act." The actual product at $25K&ndash;$100K is AI-managed portfolios executed by an RIA partner.</p>
+
+  <table>
+    <tr><th style="width:50%">Current Positioning (Wrong)</th><th style="width:50%">Required Positioning (Right)</th></tr>
+    <tr>
+      <td class="t-red">"TradeAlgo publishes signals. That's all we do."</td>
+      <td class="t-green">TradeAlgo builds the AI and generates the signals</td>
+    </tr>
+    <tr>
+      <td class="t-red">"You decide how to act."</td>
+      <td class="t-green">A licensed RIA partner manages the portfolios and executes all trades</td>
+    </tr>
+    <tr>
+      <td class="t-red">"Like Motley Fool or Stansberry Research"</td>
+      <td class="t-green">Subscriber capital managed by RIA, held at institutional custodian</td>
+    </tr>
+    <tr>
+      <td class="t-red">"Optional: prefer hands-free?"</td>
+      <td class="t-green">Hands-free execution IS the default product</td>
+    </tr>
+  </table>
+
+  <h3>Slides That Need Product Model Updates</h3>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 22</span>
+      <span class="slide-change-title">"SIGNAL PUBLISHER" Flow Diagram</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p>TradeAlgo &rarr; Publishes &rarr; AI Signals &rarr; You decide &rarr; You Act<br><br>"Like Motley Fool or Stansberry Research &mdash; except the signals are AI-generated."</p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p><strong>"HOW IT WORKS"</strong><br>TradeAlgo AI &rarr; Generates Signals &rarr; RIA Partner &rarr; Manages Your Portfolio<br><br>"TradeAlgo builds the AI. A licensed RIA partner handles portfolio management and trade execution. Your capital is held at an institutional custodian &mdash; never with TradeAlgo."<br><br><span class="remove-badge">Remove</span> Motley Fool comparison entirely.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 26</span>
+      <span class="slide-change-title">Tier Overview &mdash; User Agency</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p>"You choose the risk level. The AI publishes the signals. <code>You decide how to act.</code>"</p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p>"You choose the risk level. The AI generates the signals. <strong>The RIA partner executes every trade.</strong>"</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 42</span>
+      <span class="slide-change-title">"Three Simple Steps"</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p>1. Choose Your Tier<br>2. <code>Subscribe to Signals</code><br>3. <code>AI Publishes, You Decide</code></p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p>1. Apply &amp; Get Approved<br>2. <strong>Onboard with the RIA Partner</strong><br>3. <strong>AI Manages, You See Everything</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 43</span>
+      <span class="slide-change-title">Publisher Flow Diagram</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p>"TradeAlgo publishes signals. We never touch your money."<br><code>"Optional: prefer hands-free? We work with a brokerage partner..."</code></p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p>"TradeAlgo builds the AI. A licensed RIA partner manages your portfolio and executes every trade. Your capital is held at an institutional custodian."<br><br><span class="remove-badge">Remove</span> "Optional" framing &mdash; managed execution IS the product.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 46</span>
+      <span class="slide-change-title">Tagline Slide</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p>"The AI publishes signals. You read the reasoning. <code>You decide.</code>"</p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p>"The AI generates signals. The RIA partner executes. <strong>You see everything.</strong>"</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 54</span>
+      <span class="slide-change-title">FAQ: "Is AI safe for investing?"</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p>"TradeAlgo publishes signals. That's it. TradeAlgo doesn't touch your money."</p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p>"TradeAlgo builds the AI that generates the signals. A licensed RIA partner manages the portfolio and executes trades. TradeAlgo never has access to your capital. The AI's reasoning is fully documented and transparent."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 59</span>
+      <span class="slide-change-title">TradeAlgo Brand Slide</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p>"They generate the signals. That's all they do."</p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p><span class="keep-badge">Keep</span> existing language. <strong>Add:</strong> "A licensed RIA partner handles portfolio management and trade execution. Your capital is held at an institutional custodian."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 60</span>
+      <span class="slide-change-title">Publishing Credibility</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p>"TradeAlgo is a signal publisher &mdash; <code>like Motley Fool</code>"</p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p>"TradeAlgo is a technology company that builds AI signal-generation systems. The signals power portfolios managed by a licensed RIA partner &mdash; giving you institutional-grade AI portfolio management."<br><br><span class="remove-badge">Remove</span> Motley Fool comparison.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 71</span>
+      <span class="slide-change-title">Legal Disclaimer</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p>"TradeAlgo is an analytics and signal publishing company... The Wealth Series is a 3-year signal subscription license."</p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p>"The Wealth Series is an AI-managed portfolio program. Portfolio management and trade execution are performed by a licensed RIA partner. Client funds are held at an institutional custodian. TradeAlgo is a technology company that develops AI signal-generation systems; TradeAlgo does not provide investment advice, manage accounts, or have access to client funds."</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>Script "Banned Words" Update</h3>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num" style="background:var(--gold)">Script</span>
+      <span class="slide-change-title">Banned Words List</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p><strong>Banned:</strong> securities, registered investment advisor, <code>RIA</code>, fiduciary, <code>custodian</code>, qualified custodian, SEC, regulated, compliance, <code>manages client accounts</code>, <code>executes trades</code>, three-entity structure</p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p><strong>Still Banned:</strong> securities, fiduciary, qualified custodian, SEC, regulated, compliance, three-entity structure<br><br><strong>Now Allowed (with care):</strong><br>&bull; "licensed RIA partner"<br>&bull; "institutional custodian"<br>&bull; "manages" (for RIA partner only, never for TradeAlgo)<br>&bull; "executes trades" (for RIA partner only)</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ═══════════════ CHANGE 4: POSITIONING ═══════════════ -->
+<section class="section" id="change4">
+<div class="wrap">
+
+  <span class="section-tag tag-gold">P1 &mdash; Should Change</span>
+  <h2 class="section-title">Change 4: Mass-Market &rarr; Institutional Positioning</h2>
+
+  <blockquote>
+    Position as "private research firm," NOT "signal service" or "newsletter." Anchor against Bloomberg ($32K/yr), family offices, hedge funds &mdash; NOT Motley Fool.
+    <cite>&mdash; High-Ticket VSL Research Report</cite>
+  </blockquote>
+
+  <h3>Language to Remove</h3>
+  <table>
+    <tr><th>Current Language</th><th>Why It's Wrong</th><th>Appears On</th></tr>
+    <tr><td class="t-red">"Like Motley Fool or Stansberry Research"</td><td>Anchors against $99&ndash;$199/yr products</td><td>Slides 22, 60</td></tr>
+    <tr><td class="t-red">"$23/day, less than lunch"</td><td>Mass-market affordability framing</td><td>Slides 48, 53</td></tr>
+    <tr><td class="t-red">"$42 per signal"</td><td>Commoditizes the product</td><td>Slides 48, 53</td></tr>
+    <tr><td class="t-red">"$46/day, less than dinner for two"</td><td>Same mass-market framing</td><td>Slide 49</td></tr>
+    <tr><td class="t-red">"Starting tier"</td><td>Implies cheap entry point</td><td>Slide 66</td></tr>
+    <tr><td class="t-red">"Subscribe to signals"</td><td>Subscription framing = Netflix for trading</td><td>Slide 42</td></tr>
+    <tr><td class="t-red">"Signal publisher"</td><td>Newsletter-level positioning</td><td>Slides 22, 60</td></tr>
+  </table>
+
+  <h3>Language to Add</h3>
+  <table>
+    <tr><th>New Language</th><th>Purpose</th><th>Where</th></tr>
+    <tr><td class="t-green">"Institutional-grade AI portfolio management"</td><td>Elevates to institutional category</td><td>Hero, summary slides</td></tr>
+    <tr><td class="t-green">"Previously available only to family offices"</td><td>Exclusivity positioning</td><td>Slide 18 area</td></tr>
+    <tr><td class="t-green">"Bloomberg Terminal costs $32,000/yr for data alone"</td><td>Price anchor against institutional tools</td><td>Slide 47</td></tr>
+    <tr><td class="t-green">"Limited number of qualified investors"</td><td>Capacity constraint</td><td>Near CTA</td></tr>
+    <tr><td class="t-green">"Most transparent AI-managed portfolio system"</td><td>Updated category language</td><td>Slides 28, 61</td></tr>
+    <tr><td class="t-green">"Private research firm" / "institutional AI platform"</td><td>Category positioning</td><td>Throughout</td></tr>
+  </table>
+
+  <h3>Key Slide Positioning Changes</h3>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 28</span>
+      <span class="slide-change-title">Core Positioning Statement</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p>"The most transparent AI <code>signal service</code> available to individual investors"</p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p>"The most transparent AI-<strong>managed portfolio system</strong> available to individual investors"</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 47</span>
+      <span class="slide-change-title">Value Framing &mdash; Add Bloomberg Anchor</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p>Development cost anchoring &rarr; transitions to tier pricing.</p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p><span class="keep-badge">Keep</span> $100M development anchor.<br><br><strong>Add:</strong> "A single Bloomberg Terminal costs $32,000 per year &mdash; and it doesn't generate signals, doesn't manage portfolios, and doesn't write reasoning notes. This AI does all of that."<br><br>Transition to application CTA, NOT pricing.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 56</span>
+      <span class="slide-change-title">Wealthfront/Betterment Comparison</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p><span class="keep-badge">Keep</span> &mdash; the robo-advisor comparison is strong.</p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p><strong>Add:</strong> "And unlike institutional platforms that require $5 million minimums, the Wealth Series is accessible to qualified investors with portfolios starting at $250K."</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ═══════════════ CHANGE 5: URGENCY ═══════════════ -->
+<section class="section" id="change5">
+<div class="wrap">
+
+  <span class="section-tag tag-gold">P1 &mdash; Should Change</span>
+  <h2 class="section-title">Change 5: FOMO &rarr; Real Scarcity</h2>
+
+  <blockquote>
+    Countdown timers, "LIVE" pulsing badges, and "watching from the outside" language = amateur internet marketing that repels HNW buyers. Use real scarcity: cohort-based enrollment, capacity limits (alpha decay), milestone-based urgency, application-based exclusivity.
+    <cite>&mdash; High-Ticket VSL Research Report</cite>
+  </blockquote>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 63</span>
+      <span class="slide-change-title">"LIVE" Pulsing Badge</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p><code>"LIVE"</code> pulsing badge + "While you've been watching this video, the AI has been analyzing 86 stocks..."</p>
+        <p style="font-size:12px;color:var(--red)">Pulsing badges are the #1 tactic research says repels sophisticated buyers.</p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p><span class="remove-badge">Remove</span> pulsing "LIVE" animation.<br><br><span class="keep-badge">Keep</span> factual statement. Reframe: "The AI runs continuously. It evaluates 86 stocks every week, generates signals, and the RIA partner executes. The system doesn't stop."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 64</span>
+      <span class="slide-change-title">FOMO Pressure</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p>"Every week you wait is a week of AI-powered intelligence <code>you're not receiving</code>"</p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p>Opportunity cost framing: "Every signal cycle generates documented decisions across 86 stocks. The system produces roughly 200 signals per year per portfolio. The question isn't whether the AI works. It's whether you want it working for your portfolio."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 65</span>
+      <span class="slide-change-title">"Watching from the outside"</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p>"How many more weekly rebalances do you want to <code>watch from the outside</code>?"</p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p>Capacity-based scarcity: "We limit enrollment to maintain signal quality and portfolio performance. When too many investors follow identical signals, alpha decays &mdash; the edge erodes. That's why we review every application and cap enrollment at each tier."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 69</span>
+      <span class="slide-change-title">"AI STATUS: ACTIVE" Pulsing Dot</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p><code>"AI STATUS: ACTIVE"</code> with pulsing dot + "The only question is whether you'll be watching from the inside &mdash; or the outside"</p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p><span class="remove-badge">Remove</span> pulsing "ACTIVE" badge.<br><br>Factual status: "Last rebalance: March 4. Next cycle: This week. All 14 portfolios updated."<br><br>"Submit your application below. If you're a fit, we'll schedule your private strategy session within 48 hours."</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>New Scarcity Mechanisms to Add</h3>
+  <ol>
+    <li><strong>"Limited to [X] founding members per tier"</strong> &mdash; Alpha decay is real. More investors following identical signals = less alpha.</li>
+    <li><strong>"Enrollment opens quarterly"</strong> &mdash; Cohort-based onboarding. "Q2 2026 cohort is now accepting applications."</li>
+    <li><strong>"Founding member pricing"</strong> &mdash; "As the AI's track record lengthens, pricing increases. Current members are locked in permanently."</li>
+    <li><strong>"Application required"</strong> &mdash; The application itself IS the scarcity mechanism. "Not everyone is accepted."</li>
+  </ol>
+
+</div>
+</section>
+
+<!-- ═══════════════ CHANGE 6: ADDITIONAL SLIDES ═══════════════ -->
+<section class="section" id="change6">
+<div class="wrap">
+
+  <span class="section-tag tag-navy">P2 &mdash; Polish</span>
+  <h2 class="section-title">Change 6: Additional Slide-Level Issues</h2>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 19</span>
+      <span class="slide-change-title">Dashboard Teaser</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p>Shows performance numbers + <code>"starting at $8,333 per year"</code></p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p>Remove price. Keep performance numbers and tier names.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 44</span>
+      <span class="slide-change-title">Weekly Notification Mockup</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p>"14 positions adjusted across your portfolio"</p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p>"Your RIA partner executed 14 position adjustments based on this week's AI signals."</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <span class="slide-num">Slide 57</span>
+      <span class="slide-change-title">FAQ: "Why 3 years?"</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <p><span class="keep-badge">Keep</span> compounding argument &mdash; it's strong. <span class="keep-badge">Keep</span> "rate is locked in."</p>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <p>Reframe: "Founding members lock in their rate. As the AI improves, as the track record lengthens, pricing increases. But your rate never changes." Remove any dollar amounts. <strong>Add:</strong> "Three years gives us time to demonstrate the AI's full capability across complete market cycles."</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ═══════════════ CHANGE 7: TONE ═══════════════ -->
+<section class="section" id="change7">
+<div class="wrap">
+
+  <span class="section-tag tag-navy">P2 &mdash; Polish</span>
+  <h2 class="section-title">Change 7: Script Tone Adjustments</h2>
+
+  <p>The script's emotional arc (INTRIGUE &rarr; CURIOSITY &rarr; FASCINATION &rarr; BELIEF &rarr; DESIRE &rarr; CONVICTION) is correct. The "Bloomberg documentary narrator" direction is right. But several passages lapse into mass-market enthusiasm.</p>
+
+  <h3>Tone Issues</h3>
+
+  <div class="script-change">
+    <div class="script-label">Slide 48 VO &mdash; "More than lunch"</div>
+    <div class="script-ba">
+      <div><span class="ba-label ba-before">Before</span><br>"Let me say that again. For $8,333 a year... That's $23 a day. <strong>You probably spend more than that on lunch.</strong>"<br><br><em style="color:var(--red);font-size:12px">"More than lunch" is a $49 newsletter tactic, not a $25K tactic.</em></div>
+      <div><span class="ba-label ba-after">After</span><br>Remove entirely. No pricing, no lunch comparisons. Describe Atlas capabilities in institutional register.</div>
+    </div>
+  </div>
+
+  <div class="script-change">
+    <div class="script-label">Slide 49 VO &mdash; "Dinner for two"</div>
+    <div class="script-ba">
+      <div><span class="ba-label ba-before">Before</span><br>"Less than <strong>dinner for two</strong> &mdash; for an edge that most institutional desks would pay millions to access."<br><br><em style="color:var(--red);font-size:12px">Dinner comparison is mass-market. The institutional comparison is good.</em></div>
+      <div><span class="ba-label ba-after">After</span><br><span class="keep-badge">Keep</span> the institutional comparison. <span class="remove-badge">Remove</span> the dinner line.</div>
+    </div>
+  </div>
+
+  <div class="script-change">
+    <div class="script-label">Slide 53 VO &mdash; "Hundreds, sometimes thousands"</div>
+    <div class="script-ba">
+      <div><span class="ba-label ba-before">Before</span><br>"Each signal is designed to produce <strong>hundreds &mdash; sometimes thousands &mdash; in returns.</strong>"<br><br><em style="color:var(--red);font-size:12px">Implies specific return expectations. Regulatory risk. Sounds like a guru pitch.</em></div>
+      <div><span class="ba-label ba-after">After</span><br>"This is institutional-grade AI &mdash; the kind of technology that drives the most sophisticated strategies on Wall Street."</div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ═══════════════ CHANGE 8: STRUCTURE ═══════════════ -->
+<section class="section" id="change8">
+<div class="wrap">
+
+  <span class="section-tag tag-navy">Structural</span>
+  <h2 class="section-title">Change 8: Slide Flow Restructuring</h2>
+
+  <h3>Current vs. Proposed Flow</h3>
+  <p>The pricing section (slides 47&ndash;51) becomes a <strong>value framing</strong> section. No other structural changes.</p>
+
+  <table>
+    <tr><th>Slides</th><th>Current Section</th><th>Proposed Section</th><th>Change?</th></tr>
+    <tr><td>1&ndash;5</td><td>Hook</td><td>Hook</td><td><span class="keep-badge">Keep</span></td></tr>
+    <tr><td>6&ndash;10</td><td>Problem</td><td>Problem</td><td><span class="keep-badge">Keep</span></td></tr>
+    <tr><td>11&ndash;16</td><td>Origin Story</td><td>Origin Story</td><td><span class="keep-badge">Keep</span></td></tr>
+    <tr><td>17</td><td>Dramatic Pause</td><td>Dramatic Pause</td><td><span class="keep-badge">Keep</span></td></tr>
+    <tr><td>18&ndash;20</td><td>Reveal</td><td>Reveal (remove pricing from 19&ndash;20)</td><td style="color:var(--gold);font-weight:600">Minor</td></tr>
+    <tr><td>21&ndash;28</td><td>Solution</td><td>Solution (update model on 22, 26, 28)</td><td style="color:var(--gold);font-weight:600">Minor</td></tr>
+    <tr><td>29&ndash;40</td><td>Proof / Track Record</td><td>Proof / Track Record</td><td><span class="keep-badge">Keep</span></td></tr>
+    <tr><td>41&ndash;46</td><td>How It Works</td><td>How It Works (update model)</td><td style="color:var(--gold);font-weight:600">Minor</td></tr>
+    <tr style="background:var(--red-bg)"><td><strong>47&ndash;51</strong></td><td><strong>PRICING</strong></td><td><strong>VALUE FRAMING</strong> (no prices)</td><td style="color:var(--red);font-weight:700">Major</td></tr>
+    <tr><td>52&ndash;57</td><td>Objections</td><td>Objections (update 53, 54)</td><td style="color:var(--gold);font-weight:600">Minor</td></tr>
+    <tr><td>58&ndash;62</td><td>Authority</td><td>Authority (update 59, 60)</td><td style="color:var(--gold);font-weight:600">Minor</td></tr>
+    <tr><td>63&ndash;65</td><td>Urgency (FOMO)</td><td>Urgency (real scarcity)</td><td style="color:var(--red);font-weight:700">Major</td></tr>
+    <tr><td>66&ndash;67</td><td>Summary</td><td>Summary (remove price from 66)</td><td style="color:var(--gold);font-weight:600">Minor</td></tr>
+    <tr style="background:var(--red-bg)"><td><strong>68&ndash;71</strong></td><td><strong>CTA: "Schedule a Call"</strong></td><td><strong>CTA: "Apply Now"</strong></td><td style="color:var(--red);font-weight:700">Major</td></tr>
+  </table>
+
+  <h3>Objection Section Update (Slides 52&ndash;57)</h3>
+  <table>
+    <tr><th>Slide</th><th>Objection</th><th>Change</th></tr>
+    <tr><td>52</td><td>"What about market crashes?"</td><td><span class="keep-badge">Keep as-is</span> &mdash; strong, data-driven</td></tr>
+    <tr><td>53</td><td>"$8,333 a year is a lot."</td><td><span class="remove-badge">Replace</span> &rarr; "Is this a significant investment?" &mdash; no dollar amounts</td></tr>
+    <tr><td>54</td><td>"Is AI safe for investing?"</td><td><span class="replace-badge">Update</span> for managed model (RIA partner framing)</td></tr>
+    <tr><td>55</td><td>"Why not just buy index funds?"</td><td><span class="keep-badge">Keep mostly</span> &mdash; change "AI signals" to "AI-managed portfolios"</td></tr>
+    <tr><td>56</td><td>"Wealthfront / Betterment?"</td><td><span class="keep-badge">Keep</span> + add institutional minimum comparison ($5M)</td></tr>
+    <tr><td>57</td><td>"Why 3 years?"</td><td><span class="keep-badge">Keep</span> compounding argument. Remove dollar references.</td></tr>
+  </table>
+
+</div>
+</section>
+
+<!-- ═══════════════ FULL INVENTORY ═══════════════ -->
+<section class="section" id="inventory">
+<div class="wrap">
+
+  <span class="section-tag tag-navy">Summary</span>
+  <h2 class="section-title">Full Change Inventory</h2>
+
+  <h3>By Priority</h3>
+
+  <h4><span class="priority p0">P0</span> Must Change &mdash; Breaks the funnel at $25K+</h4>
+  <ol>
+    <li>Remove ALL pricing from slides 20, 21, 48, 49, 50, 53, 66 and corresponding script</li>
+    <li>Change CTA from "Schedule Your Call" &rarr; "Apply Now &mdash; See If You Qualify" on slides 68, 70, 71</li>
+    <li>Update product model from "signal publisher" to "AI-managed portfolios via RIA partner" on slides 22, 26, 42, 43, 46, 54, 59, 60, 71</li>
+  </ol>
+
+  <h4><span class="priority p1">P1</span> Should Change &mdash; Significantly impacts positioning</h4>
+  <ol start="4">
+    <li>Remove Motley Fool / Stansberry comparisons; add Bloomberg anchor ($32K/yr)</li>
+    <li>Replace FOMO urgency with real scarcity (capacity limits, application exclusivity, founding member pricing)</li>
+    <li>Remove mass-market framing ("$23/day, less than lunch", "$42/signal", "dinner for two")</li>
+    <li>Update script banned words list to allow "RIA partner" and "institutional custodian"</li>
+  </ol>
+
+  <h4><span class="priority p2">P2</span> Polish &mdash; Refinement</h4>
+  <ol start="8">
+    <li>Update slide 51 from "Lock In Your Rate" to "Founding Member Advantage"</li>
+    <li>Remove pulsing "LIVE" / "ACTIVE" badges on slides 63, 69</li>
+    <li>Update legal disclaimer on slide 71 for managed portfolio model</li>
+    <li>Adjust tone directions in script for institutional register</li>
+  </ol>
+
+  <h3>Slides Affected</h3>
+
+  <div class="stat-row">
+    <div class="stat-box"><div class="stat-num" style="color:var(--red)">10</div><div class="stat-label">Pricing Removal</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:var(--red)">3</div><div class="stat-label">CTA Changes</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:var(--navy)">10</div><div class="stat-label">Product Model</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:var(--gold)">6</div><div class="stat-label">Positioning</div></div>
+    <div class="stat-box"><div class="stat-num" style="color:var(--gold)">4</div><div class="stat-label">Urgency / Scarcity</div></div>
+  </div>
+
+  <table>
+    <tr><th>Change Type</th><th>Slides Affected</th><th>Count</th></tr>
+    <tr><td>Pricing removal</td><td>19, 20, 21, 47, 48, 49, 50, 51, 53, 66</td><td><strong>10</strong></td></tr>
+    <tr><td>CTA changes</td><td>68, 70, 71</td><td><strong>3</strong></td></tr>
+    <tr><td>Product model updates</td><td>22, 26, 42, 43, 44, 46, 54, 59, 60, 71</td><td><strong>10</strong></td></tr>
+    <tr><td>Positioning changes</td><td>22, 28, 40, 47, 56, 60</td><td><strong>6</strong></td></tr>
+    <tr><td>Urgency / scarcity</td><td>63, 64, 65, 69</td><td><strong>4</strong></td></tr>
+    <tr style="background:var(--bg-off)"><td><strong>Total unique slides</strong></td><td colspan="2"><strong>~28 of 71 slides need changes</strong></td></tr>
+  </table>
+
+  <h3>Implementation Notes</h3>
+  <ol>
+    <li><strong>Slide count stays at 71</strong> &mdash; restructure content within existing slides to maintain timing and pacing</li>
+    <li><strong>Emotional arc is correct</strong> &mdash; INTRIGUE &rarr; CURIOSITY &rarr; FASCINATION &rarr; BELIEF &rarr; DESIRE &rarr; CONVICTION. Arc just needs to culminate in "Apply" instead of "Here's the price"</li>
+    <li><strong>Performance data stays</strong> &mdash; returns, portfolio names, AI reasoning excerpts, hedge data, drawdown data all remain. Proof section (29&ndash;40) is strong.</li>
+    <li><strong>Development cost anchoring stays</strong> &mdash; $100M+ is effective. Just don't follow it with tier pricing.</li>
+    <li><strong>Bloomberg anchor should be added</strong> &mdash; $32K/yr is the single most effective price anchor.</li>
+    <li><strong>Application page needs to be built</strong> &mdash; separate deliverable from VSL revision.</li>
+  </ol>
+
+</div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer class="page-footer">
+  <p>Proposal prepared March 2026 &middot; Based on high-ticket-vsl-cta-research.md &middot; Covers slides.html (71 slides) + script.md (full voiceover)</p>
+</footer>
+
+</body>
+</html>
