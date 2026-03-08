@@ -227,7 +227,7 @@ That's what this AI does. Except it doesn't take a team of fifty. It does it alo
 
 An AI analyzing 86 stocks across 15 sectors — with a signal track record you can verify yourself.
 
-Not a robo-advisor allocating to six ETFs. Not a chatbot picking stocks. [pause] A complete AI-managed portfolio platform — with a documented track record you can verify — available to qualified investors through a selective enrollment process.
+Not a robo-advisor allocating to six ETFs. Not a chatbot picking stocks. [pause] A complete AI signal platform — with a documented track record you can verify — available to qualified investors through a selective enrollment process.
 
 ---
 
@@ -300,7 +300,7 @@ You can read *exactly* why it recommended buying, selling, or holding every posi
 
 **[SLIDE 28 — 7:50]** "The most transparent AI signal service available to individual investors."
 
-This isn't a black box. It's the most transparent AI-managed portfolio system available to individual investors.
+This isn't a black box. It's the most transparent AI signal platform available to individual investors.
 
 [pause]
 
@@ -454,23 +454,23 @@ So how do you actually access this? [pause] It's simpler than you'd expect.
 
 Here's how it works. 3 steps.
 
-Step one: you apply. We review every application personally to ensure the right fit. Atlas, Titan, or Everest — each tier gives you access to AI-driven signal portfolios calibrated to different risk levels — high growth, balanced, and defensive.
+Step one: you apply. We review every application personally to ensure the right fit. It takes two minutes. No cost, no obligation.
 
 ---
 
 **[SLIDE 43 — 12:25]** Capital flow diagram.
 
-Step two: you get access to the signal system. Every week, the AI generates signals with full reasoning notes — and you decide how to act.
+Step two: if you qualify, you place a fully refundable five-hundred-dollar deposit to secure your private strategy session. That deposit applies in full toward your membership if you proceed — or you get every penny back if you don't.
 
 [pause]
 
-TradeAlgo never touches your money. You see every signal, every reasoning note, every allocation change. Prefer hands-free? An RIA partner can execute the signals automatically in a managed account — but that's entirely optional.
+Zero risk. The deposit simply reserves your consultation and ensures we're speaking with serious investors.
 
 ---
 
 **[SLIDE 44 — 12:50]** Weekly experience mockup.
 
-Step three: the AI goes to work. Every week, it evaluates every position, scores every stock, and generates rebalancing signals. You see everything — every allocation change, every reasoning note, every performance metric. You decide how to act.
+Step three: a thirty-minute private strategy session. We walk through the AI system, review recent signals, and discuss whether this is the right fit for your portfolio.
 
 ---
 
@@ -541,6 +541,8 @@ Now — here's what makes this even better. Founding members lock in their rate 
 
 Three years also matters for another reason. Compounding. This system is designed to build wealth over time. The AI's signals need time to navigate full market cycles — earnings seasons, Fed decisions, corrections, and rallies. A 3-year window is how institutional investors think — and it's why the results compound.
 
+The Q2 2026 founding cohort is now accepting applications.
+
 ---
 
 ## SCENE 9: Objection Handling — CONVICTION
@@ -568,7 +570,7 @@ Last month, the market pulled back. The AI's portfolios drew down 2 to 3.7 perce
 
 Yes. This is institutional-grade AI — the kind of technology that drives the most sophisticated strategies on Wall Street. We're selective about who we work with because performance matters.
 
-The system analyzes 86 stocks across 15 sectors every week, generates documented signals, and a licensed RIA partner manages your portfolio. The top portfolio returned plus 52.8 percent in its first year. Your strategy call will cover exactly how the investment works for your specific portfolio size.
+The system analyzes 86 stocks across 15 sectors every week and generates documented signals with full reasoning notes. The top portfolio returned plus 52.8 percent in its first year. Your strategy call will cover exactly how the investment works for your specific portfolio size.
 
 ---
 
@@ -576,9 +578,9 @@ The system analyzes 86 stocks across 15 sectors every week, generates documented
 
 "Is AI safe for investing?"
 
-TradeAlgo builds the AI that generates the signals. A licensed RIA partner manages the portfolio and executes every trade. Your capital is held at an institutional custodian — never with TradeAlgo.
+TradeAlgo builds the AI that generates the signals. You can act on them yourself, or optionally have an RIA partner manage execution. Either way, TradeAlgo never touches your money.
 
-And the AI's reasoning is documented and transparent — you can read exactly why it generated every signal. This is the most transparent AI-managed portfolio system available to individual investors.
+And the AI's reasoning is documented and transparent — you can read exactly why it generated every signal. This is the most transparent AI signal platform available to individual investors.
 
 ---
 
@@ -668,7 +670,7 @@ You don't have to take our word for it. You can verify every single trade yourse
 
 `[tone: forward momentum — clarity, not pressure]`
 
-The AI runs continuously. While we've been talking, it's been evaluating positions, scoring stocks, and preparing for the next rebalance cycle.
+The AI runs continuously. While we've been talking, it's been evaluating positions, scoring stocks, and generating signals for the next cycle.
 
 ---
 
@@ -680,11 +682,11 @@ Every week, the system generates a new cycle of documented decisions across 86 s
 
 **[SLIDE 65 — 21:35]** Capacity-based scarcity — limited enrollment.
 
-We accept a limited number of investors per quarter — this is a genuine constraint, not a marketing tactic. The AI's edge depends on signal exclusivity. When too many investors follow identical signals, alpha decays — the edge erodes.
+We cap each tier at 200 founding members — this is a genuine constraint, not a marketing tactic. The AI's edge depends on signal exclusivity. When too many investors follow identical signals, alpha decays — the edge erodes.
 
 `[pace: slow]`
 
-Submit your application, and we'll review it personally.
+The Q2 2026 founding cohort has limited spots remaining. Submit your application, and we'll review it personally.
 
 ---
 
@@ -708,13 +710,13 @@ You've seen 11 portfolios powered by AI-generated signals. Returns of up to 52.8
 
 [pause]
 
-And you've seen the model: a technology company building the AI. A licensed RIA partner managing the portfolios. Your capital held at an institutional custodian. Complete transparency at every level.
+And you've seen the model: an AI analytics company generating the signals. Full transparency. You decide how to act.
 
 ---
 
 **[SLIDE 68 — 22:45]** What happens when you click below.
 
-The next step is simple. Click below to submit your application. We review every application personally — and if you're a fit, we'll invite you to a private strategy session where we walk through the AI system, review recent signals, and discuss whether this is the right fit for your portfolio.
+The next step is simple. Click below to submit your application. It takes two minutes — no cost, no obligation. If you qualify, we'll invite you to place a fully refundable five-hundred-dollar deposit to secure your private strategy session. That deposit applies in full toward your membership if you proceed — or you get every penny back if you don't. No risk.
 
 ---
 
@@ -722,13 +724,13 @@ The next step is simple. Click below to submit your application. We review every
 
 `[pace: slow — final words before the CTA holds]`
 
-The system is running. The signals are being generated. The question is whether you want this AI working for your portfolio — and whether you qualify.
+The system is running. The signals are being generated. The five-hundred-dollar deposit is fully refundable within 14 days if you decide not to proceed. It simply reserves your consultation and ensures we're speaking with serious investors.
 
 ---
 
 **[SLIDE 70 — 23:25]** Final CTA slide.
 
-Click below to apply. We're selective about who we work with — because signal quality matters, and performance depends on it. If you qualify, you'll hear from us within 48 hours.
+Click below to apply. If you qualify, a refundable five-hundred-dollar deposit secures your consultation. We'll walk through the AI system, review recent performance, and discuss whether this is the right fit for your portfolio. The deposit is fully refundable. The application is free. Zero risk to explore.
 
 `[silence — CTA slide holds for 30 seconds.]`
 
@@ -738,25 +740,28 @@ Click below to apply. We're selective about who we work with — because signal 
 
 `[No voiceover. Disclaimer on screen:]`
 
-*"Past performance is not indicative of future results. The Wealth Series is an AI-managed portfolio program. Portfolio management and trade execution are performed by a licensed RIA partner. Client funds are held at an institutional custodian, not by TradeAlgo. TradeAlgo is a technology company that develops AI signal-generation systems; TradeAlgo does not provide investment advice, manage accounts, or have access to client funds. All investing involves risk, including the potential loss of principal. Performance data shown reflects results of model portfolios guided by AI-generated signals. Individual results may vary. You should consult with your own financial, tax, and legal advisors before making any investment decisions. The Wealth Series is a 3-year program. Terms and conditions apply."*
+*"Past performance is not indicative of future results. The Wealth Series is an AI signal-generation program. Subscribers receive weekly AI-generated trading signals with full reasoning documentation. Optional managed execution is available through a licensed RIA partner; client funds under managed execution are held at an institutional custodian. TradeAlgo is an AI analytics company that develops AI signal-generation systems; TradeAlgo does not provide investment advice, manage accounts, or have access to client funds. The $500 consultation deposit is fully refundable within 14 days. All investing involves risk, including the potential loss of principal. Performance data shown reflects results of model portfolios guided by AI-generated signals. Individual results may vary. You should consult with your own financial, tax, and legal advisors before making any investment decisions. The Wealth Series is a 3-year program. Terms and conditions apply."*
 
 ---
 
 ## Review Checklist
 
 - [x] TradeAlgo identified as technology company that builds AI, never as money manager
-- [x] RIA partner model clearly explained: TradeAlgo builds AI, RIA partner manages portfolios, custodian holds capital
+- [x] RIA partner model clearly explained: TradeAlgo builds AI, optional RIA execution, custodian holds capital
 - [x] TradeAlgo never touches money, never manages anything
 - [x] Past performance disclaimer read aloud and displayed on screen
 - [x] No forward-looking return promises or guarantees
 - [x] Real scarcity only (capacity limits, application exclusivity, founding member pricing)
-- [x] CTA is "Apply Now — See If You Qualify", not direct purchase
+- [x] CTA is "Secure Your Spot — $500 Fully Refundable Deposit"
 - [x] **ZERO references to financial advisors, advisory fees, or advisor comparisons**
 - [x] **ZERO language implying TradeAlgo manages money** (TradeAlgo is an AI analytics company)
 - [x] **Product positioned as AI signal system — RIA execution is optional**
 - [x] **ALL pricing removed from script — no dollar amounts for tiers**
 - [x] **Application-first model — qualify before pricing discussion**
+- [x] **$500 fully refundable deposit secures strategy consultation**
+- [x] **Deposit applies to membership if proceeding, 100% refund if not**
+- [x] **Q2 2026 founding cohort language + 200-member cap per tier**
 
 ---
 
-*Script v3 finalized: March 2026 | Application-first model — RIA partner — institutional positioning | Storytelling-driven*
+*Script v4 finalized: March 2026 | $500 refundable deposit model — AI analytics company — Q2 2026 founding cohort | Storytelling-driven*

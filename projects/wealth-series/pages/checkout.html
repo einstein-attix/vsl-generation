@@ -3,20 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TradeAlgo — Choose Your Path</title>
+<title>TradeAlgo — Secure Your Private Strategy Call</title>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
   --green: #0a8754;
   --green-hover: #096b43;
+  --green-light: #e8f5ee;
   --navy: #1a1f3d;
   --gold: #b8860b;
-  --red: #c0392b;
   --bg-white: #fff;
   --bg-light: #f8f9fa;
   --bg-mint: #f0faf5;
-  --bg-beige: #f8f2e0;
   --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
@@ -66,8 +65,21 @@ body {
 /* HERO */
 .hero {
   text-align: center;
-  padding: 64px 24px 40px;
+  padding: 72px 24px 56px;
   background: var(--bg-white);
+}
+
+.hero-tag {
+  display: inline-block;
+  background: var(--green-light);
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 6px 20px;
+  border-radius: 20px;
+  margin-bottom: 24px;
 }
 
 .hero-headline {
@@ -76,79 +88,289 @@ body {
   color: var(--navy);
   line-height: 1.15;
   letter-spacing: -1px;
-  margin-bottom: 12px;
-}
-
-.hero-sub {
-  font-size: 20px;
-  color: #666;
-  max-width: 560px;
-  margin: 0 auto;
-}
-
-/* TABS */
-.tabs-wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-.tabs {
-  display: flex;
-  justify-content: center;
-  gap: 4px;
-  margin-bottom: 40px;
-  background: var(--bg-light);
-  border-radius: 10px;
-  padding: 4px;
-  max-width: 480px;
+  margin-bottom: 16px;
+  max-width: 720px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.tab-btn {
-  flex: 1;
-  padding: 14px 24px;
-  border: none;
-  background: transparent;
-  font-family: var(--font);
-  font-size: 16px;
+.hero-sub {
+  font-size: 20px;
+  color: #555;
+  max-width: 580px;
+  margin: 0 auto 12px;
+}
+
+.hero-refund {
+  font-size: 17px;
+  color: var(--green);
   font-weight: 600;
-  color: #666;
-  cursor: pointer;
-  border-radius: 8px;
-  transition: all 0.2s;
+  margin-bottom: 8px;
 }
-.tab-btn.active {
-  background: var(--bg-white);
-  color: var(--navy);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+/* PROCESS STEPS */
+.process-section {
+  padding: 56px 24px 64px;
+  background: var(--bg-light);
 }
-.tab-btn:hover:not(.active) { color: var(--navy); }
 
-.tab-panel { display: none; }
-.tab-panel.active { display: block; }
-
-/* CALL PANEL */
-.call-panel {
-  max-width: 800px;
-  margin: 0 auto;
+.process-headline {
   text-align: center;
-  padding-bottom: 60px;
-}
-
-.call-panel h3 {
-  font-size: 28px;
-  font-weight: 700;
+  font-size: 32px;
+  font-weight: 800;
   color: var(--navy);
   margin-bottom: 12px;
 }
 
-.call-panel p {
-  font-size: 18px;
-  color: #555;
-  margin-bottom: 32px;
+.process-sub {
+  text-align: center;
+  font-size: 17px;
+  color: #666;
+  margin-bottom: 48px;
   max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.process-step {
+  text-align: center;
+  position: relative;
+}
+
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--green);
+  color: #fff;
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.step-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+
+.step-desc {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+}
+
+.process-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 24px;
+  right: -12px;
+  width: 24px;
+  height: 2px;
+  background: #d0d0d0;
+}
+
+/* DEPOSIT FORM */
+.deposit-section {
+  padding: 64px 24px;
+  background: var(--bg-white);
+}
+
+.deposit-container {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.deposit-card {
+  background: var(--bg-white);
+  border: 2px solid var(--green);
+  border-radius: 16px;
+  padding: 40px 36px;
+  box-shadow: 0 8px 32px rgba(10,135,84,0.1);
+}
+
+.deposit-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.deposit-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+
+.deposit-amount-display {
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--green);
+  margin-bottom: 4px;
+}
+
+.deposit-refundable {
+  font-size: 14px;
+  color: var(--green);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.deposit-refundable::before {
+  content: '\2713';
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: var(--green-light);
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--green);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 13px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-family: var(--font);
+  font-size: 16px;
+  transition: border-color 0.2s;
+  outline: none;
+}
+.form-group input:focus { border-color: var(--green); }
+
+.deposit-submit {
+  width: 100%;
+  padding: 18px;
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  margin-top: 8px;
+}
+.deposit-submit:hover {
+  background: var(--green-hover);
+  transform: translateY(-1px);
+}
+
+.deposit-guarantee {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 13px;
+  color: #888;
+  line-height: 1.6;
+}
+
+.deposit-guarantee strong {
+  color: var(--navy);
+}
+
+.deposit-note {
+  text-align: center;
+  font-size: 13px;
+  color: #999;
+  margin-top: 12px;
+  padding: 10px 16px;
+  background: var(--bg-light);
+  border-radius: 6px;
+}
+
+/* REFUND PROMISE */
+.refund-section {
+  padding: 56px 24px;
+  background: var(--bg-mint);
+}
+
+.refund-container {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.refund-shield {
+  font-size: 56px;
+  margin-bottom: 16px;
+}
+
+.refund-headline {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 16px;
+}
+
+.refund-text {
+  font-size: 17px;
+  color: #555;
+  margin-bottom: 12px;
+  line-height: 1.7;
+}
+
+.refund-emphasis {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--green);
+  margin-top: 16px;
+}
+
+/* CALENDAR SECTION */
+.calendar-section {
+  padding: 64px 24px;
+  background: var(--bg-white);
+}
+
+.calendar-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.calendar-headline {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+
+.calendar-sub {
+  font-size: 17px;
+  color: #666;
+  margin-bottom: 32px;
+  max-width: 520px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -162,9 +384,28 @@ body {
   font-size: 16px;
 }
 
-/* TIER CARDS */
+/* WHAT YOU'LL DISCUSS — TIER CARDS */
 .tiers-section {
-  padding-bottom: 60px;
+  padding: 64px 24px;
+  background: var(--bg-light);
+}
+
+.tiers-headline {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+
+.tiers-sub {
+  text-align: center;
+  font-size: 17px;
+  color: #666;
+  margin-bottom: 40px;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .tiers-grid {
@@ -219,33 +460,32 @@ body {
 .tier-card:nth-child(3) .tier-name { color: var(--green); }
 
 .tier-price {
-  font-size: 40px;
+  font-size: 36px;
   font-weight: 800;
   color: var(--navy);
-  margin: 16px 0 4px;
+  margin: 12px 0 4px;
 }
 
 .tier-price span {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
   color: #999;
 }
 
-.tier-daily {
-  font-size: 15px;
-  color: var(--green);
-  font-weight: 600;
-  margin-bottom: 24px;
+.tier-term {
+  font-size: 14px;
+  color: #888;
+  margin-bottom: 20px;
 }
 
 .tier-features {
   list-style: none;
   text-align: left;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 
 .tier-features li {
-  padding: 8px 0;
+  padding: 7px 0;
   font-size: 15px;
   color: #555;
   border-bottom: 1px solid #f0f0f0;
@@ -256,119 +496,25 @@ body {
 .tier-features li:last-child { border-bottom: none; }
 
 .tier-features li::before {
-  content: '✓';
+  content: '\2713';
   color: var(--green);
   font-weight: 700;
   flex-shrink: 0;
 }
 
-.tier-cta {
+.tier-discuss {
   display: block;
   width: 100%;
-  padding: 14px 24px;
-  border: 2px solid var(--green);
-  background: transparent;
-  color: var(--green);
-  font-family: var(--font);
-  font-size: 16px;
-  font-weight: 700;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s;
-  text-decoration: none;
-  text-align: center;
-}
-.tier-cta:hover {
-  background: var(--green);
-  color: #fff;
-}
-
-.tier-card.highlighted .tier-cta {
-  background: var(--green);
-  color: #fff;
-}
-.tier-card.highlighted .tier-cta:hover {
-  background: var(--green-hover);
-}
-
-/* CHECKOUT FORM */
-.form-section {
-  padding: 60px 24px;
+  padding: 12px 24px;
+  border: 2px solid #e0e0e0;
   background: var(--bg-light);
-}
-
-.form-container {
-  max-width: 520px;
-  margin: 0 auto;
-  background: var(--bg-white);
-  border-radius: 16px;
-  padding: 40px 36px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-}
-
-.form-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--navy);
-  margin-bottom: 6px;
-  text-align: center;
-}
-
-.form-note {
-  text-align: center;
-  font-size: 13px;
-  color: #999;
-  margin-bottom: 28px;
-  padding: 8px 16px;
-  background: var(--bg-beige);
-  border-radius: 6px;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  display: block;
+  color: #666;
+  font-family: var(--font);
   font-size: 14px;
   font-weight: 600;
-  color: var(--navy);
-  margin-bottom: 6px;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 12px 16px;
-  border: 2px solid #e0e0e0;
   border-radius: 8px;
-  font-family: var(--font);
-  font-size: 16px;
-  transition: border-color 0.2s;
-  outline: none;
+  text-align: center;
 }
-.form-group input:focus { border-color: var(--green); }
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.form-submit {
-  width: 100%;
-  padding: 16px;
-  background: var(--green);
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-family: var(--font);
-  font-size: 18px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background 0.2s;
-  margin-top: 8px;
-}
-.form-submit:hover { background: var(--green-hover); }
 
 /* TRUST BADGES */
 .trust-section {
@@ -485,6 +631,54 @@ body {
   line-height: 1.7;
 }
 
+/* FINAL CTA */
+.final-cta {
+  padding: 64px 24px;
+  background: var(--bg-white);
+  text-align: center;
+}
+
+.final-cta-headline {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 12px;
+}
+
+.final-cta-sub {
+  font-size: 17px;
+  color: #555;
+  margin-bottom: 24px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 18px 48px;
+  background: var(--green);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  transition: background 0.2s, transform 0.15s;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary:hover {
+  background: var(--green-hover);
+  transform: translateY(-1px);
+}
+
+.final-cta-note {
+  font-size: 14px;
+  color: var(--green);
+  font-weight: 600;
+  margin-top: 12px;
+}
+
 /* DISCLAIMER FOOTER */
 .disclaimer-footer {
   padding: 32px 24px;
@@ -507,17 +701,27 @@ body {
     max-width: 420px;
   }
   .tier-card.highlighted { order: -1; }
+  .process-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+  .process-step::after { display: none; }
 }
 
 @media (max-width: 768px) {
-  .hero-headline { font-size: 36px; }
+  .hero-headline { font-size: 32px; }
   .hero-sub { font-size: 18px; }
   .faq-headline { font-size: 28px; }
-  .form-row { grid-template-columns: 1fr; }
-  .form-container { padding: 28px 20px; }
+  .deposit-card { padding: 28px 20px; }
+  .deposit-amount-display { font-size: 40px; }
   .nav { padding: 12px 16px; }
-  .hero { padding: 48px 16px 32px; }
+  .hero { padding: 48px 16px 40px; }
   .trust-section { gap: 24px; }
+  .process-grid { grid-template-columns: 1fr; max-width: 280px; }
+  .process-headline { font-size: 26px; }
+  .tiers-headline { font-size: 26px; }
+  .refund-headline { font-size: 24px; }
+  .final-cta-headline { font-size: 26px; }
 }
 </style>
 </head>
@@ -526,128 +730,158 @@ body {
 <!-- NAV -->
 <nav class="nav">
   <a href="landing.html" class="nav-logo">TradeAlgo</a>
-  <a href="#call" class="nav-cta">Schedule a Call</a>
+  <a href="#deposit" class="nav-cta">Secure Your Spot</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <h1 class="hero-headline">Choose Your Path</h1>
-  <p class="hero-sub">Schedule a strategy call or get started with AI-powered trading signals today.</p>
+  <div class="hero-tag">By Application Only</div>
+  <h1 class="hero-headline">Secure Your Private Strategy Call</h1>
+  <p class="hero-sub">Place a $500 fully refundable deposit to book a private consultation with a portfolio advisor. Review the AI signal portfolios, ask any question, and decide if it's right for you.</p>
+  <p class="hero-refund">100% refundable &mdash; if we're not the right fit, you get every penny back.</p>
 </section>
 
-<!-- TABS -->
-<div class="tabs-wrapper">
-  <div class="tabs">
-    <button class="tab-btn active" data-tab="call">Schedule a Call</button>
-    <button class="tab-btn" data-tab="purchase">Get Started Now</button>
-  </div>
-
-  <!-- CALL TAB -->
-  <div class="tab-panel active" id="tab-call">
-    <div class="call-panel" id="call">
-      <h3>Schedule a Strategy Call</h3>
-      <p>Review the signal portfolios. Ask any question. No commitment. No pressure. No hard sell.</p>
-      <div class="calendly-placeholder">
-        <!-- REPLACE WITH CALENDLY URL -->
-        <!-- Example: <div class="calendly-inline-widget" data-url="https://calendly.com/your-link" style="min-width:320px;height:630px;"></div> -->
-        <p>Calendly embed will appear here.</p>
-        <p style="margin-top:8px;font-size:14px;">Replace this placeholder with your Calendly inline widget.</p>
-      </div>
+<!-- PROCESS STEPS -->
+<section class="process-section">
+  <h2 class="process-headline">How It Works</h2>
+  <p class="process-sub">Four simple steps. No commitment until you've spoken with an advisor and seen the portfolios firsthand.</p>
+  <div class="process-grid">
+    <div class="process-step">
+      <div class="step-number">1</div>
+      <div class="step-title">Place Your Deposit</div>
+      <div class="step-desc">$500 fully refundable deposit secures your spot and confirms serious interest.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-number">2</div>
+      <div class="step-title">Book Your Call</div>
+      <div class="step-desc">Choose a time for your private strategy session with a portfolio advisor.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-number">3</div>
+      <div class="step-title">Strategy Session</div>
+      <div class="step-desc">Review the AI signal portfolios, ask anything, and get a personalized recommendation.</div>
+    </div>
+    <div class="process-step">
+      <div class="step-number">4</div>
+      <div class="step-title">Your Decision</div>
+      <div class="step-desc">Proceed and your deposit is credited toward your plan &mdash; or get a full refund. No pressure.</div>
     </div>
   </div>
+</section>
 
-  <!-- PURCHASE TAB -->
-  <div class="tab-panel" id="tab-purchase">
-    <div class="tiers-section">
-      <div class="tiers-grid">
-
-        <!-- ATLAS -->
-        <div class="tier-card">
-          <div class="tier-name">Atlas</div>
-          <div class="tier-price">$8,333<span>/yr</span></div>
-          <div class="tier-daily">$23/day &middot; ~$42 per signal</div>
-          <ul class="tier-features">
-            <li>3 AI-powered portfolios</li>
-            <li>Up to 31 holdings</li>
-            <li>~200 signals/year</li>
-            <li>High / Medium / Low risk levels</li>
-            <li>Weekly signals with written reasoning</li>
-            <li>Full AI dashboard access</li>
-            <li>3-year rate lock-in</li>
-          </ul>
-          <a href="#checkout-form" class="tier-cta">Select Atlas</a>
-        </div>
-
-        <!-- TITAN -->
-        <div class="tier-card">
-          <div class="tier-name">Titan</div>
-          <div class="tier-price">$16,667<span>/yr</span></div>
-          <div class="tier-daily">Full AI arsenal access</div>
-          <ul class="tier-features">
-            <li>3 AI-powered portfolios</li>
-            <li>Up to 40 holdings</li>
-            <li>~200 signals/year</li>
-            <li>High / Medium / Low risk levels</li>
-            <li>Weekly signals with written reasoning</li>
-            <li>Full AI dashboard access</li>
-            <li>3-year rate lock-in</li>
-          </ul>
-          <a href="#checkout-form" class="tier-cta">Select Titan</a>
-        </div>
-
-        <!-- EVEREST (highlighted) -->
-        <div class="tier-card highlighted">
-          <div class="tier-badge">Most Popular</div>
-          <div class="tier-name">Everest</div>
-          <div class="tier-price">$33,333<span>/yr</span></div>
-          <div class="tier-daily">Maximum diversification</div>
-          <ul class="tier-features">
-            <li>5 AI-powered portfolios</li>
-            <li>Up to 51 holdings</li>
-            <li>~200 signals/year</li>
-            <li>High / Medium / Low risk levels</li>
-            <li>Weekly signals with written reasoning</li>
-            <li>Full AI dashboard access</li>
-            <li>3-year rate lock-in</li>
-          </ul>
-          <a href="#checkout-form" class="tier-cta">Select Everest</a>
-        </div>
-
+<!-- DEPOSIT FORM -->
+<section class="deposit-section" id="deposit">
+  <div class="deposit-container">
+    <div class="deposit-card">
+      <div class="deposit-header">
+        <div class="deposit-title">Secure Your Strategy Call</div>
+        <div class="deposit-amount-display">$500</div>
+        <div class="deposit-refundable">100% Fully Refundable Deposit</div>
       </div>
+      <form onsubmit="return false">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" placeholder="John Smith" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="john@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="(555) 123-4567" required>
+        </div>
+        <button type="submit" class="deposit-submit">Place $500 Refundable Deposit</button>
+      </form>
+      <p class="deposit-guarantee"><strong>Your deposit is 100% refundable.</strong> If you decide not to proceed after the strategy call, you receive a full refund &mdash; no questions asked, no hoops to jump through.</p>
+      <p class="deposit-note">This is a UI mockup. Payment processing is not connected.</p>
     </div>
   </div>
-</div>
+</section>
 
-<!-- CHECKOUT FORM -->
-<section class="form-section" id="checkout-form">
-  <div class="form-container">
-    <h3 class="form-title">Complete Your Enrollment</h3>
-    <div class="form-note">This is a UI mockup. Payment processing is not connected.</div>
-    <form onsubmit="return false">
-      <div class="form-group">
-        <label for="name">Full Name</label>
-        <input type="text" id="name" placeholder="John Smith">
-      </div>
-      <div class="form-group">
-        <label for="email">Email Address</label>
-        <input type="email" id="email" placeholder="john@example.com">
-      </div>
-      <div class="form-group">
-        <label for="card">Card Number</label>
-        <input type="text" id="card" placeholder="4242 4242 4242 4242" maxlength="19">
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="expiry">Expiration</label>
-          <input type="text" id="expiry" placeholder="MM / YY" maxlength="7">
-        </div>
-        <div class="form-group">
-          <label for="cvc">CVC</label>
-          <input type="text" id="cvc" placeholder="123" maxlength="4">
-        </div>
-      </div>
-      <button type="submit" class="form-submit">Complete Enrollment</button>
-    </form>
+<!-- REFUND PROMISE -->
+<section class="refund-section">
+  <div class="refund-container">
+    <div class="refund-shield">&#128737;</div>
+    <h2 class="refund-headline">Your Deposit Is 100% Protected</h2>
+    <p class="refund-text">We require a deposit for one reason: to ensure every strategy call is with a serious investor, not a casual browser. Your time is valuable &mdash; and so is ours.</p>
+    <p class="refund-text">If after your strategy session you decide TradeAlgo isn't right for you, your $500 is returned in full within 5 business days. No questions asked. No fine print. No hoops.</p>
+    <p class="refund-emphasis">If we're not the right fit, you get every penny back.</p>
+  </div>
+</section>
+
+<!-- CALENDAR SECTION -->
+<section class="calendar-section" id="calendar">
+  <div class="calendar-container">
+    <h2 class="calendar-headline">Book Your Strategy Call</h2>
+    <p class="calendar-sub">After your deposit is confirmed, select a time that works for your private consultation.</p>
+    <div class="calendly-placeholder">
+      <!-- REPLACE WITH CALENDLY URL -->
+      <!-- Example: <div class="calendly-inline-widget" data-url="https://calendly.com/your-link" style="min-width:320px;height:630px;"></div> -->
+      <p>Calendly embed will appear here after deposit confirmation.</p>
+      <p style="margin-top:8px;font-size:14px;">Replace this placeholder with your Calendly inline widget.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU'LL DISCUSS — TIER CARDS -->
+<section class="tiers-section">
+  <h2 class="tiers-headline">What You'll Discuss on the Call</h2>
+  <p class="tiers-sub">Your advisor will walk you through each portfolio tier and recommend the best fit based on your goals, risk tolerance, and investment timeline.</p>
+  <div class="tiers-grid">
+
+    <!-- ATLAS -->
+    <div class="tier-card">
+      <div class="tier-name">Atlas</div>
+      <div class="tier-price">$25,000<span> / 3 yr</span></div>
+      <div class="tier-term">$8,333/year &middot; $23/day</div>
+      <ul class="tier-features">
+        <li>3 AI-powered signal portfolios</li>
+        <li>Up to 31 holdings monitored</li>
+        <li>~200 signals per year</li>
+        <li>High / Medium / Low risk levels</li>
+        <li>Weekly signals with written reasoning</li>
+        <li>Full AI dashboard access</li>
+        <li>3-year rate lock-in</li>
+      </ul>
+      <div class="tier-discuss">Discuss with your advisor</div>
+    </div>
+
+    <!-- TITAN -->
+    <div class="tier-card highlighted">
+      <div class="tier-badge">Most Popular</div>
+      <div class="tier-name">Titan</div>
+      <div class="tier-price">$50,000<span> / 3 yr</span></div>
+      <div class="tier-term">$16,667/year &middot; Full AI arsenal</div>
+      <ul class="tier-features">
+        <li>3 AI-powered signal portfolios</li>
+        <li>Up to 40 holdings monitored</li>
+        <li>~200 signals per year</li>
+        <li>High / Medium / Low risk levels</li>
+        <li>Weekly signals with written reasoning</li>
+        <li>Full AI dashboard access</li>
+        <li>3-year rate lock-in</li>
+      </ul>
+      <div class="tier-discuss">Discuss with your advisor</div>
+    </div>
+
+    <!-- EVEREST -->
+    <div class="tier-card">
+      <div class="tier-name">Everest</div>
+      <div class="tier-price">$100,000<span> / 3 yr</span></div>
+      <div class="tier-term">$33,333/year &middot; Maximum diversification</div>
+      <ul class="tier-features">
+        <li>5 AI-powered signal portfolios</li>
+        <li>Up to 51 holdings monitored</li>
+        <li>~200 signals per year</li>
+        <li>High / Medium / Low risk levels</li>
+        <li>Weekly signals with written reasoning</li>
+        <li>Full AI dashboard access</li>
+        <li>3-year rate lock-in</li>
+      </ul>
+      <div class="tier-discuss">Discuss with your advisor</div>
+    </div>
+
   </div>
 </section>
 
@@ -659,14 +893,19 @@ body {
     <div class="trust-sublabel">256-bit encryption</div>
   </div>
   <div class="trust-item">
-    <div class="trust-icon">&#9989;</div>
-    <div class="trust-label">Money-Back Guarantee</div>
-    <div class="trust-sublabel">30-day refund policy</div>
+    <div class="trust-icon">&#128737;</div>
+    <div class="trust-label">100% Refundable</div>
+    <div class="trust-sublabel">Full deposit returned if you don't proceed</div>
   </div>
   <div class="trust-item">
     <div class="trust-icon">&#128200;</div>
     <div class="trust-label">$100M+ Backed</div>
-    <div class="trust-sublabel">Proven track record</div>
+    <div class="trust-sublabel">Published track record</div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon">&#128100;</div>
+    <div class="trust-label">Private Consultation</div>
+    <div class="trust-sublabel">1-on-1 with a portfolio advisor</div>
   </div>
 </section>
 
@@ -677,57 +916,72 @@ body {
 
     <div class="faq-item">
       <button class="faq-question">
+        <span>Is the $500 deposit really refundable?</span>
+        <span class="faq-arrow"></span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Yes, 100%, no questions asked. The deposit exists to ensure every strategy call is with a serious investor. If after your consultation you decide TradeAlgo isn't the right fit, your full $500 is returned within 5 business days. No fine print, no hoops, no hassle. We've never refused a refund request.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>What happens on the strategy call?</span>
+        <span class="faq-arrow"></span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          You'll have a private, 1-on-1 consultation with a portfolio advisor. They'll walk you through the AI signal portfolios, explain how the system generates trading signals, review real performance data, and answer every question you have. They'll also recommend which tier &mdash; Atlas, Titan, or Everest &mdash; best fits your investment goals and risk tolerance. There is no hard sell. It's a conversation, not a pitch.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>What if I decide not to proceed?</span>
+        <span class="faq-arrow"></span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          You get your full $500 back. That's it. No penalty, no retention calls, no guilt. Simply let your advisor know during or after the call, and your refund is processed within 5 business days. The deposit is a commitment to have a serious conversation &mdash; not a commitment to buy.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Does the deposit apply toward my subscription?</span>
+        <span class="faq-arrow"></span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Yes. If you decide to proceed with Atlas, Titan, or Everest, your $500 deposit is credited toward your subscription. It's not an extra cost &mdash; it's applied directly to your plan.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
+        <span>Why do you require a deposit at all?</span>
+        <span class="faq-arrow"></span>
+      </button>
+      <div class="faq-answer">
+        <div class="faq-answer-inner">
+          Every strategy call is a private, 1-on-1 session with a senior portfolio advisor. These calls take real time and preparation. The deposit ensures that every call is with someone genuinely interested in AI-powered signal portfolios &mdash; not a casual browser. It respects your time and ours. If it's not a fit, you get every penny back.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">
         <span>What about market crashes?</span>
         <span class="faq-arrow"></span>
       </button>
       <div class="faq-answer">
         <div class="faq-answer-inner">
-          The AI is holding short S&amp;P 500 positions in 8 of 11 portfolios right now. It has a 5% gold allocation across every portfolio. It maintains a defensive core — consumer staples, utilities, healthcare — in every portfolio regardless of risk level.<br><br>
-          Last month, portfolios drew down 2% to 3.7%. The hedges were already in place. The AI doesn't react to crashes — it positions for them in advance.
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question">
-        <span>$8,333 a year is a lot.</span>
-        <span class="faq-arrow"></span>
-      </button>
-      <div class="faq-answer">
-        <div class="faq-answer-inner">
-          It is. And it should be — this is a serious signal publication, not a newsletter with vague tips.<br><br>
-          That's $23 a day. About $42 per signal. Each signal is designed to produce hundreds, sometimes thousands, in returns.<br><br>
-          Your subscription gives you access to 11 AI-powered signal portfolios, publishing detailed buy, sell, and hold signals with written reasoning, every week. The top portfolio returned +43.9% in its first year.
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question">
-        <span>Is AI safe for investing?</span>
-        <span class="faq-arrow"></span>
-      </button>
-      <div class="faq-answer">
-        <div class="faq-answer-inner">
-          TradeAlgo publishes signals. That's it. TradeAlgo doesn't touch your money, doesn't access your accounts, and doesn't make any trades for you.<br><br>
-          What you do with the signals is entirely your decision. And the AI's reasoning is documented and transparent — you can read exactly why it generated every signal. This is the most transparent AI signal publication available to individual investors.
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question">
-        <span>Why not just buy index funds?</span>
-        <span class="faq-arrow"></span>
-      </button>
-      <div class="faq-answer">
-        <div class="faq-answer-inner">
-          You can. But here's what index funds don't do:<br><br>
-          &times; They don't hedge.<br>
-          &times; They don't rotate into defensive sectors when macro conditions shift.<br>
-          &times; They don't trim overbought positions when RSI hits 70.<br>
-          &times; They don't add short S&amp;P positions before a pullback.<br><br>
-          An index fund held through a 20% drawdown is a 20% loss. Active risk management through AI signals is what you get beyond passive exposure.
+          The AI holds short S&amp;P 500 positions in 8 of 11 portfolios right now. It maintains a 5% gold allocation across every portfolio and a defensive core &mdash; consumer staples, utilities, healthcare &mdash; regardless of risk level. Last month, portfolios drew down 2% to 3.7%. The hedges were already in place. The AI doesn't react to crashes &mdash; it positions for them in advance.
         </div>
       </div>
     </div>
@@ -739,27 +993,20 @@ body {
       </button>
       <div class="faq-answer">
         <div class="faq-answer-inner">
-          Robo-advisors allocate your money across 6–12 ETFs based on a risk questionnaire. Then they rebalance when your allocation drifts. That's it.<br><br>
-          The Wealth Series AI generates signals across 86 individual stocks. It publishes weekly trading signals with full reasoning. It uses RSI, CCI, momentum, sector rotation, and macro analysis. It writes detailed reasoning for every signal.<br><br>
-          Top portfolio: +52.8% in a year. Wealthfront's typical return? Market average. These are fundamentally different products.
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-question">
-        <span>Why 3 years?</span>
-        <span class="faq-arrow"></span>
-      </button>
-      <div class="faq-answer">
-        <div class="faq-answer-inner">
-          Two reasons. First, your rate is locked in — as the AI improves and we add new models, your price never increases. You're grandfathered in at today's rate.<br><br>
-          Second, compounding. AI-driven strategies work over full market cycles, not weeks. Last month, high-risk portfolios drew down 3–4%. Over a year, those same portfolios returned 43% to 52%. 3 years gives the system room to deliver its full potential.
+          Robo-advisors allocate across 6&ndash;12 ETFs based on a risk questionnaire, then rebalance when allocation drifts. That's it. The Wealth Series AI generates signals across 86 individual stocks, publishing weekly trading signals with full written reasoning. It uses RSI, CCI, momentum, sector rotation, and macro analysis. Top portfolio: +52.8% in its first year. These are fundamentally different products &mdash; your advisor will walk you through the differences in detail on the call.
         </div>
       </div>
     </div>
 
   </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <h2 class="final-cta-headline">Ready to See What AI-Powered Signals Can Do?</h2>
+  <p class="final-cta-sub">Secure your spot, speak with an advisor, and decide with full information. Your deposit is 100% refundable.</p>
+  <a href="#deposit" class="btn-primary">Secure Your Spot &mdash; $500 Refundable Deposit</a>
+  <p class="final-cta-note">100% refundable if you don't proceed. No questions asked.</p>
 </section>
 
 <!-- DISCLAIMER FOOTER -->
@@ -768,24 +1015,12 @@ body {
 </footer>
 
 <script>
-// Tab switching
-document.querySelectorAll('.tab-btn').forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
-    document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
-    btn.classList.add('active');
-    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
-  });
-});
-
 // FAQ accordion
 document.querySelectorAll('.faq-question').forEach(function(btn) {
   btn.addEventListener('click', function() {
     var item = btn.parentElement;
     var wasActive = item.classList.contains('active');
-    // Close all
     document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('active'); });
-    // Toggle clicked
     if (!wasActive) { item.classList.add('active'); }
   });
 });
