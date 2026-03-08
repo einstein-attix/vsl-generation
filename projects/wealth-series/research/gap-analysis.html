@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gap Analysis — Research vs. Current VSL Implementation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1a1f3d;--navy-light:#2d3461;
+  --green:#0a8754;--green-dark:#06693f;--green-light:#e8f5ee;--green-bg:#f0faf5;
+  --red:#c0392b;--red-light:#fdf0ee;--red-bg:#fff5f4;
+  --gold:#b8860b;--gold-light:#f8f2e0;--gold-bg:#fffbf0;
+  --blue:#1a73e8;--blue-light:#e8f0fe;
+  --bg:#fff;--bg-off:#f8f9fa;--border:#e4e7eb;
+  --text:#333;--text-light:#5a6270;--text-muted:#8e96a3;
+  --font:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --max-w:960px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);font-size:17px;line-height:1.72;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
+
+/* Layout */
+.wrap{max-width:var(--max-w);margin:0 auto;padding:0 28px}
+
+/* Header */
+.page-header{padding:64px 28px 48px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,#fff 60%,var(--bg-off) 100%)}
+.page-header .wrap{max-width:var(--max-w)}
+.doc-badge{display:inline-block;padding:4px 14px;background:var(--red-light);color:var(--red);border-radius:4px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:20px}
+.page-header h1{font-size:clamp(28px,4vw,40px);font-weight:900;color:var(--navy);line-height:1.15;letter-spacing:-1px;margin-bottom:12px}
+.page-header .lead{font-size:18px;color:var(--text-light);max-width:700px;line-height:1.65}
+.meta-row{display:flex;flex-wrap:wrap;gap:24px;margin-top:20px}
+.meta-item{font-size:13px;color:var(--text-muted)}
+.meta-item strong{color:var(--text-light);font-weight:600}
+
+/* Sticky TOC */
+.toc{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:12px 28px;overflow-x:auto;white-space:nowrap}
+.toc-inner{max-width:var(--max-w);margin:0 auto;display:flex;gap:6px;align-items:center}
+.toc a{display:inline-block;padding:6px 14px;font-size:13px;font-weight:600;color:var(--text-light);text-decoration:none;border-radius:6px;transition:all .15s;flex-shrink:0}
+.toc a:hover{background:var(--green-light);color:var(--green)}
+
+/* Score Hero */
+.score-hero{padding:40px 28px;background:var(--bg-off);border-bottom:1px solid var(--border)}
+.score-hero .wrap{display:flex;align-items:center;gap:40px;flex-wrap:wrap}
+.score-ring{position:relative;width:140px;height:140px;flex-shrink:0}
+.score-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.score-ring circle{fill:none;stroke-width:10}
+.score-ring .bg{stroke:var(--border)}
+.score-ring .fill{stroke:var(--red);stroke-linecap:round;stroke-dasharray:408;stroke-dashoffset:306;transition:stroke-dashoffset 1.5s ease}
+.score-label{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.score-label .num{font-size:42px;font-weight:900;color:var(--navy);line-height:1}
+.score-label .pct{font-size:14px;font-weight:700;color:var(--red);margin-top:2px}
+.score-detail h3{margin:0 0 8px;font-size:20px;color:var(--navy)}
+.score-detail p{margin:0;font-size:15px;color:var(--text-light);max-width:500px}
+.score-bars{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:16px}
+.score-bar{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--text-light)}
+.score-bar .bar{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.score-bar .bar-fill{height:100%;border-radius:3px}
+.bar-fill.good{background:var(--green)}
+.bar-fill.partial{background:var(--gold)}
+.bar-fill.missing{background:var(--red)}
+
+/* Sections */
+.section{padding:56px 28px;border-bottom:1px solid var(--border)}
+.section:last-of-type{border-bottom:none}
+.section-tag{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:4px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px}
+.tag-red{background:var(--red-light);color:var(--red)}
+.tag-green{background:var(--green-light);color:var(--green)}
+.tag-gold{background:var(--gold-light);color:var(--gold)}
+.tag-navy{background:rgba(26,31,61,.08);color:var(--navy)}
+.tag-blue{background:var(--blue-light);color:var(--blue)}
+h2.section-title{font-size:clamp(24px,3vw,32px);font-weight:800;color:var(--navy);letter-spacing:-.5px;margin-bottom:8px;line-height:1.2}
+h3{font-size:20px;font-weight:700;color:var(--navy);margin:32px 0 12px;line-height:1.3}
+h4{font-size:16px;font-weight:700;color:var(--navy);margin:24px 0 8px}
+p{margin-bottom:14px}
+
+/* Priority Badges */
+.priority{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px}
+.p-critical{background:var(--red);color:#fff}
+.p-high{background:#e74c3c;color:#fff}
+.p-medium{background:var(--gold);color:#fff}
+.p-low{background:var(--border);color:var(--text-light)}
+
+/* Severity Badges */
+.severity{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.sev-critical{background:var(--red);color:#fff}
+.sev-high{background:#e74c3c;color:#fff}
+.sev-medium{background:var(--gold);color:#fff}
+.sev-low{background:var(--border);color:var(--text-light)}
+
+/* Issue Table */
+.issue-table{width:100%;border-collapse:collapse;margin:24px 0;border:1px solid var(--border);border-radius:10px;overflow:hidden;font-size:14px}
+.issue-table thead{background:var(--navy);color:#fff}
+.issue-table th{padding:12px 16px;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.issue-table td{padding:14px 16px;border-bottom:1px solid var(--border);vertical-align:top}
+.issue-table tr:last-child td{border-bottom:none}
+.issue-table tbody tr:nth-child(even){background:var(--bg-off)}
+.issue-table .slide-col{font-weight:800;color:var(--navy);font-size:16px;white-space:nowrap}
+
+/* Before/After Slide Cards */
+.slide-change{margin:20px 0;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.slide-change-header{display:flex;align-items:center;gap:12px;padding:14px 20px;background:var(--bg-off);border-bottom:1px solid var(--border)}
+.slide-num{display:inline-flex;align-items:center;justify-content:center;min-width:56px;height:32px;padding:0 10px;background:var(--navy);color:#fff;border-radius:6px;font-size:13px;font-weight:800;letter-spacing:.5px;flex-shrink:0}
+.slide-change-title{font-size:14px;font-weight:600;color:var(--navy);flex:1}
+.slide-change-body{display:grid;grid-template-columns:1fr 1fr;min-height:0}
+.slide-before,.slide-after{padding:16px 20px;font-size:14px;line-height:1.65}
+.slide-before{background:var(--red-bg);border-right:1px solid var(--border)}
+.slide-after{background:var(--green-bg)}
+.ba-label{display:inline-block;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.ba-before{background:var(--red);color:#fff}
+.ba-after{background:var(--green);color:#fff}
+.ba-text{font-family:'SF Mono',Consolas,'Liberation Mono',monospace;font-size:13px;line-height:1.6;white-space:pre-wrap;word-break:break-word}
+
+/* Status Indicators */
+.status{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:4px;font-size:12px;font-weight:700;white-space:nowrap}
+.status-done{background:var(--green-light);color:var(--green)}
+.status-partial{background:var(--gold-light);color:var(--gold)}
+.status-missing{background:var(--red-light);color:var(--red)}
+.status-wrong{background:var(--red);color:#fff}
+
+/* Checklist */
+.check-list{list-style:none;margin:16px 0;padding:0}
+.check-list li{padding:8px 0 8px 28px;position:relative;font-size:15px;border-bottom:1px solid var(--border)}
+.check-list li:last-child{border-bottom:none}
+.check-list li::before{content:'';position:absolute;left:0;top:12px;width:16px;height:16px;border-radius:3px;border:2px solid var(--border)}
+.check-list li.done::before{background:var(--green);border-color:var(--green)}
+.check-list li.done::after{content:'';position:absolute;left:3px;top:15px;width:10px;height:6px;border-left:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(-45deg)}
+.check-list li.missing::before{background:var(--red-light);border-color:var(--red)}
+.check-list li.partial::before{background:var(--gold-light);border-color:var(--gold)}
+
+/* Recommendation Cards */
+.rec-card{margin:24px 0;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#fff}
+.rec-card-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.rec-card-title{font-size:17px;font-weight:700;color:var(--navy);flex:1}
+.rec-card-body{padding:20px}
+.rec-card-body p{font-size:15px}
+
+/* Flow Table */
+.flow-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14px}
+.flow-table th{background:var(--navy);color:#fff;padding:10px 14px;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.flow-table td{padding:12px 14px;border-bottom:1px solid var(--border);vertical-align:top}
+.flow-table tr:nth-child(even){background:var(--bg-off)}
+
+/* Priority Groups */
+.priority-group{margin:32px 0;border:2px solid var(--border);border-radius:12px;overflow:hidden}
+.priority-group-header{padding:16px 20px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border)}
+.priority-group.p0 .priority-group-header{background:var(--red);border-color:var(--red)}
+.priority-group.p0 .priority-group-header *{color:#fff}
+.priority-group.p1 .priority-group-header{background:#e74c3c;border-color:#e74c3c}
+.priority-group.p1 .priority-group-header *{color:#fff}
+.priority-group.p2 .priority-group-header{background:var(--gold);border-color:var(--gold)}
+.priority-group.p2 .priority-group-header *{color:#fff}
+.priority-group.p3 .priority-group-header{background:var(--bg-off);border-color:var(--border)}
+.pg-label{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:1px}
+.pg-title{font-size:17px;font-weight:700}
+.priority-item{display:grid;grid-template-columns:40px 1fr auto auto;gap:0;border-bottom:1px solid var(--border);font-size:14px;align-items:center}
+.priority-item:last-child{border-bottom:none}
+.priority-item>div{padding:12px 16px}
+.pi-num{font-weight:800;color:var(--navy);text-align:center;font-size:16px}
+.pi-issue{font-weight:600;color:var(--text)}
+.pi-slides{font-size:13px;color:var(--text-muted);white-space:nowrap}
+.pi-effort{font-size:12px;font-weight:700;text-transform:uppercase;padding:3px 10px;border-radius:4px;text-align:center}
+.effort-high{background:var(--red-light);color:var(--red)}
+.effort-medium{background:var(--gold-light);color:var(--gold)}
+.effort-low{background:var(--green-light);color:var(--green)}
+
+/* Scorecard */
+.scorecard{width:100%;border-collapse:collapse;margin:24px 0;border:2px solid var(--navy);border-radius:10px;overflow:hidden;font-size:14px}
+.scorecard thead{background:var(--navy);color:#fff}
+.scorecard th{padding:12px 14px;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.scorecard td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:middle}
+.scorecard tr:last-child td{border-bottom:none}
+.scorecard tbody tr:nth-child(even){background:var(--bg-off)}
+.scorecard .score-cell{font-weight:800;font-size:15px;text-align:center}
+.score-10{color:var(--green)}
+.score-high{color:var(--green)}
+.score-mid{color:var(--gold)}
+.score-low{color:var(--red)}
+.score-zero{color:var(--red);font-weight:900}
+.scorecard .total-row{background:var(--navy)!important;color:#fff;font-weight:800;font-size:16px}
+.scorecard .total-row td{border-bottom:none}
+
+/* Blockquote */
+blockquote{margin:20px 0;padding:20px 24px;background:var(--bg-off);border-left:4px solid var(--green);border-radius:0 8px 8px 0;font-size:15px;color:var(--text);line-height:1.7}
+blockquote cite{display:block;margin-top:8px;font-size:13px;color:var(--text-muted);font-style:normal;font-weight:600}
+
+/* Alert Boxes */
+.alert{margin:20px 0;padding:16px 20px;border-radius:8px;font-size:15px;line-height:1.6}
+.alert-red{background:var(--red-bg);border:1px solid rgba(192,57,43,.2);color:var(--red)}
+.alert-green{background:var(--green-bg);border:1px solid rgba(10,135,84,.2);color:var(--green-dark)}
+.alert-gold{background:var(--gold-bg);border:1px solid rgba(184,134,11,.2);color:var(--gold)}
+.alert strong{font-weight:700}
+
+/* Summary stat strip */
+.stat-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:24px 0}
+.stat-box{text-align:center;padding:20px 16px;border-radius:10px;border:1px solid var(--border);background:#fff}
+.stat-box .stat-num{font-size:32px;font-weight:900;line-height:1}
+.stat-box .stat-label{font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-top:6px}
+.stat-green .stat-num{color:var(--green)}
+.stat-gold .stat-num{color:var(--gold)}
+.stat-red .stat-num{color:var(--red)}
+.stat-navy .stat-num{color:var(--navy)}
+
+/* Footer */
+.page-footer{padding:40px 28px;background:var(--bg-off);border-top:1px solid var(--border);text-align:center;font-size:13px;color:var(--text-muted)}
+
+/* Responsive */
+@media(max-width:768px){
+  .slide-change-body{grid-template-columns:1fr}
+  .slide-before{border-right:none;border-bottom:1px solid var(--border)}
+  .priority-item{grid-template-columns:32px 1fr;gap:0}
+  .pi-slides,.pi-effort{display:none}
+  .stat-strip{grid-template-columns:repeat(2,1fr)}
+  .score-hero .wrap{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="page-header">
+<div class="wrap">
+  <div class="doc-badge">Comprehensive Audit</div>
+  <h1>Gap Analysis: Research vs. Current VSL</h1>
+  <p class="lead">A slide-by-slide audit comparing the high-ticket research recommendations against the current 71-slide VSL implementation, with prioritized action items.</p>
+  <div class="meta-row">
+    <div class="meta-item"><strong>Date:</strong> March 2026</div>
+    <div class="meta-item"><strong>Files:</strong> slides.html &middot; script.md &middot; vsl-revision-proposal.md &middot; high-ticket-vsl-cta-research.md</div>
+    <div class="meta-item"><strong>Overall Score:</strong> 55 / 220 (25%)</div>
+  </div>
+</div>
+</header>
+
+<!-- ============ TOC ============ -->
+<nav class="toc">
+<div class="toc-inner">
+  <a href="#score">Score</a>
+  <a href="#s1">Slide Issues</a>
+  <a href="#s2">Not Implemented</a>
+  <a href="#s3">Text Changes</a>
+  <a href="#s4">CTA Flow</a>
+  <a href="#s5">Priorities</a>
+  <a href="#scorecard">Scorecard</a>
+</div>
+</nav>
+
+<!-- ============ SCORE HERO ============ -->
+<section class="score-hero" id="score">
+<div class="wrap">
+  <div class="score-ring">
+    <svg viewBox="0 0 140 140"><circle class="bg" cx="70" cy="70" r="65"/><circle class="fill" cx="70" cy="70" r="65"/></svg>
+    <div class="score-label">
+      <div class="num">25%</div>
+      <div class="pct">55 / 220</div>
+    </div>
+  </div>
+  <div class="score-detail">
+    <h3>Implementation Coverage</h3>
+    <p>The VSL nails pricing removal, application-first CTAs, and FOMO cleanup &mdash; but is missing the entire deposit flow, all social proof, all trust signals, and the RIA-optional framing that Carlos requires.</p>
+    <div class="score-bars" style="margin-top:20px">
+      <div class="score-bar"><span style="min-width:80px">Fully done</span><div class="bar"><div class="bar-fill good" style="width:36%"></div></div><span>8</span></div>
+      <div class="score-bar"><span style="min-width:80px">Partial</span><div class="bar"><div class="bar-fill partial" style="width:23%"></div></div><span>5</span></div>
+      <div class="score-bar"><span style="min-width:80px">Missing</span><div class="bar"><div class="bar-fill missing" style="width:41%"></div></div><span>9</span></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ============ SUMMARY STATS ============ -->
+<div class="wrap">
+<div class="stat-strip">
+  <div class="stat-box stat-green"><div class="stat-num">8</div><div class="stat-label">Fully Implemented</div></div>
+  <div class="stat-box stat-gold"><div class="stat-num">5</div><div class="stat-label">Partially Done</div></div>
+  <div class="stat-box stat-red"><div class="stat-num">9</div><div class="stat-label">Not Implemented</div></div>
+  <div class="stat-box stat-navy"><div class="stat-num">18</div><div class="stat-label">Slides Affected</div></div>
+</div>
+</div>
+
+<!-- ============ SECTION 1: Slide-by-Slide Issues ============ -->
+<section class="section" id="s1">
+<div class="wrap">
+  <div class="section-tag tag-red">Section 1</div>
+  <h2 class="section-title">Slide-by-Slide Issues</h2>
+  <p>Carlos CEO feedback combined with additional issues found during audit. <strong>18 slides</strong> require changes.</p>
+
+  <table class="issue-table">
+    <thead>
+      <tr><th>#</th><th>Slide</th><th>Issue</th><th>Severity</th><th>Details</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td class="slide-col">17</td>
+        <td>Empty slide &mdash; intentional?</td>
+        <td><span class="severity sev-low">LOW</span></td>
+        <td><strong>YES, intentional.</strong> Script says: "Fade to black. Complete silence. [silence &mdash; 3 seconds.]" Standard dramatic pause between origin story and reveal. <strong>No fix needed</strong> unless Carlos wants content.</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td class="slide-col">21</td>
+        <td>"Apply for Details" too early</td>
+        <td><span class="severity sev-medium">MEDIUM</span></td>
+        <td>Tier cards show <code>Apply for Details</code> at slide 21 (5:00 mark) &mdash; viewer hasn't seen proof, objection handling, or how it works. Premature CTA breaks emotional arc. Carlos flagged as "slide 12" (numbering discrepancy).</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td class="slide-col">22</td>
+        <td>Layout is broken</td>
+        <td><span class="severity sev-high">HIGH</span></td>
+        <td>Flow diagram has 3 boxes (min-width 280px each) + 2 arrows in flex row. Total ~950px+ minimum. Wraps on screens &lt; 1100px. Needs responsive fix or vertical stacking.</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td class="slide-col">43</td>
+        <td>RIA shown as mandatory &mdash; must be OPTIONAL</td>
+        <td><span class="severity sev-critical">CRITICAL</span></td>
+        <td>Carlos says RIA is <strong>optional</strong>, not the default. Current slide presents RIA as THE way it works. Must reframe: signals delivered to you; RIA execution is an available option.</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td class="slide-col">46</td>
+        <td>Affected by RIA optional change</td>
+        <td><span class="severity sev-high">HIGH</span></td>
+        <td>Currently: "The RIA partner executes." Must become: "You decide how to act &mdash; self-directed or through our optional RIA partner."</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td class="slide-col">47</td>
+        <td>Too wordy / content cut off</td>
+        <td><span class="severity sev-high">HIGH</span></td>
+        <td>7 animated elements, ~150 words plus cost cards. Bottom content clipped on 1080p. Bloomberg comparison could be shortened or moved.</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td class="slide-col">56</td>
+        <td>Content cut off at bottom</td>
+        <td><span class="severity sev-high">HIGH</span></td>
+        <td>Wealthfront comparison has 5 lines + performance + "$5M minimums." <code>objection-a</code> at 38px / line-height 1.6 causes overflow.</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td class="slide-col">60</td>
+        <td>TradeAlgo framing wrong</td>
+        <td><span class="severity sev-medium">MEDIUM</span></td>
+        <td>Badge says "TECHNOLOGY COMPANY." Carlos says correct framing is <strong>"AI ANALYTICS COMPANY."</strong></td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td class="slide-col">69</td>
+        <td>"All 14 portfolios" &mdash; should be 11</td>
+        <td><span class="severity sev-medium">MEDIUM</span></td>
+        <td>3 Atlas + 3 Titan + 5 Everest = <strong>11</strong>. "14" is an error.</td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td class="slide-col">26</td>
+        <td>"RIA partner executes every trade"</td>
+        <td><span class="severity sev-high">HIGH</span></td>
+        <td>Bottom text must add optionality for RIA execution.</td>
+      </tr>
+      <tr>
+        <td>11</td>
+        <td class="slide-col">42</td>
+        <td>Step 2 "Onboard with RIA"</td>
+        <td><span class="severity sev-high">HIGH</span></td>
+        <td>If RIA is optional, Step 2 should offer both self-directed and RIA paths.</td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td class="slide-col">44</td>
+        <td>"RIA partner executed 14 adjustments"</td>
+        <td><span class="severity sev-medium">MEDIUM</span></td>
+        <td>Weekly notification implies RIA executed trades. Should show signal notification. Also "14" should match actual count.</td>
+      </tr>
+      <tr>
+        <td>13</td>
+        <td class="slide-col">54</td>
+        <td>"RIA partner manages the portfolio"</td>
+        <td><span class="severity sev-medium">MEDIUM</span></td>
+        <td>Objection answer states RIA manages as fact. Must add optionality.</td>
+      </tr>
+      <tr>
+        <td>14</td>
+        <td class="slide-col">59</td>
+        <td>"RIA partner handles portfolio management"</td>
+        <td><span class="severity sev-medium">MEDIUM</span></td>
+        <td>Body text presents RIA as sole path. Must reflect optional model.</td>
+      </tr>
+      <tr>
+        <td>15</td>
+        <td class="slide-col">71</td>
+        <td>Disclaimer says "AI-managed portfolio program"</td>
+        <td><span class="severity sev-high">HIGH</span></td>
+        <td>Legal disclaimer needs nuance for optional RIA execution model.</td>
+      </tr>
+      <tr>
+        <td>16</td>
+        <td class="slide-col">28</td>
+        <td>"AI-managed portfolio system"</td>
+        <td><span class="severity sev-medium">MEDIUM</span></td>
+        <td>Should say "AI signal portfolio system" &mdash; not implying management is default.</td>
+      </tr>
+      <tr>
+        <td>17</td>
+        <td class="slide-col">40</td>
+        <td>"AI portfolio management"</td>
+        <td><span class="severity sev-medium">MEDIUM</span></td>
+        <td>Implies management is part of product. Should say "signal generation."</td>
+      </tr>
+      <tr>
+        <td>18</td>
+        <td class="slide-col">48&ndash;50</td>
+        <td>No CTA guidance after tier slides</td>
+        <td><span class="severity sev-low">LOW</span></td>
+        <td>Tier slides end without direction. Could add "Details in your strategy session."</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="alert alert-red">
+    <strong>Key finding:</strong> The RIA-as-mandatory framing appears in <strong>14 slides</strong>: 22, 26, 28, 40, 42, 43, 44, 46, 47, 48, 49, 50, 54, 59 &mdash; plus slide 71 (disclaimer) and the script throughout. <strong>This is the single largest change needed.</strong>
+  </div>
+</div>
+</section>
+
+<!-- ============ SECTION 2: Research Recommendations ============ -->
+<section class="section" id="s2">
+<div class="wrap">
+  <div class="section-tag tag-gold">Section 2</div>
+  <h2 class="section-title">Research Recommendations &mdash; Implementation Status</h2>
+  <p>How each recommendation from the high-ticket research maps to the current VSL.</p>
+
+  <!-- 2.1 Refundable Deposit -->
+  <div class="rec-card">
+    <div class="rec-card-header">
+      <div class="rec-card-title">2.1 Refundable Deposit Model</div>
+      <span class="status status-missing">Not Implemented</span>
+    </div>
+    <div class="rec-card-body">
+      <blockquote>Use a $1,000 fully refundable deposit. Apply to full purchase price if they proceed. 14-day decision window.<cite>Research &mdash; Section 2, lines 179&ndash;208</cite></blockquote>
+      <p><strong>Recommended flow:</strong> VSL &rarr; Application &rarr; Deposit ($1,000) &rarr; Strategy Call &rarr; Close</p>
+      <p><strong>Current flow:</strong> VSL &rarr; "Apply Now &mdash; See If You Qualify" &rarr; (nothing specified)</p>
+      <h4>What's missing:</h4>
+      <ul class="check-list">
+        <li class="missing">No mention of deposit anywhere in slides or script</li>
+        <li class="missing">No deposit amount stated</li>
+        <li class="missing">No "fully refundable" language</li>
+        <li class="missing">No 14-day decision window mentioned</li>
+        <li class="missing">Post-application flow is vague &mdash; slide 68 says "We'll Reach Out" but doesn't specify what happens</li>
+      </ul>
+      <h4>Research data supporting this:</h4>
+      <ul class="check-list">
+        <li class="missing">Perry Belcher: "$500 deposit cuts lead volume 60% but increases close rate 300%"</li>
+        <li class="missing">Russ Ruffino: $1K deposits for $30K&ndash;$50K coaching &rarr; 40&ndash;60% close rates</li>
+        <li class="missing">Tesla pre-orders: $250&ndash;$1,000 deposit &rarr; 70&ndash;80% purchase rate</li>
+        <li class="missing">Endowment effect (Kahneman): People value things they own 2&ndash;3x more</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 2.2 Private Research Firm -->
+  <div class="rec-card">
+    <div class="rec-card-header">
+      <div class="rec-card-title">2.2 "Private Research Firm" Positioning</div>
+      <span class="status status-partial">Partially Implemented</span>
+    </div>
+    <div class="rec-card-body">
+      <blockquote>At $25K&ndash;$100K, position as "private research firm / family office model" &mdash; NOT "course," "signal service," or "trading community."<cite>Research &mdash; Section 6, lines 708&ndash;720</cite></blockquote>
+      <h4>What IS implemented:</h4>
+      <ul class="check-list">
+        <li class="done">"Institutional-grade" language used throughout (slides 40, 47, 53, 56)</li>
+        <li class="done">"Family offices" referenced (slides 22, 40, 60)</li>
+        <li class="done">"Qualified individual investors" language (slides 22, 40, 47)</li>
+        <li class="done">"Selective enrollment" framing (slides 65, 66)</li>
+        <li class="done">Motley Fool / Stansberry comparisons removed</li>
+      </ul>
+      <h4>What is NOT implemented:</h4>
+      <ul class="check-list">
+        <li class="missing">Term "private research firm" never appears</li>
+        <li class="missing">No comparison to family office advisory fees ($50K&ndash;$250K/yr) as anchor</li>
+        <li class="missing">No comparison to hedge fund minimums ($500K&ndash;$5M+)</li>
+        <li class="missing">No comparison to Gavekal/BCA Research ($25K&ndash;$250K/yr)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 2.3 Bloomberg -->
+  <div class="rec-card">
+    <div class="rec-card-header">
+      <div class="rec-card-title">2.3 Bloomberg Terminal Anchoring ($32K/yr)</div>
+      <span class="status status-done">Implemented</span>
+    </div>
+    <div class="rec-card-body">
+      <p>Slide 47: <em>"A single Bloomberg Terminal costs $32,000 per year &mdash; and it doesn't generate signals, doesn't manage portfolios, and doesn't write reasoning notes."</em></p>
+      <div class="alert alert-green"><strong>Status:</strong> Fully implemented in both slides and script. Strong execution.</div>
+    </div>
+  </div>
+
+  <!-- 2.4 Application -->
+  <div class="rec-card">
+    <div class="rec-card-header">
+      <div class="rec-card-title">2.4 Application / Qualification Language</div>
+      <span class="status status-done">Implemented</span>
+    </div>
+    <div class="rec-card-body">
+      <ul class="check-list">
+        <li class="done">Slide 42 Step 1: "Apply &amp; Get Approved"</li>
+        <li class="done">Slide 65: "We review every application and cap enrollment"</li>
+        <li class="done">Slide 66: "Selective / Application required"</li>
+        <li class="done">Slide 68: "Submit Your Application"</li>
+        <li class="done">Slides 70&ndash;71: CTA "Apply Now &mdash; See If You Qualify"</li>
+      </ul>
+      <div class="alert alert-green"><strong>Status:</strong> Well implemented. Application-first model is in place.</div>
+    </div>
+  </div>
+
+  <!-- 2.5 Scarcity -->
+  <div class="rec-card">
+    <div class="rec-card-header">
+      <div class="rec-card-title">2.5 Scarcity &mdash; Cohort-Based Enrollment, Limited Spots</div>
+      <span class="status status-partial">Partially Implemented</span>
+    </div>
+    <div class="rec-card-body">
+      <h4>What IS implemented:</h4>
+      <ul class="check-list">
+        <li class="done">Alpha decay argument (slide 65)</li>
+        <li class="done">Application exclusivity (slides 42, 65, 68, 70)</li>
+        <li class="done">"Founding member pricing" language (slides 51, 64)</li>
+        <li class="done">"We limit enrollment" (slide 65)</li>
+      </ul>
+      <h4>What is NOT implemented:</h4>
+      <ul class="check-list">
+        <li class="missing">No specific number of founding members ("Limited to 200")</li>
+        <li class="missing">No cohort language ("Q2 2026 cohort")</li>
+        <li class="missing">No specific founding member pricing deadline</li>
+        <li class="missing">No waitlist mention</li>
+        <li class="missing">No milestone-based urgency</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 2.6 No Price -->
+  <div class="rec-card">
+    <div class="rec-card-header">
+      <div class="rec-card-title">2.6 Never Showing Price in VSL</div>
+      <span class="status status-done">Implemented</span>
+    </div>
+    <div class="rec-card-body">
+      <p>All tier pricing ($8,333, $16,667, $33,333) removed. Development cost anchoring ($200K, $50K, $50K, $100M) correctly remains as value anchoring.</p>
+      <div class="alert alert-green"><strong>Status:</strong> Fully implemented. Zero product pricing visible.</div>
+    </div>
+  </div>
+
+  <!-- 2.7 Social Proof -->
+  <div class="rec-card">
+    <div class="rec-card-header">
+      <div class="rec-card-title">2.7 Social Proof Requirements</div>
+      <span class="status status-missing">Severely Lacking</span>
+    </div>
+    <div class="rec-card-body">
+      <h4>What IS implemented:</h4>
+      <ul class="check-list">
+        <li class="done">Verified performance data &mdash; excellent (slides 29&ndash;40)</li>
+        <li class="done">AI reasoning transparency &mdash; strong (slides 24, 32&ndash;34)</li>
+        <li class="done">Published track record &mdash; 55 documented events (slide 62)</li>
+        <li class="done">Data infrastructure claims &mdash; "86 stocks, 15 sectors"</li>
+      </ul>
+      <h4>What is COMPLETELY MISSING:</h4>
+      <ul class="check-list">
+        <li class="missing"><strong>Zero testimonials</strong> &mdash; no video, no written, nothing</li>
+        <li class="missing"><strong>Zero case studies</strong></li>
+        <li class="missing"><strong>Zero member count data</strong></li>
+        <li class="missing"><strong>Zero media/press coverage</strong></li>
+        <li class="missing"><strong>Zero team credentials</strong> &mdash; no named individuals</li>
+        <li class="missing"><strong>Zero institutional partnerships</strong></li>
+        <li class="missing"><strong>Zero duration-of-operation claims</strong></li>
+      </ul>
+      <div class="alert alert-red"><strong>Research says:</strong> "10&ndash;15 quality testimonials from diverse member profiles is sufficient." <strong>The VSL has ZERO.</strong> This is the single largest social proof gap.</div>
+    </div>
+  </div>
+
+  <!-- 2.8 Post-VSL Flow -->
+  <div class="rec-card">
+    <div class="rec-card-header">
+      <div class="rec-card-title">2.8 Post-VSL Flow (Deposit &rarr; Call &rarr; Close)</div>
+      <span class="status status-missing">Not Reflected</span>
+    </div>
+    <div class="rec-card-body">
+      <p><strong>Current CTA flow (slide 68):</strong></p>
+      <ol style="margin:8px 0 16px 20px;font-size:15px">
+        <li>"Submit Your Application" &mdash; OK</li>
+        <li>"If You Qualify, We'll Reach Out" &mdash; vague</li>
+        <li>"Your Portfolio, Managed by AI" &mdash; skips deposit &amp; call</li>
+      </ol>
+      <h4>What's missing:</h4>
+      <ul class="check-list">
+        <li class="missing">No deposit step in flow</li>
+        <li class="missing">No deposit amount ($1,000)</li>
+        <li class="missing">No "fully refundable" language</li>
+        <li class="missing">No "strategy call / consultation" framing</li>
+        <li class="missing">No "deposit applies to purchase price"</li>
+        <li class="missing">Step 3 jumps to "onboarding" &mdash; skips sales call</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 2.9 Urgency -->
+  <div class="rec-card">
+    <div class="rec-card-header">
+      <div class="rec-card-title">2.9 Compliant Urgency Triggers</div>
+      <span class="status status-partial">Partially Implemented</span>
+    </div>
+    <div class="rec-card-body">
+      <table class="flow-table">
+        <thead><tr><th>Recommended Trigger</th><th>In VSL?</th><th>Details</th></tr></thead>
+        <tbody>
+          <tr><td>Limited membership capacity (alpha decay)</td><td><span class="status status-done">Yes</span></td><td>Slide 65: "alpha decays &mdash; the edge erodes"</td></tr>
+          <tr><td>Cohort-based enrollment</td><td><span class="status status-missing">No</span></td><td>No cohort language anywhere</td></tr>
+          <tr><td>Quarterly enrollment windows</td><td><span class="status status-missing">No</span></td><td>No "Q2 2026" language</td></tr>
+          <tr><td>Waitlist system</td><td><span class="status status-missing">No</span></td><td>No waitlist mentioned</td></tr>
+          <tr><td>Price increases tied to growth</td><td><span class="status status-partial">Partial</span></td><td>"Pricing increases to reflect performance" but vague</td></tr>
+          <tr><td>Founding member pricing</td><td><span class="status status-done">Yes</span></td><td>Slides 51, 64</td></tr>
+          <tr><td>Milestone-based urgency</td><td><span class="status status-missing">No</span></td><td>No specific milestones</td></tr>
+          <tr><td>Opportunity cost framing</td><td><span class="status status-done">Yes</span></td><td>Slide 64: "200 signals per year"</td></tr>
+          <tr><td>Application-based exclusivity</td><td><span class="status status-done">Yes</span></td><td>"We review every application"</td></tr>
+        </tbody>
+      </table>
+      <div class="alert alert-green"><strong>FOMO tactics successfully removed:</strong> No pulsing badges, no "watching from the outside," no countdown timers, no unjustified "X spots left!"</div>
+    </div>
+  </div>
+
+  <!-- 2.10 Trust Signals -->
+  <div class="rec-card">
+    <div class="rec-card-header">
+      <div class="rec-card-title">2.10 Trust Signals</div>
+      <span class="status status-partial">Mixed</span>
+    </div>
+    <div class="rec-card-body">
+      <table class="flow-table">
+        <thead><tr><th>Trust Signal</th><th>Rank</th><th>Status</th><th>Details</th></tr></thead>
+        <tbody>
+          <tr><td>Verified, audited track record</td><td>#1</td><td><span class="status status-partial">Partial</span></td><td>Published (55 events) but not third-party audited</td></tr>
+          <tr><td>Team credentials</td><td>#2</td><td><span class="status status-missing">No</span></td><td>Zero named individuals</td></tr>
+          <tr><td>Regulatory standing</td><td>#3</td><td><span class="status status-missing">No</span></td><td>No SEC/FINRA mentions. No specific RIA named.</td></tr>
+          <tr><td>Media mentions</td><td>#4</td><td><span class="status status-missing">No</span></td><td>No press logos</td></tr>
+          <tr><td>Institutional partnerships</td><td>#5</td><td><span class="status status-missing">No</span></td><td>No named custodian/data providers</td></tr>
+          <tr><td>Social proof</td><td>#6</td><td><span class="status status-missing">No</span></td><td>Zero testimonials</td></tr>
+          <tr><td>Money-back guarantee</td><td>#7</td><td><span class="status status-missing">No</span></td><td>Research recommends 60-day conditional</td></tr>
+          <tr><td>Data infrastructure claims</td><td>#8</td><td><span class="status status-done">Yes</span></td><td>"86 stocks, 15 sectors, 52+ cycles." "$100M+ raised."</td></tr>
+        </tbody>
+      </table>
+      <div class="alert alert-green"><strong>AI Reasoning Transparency &mdash; STRONG:</strong> Slides 24, 25, 32&ndash;34, 61 cover this well with real AI reasoning excerpts.</div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ============ SECTION 3: Specific Text Changes ============ -->
+<section class="section" id="s3">
+<div class="wrap">
+  <div class="section-tag tag-navy">Section 3</div>
+  <h2 class="section-title">Specific Text Changes Needed</h2>
+  <p>Before/after for every affected slide. The RIA-optional change is the largest single item, touching 14+ slides.</p>
+
+  <h3>3.1 RIA Optional Change (CRITICAL &mdash; 14+ slides)</h3>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <div class="slide-num">Slide 22</div>
+      <div class="slide-change-title">Flow Diagram</div>
+      <span class="priority p-critical">CRITICAL</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <div class="ba-text">Three boxes showing:
+AI ENGINE &rarr; RIA PARTNER &rarr; INSTITUTIONAL CUSTODIAN
+as the only path</div>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <div class="ba-text">Show two paths:
+AI ENGINE &rarr; SIGNALS &rarr; YOU (self-directed)
+AI ENGINE &rarr; SIGNALS &rarr; RIA PARTNER (optional)
+
+"TradeAlgo is an AI analytics company. It generates signals. You can act on them yourself &mdash; or optionally have an RIA partner manage execution."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <div class="slide-num">Slide 26</div>
+      <div class="slide-change-title">Bottom Text</div>
+      <span class="priority p-high">HIGH</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <div class="ba-text">"You choose the risk level. The AI generates the signals. The RIA partner executes every trade."</div>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <div class="ba-text">"You choose the risk level. The AI generates the signals. You decide how to act &mdash; self-directed or through our optional RIA partner."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <div class="slide-num">Slide 42</div>
+      <div class="slide-change-title">Step 2</div>
+      <span class="priority p-high">HIGH</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <div class="ba-text">Step 2: "Onboard with the RIA Partner"
+"Open a managed account with our licensed RIA partner. Your capital is held at an institutional custodian."</div>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <div class="ba-text">Step 2: "Access the Signals"
+"You'll receive weekly AI signals with full reasoning. Act on them yourself, or opt for managed execution through our RIA partner."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <div class="slide-num">Slide 43</div>
+      <div class="slide-change-title">Flow Diagram + Warning Text</div>
+      <span class="priority p-critical">CRITICAL</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <div class="ba-text">TradeAlgo AI &rarr; RIA Partner &rarr; Your Portfolio
+
+"TradeAlgo builds the AI. A licensed RIA partner manages your portfolio. Your capital is held at an institutional custodian."</div>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <div class="ba-text">TradeAlgo AI &rarr; Generates Signals &rarr; Your Choice
+Path A: "Self-directed &mdash; You receive and execute"
+Path B: "RIA-managed &mdash; Optional hands-free"
+
+"TradeAlgo is an AI analytics company. We generate signals. We never touch your money. Optional: RIA-managed execution available."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <div class="slide-num">Slide 44</div>
+      <div class="slide-change-title">Weekly Notification</div>
+      <span class="priority p-medium">MEDIUM</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <div class="ba-text">"Your RIA partner executed 14 position adjustments based on this week's AI signals."</div>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <div class="ba-text">"This week's AI signals: 14 position adjustments recommended across your portfolio. Full reasoning notes updated."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <div class="slide-num">Slide 46</div>
+      <div class="slide-change-title">Three-Line Statement</div>
+      <span class="priority p-high">HIGH</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <div class="ba-text">"The AI generates signals."
+"The RIA partner executes."
+"You see everything."</div>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <div class="ba-text">"The AI generates signals."
+"You see everything."
+"You decide how to act."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <div class="slide-num">Slide 54</div>
+      <div class="slide-change-title">Objection Answer</div>
+      <span class="priority p-medium">MEDIUM</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <div class="ba-text">"TradeAlgo builds the AI that generates the signals. A licensed RIA partner manages the portfolio and executes every trade."</div>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <div class="ba-text">"TradeAlgo builds the AI that generates the signals. You can act on them yourself, or optionally have an RIA partner manage execution. Either way, the AI's reasoning is documented and transparent."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <div class="slide-num">Slide 59</div>
+      <div class="slide-change-title">Badge + Body</div>
+      <span class="priority p-medium">MEDIUM</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <div class="ba-text">Badge: "TECHNOLOGY COMPANY"
+Body: "A licensed RIA partner handles portfolio management and trade execution."</div>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <div class="ba-text">Badge: "AI ANALYTICS COMPANY"
+Body: "TradeAlgo generates institutional-grade AI trading signals. Optional RIA-managed execution available for hands-free portfolio management."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <div class="slide-num">Slide 60</div>
+      <div class="slide-change-title">Badge Context</div>
+      <span class="priority p-medium">MEDIUM</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <div class="ba-text">"The signals power portfolios managed by a licensed RIA partner &mdash; giving you institutional-grade AI portfolio management."</div>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <div class="ba-text">"The signals power your investment decisions &mdash; whether you execute yourself or through our optional RIA partner. Institutional-grade AI analysis, now available to individual investors."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <div class="slide-num">Slide 71</div>
+      <div class="slide-change-title">Legal Disclaimer</div>
+      <span class="priority p-high">HIGH</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <div class="ba-text">"The Wealth Series is an AI-managed portfolio program. Portfolio management and trade execution are performed by a licensed RIA partner."</div>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <div class="ba-text">"The Wealth Series is an AI signal-generation program. Subscribers receive weekly AI-generated trading signals with full reasoning documentation. Optional managed execution is available through a licensed RIA partner; client funds under managed execution are held at an institutional custodian. TradeAlgo is an AI analytics company; TradeAlgo does not provide investment advice, manage accounts, or have access to client funds."</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>3.2 Remove Early "Apply for Details"</h3>
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <div class="slide-num">Slide 21</div>
+      <div class="slide-change-title">Tier Card Bottom Lines</div>
+      <span class="priority p-medium">MEDIUM</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <div class="ba-text">Each tier card:
+&lt;span style="color:#0a8754"&gt;Apply for Details&lt;/span&gt;</div>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <div class="ba-text">Atlas: "High Growth &bull; Balanced &bull; Defensive"
+Titan: "Expanded Coverage &bull; Full AI Arsenal"
+Everest: "Maximum Diversification &bull; All 5 Strategies"</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>3.3 TradeAlgo = AI Analytics Company</h3>
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <div class="slide-num">Slide 60</div>
+      <div class="slide-change-title">Company Badge</div>
+      <span class="priority p-medium">MEDIUM</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <div class="ba-text">"TECHNOLOGY COMPANY"</div>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <div class="ba-text">"AI ANALYTICS COMPANY"</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>3.4 Fix Portfolio Count</h3>
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <div class="slide-num">Slide 69</div>
+      <div class="slide-change-title">Portfolio Count (14 &rarr; 11)</div>
+      <span class="priority p-medium">MEDIUM</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <div class="ba-text">&lt;strong&gt;All 14 portfolios:&lt;/strong&gt; Updated</div>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <div class="ba-text">&lt;strong&gt;All 11 portfolios:&lt;/strong&gt; Updated</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>3.5 &amp; 3.6 Trim for Overflow</h3>
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <div class="slide-num">Slide 47</div>
+      <div class="slide-change-title">Intro Paragraph</div>
+      <span class="priority p-high">HIGH</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <div class="ba-text">"Building an AI system like this from scratch requires machine learning engineers, institutional-grade data feeds, and massive computing power."</div>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <div class="ba-text">"Building this AI required:"
+[Let the cost cards speak for themselves]</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <div class="slide-num">Slide 56</div>
+      <div class="slide-change-title">Wealthfront Comparison</div>
+      <span class="priority p-high">HIGH</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <div class="ba-text">Full comparison text + "$5 million minimums" + "These are fundamentally different products."</div>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <div class="ba-text">Trim final paragraph. Remove "These are fundamentally different products." (redundant). Keep "$5 million minimums" line.</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>3.7 &amp; 3.8 Adjust for RIA Optional</h3>
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <div class="slide-num">Slide 28</div>
+      <div class="slide-change-title">Tagline</div>
+      <span class="priority p-medium">MEDIUM</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <div class="ba-text">"The most transparent AI-managed portfolio system available to individual investors."</div>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <div class="ba-text">"The most transparent AI signal platform available to individual investors."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <div class="slide-num">Slide 40</div>
+      <div class="slide-change-title">Bottom Text</div>
+      <span class="priority p-medium">MEDIUM</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Before</div>
+        <div class="ba-text">"Institutional-grade AI portfolio management &mdash; the kind of technology that family offices pay millions to access."</div>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">After</div>
+        <div class="ba-text">"Institutional-grade AI signal generation &mdash; the kind of analysis that family offices pay millions to access &mdash; now available to qualified individual investors."</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ============ SECTION 4: CTA/Checkout Flow ============ -->
+<section class="section" id="s4">
+<div class="wrap">
+  <div class="section-tag tag-blue">Section 4</div>
+  <h2 class="section-title">CTA / Checkout Flow Recommendations</h2>
+  <p>Aligning the VSL ending (slides 68&ndash;71) with the research-recommended deposit-based conversion funnel.</p>
+
+  <h3>4.1 Current CTA Flow (Slides 68&ndash;71)</h3>
+  <table class="flow-table">
+    <thead><tr><th>Slide</th><th>Current Content</th><th>Problem</th></tr></thead>
+    <tbody>
+      <tr><td><strong>68</strong></td><td>3 steps: Apply &rarr; Qualified &rarr; Onboarding</td><td>No deposit step. No strategy call framing.</td></tr>
+      <tr><td><strong>69</strong></td><td>System status + "Submit application"</td><td>No urgency mechanism with teeth</td></tr>
+      <tr><td><strong>70</strong></td><td>CTA: "Apply Now &mdash; See If You Qualify"</td><td>Missing deposit, call framing, refundable language</td></tr>
+      <tr><td><strong>71</strong></td><td>Legal disclaimer</td><td>Needs RIA-optional update</td></tr>
+    </tbody>
+  </table>
+
+  <h3>4.2 Recommended CTA Flow</h3>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <div class="slide-num">Slide 68</div>
+      <div class="slide-change-title">"What Happens When You Click Below"</div>
+      <span class="priority p-high">HIGH</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Current</div>
+        <div class="ba-text">1. Submit Your Application
+2. If You Qualify, We'll Reach Out
+3. Your Portfolio, Managed by AI</div>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">Recommended</div>
+        <div class="ba-text">1. Submit Your Application &mdash; We review every application personally. Takes 2 min. No cost, no obligation.
+
+2. Secure Your Consultation &mdash; If you qualify, place a fully refundable $1,000 deposit to reserve your strategy session.
+
+3. Private Strategy Session &mdash; A 30-min consultation: walk through the AI, review your portfolio, discuss fit.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <div class="slide-num">Slide 69</div>
+      <div class="slide-change-title">Deposit Reinforcement</div>
+      <span class="priority p-high">HIGH</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Current</div>
+        <div class="ba-text">(No deposit language)</div>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">Add</div>
+        <div class="ba-text">"The $1,000 deposit is fully refundable within 14 days if you decide not to proceed. It reserves your consultation and ensures we're speaking with serious investors."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <div class="slide-num">Slide 70</div>
+      <div class="slide-change-title">CTA Supporting Text</div>
+      <span class="priority p-high">HIGH</span>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Current</div>
+        <div class="ba-text">"We review every application personally. If you're a fit, we'll invite you to a private strategy session..."</div>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">Recommended</div>
+        <div class="ba-text">"Qualified applicants place a fully refundable $1,000 deposit to secure a private strategy session. The deposit applies to your membership if you proceed &mdash; or is refunded in full if you don't."</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>4.3 Script Changes for CTA Slides</h3>
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <div class="slide-num">Script 68</div>
+      <div class="slide-change-title">Voiceover</div>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Current</div>
+        <div class="ba-text">"Click below to submit your application. We review every application personally &mdash; and if you're a fit, we'll invite you to a private strategy session..."</div>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">Recommended</div>
+        <div class="ba-text">"Click below to submit your application. It takes two minutes. If you qualify, we'll invite you to place a fully refundable thousand-dollar deposit to secure your private strategy session. That deposit applies in full if you proceed &mdash; or you get every penny back if you don't. No risk."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-change">
+    <div class="slide-change-header">
+      <div class="slide-num">Script 70</div>
+      <div class="slide-change-title">Voiceover</div>
+    </div>
+    <div class="slide-change-body">
+      <div class="slide-before">
+        <div class="ba-label ba-before">Current</div>
+        <div class="ba-text">"Click below to apply. We're selective about who we work with..."</div>
+      </div>
+      <div class="slide-after">
+        <div class="ba-label ba-after">Recommended</div>
+        <div class="ba-text">"Click below to apply. If you qualify, a refundable deposit secures your consultation. We'll walk through the AI, review performance, and discuss fit. The deposit is fully refundable. The application is free."</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>4.4 Missing CTA Elements</h3>
+  <table class="flow-table">
+    <thead><tr><th>Recommendation</th><th>Status</th><th>Action Needed</th></tr></thead>
+    <tbody>
+      <tr><td>Refundable $1,000 deposit</td><td><span class="status status-missing">Missing</span></td><td>Add to slides 68, 69, 70</td></tr>
+      <tr><td>Deposit &rarr; call within 48 hours</td><td><span class="status status-partial">Partial</span></td><td>"48 hours" not tied to deposit</td></tr>
+      <tr><td>"Deposit applies to purchase price"</td><td><span class="status status-missing">Missing</span></td><td>Add to slide 68/70</td></tr>
+      <tr><td>"Full refund within 14 days"</td><td><span class="status status-missing">Missing</span></td><td>Add to slide 68/70</td></tr>
+      <tr><td>Money-back guarantee (60-day)</td><td><span class="status status-missing">Missing</span></td><td>Consider for slide 53 area</td></tr>
+      <tr><td>Payment plan option</td><td><span class="status status-missing">Missing</span></td><td>Research: plans double/triple conversion at $25K+</td></tr>
+    </tbody>
+  </table>
+
+</div>
+</section>
+
+<!-- ============ SECTION 5: Priority Ranking ============ -->
+<section class="section" id="s5">
+<div class="wrap">
+  <div class="section-tag tag-red">Section 5</div>
+  <h2 class="section-title">Priority Ranking &mdash; What to Fix First</h2>
+
+  <!-- P0 -->
+  <div class="priority-group p0">
+    <div class="priority-group-header">
+      <span class="pg-label">P0</span>
+      <span class="pg-title">CRITICAL &mdash; Fix Immediately (Blocks Approval)</span>
+    </div>
+    <div class="priority-item">
+      <div class="pi-num">1</div>
+      <div class="pi-issue"><strong>RIA management must be OPTIONAL</strong> per Carlos</div>
+      <div class="pi-slides">12 slides + script</div>
+      <div><span class="pi-effort effort-high">HIGH</span></div>
+    </div>
+    <div class="priority-item">
+      <div class="pi-num">2</div>
+      <div class="pi-issue"><strong>Slide 60:</strong> "TECHNOLOGY COMPANY" &rarr; "AI ANALYTICS COMPANY"</div>
+      <div class="pi-slides">Slide 60</div>
+      <div><span class="pi-effort effort-low">LOW</span></div>
+    </div>
+    <div class="priority-item">
+      <div class="pi-num">3</div>
+      <div class="pi-issue"><strong>Slide 69:</strong> Fix "14 portfolios" &rarr; "11 portfolios"</div>
+      <div class="pi-slides">Slide 69</div>
+      <div><span class="pi-effort effort-low">LOW</span></div>
+    </div>
+    <div class="priority-item">
+      <div class="pi-num">4</div>
+      <div class="pi-issue"><strong>Slide 22:</strong> Fix broken layout</div>
+      <div class="pi-slides">Slide 22</div>
+      <div><span class="pi-effort effort-medium">MEDIUM</span></div>
+    </div>
+  </div>
+
+  <!-- P1 -->
+  <div class="priority-group p1">
+    <div class="priority-group-header">
+      <span class="pg-label">P1</span>
+      <span class="pg-title">HIGH &mdash; Implement Before Launch</span>
+    </div>
+    <div class="priority-item">
+      <div class="pi-num">5</div>
+      <div class="pi-issue"><strong>Add refundable deposit</strong> to CTA flow</div>
+      <div class="pi-slides">68, 69, 70, script</div>
+      <div><span class="pi-effort effort-medium">MEDIUM</span></div>
+    </div>
+    <div class="priority-item">
+      <div class="pi-num">6</div>
+      <div class="pi-issue"><strong>Slide 47:</strong> Fix overflow / trim content</div>
+      <div class="pi-slides">Slide 47</div>
+      <div><span class="pi-effort effort-medium">MEDIUM</span></div>
+    </div>
+    <div class="priority-item">
+      <div class="pi-num">7</div>
+      <div class="pi-issue"><strong>Slide 56:</strong> Fix overflow</div>
+      <div class="pi-slides">Slide 56</div>
+      <div><span class="pi-effort effort-low">LOW</span></div>
+    </div>
+    <div class="priority-item">
+      <div class="pi-num">8</div>
+      <div class="pi-issue"><strong>Slide 21:</strong> Remove premature "Apply for Details"</div>
+      <div class="pi-slides">Slide 21</div>
+      <div><span class="pi-effort effort-low">LOW</span></div>
+    </div>
+    <div class="priority-item">
+      <div class="pi-num">9</div>
+      <div class="pi-issue"><strong>Add specific scarcity numbers</strong> (cap, cohort dates)</div>
+      <div class="pi-slides">51, 64, 65, 69</div>
+      <div><span class="pi-effort effort-low">LOW</span></div>
+    </div>
+  </div>
+
+  <!-- P2 -->
+  <div class="priority-group p2">
+    <div class="priority-group-header">
+      <span class="pg-label">P2</span>
+      <span class="pg-title">IMPORTANT &mdash; Conversion Optimization</span>
+    </div>
+    <div class="priority-item">
+      <div class="pi-num">10</div>
+      <div class="pi-issue"><strong>Add social proof / testimonials</strong></div>
+      <div class="pi-slides">New slide(s)</div>
+      <div><span class="pi-effort effort-high">HIGH</span></div>
+    </div>
+    <div class="priority-item">
+      <div class="pi-num">11</div>
+      <div class="pi-issue"><strong>Add money-back guarantee</strong></div>
+      <div class="pi-slides">Slide 53 area</div>
+      <div><span class="pi-effort effort-low">LOW</span></div>
+    </div>
+    <div class="priority-item">
+      <div class="pi-num">12</div>
+      <div class="pi-issue"><strong>Add team credentials</strong></div>
+      <div class="pi-slides">Slide 59 or new</div>
+      <div><span class="pi-effort effort-medium">MEDIUM</span></div>
+    </div>
+    <div class="priority-item">
+      <div class="pi-num">13</div>
+      <div class="pi-issue"><strong>Add media/press logos</strong></div>
+      <div class="pi-slides">New or existing</div>
+      <div><span class="pi-effort effort-low">LOW</span></div>
+    </div>
+    <div class="priority-item">
+      <div class="pi-num">14</div>
+      <div class="pi-issue"><strong>"Private research firm" positioning</strong></div>
+      <div class="pi-slides">Throughout</div>
+      <div><span class="pi-effort effort-low">LOW</span></div>
+    </div>
+  </div>
+
+  <!-- P3 -->
+  <div class="priority-group p3">
+    <div class="priority-group-header">
+      <span class="pg-label">P3</span>
+      <span class="pg-title">POLISH &mdash; Nice to Have</span>
+    </div>
+    <div class="priority-item">
+      <div class="pi-num">15</div>
+      <div class="pi-issue">Cohort-based enrollment ("Q2 2026 cohort")</div>
+      <div class="pi-slides">51, 65</div>
+      <div><span class="pi-effort effort-low">LOW</span></div>
+    </div>
+    <div class="priority-item">
+      <div class="pi-num">16</div>
+      <div class="pi-issue">Milestone-based urgency ("at member #200")</div>
+      <div class="pi-slides">64, 65</div>
+      <div><span class="pi-effort effort-low">LOW</span></div>
+    </div>
+    <div class="priority-item">
+      <div class="pi-num">17</div>
+      <div class="pi-issue">Additional institutional anchors</div>
+      <div class="pi-slides">47 area</div>
+      <div><span class="pi-effort effort-low">LOW</span></div>
+    </div>
+    <div class="priority-item">
+      <div class="pi-num">18</div>
+      <div class="pi-issue">ROI calculator / math framing</div>
+      <div class="pi-slides">Near slide 53</div>
+      <div><span class="pi-effort effort-medium">MEDIUM</span></div>
+    </div>
+    <div class="priority-item">
+      <div class="pi-num">19</div>
+      <div class="pi-issue">Value ladder (lower-tier entry)</div>
+      <div class="pi-slides">N/A</div>
+      <div><span class="pi-effort effort-low">LOW</span></div>
+    </div>
+    <div class="priority-item">
+      <div class="pi-num">20</div>
+      <div class="pi-issue">Slide 17 &mdash; subtle transition text</div>
+      <div class="pi-slides">Slide 17</div>
+      <div><span class="pi-effort effort-low">LOW</span></div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ============ SCORECARD ============ -->
+<section class="section" id="scorecard">
+<div class="wrap">
+  <div class="section-tag tag-navy">Appendix</div>
+  <h2 class="section-title">Implementation Scorecard</h2>
+  <p>Every research recommendation scored 0&ndash;10 on implementation quality.</p>
+
+  <table class="scorecard">
+    <thead>
+      <tr><th>#</th><th>Research Recommendation</th><th>Status</th><th style="text-align:center">Score</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>Remove all pricing from VSL</td><td><span class="status status-done">Yes</span></td><td class="score-cell score-10">10/10</td></tr>
+      <tr><td>2</td><td>"Apply Now &mdash; See If You Qualify" CTA</td><td><span class="status status-done">Yes</span></td><td class="score-cell score-10">10/10</td></tr>
+      <tr><td>3</td><td>Application-first model</td><td><span class="status status-done">Yes</span></td><td class="score-cell score-high">9/10</td></tr>
+      <tr><td>4</td><td>Bloomberg anchor ($32K/yr)</td><td><span class="status status-done">Yes</span></td><td class="score-cell score-10">10/10</td></tr>
+      <tr><td>5</td><td>Remove Motley Fool comparisons</td><td><span class="status status-done">Yes</span></td><td class="score-cell score-10">10/10</td></tr>
+      <tr><td>6</td><td>Remove mass-market framing</td><td><span class="status status-done">Yes</span></td><td class="score-cell score-10">10/10</td></tr>
+      <tr><td>7</td><td>Remove FOMO tactics</td><td><span class="status status-done">Yes</span></td><td class="score-cell score-10">10/10</td></tr>
+      <tr><td>8</td><td>Institutional / family office positioning</td><td><span class="status status-partial">Partial</span></td><td class="score-cell score-mid">7/10</td></tr>
+      <tr><td>9</td><td>Alpha decay scarcity justification</td><td><span class="status status-done">Yes</span></td><td class="score-cell score-high">9/10</td></tr>
+      <tr><td>10</td><td>Founding member pricing language</td><td><span class="status status-done">Yes</span></td><td class="score-cell score-high">8/10</td></tr>
+      <tr><td>11</td><td>Refundable deposit model</td><td><span class="status status-missing">No</span></td><td class="score-cell score-zero">0/10</td></tr>
+      <tr><td>12</td><td>"Private research firm" positioning</td><td><span class="status status-partial">Partial</span></td><td class="score-cell score-low">4/10</td></tr>
+      <tr><td>13</td><td>Social proof / testimonials</td><td><span class="status status-missing">No</span></td><td class="score-cell score-zero">0/10</td></tr>
+      <tr><td>14</td><td>Team credentials / named individuals</td><td><span class="status status-missing">No</span></td><td class="score-cell score-zero">0/10</td></tr>
+      <tr><td>15</td><td>Money-back guarantee</td><td><span class="status status-missing">No</span></td><td class="score-cell score-zero">0/10</td></tr>
+      <tr><td>16</td><td>Specific scarcity numbers</td><td><span class="status status-missing">No</span></td><td class="score-cell score-low">2/10</td></tr>
+      <tr><td>17</td><td>Post-VSL flow (deposit &rarr; call &rarr; close)</td><td><span class="status status-missing">No</span></td><td class="score-cell score-low">1/10</td></tr>
+      <tr><td>18</td><td>Media / press coverage</td><td><span class="status status-missing">No</span></td><td class="score-cell score-zero">0/10</td></tr>
+      <tr><td>19</td><td>Additional institutional anchors</td><td><span class="status status-partial">Partial</span></td><td class="score-cell score-mid">5/10</td></tr>
+      <tr><td>20</td><td>Payment plan availability</td><td><span class="status status-missing">No</span></td><td class="score-cell score-zero">0/10</td></tr>
+      <tr><td>21</td><td>Compliant urgency triggers</td><td><span class="status status-partial">Partial</span></td><td class="score-cell score-mid">5/10</td></tr>
+      <tr><td>22</td><td>RIA model (must be optional)</td><td><span class="status status-wrong">WRONG</span></td><td class="score-cell score-zero">0/10</td></tr>
+      <tr class="total-row"><td colspan="3" style="text-align:right;padding-right:20px">OVERALL SCORE</td><td class="score-cell" style="color:#fff">55 / 220 (25%)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="alert alert-gold">
+    <strong>Bottom line:</strong> The VSL successfully implements "remove pricing / apply first / institutional language" but is missing the entire deposit-based CTA flow, all social proof, all trust signals beyond performance data, all specific scarcity mechanisms, and the guarantee. The RIA-mandatory framing also needs to be reversed per Carlos's direction.
+  </div>
+
+</div>
+</section>
+
+<footer class="page-footer">
+  <p>Analysis completed: March 2026</p>
+  <p>Based on: high-ticket-vsl-cta-research.md &middot; vsl-revision-proposal.md &middot; slides.html (71 slides) &middot; script.md (v3)</p>
+</footer>
+
+</body>
+</html>
