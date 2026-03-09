@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(identify /home/node/openclaw/workspace/vsl-generation/projects/wealth-series/frames/slide-01.png 2>/dev/null || file /home/node/openclaw/workspace/vsl-generation/projects/wealth-series/frames/slide-01.png)",
+      "Bash(ls -la /home/node/openclaw/workspace/vsl-generation/projects/wealth-series/frames/ | wc -l && ls -la /home/node/openclaw/workspace/vsl-generation/projects/wealth-series/audio/*.mp3 | wc -l)",
+      "Bash(node src/generate-video.mjs 2>&1)",
+      "Bash(git add config/defaults.json src/compress.mjs src/generate-video.mjs && git commit -m \"$\\(cat <<'EOF'\nV5: HD video pipeline — CRF 18, retina screenshots, proper audio\n\n- Set videoCrf to 18 \\(was 23\\) for high quality encoding\n- Add deviceScaleFactor 2 for retina-quality 3840x2160 screenshots\n- Use lanczos downscale filter for sharp 1920x1080 output\n- Audio: AAC 128k at 44100 Hz \\(was 48k at 24000 Hz mono\\)\n- Output renamed to wealth-series-vsl-hd.mp4 for download delivery\n- Compress script: match audio settings \\(128k, 44100 Hz\\)\n\nCo-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\nEOF\n\\)\" && git status)",
+      "Bash(git push)",
+      "WebSearch",
+      "WebFetch(domain:www.coachmatic.app)",
+      "WebFetch(domain:www.numberanalytics.com)",
+      "WebFetch(domain:directpaynet.com)",
+      "WebFetch(domain:swipepages.com)",
+      "WebFetch(domain:www.clickfunnels.com)",
+      "WebFetch(domain:medium.com)",
+      "WebFetch(domain:www.vidalytics.com)",
+      "WebFetch(domain:swiped.co)"
+    ]
+  }
+}

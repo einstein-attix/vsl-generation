@@ -57,7 +57,7 @@ async function captureSlides() {
   const page = await browser.newPage();
   await page.setViewport({ width: defaults.resolution.width, height: defaults.resolution.height, deviceScaleFactor: 2 });
 
-  await page.goto(`file://${SLIDES_HTML}`, { waitUntil: 'networkidle0', timeout: 30000 });
+  await page.goto(`file://${SLIDES_HTML}?render=true`, { waitUntil: 'networkidle0', timeout: 30000 });
   await new Promise(r => setTimeout(r, 2000));
 
   for (let i = 0; i < manifest.length; i++) {

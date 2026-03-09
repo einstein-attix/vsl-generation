@@ -1128,12 +1128,19 @@ if(x<window.innerWidth*0.3)prev();
 else next();
 });
 
-// Add navigation buttons
-var navHTML='<div style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:12px;z-index:9999;">';
+// Add navigation buttons (hidden in render mode)
+var isRender=new URLSearchParams(window.location.search).has('render');
+if(!isRender){
+var navHTML='<div id="nav-buttons" style="position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:12px;z-index:9999;">';
 navHTML+='<button class="nav-btn" onclick="event.stopPropagation();window._prev()" style="background:rgba(0,0,0,0.6);color:#fff;border:none;border-radius:50%;width:48px;height:48px;font-size:22px;cursor:pointer;backdrop-filter:blur(4px);">◀</button>';
 navHTML+='<button class="nav-btn" onclick="event.stopPropagation();window._next()" style="background:rgba(0,0,0,0.6);color:#fff;border:none;border-radius:50%;width:48px;height:48px;font-size:22px;cursor:pointer;backdrop-filter:blur(4px);">▶</button>';
 navHTML+='</div>';
 document.body.insertAdjacentHTML('beforeend',navHTML);
+}
+// Hide UI chrome in render mode
+if(isRender){
+['slide-counter','auto-badge','progress-bar'].forEach(function(id){var el=document.getElementById(id);if(el)el.style.display='none';});
+}
 window._prev=prev;
 window._next=next;
 
