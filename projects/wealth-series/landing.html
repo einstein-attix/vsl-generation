@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TradeAlgo Wealth Series — AI-Powered Signal Portfolios</title>
+<meta name="description" content="AI-generated portfolios that beat the S&P 500. 942+ investors. $32M AUM. 5 narrative strategies across growth, value, defensive, and balanced approaches. See exactly why every signal is made.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+<style>
+/* ── Reset & Base ──────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:#202021;background:#fff;line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+img{max-width:100%;display:block}
+a{color:#007BFF;text-decoration:none}
+
+/* ── Layout ────────────────────────────────── */
+.container{max-width:1140px;margin:0 auto;padding:0 24px}
+.section{padding:80px 0}
+.section-alt{background:#F8FAFC}
+
+/* ── Typography ────────────────────────────── */
+.overline{font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#007BFF}
+h1{font-size:clamp(36px,5vw,60px);font-weight:700;letter-spacing:-1px;line-height:1.1;color:#1C1C1E}
+h2{font-size:clamp(28px,4vw,48px);font-weight:700;letter-spacing:-.5px;line-height:1.15;color:#1C1C1E}
+h3{font-size:clamp(20px,2.5vw,24px);font-weight:600;color:#1C1C1E;line-height:1.3}
+p{font-size:16px;color:#636465}
+.text-center{text-align:center}
+.text-white{color:#fff}
+.text-muted{color:#636465}
+.text-small{font-size:14px}
+
+/* ── Buttons ───────────────────────────────── */
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:inherit;font-size:16px;font-weight:600;padding:16px 32px;border-radius:10px;border:none;cursor:pointer;transition:all .2s ease}
+.btn-primary{background:#007BFF;color:#fff;box-shadow:0 4px 14px rgba(0,123,255,.3)}
+.btn-primary:hover{background:#008FFF;box-shadow:0 6px 20px rgba(0,123,255,.4);transform:translateY(-1px)}
+.btn-outline{background:transparent;color:#007BFF;border:2px solid #007BFF}
+.btn-outline:hover{background:#007BFF;color:#fff}
+.btn-lg{font-size:18px;padding:18px 40px;border-radius:12px}
+.btn .material-icons-round{font-size:20px}
+
+/* ── Sticky Nav ────────────────────────────── */
+.nav{position:fixed;top:0;left:0;right:0;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #F2F2F5;z-index:1000;padding:14px 0}
+.nav-inner{display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;color:#1C1C1E}
+.nav-logo svg{width:32px;height:32px}
+.nav-cta{font-size:14px;padding:10px 24px;border-radius:8px}
+
+/* ── Hero ──────────────────────────────────── */
+.hero{padding:120px 0 60px;text-align:center}
+.hero h1{margin-bottom:20px}
+.hero p.lead{font-size:clamp(16px,2vw,20px);color:#636465;max-width:720px;margin:0 auto 40px}
+.wistia-wrap{max-width:800px;margin:0 auto 32px;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.12);background:#1C1C1E}
+.wistia_responsive_padding{padding:56.25% 0 0 0;position:relative}
+.wistia_responsive_wrapper{position:absolute;top:0;left:0;width:100%;height:100%}
+.hero-cta-wrap{opacity:0;transform:translateY(10px);transition:opacity .6s ease,transform .6s ease}
+.hero-cta-wrap.visible{opacity:1;transform:translateY(0)}
+.hero-micro{font-size:14px;color:#9A9B9C;margin-top:12px}
+.hero-micro strong{color:#636465}
+
+/* ── Social Proof Bar ──────────────────────── */
+.proof-bar{border-top:1px solid #F2F2F5;border-bottom:1px solid #F2F2F5;padding:28px 0;background:#fff}
+.proof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
+.proof-item .proof-value{font-size:28px;font-weight:700;color:#1C1C1E}
+.proof-item .proof-label{font-size:12px;color:#9A9B9C;margin-top:2px;line-height:1.3}
+.proof-item .proof-stars{color:#f59e0b;font-size:14px;letter-spacing:1px}
+
+/* ── Feature Grid ──────────────────────────── */
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.feature-card{background:#fff;border:1px solid #F2F2F5;border-radius:14px;padding:32px 28px;transition:box-shadow .2s ease,transform .2s ease}
+.feature-card:hover{box-shadow:0 8px 30px rgba(0,0,0,.06);transform:translateY(-2px)}
+.feature-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:24px;color:#fff}
+.feature-icon.blue{background:#007BFF}
+.feature-icon.dark{background:#1C1C1E}
+.feature-icon.teal{background:#0891b2}
+.feature-icon.green{background:#2E7D32}
+.feature-card h3{font-size:18px;margin-bottom:8px}
+.feature-card p{font-size:14px;color:#636465;line-height:1.5}
+.feature-tag{display:inline-block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;padding:3px 8px;border-radius:4px;margin-bottom:12px}
+.feature-tag.ai{background:#BBE2FF;color:#007BFF}
+.feature-tag.data{background:#E8F5E9;color:#2E7D32}
+.feature-tag.live{background:#FFF3E0;color:#EF6C00}
+.mid-cta{text-align:center;margin-top:48px}
+.mid-cta .btn-micro{font-size:13px;color:#9A9B9C;margin-top:10px}
+
+/* ── Tier Cards ────────────────────────────── */
+.tiers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.tier-card{background:#fff;border:2px solid #F2F2F5;border-radius:16px;padding:40px 32px;text-align:center;position:relative;transition:box-shadow .2s ease,transform .2s ease}
+.tier-card:hover{box-shadow:0 12px 40px rgba(0,0,0,.08);transform:translateY(-3px)}
+.tier-card.featured{border-color:#007BFF;box-shadow:0 8px 30px rgba(0,123,255,.12)}
+.tier-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:#007BFF;color:#fff;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:4px 16px;border-radius:20px}
+.tier-name{font-size:28px;font-weight:700;color:#1C1C1E;margin-bottom:4px}
+.tier-focus{font-size:14px;color:#636465;margin-bottom:20px}
+.tier-portfolios{font-size:48px;font-weight:700;color:#007BFF;line-height:1}
+.tier-portfolios-label{font-size:14px;color:#9A9B9C;margin-top:4px;margin-bottom:20px}
+.tier-features{list-style:none;text-align:left;font-size:14px;color:#636465;line-height:1.8}
+.tier-features li{display:flex;align-items:flex-start;gap:8px}
+.tier-features .material-icons-round{font-size:18px;color:#2E7D32;flex-shrink:0;margin-top:3px}
+
+/* ── Performance Bar ───────────────────────── */
+.perf-bar{background:#1C1C1E;padding:60px 0;text-align:center}
+.perf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:24px}
+.perf-item{text-align:center}
+.perf-value{font-size:clamp(28px,4vw,44px);font-weight:700;color:#fff;letter-spacing:-1px;line-height:1}
+.perf-value.blue{color:#007BFF}
+.perf-value.green{color:#2E7D32}
+.perf-label{font-size:13px;color:#BABABB;margin-top:6px;line-height:1.4}
+
+/* ── Growth Proof ──────────────────────────── */
+.growth-visual{display:flex;align-items:flex-end;justify-content:center;gap:60px;margin:40px 0 20px}
+.growth-col{text-align:center}
+.growth-bar{width:120px;border-radius:12px 12px 0 0;margin:0 auto 12px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:16px}
+.growth-bar.small{background:linear-gradient(180deg,#BBE2FF,#007BFF);height:80px}
+.growth-bar.large{background:linear-gradient(180deg,#007BFF,#0050b3);height:280px}
+.growth-num{font-size:24px;font-weight:700;color:#fff}
+.growth-year{font-size:16px;font-weight:600;color:#1C1C1E}
+.growth-arrow{font-size:48px;color:#007BFF;font-weight:700;align-self:center;margin-bottom:60px}
+
+/* ── Comparison Table ──────────────────────── */
+.compare-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.compare-table{width:100%;border-collapse:collapse;min-width:600px}
+.compare-table thead th{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#9A9B9C;padding:14px 16px;text-align:center;border-bottom:2px solid #F2F2F5}
+.compare-table thead th:first-child{text-align:left}
+.compare-table thead th.highlight{color:#007BFF}
+.compare-table tbody td{padding:16px;text-align:center;font-size:15px;border-bottom:1px solid #F2F2F5;color:#636465}
+.compare-table tbody td:first-child{text-align:left;font-weight:500;color:#1C1C1E}
+.compare-table tbody td.highlight{background:#F0F7FF;font-weight:600;color:#1C1C1E}
+.compare-table .check{color:#2E7D32;font-size:22px}
+.compare-table .cross{color:#ccc;font-size:22px}
+.compare-table tfoot td{padding:16px;text-align:center;font-size:15px;font-weight:700;color:#1C1C1E;border-top:2px solid #F2F2F5}
+.compare-table tfoot td:first-child{text-align:left}
+.compare-table tfoot td.highlight{background:#F0F7FF;color:#007BFF}
+.compare-verdict{text-align:center;margin-top:32px;padding:24px;background:#F0F7FF;border-radius:12px}
+.compare-verdict p{font-size:16px;color:#1C1C1E;font-weight:500}
+.compare-verdict strong{color:#007BFF}
+
+/* ── Reasoning Showcase ────────────────────── */
+.reasoning-card{background:#F8FAFC;border-left:4px solid #007BFF;border-radius:0 12px 12px 0;padding:32px;max-width:740px;margin:0 auto}
+.reasoning-card .ticker-badge{display:inline-block;background:#1C1C1E;color:#fff;font-size:13px;font-weight:700;padding:4px 12px;border-radius:6px;margin-bottom:12px}
+.reasoning-card .action-badge{display:inline-block;font-size:13px;font-weight:700;padding:4px 12px;border-radius:6px;margin-left:8px}
+.reasoning-card .action-badge.trim{background:#FFF3E0;color:#EF6C00}
+.reasoning-card .action-badge.hold{background:#E8F5E9;color:#2E7D32}
+.reasoning-card blockquote{font-size:15px;color:#636465;line-height:1.7;margin:12px 0 0;border:none;padding:0}
+.reasoning-card blockquote strong{color:#1C1C1E}
+
+/* ── How It Works ──────────────────────────── */
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.step-card{text-align:center;padding:32px 24px}
+.step-num{width:56px;height:56px;border-radius:50%;background:#007BFF;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:24px;margin:0 auto 20px}
+.step-card h3{margin-bottom:8px}
+.step-card p{font-size:14px;color:#636465}
+
+/* ── Pricing CTA ───────────────────────────── */
+.pricing-section{background:linear-gradient(180deg,#1C1C1E 0%,#2a2a2e 100%);color:#fff;padding:100px 0;text-align:center}
+.pricing-section h2{color:#fff;margin-bottom:12px}
+.pricing-section .overline{color:#BBE2FF}
+.price-tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:40px 0 32px;text-align:left}
+.price-tier{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:32px 28px}
+.price-tier.featured{border-color:#007BFF;background:rgba(0,123,255,.08)}
+.price-tier .pt-name{font-size:22px;font-weight:700;color:#fff;margin-bottom:4px}
+.price-tier .pt-focus{font-size:13px;color:#BABABB;margin-bottom:16px}
+.price-tier .pt-portfolios{font-size:14px;color:#BBE2FF;font-weight:600;margin-bottom:8px}
+.price-tier .pt-includes{list-style:none;font-size:13px;color:#BABABB;line-height:1.8}
+.price-tier .pt-includes li{display:flex;align-items:flex-start;gap:6px}
+.price-tier .pt-includes .material-icons-round{font-size:16px;color:#2E7D32;flex-shrink:0;margin-top:3px}
+.pricing-section .btn-primary{font-size:20px;padding:20px 48px;border-radius:14px;box-shadow:0 6px 24px rgba(0,123,255,.35)}
+.pricing-cta-micro{font-size:13px;color:#727274;margin-top:14px}
+
+/* ── FAQ ───────────────────────────────────── */
+.faq-list{max-width:720px;margin:0 auto}
+.faq-item{border-bottom:1px solid #F2F2F5}
+.faq-question{width:100%;text-align:left;background:none;border:none;font-family:inherit;font-size:17px;font-weight:600;color:#1C1C1E;padding:24px 0;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.faq-question .material-icons-round{color:#9A9B9C;transition:transform .2s ease;font-size:24px;flex-shrink:0}
+.faq-item.open .faq-question .material-icons-round{transform:rotate(180deg)}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-answer-inner{padding:0 0 24px;font-size:15px;color:#636465;line-height:1.7}
+
+/* ── Final CTA ─────────────────────────────── */
+.final-cta{background:#F8FAFC;padding:80px 0;text-align:center}
+.final-cta h2{margin-bottom:16px}
+.final-cta p{max-width:600px;margin:0 auto 12px;font-size:18px}
+.final-cta .trust-recap{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin:20px 0 32px;font-size:14px;color:#636465}
+.final-cta .trust-recap span{display:flex;align-items:center;gap:6px}
+.final-cta .trust-recap .material-icons-round{font-size:18px;color:#2E7D32}
+
+/* ── Footer ────────────────────────────────── */
+.footer{background:#1C1C1E;color:#727274;padding:40px 0;text-align:center;font-size:13px;line-height:1.8}
+.footer a{color:#BABABB}
+.footer-disclaimer{max-width:700px;margin:0 auto;font-size:12px;color:#727274;line-height:1.6}
+
+/* ── Sticky Mobile CTA ────────────────────── */
+.sticky-mobile-cta{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid #F2F2F5;padding:12px 16px;z-index:999;text-align:center;box-shadow:0 -4px 20px rgba(0,0,0,.08)}
+.sticky-mobile-cta .btn{width:100%;justify-content:center;padding:14px 24px;font-size:16px}
+.sticky-mobile-cta .sticky-micro{font-size:11px;color:#9A9B9C;margin-top:6px}
+
+/* ── Responsive ────────────────────────────── */
+@media(max-width:1024px){
+  .features-grid{grid-template-columns:repeat(2,1fr)}
+  .tiers-grid{grid-template-columns:1fr}
+  .price-tiers{grid-template-columns:1fr}
+  .perf-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  .section{padding:60px 0}
+  .hero{padding:100px 0 40px}
+  .proof-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+  .features-grid{grid-template-columns:1fr}
+  .steps-grid{grid-template-columns:1fr;gap:16px}
+  .pricing-section{padding:60px 0}
+  .growth-visual{flex-direction:row;gap:30px}
+  .growth-bar{width:80px}
+  .growth-bar.large{height:180px}
+  .growth-arrow{font-size:32px;margin-bottom:40px}
+  .nav-logo span{display:none}
+  .sticky-mobile-cta{display:block}
+  body{padding-bottom:72px}
+  .final-cta .trust-recap{flex-direction:column;align-items:center;gap:8px}
+  .compare-table{min-width:540px}
+}
+@media(max-width:480px){
+  .container{padding:0 16px}
+  .hero h1{font-size:32px}
+  .proof-grid{grid-template-columns:1fr 1fr}
+  .growth-bar{width:60px}
+  .growth-bar.large{height:140px}
+  .growth-bar.small{height:50px}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ NAV ═══════ -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 4L6 14l4.5 3L20 10.5 29.5 17 34 14 20 4z" fill="#1C1C1E"/><path d="M20 17L6 27l14 9 14-9L20 17zm0 4.5L29.5 27 20 32.5 10.5 27 20 21.5z" fill="#1C1C1E"/></svg>
+      <span>TradeAlgo</span>
+    </a>
+    <a href="#pricing" class="btn btn-primary nav-cta">Book a Strategy Session</a>
+  </div>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero">
+  <div class="container">
+    <p class="overline" style="margin-bottom:16px">TradeAlgo Wealth Series</p>
+    <h1>AI-Built Portfolios That<br>Beat the S&amp;P 500.</h1>
+    <p class="lead">Momentum Ascent returned +38.43% YTD while the S&amp;P did +16.82%. The AI analyzes 15 sectors simultaneously, rebalances with written reasoning, and publishes every signal &mdash; so you always know exactly why.</p>
+
+    <div class="wistia-wrap">
+      <div class="wistia_responsive_padding">
+        <div class="wistia_responsive_wrapper">
+          <div class="wistia_embed wistia_async_7mlghuud37 seo=true videoFoam=true" style="height:100%;position:relative;width:100%">&nbsp;</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-cta-wrap" id="heroCta">
+      <a href="#pricing" class="btn btn-primary btn-lg">
+        <span class="material-icons-round">trending_up</span>
+        See How It Works
+      </a>
+      <p class="hero-micro">Free strategy session &mdash; <strong>no obligation</strong>. Deposit fully refundable.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SOCIAL PROOF BAR ═══════ -->
+<section class="proof-bar">
+  <div class="container">
+    <div class="proof-grid">
+      <div class="proof-item">
+        <div class="proof-value">942+</div>
+        <div class="proof-label">Investors Using Wealth Series</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-value">$9.1M+</div>
+        <div class="proof-label">Revenue Generated</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-value">$32M+</div>
+        <div class="proof-label">Assets Under Management</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="proof-value">4.7</div>
+        <div class="proof-label">Trustpilot Rating</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ THE PROBLEM ═══════ -->
+<section class="section">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:48px">
+      <p class="overline" style="margin-bottom:12px">The Problem</p>
+      <h2>You Can't Analyze 15 Sectors<br>on a Sunday Night.</h2>
+      <p style="max-width:640px;margin:16px auto 0">86 research reports. 15 sectors. Conflicting analyst opinions. 4 hours of sleep. By Monday morning, you're making educated guesses &mdash; not data-driven decisions.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:900px;margin:0 auto">
+      <div style="background:#F8FAFC;border:1px solid #F2F2F5;border-radius:12px;padding:28px 16px;text-align:center">
+        <div style="font-size:36px;font-weight:700;color:#1C1C1E">86</div>
+        <div style="font-size:13px;color:#9A9B9C;margin-top:4px">Research Reports<br>Per Week</div>
+      </div>
+      <div style="background:#F8FAFC;border:1px solid #F2F2F5;border-radius:12px;padding:28px 16px;text-align:center">
+        <div style="font-size:36px;font-weight:700;color:#1C1C1E">15</div>
+        <div style="font-size:13px;color:#9A9B9C;margin-top:4px">Sectors to<br>Analyze</div>
+      </div>
+      <div style="background:#F8FAFC;border:1px solid #F2F2F5;border-radius:12px;padding:28px 16px;text-align:center">
+        <div style="font-size:36px;font-weight:700;color:#1C1C1E">52</div>
+        <div style="font-size:13px;color:#9A9B9C;margin-top:4px">Signal Cycles<br>Per Year</div>
+      </div>
+      <div style="background:#F8FAFC;border:1px solid #F2F2F5;border-radius:12px;padding:28px 16px;text-align:center">
+        <div style="font-size:36px;font-weight:700;color:#EF6C00">&infin;</div>
+        <div style="font-size:13px;color:#9A9B9C;margin-top:4px">Conflicting<br>Opinions</div>
+      </div>
+    </div>
+
+    <p class="text-center" style="margin-top:32px;font-size:17px;color:#636465;max-width:580px;margin-left:auto;margin-right:auto">The real cost isn't what you lost &mdash; it's what you never made. When the AI-managed portfolio returned +38% and yours returned +16%, that gap is real dollars.</p>
+  </div>
+</section>
+
+<!-- ═══════ THE SOLUTION ═══════ -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:48px">
+      <p class="overline" style="margin-bottom:12px">The Solution</p>
+      <h2>AI That Does the Analyst Work.<br>You Decide What to Do.</h2>
+      <p style="max-width:640px;margin:16px auto 0">Wealth Series uses PilotAI to build, monitor, and rebalance diversified portfolios across 5 investment narratives &mdash; then publishes every signal with written reasoning, so you can verify every decision.</p>
+    </div>
+
+    <!-- Reasoning showcase -->
+    <div class="reasoning-card" style="margin-bottom:48px">
+      <span class="ticker-badge">IAUM (Gold)</span>
+      <span class="action-badge trim">TRIM 1.1%</span>
+      <blockquote>RSI at <strong>69.69</strong>. CCI at <strong>161</strong>. Overbought territory with consolidation risk. Reduce exposure ahead of FOMC meeting. Gold has rallied 8 consecutive sessions; mean-reversion probability elevated. Maintain core position but trim tactical overweight. Signal confidence: <strong>HIGH</strong>.</blockquote>
+    </div>
+
+    <p class="text-center text-muted text-small" style="margin-bottom:40px">Every signal includes written reasoning. Not a black box &mdash; you can verify every decision.</p>
+
+    <!-- Feature Grid -->
+    <div class="features-grid">
+
+      <div class="feature-card">
+        <span class="feature-tag ai">AI-Powered</span>
+        <div class="feature-icon blue"><span class="material-icons-round">auto_awesome</span></div>
+        <h3>PilotAI Portfolios</h3>
+        <p>AI-generated portfolios evaluated against a qualifying scale, continuously monitored and rebalanced. 3 to 5 portfolios depending on your tier.</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-tag data">Strategy</span>
+        <div class="feature-icon green"><span class="material-icons-round">pie_chart</span></div>
+        <h3>5 Narrative Strategies</h3>
+        <p>Growth, Low-Risk Volatility, Deep Value, Defensive, and Balanced. Diversified exposure engineered for different market conditions.</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-tag ai">AI-Powered</span>
+        <div class="feature-icon blue"><span class="material-icons-round">psychology</span></div>
+        <h3>Rebalancing with Rationale</h3>
+        <p>Every rebalance includes written reasoning at both portfolio and stock level. Know exactly why the AI made each adjustment.</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-tag data">Performance</span>
+        <div class="feature-icon dark"><span class="material-icons-round">analytics</span></div>
+        <h3>S&amp;P 500 Benchmarking</h3>
+        <p>Portfolio performance benchmarked against the S&amp;P 500 with multi-timeframe views: 1D, 7D, 1M, 1Y, and YTD. Track how your signals stack up.</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-tag live">Real-Time</span>
+        <div class="feature-icon teal"><span class="material-icons-round">videocam</span></div>
+        <h3>Weekly Livestreams</h3>
+        <p>Dane and Eric host weekly analyst sessions with live Q&amp;A. Atlas on Mondays, Titan Tuesdays, Everest Wednesdays &mdash; 4:30 PM EST.</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-tag live">Mentorship</span>
+        <div class="feature-icon teal"><span class="material-icons-round">groups</span></div>
+        <h3>1-on-1 Mentorship</h3>
+        <p>Up to 32 sessions with Dane and Eric. Book via Calendly. Not pre-recorded webinars &mdash; live, personalized portfolio guidance.</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-tag live">Real-Time</span>
+        <div class="feature-icon green"><span class="material-icons-round">notifications_active</span></div>
+        <h3>Telegram &amp; Email Alerts</h3>
+        <p>Machine-triggered portfolio changes and analyst-generated signals delivered to your Telegram and inbox. Monthly recaps included.</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-tag ai">AI-Powered</span>
+        <div class="feature-icon blue"><span class="material-icons-round">price_check</span></div>
+        <h3>AI Entry Price Indicator</h3>
+        <p>See the exact price the AI entered each ticker. Maximum transparency on every position &mdash; with individual stock sparklines and performance views.</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-tag data">Coverage</span>
+        <div class="feature-icon dark"><span class="material-icons-round">view_timeline</span></div>
+        <h3>15 Sectors Simultaneously</h3>
+        <p>Technology, Healthcare, Energy, Financials, Gold, Consumer Staples, and 9 more. The AI covers everything you can't on a Sunday night.</p>
+      </div>
+
+    </div>
+
+    <div class="mid-cta">
+      <a href="#pricing" class="btn btn-primary btn-lg">
+        <span class="material-icons-round">trending_up</span>
+        Book a Strategy Session
+      </a>
+      <p class="btn-micro">Free. No obligation. Deposit fully refundable.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ PERFORMANCE ═══════ -->
+<section class="perf-bar">
+  <div class="container">
+    <p class="overline" style="color:#BBE2FF;margin-bottom:12px">2025 YTD Performance</p>
+    <h2 class="text-white" style="margin-bottom:32px">Real Portfolios. Real Signals.<br>Let the Numbers Speak.</h2>
+    <div class="perf-grid">
+      <div class="perf-item">
+        <div class="perf-value blue">+38.43%</div>
+        <div class="perf-label">Momentum Ascent<br>(Everest)</div>
+      </div>
+      <div class="perf-item">
+        <div class="perf-value" style="color:#fff">+36.34%</div>
+        <div class="perf-label">Capital Jetstream</div>
+      </div>
+      <div class="perf-item">
+        <div class="perf-value" style="color:#fff">+33.79%</div>
+        <div class="perf-label">Midas Link</div>
+      </div>
+      <div class="perf-item">
+        <div class="perf-value" style="color:#f59e0b">+16.82%</div>
+        <div class="perf-label">S&amp;P 500 Benchmark</div>
+      </div>
+    </div>
+    <p style="font-size:15px;color:#BABABB;max-width:640px;margin:0 auto;line-height:1.6">7 of 11 Wealth Series portfolios outperformed the S&amp;P 500. The top performer &mdash; Momentum Ascent &mdash; more than doubled the benchmark return. Everest's defensive portfolio, Capital Shield, beat the S&amp;P at +18.08%.</p>
+    <p style="font-size:12px;color:#727274;margin-top:16px">Past performance is not indicative of future results. All investing involves risk.</p>
+  </div>
+</section>
+
+<!-- ═══════ THREE TIERS ═══════ -->
+<section class="section" id="tiers">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:48px">
+      <p class="overline" style="margin-bottom:12px">Choose Your Tier</p>
+      <h2>Three Tiers. One AI System.</h2>
+      <p style="max-width:600px;margin:16px auto 0">Each tier is mapped to your portfolio size and gives you more AI signal portfolios, broader diversification, and deeper coverage.</p>
+    </div>
+
+    <div class="tiers-grid">
+
+      <!-- Lite -->
+      <div class="tier-card">
+        <div class="tier-name">Lite</div>
+        <div class="tier-focus">AI Stock Picker Fantasy League</div>
+        <div class="tier-portfolios" style="font-size:36px;color:#636465">Entry</div>
+        <div class="tier-portfolios-label">Build your own AI-powered portfolio</div>
+        <ul class="tier-features">
+          <li><span class="material-icons-round">check_circle</span> 4 AI stock picker models refreshed biweekly</li>
+          <li><span class="material-icons-round">check_circle</span> Build a custom portfolio (up to 10 stocks)</li>
+          <li><span class="material-icons-round">check_circle</span> Public leaderboard ranked by P&amp;L</li>
+          <li><span class="material-icons-round">check_circle</span> Weekly livestream sessions</li>
+          <li><span class="material-icons-round">check_circle</span> 2x 1-on-1 mentorship sessions</li>
+          <li><span class="material-icons-round">check_circle</span> Biweekly Telegram &amp; email alerts</li>
+        </ul>
+      </div>
+
+      <!-- Premium -->
+      <div class="tier-card featured">
+        <div class="tier-badge">Most Popular</div>
+        <div class="tier-name">Premium</div>
+        <div class="tier-focus">Managed AI Signal Portfolios</div>
+        <div class="tier-portfolios">3&ndash;5</div>
+        <div class="tier-portfolios-label">AI Signal Portfolios (Atlas / Titan / Everest)</div>
+        <ul class="tier-features">
+          <li><span class="material-icons-round">check_circle</span> AI-generated, continuously rebalanced portfolios</li>
+          <li><span class="material-icons-round">check_circle</span> 5 narrative strategies (Growth, Value, Defensive...)</li>
+          <li><span class="material-icons-round">check_circle</span> Written rationale for every rebalance</li>
+          <li><span class="material-icons-round">check_circle</span> S&amp;P 500 benchmarking &amp; sparklines</li>
+          <li><span class="material-icons-round">check_circle</span> Weekly analyst livestreams with Dane &amp; Eric</li>
+          <li><span class="material-icons-round">check_circle</span> 32x 1-on-1 mentorship sessions</li>
+          <li><span class="material-icons-round">check_circle</span> Real-time Telegram &amp; email alerts</li>
+          <li><span class="material-icons-round">check_circle</span> AI Entry Price indicator</li>
+        </ul>
+      </div>
+
+      <!-- Auto -->
+      <div class="tier-card">
+        <div class="tier-name">Auto</div>
+        <div class="tier-focus">Hands-Off Investing</div>
+        <div class="tier-portfolios">3&ndash;5</div>
+        <div class="tier-portfolios-label">Fully Traded AI Portfolios</div>
+        <ul class="tier-features">
+          <li><span class="material-icons-round">check_circle</span> Everything in Premium, plus:</li>
+          <li><span class="material-icons-round">check_circle</span> Portfolios traded on your behalf</li>
+          <li><span class="material-icons-round">check_circle</span> No need to manage trades yourself</li>
+          <li><span class="material-icons-round">check_circle</span> Fully automated execution</li>
+          <li><span class="material-icons-round">check_circle</span> Same AI signals, zero manual effort</li>
+          <li><span class="material-icons-round">check_circle</span> Connected to your brokerage partner</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ GROWTH PROOF ═══════ -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:20px">
+      <p class="overline" style="margin-bottom:12px">Growth</p>
+      <h2>$1.4M to $7.7M in One Year.</h2>
+      <p style="max-width:600px;margin:16px auto 0">Wealth Series revenue grew 5x from 2024 to 2025. 942 investors now trust the system across all tiers &mdash; from Lite to Everest Auto.</p>
+    </div>
+
+    <div class="growth-visual">
+      <div class="growth-col">
+        <div class="growth-bar small"><span class="growth-num">$1.4M</span></div>
+        <div class="growth-year">2024</div>
+      </div>
+      <div class="growth-arrow">&rarr;</div>
+      <div class="growth-col">
+        <div class="growth-bar large"><span class="growth-num">$7.7M</span></div>
+        <div class="growth-year">2025</div>
+      </div>
+    </div>
+
+    <p class="text-center text-muted text-small" style="margin-top:12px">$32M+ AUM accumulated in 2025. Target: $100M by end of 2026.</p>
+  </div>
+</section>
+
+<!-- ═══════ COMPARISON TABLE ═══════ -->
+<section class="section" id="compare">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:48px">
+      <p class="overline" style="margin-bottom:12px">How It Compares</p>
+      <h2>Wealth Series vs. Everything Else.</h2>
+      <p style="max-width:620px;margin:16px auto 0">DIY investors, robo-advisors, and hedge fund strategies compared side by side. See where AI signal portfolios stand.</p>
+    </div>
+
+    <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>DIY Investing</th>
+            <th>Robo-Advisors</th>
+            <th>Hedge Fund Style</th>
+            <th class="highlight">Wealth Series</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>AI-generated portfolios</td>
+            <td><span class="cross">&#10007;</span></td>
+            <td><span class="cross">&#10007;</span></td>
+            <td><span class="check">&#10003;</span></td>
+            <td class="highlight"><span class="check">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td>Written rationale per rebalance</td>
+            <td><span class="cross">&#10007;</span></td>
+            <td><span class="cross">&#10007;</span></td>
+            <td><span class="cross">&#10007;</span></td>
+            <td class="highlight"><span class="check">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td>S&amp;P 500 benchmarking</td>
+            <td>Manual</td>
+            <td><span class="check">&#10003;</span></td>
+            <td><span class="check">&#10003;</span></td>
+            <td class="highlight"><span class="check">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td>1-on-1 mentorship</td>
+            <td><span class="cross">&#10007;</span></td>
+            <td><span class="cross">&#10007;</span></td>
+            <td>Rare</td>
+            <td class="highlight">Up to 32 sessions</td>
+          </tr>
+          <tr>
+            <td>Weekly live analyst sessions</td>
+            <td><span class="cross">&#10007;</span></td>
+            <td><span class="cross">&#10007;</span></td>
+            <td><span class="cross">&#10007;</span></td>
+            <td class="highlight"><span class="check">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td>Real-time alerts (Telegram + email)</td>
+            <td><span class="cross">&#10007;</span></td>
+            <td>Email only</td>
+            <td><span class="cross">&#10007;</span></td>
+            <td class="highlight"><span class="check">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td>15 sectors analyzed simultaneously</td>
+            <td><span class="cross">&#10007;</span></td>
+            <td>ETFs only</td>
+            <td><span class="check">&#10003;</span></td>
+            <td class="highlight"><span class="check">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td>AI entry price transparency</td>
+            <td><span class="cross">&#10007;</span></td>
+            <td><span class="cross">&#10007;</span></td>
+            <td><span class="cross">&#10007;</span></td>
+            <td class="highlight"><span class="check">&#10003;</span></td>
+          </tr>
+          <tr>
+            <td>Fully hands-off option</td>
+            <td><span class="cross">&#10007;</span></td>
+            <td><span class="check">&#10003;</span></td>
+            <td><span class="check">&#10003;</span></td>
+            <td class="highlight">Auto Tier</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>Typical cost</td>
+            <td>$0 + your time</td>
+            <td>0.25% AUM/yr</td>
+            <td>2% + 20% perf.</td>
+            <td class="highlight">From $3,000/yr</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="compare-verdict">
+      <p>Robo-advisors automate but don't explain. Hedge funds explain but charge 2 and 20. <strong>Wealth Series does both &mdash; at a flat fee.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ HOW IT WORKS ═══════ -->
+<section class="section section-alt" id="how">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:48px">
+      <p class="overline" style="margin-bottom:12px">How It Works</p>
+      <h2>Three Steps to Get Started.</h2>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Apply</h3>
+        <p>Free. Takes 2 minutes. Tell us about your portfolio and goals.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num" style="background:#1C1C1E">2</div>
+        <h3>$500 Deposit</h3>
+        <p>Fully refundable. Secures your strategy session with a portfolio strategist.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Strategy Session</h3>
+        <p>30 minutes. Review AI signals, ask questions, choose your tier. Every penny back if you don't proceed.</p>
+      </div>
+    </div>
+
+    <div class="mid-cta" style="margin-top:40px">
+      <a href="#pricing" class="btn btn-primary btn-lg">
+        <span class="material-icons-round">calendar_today</span>
+        Book Your Free Strategy Session
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ PRICING CTA ═══════ -->
+<section class="pricing-section" id="pricing">
+  <div class="container">
+    <p class="overline" style="color:#BBE2FF;margin-bottom:12px">Pricing</p>
+    <h2 style="color:#fff">Choose the Tier That Fits Your Portfolio.</h2>
+    <p style="color:#BABABB;max-width:600px;margin:12px auto 0;font-size:16px">All pricing is for a 2-year subscription. Sales-led &mdash; your strategist will walk you through everything.</p>
+
+    <div class="price-tiers">
+      <!-- Atlas -->
+      <div class="price-tier">
+        <div class="pt-name">Atlas</div>
+        <div class="pt-focus">Growth Focused &middot; Up to $500K portfolio</div>
+        <div class="pt-portfolios">3 AI Signal Portfolios</div>
+        <ul class="pt-includes">
+          <li><span class="material-icons-round">check_circle</span> Full AI rebalancing + rationale</li>
+          <li><span class="material-icons-round">check_circle</span> Weekly Monday livestream</li>
+          <li><span class="material-icons-round">check_circle</span> 32x mentorship sessions</li>
+          <li><span class="material-icons-round">check_circle</span> Telegram + email alerts</li>
+        </ul>
+      </div>
+
+      <!-- Titan -->
+      <div class="price-tier featured">
+        <div class="pt-name">Titan</div>
+        <div class="pt-focus">Balance Focused &middot; Up to $1.5M portfolio</div>
+        <div class="pt-portfolios">3 AI Signal Portfolios + Expanded Coverage</div>
+        <ul class="pt-includes">
+          <li><span class="material-icons-round">check_circle</span> Everything in Atlas</li>
+          <li><span class="material-icons-round">check_circle</span> Broader sector diversification</li>
+          <li><span class="material-icons-round">check_circle</span> Weekly Tuesday livestream</li>
+          <li><span class="material-icons-round">check_circle</span> Dynamic Upside: +21.70% YTD</li>
+        </ul>
+      </div>
+
+      <!-- Everest -->
+      <div class="price-tier">
+        <div class="pt-name">Everest</div>
+        <div class="pt-focus">Wealth Management &middot; $5M+ portfolio</div>
+        <div class="pt-portfolios">5 AI Signal Portfolios &mdash; Maximum Coverage</div>
+        <ul class="pt-includes">
+          <li><span class="material-icons-round">check_circle</span> Everything in Titan</li>
+          <li><span class="material-icons-round">check_circle</span> Momentum Ascent: +38.43% YTD</li>
+          <li><span class="material-icons-round">check_circle</span> Weekly Wednesday livestream (75 min)</li>
+          <li><span class="material-icons-round">check_circle</span> 5 narrative strategies</li>
+        </ul>
+      </div>
+    </div>
+
+    <p style="color:#BABABB;font-size:14px;margin-bottom:8px"><strong style="color:#fff">Wealth Series Lite</strong> also available from $3,000 &mdash; build your own AI stock portfolio and compete on the leaderboard.</p>
+    <p style="color:#BABABB;font-size:14px;margin-bottom:32px"><strong style="color:#fff">Auto tiers</strong> available for Atlas, Titan, and Everest &mdash; portfolios traded on your behalf.</p>
+
+    <a href="mailto:sales@tradealgo.com" class="btn btn-primary" style="font-size:20px;padding:20px 48px;border-radius:14px;box-shadow:0 6px 24px rgba(0,123,255,.35)">
+      <span class="material-icons-round">calendar_today</span>
+      Book a Strategy Session
+    </a>
+    <p class="pricing-cta-micro">$500 deposit &mdash; fully refundable if you don't proceed. Contact: sales@tradealgo.com</p>
+  </div>
+</section>
+
+<!-- ═══════ FAQ ═══════ -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:48px">
+      <p class="overline" style="margin-bottom:12px">Questions</p>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-question">
+          How does the AI build portfolios?
+          <span class="material-icons-round">expand_more</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Wealth Series portfolios are generated by PilotAI and evaluated against a qualifying scale. The AI continuously monitors holdings and triggers rebalancing events based on threshold changes. Each rebalance generates written rationale at both the portfolio level (macro/sector sentiment) and stock level (key drivers, growth trends). All signals are published with timestamps so you can verify every decision.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          What are the 5 narrative strategies?
+          <span class="material-icons-round">expand_more</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">The five narratives are: <strong>Growth</strong> (high-growth sectors and momentum plays), <strong>Low-Risk Volatility</strong> (reduced drawdown strategies), <strong>Deep Value/Fundamentals</strong> (undervalued companies with strong financials), <strong>Defensive</strong> (capital preservation with gold, consumer staples, and short hedges), and <strong>Balanced</strong> (diversified mix across all narratives). Each portfolio is mapped to one or more of these strategies.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          What's the difference between Premium and Auto?
+          <span class="material-icons-round">expand_more</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Premium gives you AI-generated signals with written reasoning &mdash; you read the signals and execute trades yourself through your own brokerage. Auto includes everything in Premium but also trades the portfolios on your behalf through a brokerage partner, removing the need to manage trades yourself. Same AI, same signals &mdash; Auto just adds hands-off execution.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          What is Wealth Series Lite?
+          <span class="material-icons-round">expand_more</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Lite is an entry-level AI stock picker product. You pick stocks from 4 AI-powered models (Fundamentals First, Trend Tracker, Sentiment Sentry, Value and Growth) to build your own custom portfolio of up to 10 stocks. Your portfolio competes on a public leaderboard ranked by P&amp;L. Think of it as a fantasy league for investing &mdash; powered by AI stock picks refreshed biweekly.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          How are the livestream sessions structured?
+          <span class="material-icons-round">expand_more</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Weekly analyst sessions are hosted by Dane and Eric. Atlas members join on Mondays (45 min), Titan on Tuesdays (45 min), and Everest on Wednesdays (75 min) &mdash; all at 4:30 PM EST. These are live, interactive sessions with Q&amp;A &mdash; not pre-recorded webinars. Lite members also get weekly livestream access.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Can I see the AI's reasoning before acting?
+          <span class="material-icons-round">expand_more</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Yes. Every rebalancing action &mdash; BUY, SELL, HOLD, TRIM, ADD &mdash; includes AI-generated reasoning at both the portfolio level and individual stock level. You can review the rationale, see the AI Entry Price, check sparkline performance across multiple timeframes, and view the history of past rebalance actions before deciding to act. TradeAlgo publishes signals. You decide what to do.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          What does the $500 deposit cover?
+          <span class="material-icons-round">expand_more</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">The $500 deposit secures your strategy session with a portfolio strategist. It's fully refundable if you decide not to proceed. During the 30-minute session, you'll review the AI signal system, discuss which tier fits your portfolio, and get answers to any questions. No obligation.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Does TradeAlgo touch my money?
+          <span class="material-icons-round">expand_more</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">TradeAlgo is a signal publication company. For Premium tiers, TradeAlgo publishes AI-generated signals with written reasoning &mdash; you execute trades on your own brokerage. For Auto tiers, trades are executed through a brokerage partner connected to your account. In both cases, the subscription is a flat fee for access to the signal publication and mentorship.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FINAL CTA ═══════ -->
+<section class="final-cta">
+  <div class="container">
+    <p class="overline" style="margin-bottom:16px">Stop Guessing</p>
+    <h2>Let the AI Do the<br>Analyst Work.</h2>
+    <p>942+ investors already use Wealth Series to get AI-generated signals with written reasoning, across 15 sectors, every week.</p>
+
+    <div class="trust-recap">
+      <span><span class="material-icons-round">verified</span> 942+ investors</span>
+      <span><span class="material-icons-round">verified</span> $32M+ AUM</span>
+      <span><span class="material-icons-round">verified</span> Trustpilot 4.7</span>
+      <span><span class="material-icons-round">verified</span> 7 of 11 portfolios beat S&amp;P 500</span>
+    </div>
+
+    <a href="#pricing" class="btn btn-primary btn-lg">
+      <span class="material-icons-round">trending_up</span>
+      Book a Strategy Session
+    </a>
+    <p class="hero-micro" style="margin-top:12px">$500 deposit &mdash; fully refundable. Contact: <strong>sales@tradealgo.com</strong></p>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer class="footer">
+  <div class="container">
+    <p style="margin-bottom:16px"><a href="#">TradeAlgo</a> &middot; AI-Powered Analytics &amp; Signal Publications</p>
+    <div class="footer-disclaimer">
+      <p>TradeAlgo does not provide personalized financial advice. Investing involves risk and past performance is not indicative of future results. Users should consult a licensed financial advisor before making investment decisions. Portfolio performance data is for informational purposes only and should not be interpreted as a guarantee of future returns. All portfolio returns referenced are YTD 2025 and benchmarked against the S&amp;P 500 (SPY +16.82%).</p>
+      <p style="margin-top:8px">&copy; 2026 TradeAlgo. All rights reserved. &middot; <a href="#">Privacy Policy</a> &middot; <a href="#">Terms of Service</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════ STICKY MOBILE CTA ═══════ -->
+<div class="sticky-mobile-cta">
+  <a href="#pricing" class="btn btn-primary">
+    <span class="material-icons-round">trending_up</span>
+    Book a Strategy Session
+  </a>
+  <p class="sticky-micro">$500 deposit &mdash; fully refundable</p>
+</div>
+
+<!-- ═══════ SCRIPTS ═══════ -->
+<script src="https://fast.wistia.com/embed/medias/7mlghuud37.jsonp" async></script>
+<script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+<script>
+// Reveal hero CTA after video loads or after timeout
+(function(){
+  var cta = document.getElementById('heroCta');
+  function show(){ cta.classList.add('visible'); }
+  // Show after 3 seconds regardless
+  setTimeout(show, 3000);
+  // Or show when Wistia video is ready
+  window._wq = window._wq || [];
+  window._wq.push({ id: '7mlghuud37', onReady: function(v){ show(); }});
+})();
+
+// FAQ accordion
+document.querySelectorAll('.faq-question').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var item = this.parentElement;
+    var answer = item.querySelector('.faq-answer');
+    var isOpen = item.classList.contains('open');
+
+    // Close all
+    document.querySelectorAll('.faq-item.open').forEach(function(openItem){
+      openItem.classList.remove('open');
+      openItem.querySelector('.faq-answer').style.maxHeight = null;
+    });
+
+    // Open clicked (if it wasn't already open)
+    if(!isOpen){
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  });
+});
+</script>
+
+</body>
+</html>
