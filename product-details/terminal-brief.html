@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Brief — Raw Facts</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8f9fa; color: #1a1a2e; line-height: 1.6; }
+  .container { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+  h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.25rem; color: #0f172a; }
+  .subtitle { color: #64748b; font-size: 1rem; margin-bottom: 1rem; border-bottom: 3px solid #e2e8f0; padding-bottom: 1.5rem; }
+  .section { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.75rem 2rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+  .section-number { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: #0f172a; color: #fff; border-radius: 8px; font-weight: 700; font-size: 0.85rem; margin-right: 0.6rem; vertical-align: middle; }
+  .section h2 { font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-bottom: 0.3rem; display: inline; vertical-align: middle; }
+  .section-desc { color: #64748b; font-size: 0.9rem; margin-bottom: 1.25rem; margin-top: 0.4rem; }
+  .question { margin-bottom: 1.25rem; }
+  .question:last-child { margin-bottom: 0; }
+  .label { font-weight: 600; font-size: 0.92rem; color: #1e293b; margin-bottom: 0.35rem; display: block; }
+  .hint { font-size: 0.82rem; color: #94a3b8; margin-bottom: 0.4rem; font-style: italic; }
+  textarea, input[type="text"], input[type="url"], input[type="number"] {
+    width: 100%; padding: 0.65rem 0.85rem; border: 1.5px solid #e2e8f0; border-radius: 8px;
+    font-size: 0.92rem; font-family: inherit; color: #1e293b; background: #fafbfc;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  textarea:focus, input:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.1); background: #fff; }
+  textarea { min-height: 80px; resize: vertical; }
+  textarea.lg { min-height: 120px; }
+  textarea.xl { min-height: 170px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .radio-group { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.3rem; }
+  .radio-option { display: flex; align-items: center; gap: 0.4rem; background: #f1f5f9; padding: 0.4rem 0.85rem; border-radius: 6px; cursor: pointer; font-size: 0.88rem; }
+  .radio-option:hover { background: #e2e8f0; }
+  .radio-option input { accent-color: #3b82f6; }
+  .action-bar { position: sticky; bottom: 0; left: 0; right: 0; background: #fff; border-top: 2px solid #e2e8f0; padding: 0.75rem 1rem; z-index: 100; box-shadow: 0 -4px 12px rgba(0,0,0,0.08); }
+  .action-bar-inner { max-width: 860px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .save-status { font-size: 0.82rem; color: #64748b; }
+  .action-buttons { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .btn { padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; border: none; transition: all 0.15s; }
+  .btn-primary { background: #0f172a; color: #fff; }
+  .btn-primary:hover { background: #1e293b; }
+  .btn-secondary { background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
+  .btn-secondary:hover { background: #e2e8f0; }
+  .progress-bar { background: #e2e8f0; height: 6px; border-radius: 3px; margin-bottom: 1.5rem; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, #22c55e, #0ea5e9); border-radius: 3px; transition: width 0.3s; width: 0%; }
+  .progress-label { font-size: 0.8rem; color: #64748b; margin-bottom: 0.5rem; }
+  @media (max-width: 640px) { .container { padding: 1rem; } .section { padding: 1.25rem 1rem; } h1 { font-size: 1.5rem; } .two-col { grid-template-columns: 1fr; } .action-bar-inner { flex-direction: column; text-align: center; } .action-buttons { justify-content: center; } }
+  @media print { .action-bar { display: none; } body { background: #fff; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>🧪 Product Brief</h1>
+<p class="subtitle">Just the facts. Tell me what the product is, what it includes, who uses it, and what results exist. I'll handle everything else.</p>
+
+<div class="progress-label" id="progress-label">0/0 fields</div>
+<div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+
+<!-- 1. PRODUCT IDENTITY -->
+<div class="section">
+  <span class="section-number">1</span>
+  <h2>Product Identity</h2>
+
+  <div class="question">
+    <label class="label">Product name</label>
+    <input type="text" value="Dashboard (Terminal)">
+  </div>
+
+  <div class="question">
+    <label class="label">Company / brand name</label>
+    <input type="text" value="TradeAlgo">
+  </div>
+
+  <div class="question">
+    <label class="label">Product URL</label>
+    <input type="url" value="https://www.tradealgo.com">
+  </div>
+
+  <div class="question">
+    <label class="label">What is this product?</label>
+    <p class="hint">Plain English. What is it?</p>
+    <textarea>Terminal is a comprehensive trading data platform that delivers institutional-grade options data to retail investors. Designed for traders of all experience levels, it supports intraday and swing trading styles and provides access to dark pool activity data, detailed stock-level financial information, and an AI-driven stock picker (TradeGPT) for actionable trading insights. The AI scans over 10,000 tickers daily to surface top picks.</textarea>
+  </div>
+
+  <div class="question">
+    <label class="label">What category / industry does it belong to?</label>
+    <input type="text" value="Trading software / Fintech / Retail investing platform">
+  </div>
+</div>
+
+<!-- 2. WHAT'S INCLUDED -->
+<div class="section">
+  <span class="section-number">2</span>
+  <h2>What's Included</h2>
+  <p class="section-desc">List everything the customer gets when they buy. Every feature, tool, resource, access, bonus — all of it.</p>
+
+  <div class="question">
+    <label class="label">Complete list of what the customer receives</label>
+    <textarea class="xl">- Institutional-grade options data (normally only available to professional/institutional traders)
+- Dark pool activity data and visibility (e.g. +150–300% dark pool activity shown per ticker)
+- AI-driven stock picker (TradeGPT) — scans 10,000+ tickers to surface top daily picks
+- AI Sentiment scoring per ticker (e.g. 77.78% Bullish for AMD)
+- News Sentiment scores per ticker
+- Detailed stock-level financial data (share price, market cap, share volume, call ratio, sparkline)
+- Top Picks of The Day module (with 1H / 4H / 1D views)
+- Stocks Performance Summary — Intraday Activity, Weekly Activity, Popular Stocks tabs
+- Filterable by Auto / Large Caps / Medium Caps / Small Caps
+- Popular Contracts table (Contract, C/P, Strike, Price, Expiry, Volume, ITM%)
+- Trading Tools: TradeGPT, Scanner, Chart Grid, Cap Movement, Options Chain, Swing Trades AI, Trade Alerts, Live Options, Historical Darkflow
+- Live Trading Sessions with professional analysts (Mon–Fri)
+- Popular Stocks sidebar with real-time movers
+- Pre-market analysis
+- 12-month subscription access</textarea>
+  </div>
+
+  <div class="question">
+    <label class="label">How is it delivered?</label>
+    <p class="hint">Web app, mobile app, email, download, physical shipment, login portal, API, etc.</p>
+    <textarea>Web-based platform (PC/desktop, primary). Mobile app available (iOS/Android). Mobile web also supported. Trade alerts delivered via Telegram. All accessible via login at tradealgo.com.</textarea>
+  </div>
+
+  <div class="question">
+    <label class="label">What does a typical user session look like?</label>
+    <p class="hint">They log in / open it — then what? Walk through a normal use.</p>
+    <textarea class="lg">User logs in and is greeted with a personalised dashboard. They review Top Picks of the Day (AI-selected from 10,000+ tickers), toggle between Intraday and Swing Trading modes, check the Stocks Performance Summary for top movers with dark pool activity signals, review Popular Contracts for options flow, and use TradeGPT (floating AI assistant) for trade ideas. They may tune into a live analyst session (Brian Mitchell or Eric Armenteros) before or during market hours.</textarea>
+  </div>
+
+  <div class="question">
+    <label class="label">How quickly does the customer get value after purchase?</label>
+    <p class="hint">Instant access? Setup required? How long until they see the first result?</p>
+    <textarea>Immediate access upon account setup. Users can begin viewing live data, AI stock picks, dark pool activity, and analyst livestreams as soon as they log in.</textarea>
+  </div>
+</div>
+
+<!-- 3. TECHNICAL DETAILS -->
+<div class="section">
+  <span class="section-number">3</span>
+  <h2>Technical Details</h2>
+  <p class="section-desc">How does it actually work under the hood? Data sources, technology, methodology, infrastructure.</p>
+
+  <div class="question">
+    <label class="label">How does the product work technically?</label>
+    <p class="hint">Data sources, algorithms, integrations, methodology — whatever powers it.</p>
+    <textarea class="xl">Terminal ingests real-time and historical market data via dxFeed, a professional-grade financial data provider. This powers the options flow data, dark pool activity tracking, and stock-level financial information. The AI stock picker (TradeGPT) processes this data to surface actionable top picks and sentiment signals from 10,000+ tickers. The platform supports intraday and swing trading workflows with multiple timeframe views (1H, 4H, 1D). Data is refreshed in real time during market hours.</textarea>
+  </div>
+
+  <div class="question">
+    <label class="label">Key specs and numbers</label>
+    <p class="hint">Speed, accuracy, uptime, data volume, coverage, refresh rate — any hard metrics about the product itself.</p>
+    <textarea class="lg">- Real-time data feed via DXFeed integration
+- AI scans 10,000+ tickers daily to produce Top Picks
+- Supports intraday and swing trading timeframes (1H, 4H, 1D)
+- Dark pool activity data with % change indicators
+- AI Sentiment scores per ticker (0–100% bullish/bearish)
+- News Sentiment scores per ticker
+- ~5,030 active subscriptions (Feb 2026)
+- 12-month subscription period
+- Churn Rate: 4.31% (Feb 2026)
+- New Subscriptions: 47 (Feb 2026)</textarea>
+  </div>
+
+  <div class="question">
+    <label class="label">What platforms / devices does it work on?</label>
+    <textarea>PC/desktop web browser (primary). Mobile app (iOS/Android). Mobile web supported.</textarea>
+  </div>
+
+  <div class="question">
+    <label class="label">Any integrations with other tools or platforms?</label>
+    <textarea>Data integration with DXFeed for real-time trading data and options flow. Trade alerts delivered via Telegram. No direct brokerage integrations currently available.</textarea>
+  </div>
+
+  <div class="question">
+    <label class="label">Known limitations or things it does NOT do</label>
+    <textarea>- No direct brokerage integration (cannot place trades from the platform)
+- No automated/algorithmic trade execution
+- Does not provide personalised financial advice (informational and educational purposes only)
+- Alerts currently only via Telegram (no in-platform push notifications yet)</textarea>
+  </div>
+</div>
+
+<!-- 4. PRICING -->
+<div class="section">
+  <span class="section-number">4</span>
+  <h2>Pricing</h2>
+
+  <div class="question">
+    <label class="label">All pricing tiers and options</label>
+    <p class="hint">Every price point — monthly, annual, lifetime, tiers, one-time.</p>
+    <textarea class="lg">- Dashboard (Terminal): $2,995 USD for a 12-month subscription (~$249.58/month equivalent)
+- Single tier — no separate pricing tiers for this product
+- Pricing is primarily sales-led; a direct purchase URL also exists at tradealgo.com
+- Some customers may negotiate a lower price directly with the sales team on a case-by-case basis — there are no official discounts, promotions, or sales events</textarea>
+  </div>
+
+  <div class="question">
+    <label class="label">Any bonuses or extras included with purchase?</label>
+    <textarea>Full platform access including TradeGPT AI assistant, dark pool data, institutional-grade options flow, scanners, pre-market analysis, live analyst trading sessions, and Historical Darkflow tool.</textarea>
+  </div>
+
+  <div class="question">
+    <label class="label">Guarantee / refund policy</label>
+    <textarea>A refund policy exists but is not guaranteed — assessed on a case-by-case basis. Contact customer support for details: sales@tradealgo.com. (Note: confirm exact policy terms with support team before using in marketing.)</textarea>
+  </div>
+
+  <div class="question">
+    <label class="label">Any limited-time pricing, caps, or upcoming price changes?</label>
+    <textarea>No promotions, limited-time discounts, or sales events — ever. No upcoming price changes planned. List price is $2,995 USD / 12 months. Individual pricing exceptions may occur via sales negotiation only.</textarea>
+  </div>
+
+  <div class="question">
+    <label class="label">Checkout / purchase URL</label>
+    <input type="url" value="https://www.tradealgo.com">
+  </div>
+</div>
+
+<!-- 5. EXISTING USERS & CUSTOMERS -->
+<div class="section">
+  <span class="section-number">5</span>
+  <h2>Existing Users & Customers</h2>
+  <p class="section-desc">Facts about who already uses this and what they look like.</p>
+
+  <div class="question">
+    <label class="label">How many paying customers / users?</label>
+    <input type="text" value="~5,030 active subscriptions (Feb 2026)">
+  </div>
+
+  <div class="question">
+    <label class="label">How many free users (if applicable)?</label>
+    <input type="text" value="Not applicable / not tracked separately">
+  </div>
+
+  <div class="question">
+    <label class="label">Who are your typical customers?</label>
+    <p class="hint">Demographics, job titles, experience level — describe the actual people who buy.</p>
+    <textarea class="lg">Retail traders and active day traders, primarily based in the United States. Typically 30 years old and above. Self-directed investors who want access to institutional-grade data not normally available to retail traders — dark pool activity, options flow, AI-driven stock picks. Users range from newer self-directed investors to experienced active traders monitoring intraday and swing opportunities daily.</textarea>
+  </div>
+
+  <div class="question">
+    <label class="label">Average customer lifetime / retention</label>
+    <p class="hint">How long do they stay? Churn rate? Renewal rate?</p>
+    <textarea>12-month subscription cycle. Churn rate: 4.31% (Feb 2026). Renewal rate not currently tracked. Metrics monitored internally: churn rate, weekly/monthly user growth, total revenue, total active subscriptions.</textarea>
+  </div>
+
+  <div class="question">
+    <label class="label">What tools or products were customers using before switching to you?</label>
+    <textarea></textarea>
+  </div>
+
+  <div class="question">
+    <label class="label">Most common customer complaints or feature requests</label>
+    <textarea>- Dashboard informational hierarchy could be clearer (users unsure what to prioritise)
+- AI sentiment values lack explanations
+- No brokerage integration for direct trade execution
+- Alerts only via Telegram (users want in-platform notifications)
+- Some overlapping modules cause confusion (Popular Stocks vs Top Picks vs Popular Contracts)</textarea>
+  </div>
+</div>
+
+<!-- 6. TESTIMONIALS -->
+<div class="section">
+  <span class="section-number">6</span>
+  <h2>Testimonials</h2>
+  <p class="section-desc">Paste real quotes from real customers. DMs, emails, reviews, Discord messages — anything.</p>
+
+  <div class="question">
+    <label class="label">Do you have testimonials?</label>
+    <div class="radio-group">
+      <label class="radio-option"><input type="radio" name="testimonials" value="many" checked> Yes — lots</label>
+      <label class="radio-option"><input type="radio" name="testimonials" value="some"> Yes — a few</label>
+      <label class="radio-option"><input type="radio" name="testimonials" value="informal"> Informal only (DMs, emails)</label>
+      <label class="radio-option"><input type="radio" name="testimonials" value="none"> None yet</label>
+    </div>
+  </div>
+
+  <div class="question">
+    <label class="label">Paste them all here</label>
+    <p class="hint">Copy-paste direct quotes. Include who said it if possible. Messy is fine — dump everything.</p>
+    <textarea class="xl">My Experience After One Year With Trade Algo
+I've been with Trade Algo for about a year now. I'll admit I was skeptical at first—investing $5,000 for a one‑year membership isn't a small decision. But after reading the reviews and taking a moment to quiet my emotions, my gut told me to go for it. That decision paid off quickly: I recovered the full cost of the membership within the first month. After a few months in the community, upgrading to a lifetime membership was an easy choice.
+I've actively traded stocks for about 15 years. Four years ago, I began selling options, and two years ago I started buying options. That progression opened the door to a more sophisticated trading approach, but one thing I still needed—and continue to develop—was discipline. Trade Algo has been instrumental in helping me build that.
+Trade Algo teaches proven rules and frameworks that help you trade with structure instead of emotion. It reinforces that trading is not gambling—it's a craft. Like any profession, success comes from following rules that build discipline and protect your capital.
+The platform itself is incredibly rich in information, and I learn something new every day from outstanding analysts like Brian, Dane, Bronco, Mike, Eric, and Mr. Confluence. Each brings a different style and strategy. They're not financial advisers and they don't claim to predict the future—they simply share deep, practical market experience. It's up to each member to use that information responsibly.
+Brian "Axelrod" deserves special mention. His open chat is a valuable space where members share insights and experiences throughout the trading day. Brian is highly experienced, extremely disciplined, and refreshingly direct. He's a master "knife catcher," and he provides powerful tools to help you avoid FOMO, journal your trades, and stay consistent.
+— Verified Trustpilot Review, 5 Stars</textarea>
+  </div>
+
+  <div class="question">
+    <label class="label">Do you have video testimonials?</label>
+    <textarea></textarea>
+  </div>
+
+  <div class="question">
+    <label class="label">Review ratings (Trustpilot, App Store, G2, etc.)</label>
+    <textarea>Trustpilot: 4.7 — https://www.trustpilot.com/review/tradealgo.com
+Apple App Store: 5.0
+Google Play Store: 1,000+ downloads</textarea>
+  </div>
+</div>
+
+<!-- 7. RESULTS & DATA -->
+<div class="section">
+  <span class="section-number">7</span>
+  <h2>Results & Data</h2>
+  <p class="section-desc">Measurable outcomes. What results have users gotten? What can you prove?</p>
+
+  <div class="question">
+    <label class="label">Specific results users have achieved</label>
+    <p class="hint">Dates, numbers, names/initials, specifics. The more concrete, the better.</p>
+    <textarea class="xl">One verified reviewer reported recovering the full cost of their membership within the first month of joining.</textarea>
+  </div>
+
+  <div class="question">
+    <label class="label">Any aggregate performance data or stats?</label>
+    <p class="hint">Win rates, accuracy, averages, benchmarks — anything you track.</p>
+    <textarea class="lg">- Total active subscriptions: 5,030 (Feb 2026)
+- Unique users: ~5,030 (Feb 2026)
+- Churn rate: 4.31% (Feb 2026)
+- New subscriptions: 47 (Feb 2026)
+- AI scans 10,000+ tickers daily to surface Top Picks</textarea>
+  </div>
+
+  <div class="question">
+    <label class="label">Case studies (if any)</label>
+    <textarea></textarea>
+  </div>
+</div>
+
+<!-- 8. COMPETITORS -->
+<div class="section">
+  <span class="section-number">8</span>
+  <h2>Competitors</h2>
+  <p class="section-desc">Who else is in this space? Names, prices, what they offer.</p>
+
+  <div class="question">
+    <label class="label">List competitors — name, price, what they do</label>
+    <textarea class="xl">1. Unusual Whales — ~$50/month. Options flow and dark pool data platform popular with retail traders. Strong social/community component. Known for its options flow feed and political trade tracking.
+
+2. Benzinga Pro — ~$79–$199/month. Real-time news, stock screener, options activity feed, and signals. Broad financial news + data platform targeting active retail traders.
+
+3. Thinkorswim (TD Ameritrade / Schwab) — Free with brokerage account. Advanced charting, options analytics, paper trading. Very powerful but requires a brokerage account; not a standalone data platform.
+
+4. Market Chameleon — Free–$99/month. Options analytics, IV rank, earnings data, flow scanning. Heavy on options-specific data; used by more sophisticated retail options traders.
+
+5. BlackBoxStocks — ~$99/month. Real-time options flow, dark pool prints, live trading chatroom, and scanners. Direct competitor in the retail options flow + community space.</textarea>
+  </div>
+
+  <div class="question">
+    <label class="label">What does your product do that they don't?</label>
+    <textarea class="lg">- Combines institutional-grade options flow AND dark pool data AND an AI stock picker (TradeGPT) in a single unified platform
+- AI scans 10,000+ tickers daily to produce personalised Top Picks with sentiment scores — not just raw flow data
+- Live analyst trading sessions built directly into the platform (not just a chatroom)
+- Part of a broader ecosystem (Wealth Series, Emerald, Platinum) allowing users to grow into more advanced products from the same platform</textarea>
+  </div>
+
+  <div class="question">
+    <label class="label">What do they do that you don't?</label>
+    <textarea>- Unusual Whales & BlackBoxStocks: stronger community/social layer and Discord integration
+- Thinkorswim: direct brokerage integration and trade execution from the same platform
+- All competitors: lower monthly price point (Terminal at ~$250/month is at the higher end)
+- No brokerage integration currently available on Terminal</textarea>
+  </div>
+</div>
+
+<!-- 9. COMPANY -->
+<div class="section">
+  <span class="section-number">9</span>
+  <h2>Company</h2>
+
+  <div class="question">
+    <label class="label">How long has the company been in business?</label>
+    <input type="text" value="Since March 2022 (~3 years)">
+  </div>
+
+  <div class="question">
+    <label class="label">Team size</label>
+    <input type="text" value="~80 people across Singapore and the United States">
+  </div>
+
+  <div class="question">
+    <label class="label">Founder / leadership background</label>
+    <textarea></textarea>
+  </div>
+
+  <div class="question">
+    <label class="label">Press, awards, partnerships, certifications</label>
+    <textarea></textarea>
+  </div>
+
+  <div class="question">
+    <label class="label">Revenue / funding (whatever you're comfortable sharing)</label>
+    <textarea></textarea>
+  </div>
+</div>
+
+<!-- 10. ASSETS -->
+<div class="section">
+  <span class="section-number">10</span>
+  <h2>Existing Assets</h2>
+
+  <div class="question">
+    <label class="label">Screenshots or product demos available?</label>
+    <textarea>Yes — screenshots of the live platform available. Key screens:
+
+1. Dashboard Home / Top Picks of The Day: Personalised greeting, AI-handpicked stocks from 10,000+ tickers, Intraday/Swing toggle, ticker list with price + % change (e.g. AMD $200.63 +6.10%, BMNR $20.23 +5.00%, BTBT $1.67 +3.10%), AI Sentiment score (e.g. AMD: 77.78% Bullish on 1H), News Sentiment score (+39.19), Popular Contracts table.
+
+2. Stocks Performance Summary: Intraday Activity / Weekly Activity / Popular Stocks tabs. Filter by Auto / Large Caps / Medium Caps / Small Caps. Example: AGX +13.20% with +208.24% dark pool activity, LNTH +8.70% with +299.44% dark pool activity.
+
+3. Trading Tools & Live Sessions: Quick-access icons for TradeGPT, Scanner, Chart Grid, Cap Movement, Options Chain, Swing Trades AI, Trade Alerts, Live Options, Historical Darkflow. Live Trading Sessions: "DayTrade with Brian" (Mon–Fri 10:30–11:30am EST) and "Platinum Daily Livestreams" (Mon–Fri 9:30–10:30am EST).</textarea>
+  </div>
+
+  <div class="question">
+    <label class="label">Existing marketing materials (landing pages, ads, videos)</label>
+    <textarea>Product listed and sold at tradealgo.com. Sales also conducted via sales team (sales@tradealgo.com). Analyst livestream banners in-platform (Brian Mitchell, Eric Armenteros).</textarea>
+  </div>
+
+  <div class="question">
+    <label class="label">Brand assets (logo, colors, fonts, guidelines)</label>
+    <textarea></textarea>
+  </div>
+</div>
+
+<!-- 11. COMPLIANCE -->
+<div class="section">
+  <span class="section-number">11</span>
+  <h2>Legal / Compliance</h2>
+
+  <div class="question">
+    <label class="label">Any claims we cannot make?</label>
+    <textarea>Cannot guarantee investment returns or profitability. Cannot imply the platform provides personalised financial advice. All content is for informational and educational purposes only.</textarea>
+  </div>
+
+  <div class="question">
+    <label class="label">Required disclaimers</label>
+    <textarea>All marketing and sales content must include a disclaimer: TradeAlgo does not provide financial advice. Trading involves risk and past performance is not indicative of future results. Users should consult a licensed financial advisor before making investment decisions.</textarea>
+  </div>
+
+  <div class="question">
+    <label class="label">Regulated industry? Any specific rules?</label>
+    <textarea>Yes. Operates in US financial services / fintech space. Complies with all applicable US financial regulatory rules. Positioned as an independent research and data provider — not a registered investment adviser (RIA).</textarea>
+  </div>
+</div>
+
+<!-- 12. ANYTHING ELSE -->
+<div class="section">
+  <span class="section-number">12</span>
+  <h2>Anything Else</h2>
+
+  <div class="question">
+    <label class="label">Anything I should know that doesn't fit above</label>
+    <textarea class="xl">- Terminal is part of a broader product ecosystem sold under the TradeAlgo brand (tradealgo.com). Related products: Emerald, Platinum, Options Academy (options education), Wealth Series (AI portfolio management), Crypto Obsidian (crypto/futures), standalone e-books.
+- Terminal is strategically positioned as a gateway/entry product — the intent is to funnel Terminal users into higher-tier products (Emerald, Wealth Series, Mentorship, etc.).
+- TradeGPT (AI trade assistant) is a key engagement and retention feature — designed to be highly accessible to habituate users to the platform.
+- A dashboard redesign has recently been completed to improve UX: better informational hierarchy, more prominent TradeGPT placement, consolidated modules, and improved premium product promotion within the dashboard.
+- Live analyst sessions hosted by Brian Mitchell (DayTrade, Mon–Fri 10:30–11:30am EST) and Eric Armenteros (Platinum Daily, Mon–Fri 9:30–10:30am EST).
+- Sales contact: sales@tradealgo.com</textarea>
+  </div>
+</div>
+
+<!-- ACTION BAR -->
+<div class="action-bar">
+  <div class="action-bar-inner">
+    <div class="save-status" id="save-status">✅ Auto-saving</div>
+    <div class="action-buttons">
+      <button class="btn btn-secondary" onclick="clearAll()">🗑️ Clear</button>
+      <button class="btn btn-primary" onclick="exportText()">📄 Export & Send to Einstein</button>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center;margin-top:2rem;padding:1.25rem;background:#0f172a;border-radius:12px;color:#e2e8f0;">
+  <p style="font-size:0.9rem;"><strong>🧪 Product Brief v3</strong> — Just the facts. Einstein handles the rest.</p>
+  <p style="font-size:0.8rem;color:#64748b;margin-top:0.4rem;">💾 Auto-saves to your browser.</p>
+</div>
+
+</div>
+
+<script>
+const SK = 'einstein_product_brief_v3';
+let st;
+
+function getAll() {
+  const d = {};
+  document.querySelectorAll('textarea, input[type="text"], input[type="url"], input[type="number"]').forEach((el, i) => d[el.name||el.id||('f'+i)] = el.value);
+  document.querySelectorAll('input[type="radio"]').forEach(el => { if (el.checked) d['r_'+el.name] = el.value; });
+  document.querySelectorAll('input[type="checkbox"]').forEach((el, i) => { d[el.name?(el.name+'_'+el.value):('c'+i)] = el.checked; });
+  return d;
+}
+
+function save() {
+  try { localStorage.setItem(SK, JSON.stringify(getAll()));
+    const s = document.getElementById('save-status'); s.textContent = '💾 Saved'; s.style.color = '#22c55e';
+    setTimeout(() => { s.textContent = '✅ Auto-saving'; s.style.color = '#64748b'; }, 1500);
+  } catch(e) {}
+}
+
+function ds() { clearTimeout(st); st = setTimeout(save, 500); }
+document.addEventListener('input', ds);
+document.addEventListener('change', ds);
+
+function lab(el) { let c = el.closest('.question'); if (c) { let l = c.querySelector('.label'); if (l) return l.textContent.trim(); } return ''; }
+
+function exportText() {
+  let o = 'PRODUCT BRIEF\n' + '='.repeat(40) + '\n' + new Date().toLocaleString() + '\n';
+  document.querySelectorAll('.section').forEach(s => {
+    const h = s.querySelector('h2'); if (!h) return; let c = '';
+    s.querySelectorAll('textarea, input[type="text"], input[type="url"], input[type="number"]').forEach(el => {
+      if (el.value.trim()) c += lab(el) + ':\n' + el.value.trim() + '\n\n';
+    });
+    s.querySelectorAll('input[type="radio"]:checked').forEach(el => { c += lab(el) + ': ' + el.parentElement.textContent.trim() + '\n\n'; });
+    if (c.trim()) o += '\n## ' + h.textContent.trim() + '\n' + '-'.repeat(30) + '\n' + c;
+  });
+  const b = new Blob([o], {type:'text/plain'}); const a = document.createElement('a');
+  a.href = URL.createObjectURL(b); a.download = 'product-brief-'+new Date().toISOString().slice(0,10)+'.txt'; a.click();
+}
+
+function clearAll() {
+  if (!confirm('Clear everything?')) return;
+  localStorage.removeItem(SK);
+  document.querySelectorAll('textarea, input[type="text"], input[type="url"], input[type="number"]').forEach(el => el.value = '');
+  document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(el => el.checked = false);
+  up();
+}
+
+function up() {
+  let f=0, t=0;
+  document.querySelectorAll('textarea, input[type="text"], input[type="url"]').forEach(el => { t++; if (el.value.trim()) f++; });
+  const p = t ? Math.round(f/t*100) : 0;
+  document.getElementById('progress-fill').style.width = p+'%';
+  document.getElementById('progress-label').textContent = f+'/'+t+' fields ('+p+'%)';
+}
+document.addEventListener('input', up);
+document.addEventListener('DOMContentLoaded', () => { setTimeout(up, 100); });
+</script>
+</body>
+</html>

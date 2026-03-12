@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Brief — Wealth Series</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8f9fa; color: #1a1a2e; line-height: 1.6; }
+  .container { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 6rem; }
+  h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.25rem; color: #0f172a; }
+  .subtitle { color: #64748b; font-size: 1rem; margin-bottom: 1rem; border-bottom: 3px solid #e2e8f0; padding-bottom: 1.5rem; }
+  .section { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.75rem 2rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+  .section-number { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: #0f172a; color: #fff; border-radius: 8px; font-weight: 700; font-size: 0.85rem; margin-right: 0.6rem; vertical-align: middle; }
+  .section h2 { font-size: 1.3rem; font-weight: 700; color: #0f172a; margin-bottom: 0.3rem; display: inline; vertical-align: middle; }
+  .section-desc { color: #64748b; font-size: 0.9rem; margin-bottom: 1.25rem; margin-top: 0.4rem; }
+  .question { margin-bottom: 1.25rem; }
+  .question:last-child { margin-bottom: 0; }
+  .label { font-weight: 600; font-size: 0.92rem; color: #1e293b; margin-bottom: 0.35rem; display: block; }
+  .hint { font-size: 0.82rem; color: #94a3b8; margin-bottom: 0.4rem; font-style: italic; }
+  textarea, input[type="text"], input[type="url"] {
+    width: 100%; padding: 0.65rem 0.85rem; border: 1.5px solid #e2e8f0; border-radius: 8px;
+    font-size: 0.92rem; font-family: inherit; color: #1e293b; background: #fafbfc;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  textarea:focus, input:focus { outline: none; border-color: #3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,0.1); background: #fff; }
+  textarea { min-height: 80px; resize: vertical; }
+  textarea.lg { min-height: 130px; }
+  textarea.xl { min-height: 180px; }
+  .radio-group { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.3rem; }
+  .radio-option { display: flex; align-items: center; gap: 0.4rem; background: #f1f5f9; padding: 0.4rem 0.85rem; border-radius: 6px; cursor: pointer; font-size: 0.88rem; }
+  .radio-option:hover { background: #e2e8f0; }
+  .radio-option input { accent-color: #3b82f6; }
+  .action-bar { position: sticky; bottom: 0; background: #fff; border-top: 2px solid #e2e8f0; padding: 0.75rem 1rem; z-index: 100; box-shadow: 0 -4px 12px rgba(0,0,0,0.08); }
+  .action-bar-inner { max-width: 860px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .save-status { font-size: 0.82rem; color: #64748b; }
+  .action-buttons { display: flex; gap: 0.5rem; }
+  .btn { padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; border: none; transition: all 0.15s; }
+  .btn-primary { background: #0f172a; color: #fff; }
+  .btn-primary:hover { background: #1e293b; }
+  .btn-secondary { background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
+  .btn-secondary:hover { background: #e2e8f0; }
+  .progress-bar { background: #e2e8f0; height: 6px; border-radius: 3px; margin-bottom: 1.5rem; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, #22c55e, #0ea5e9); border-radius: 3px; transition: width 0.3s; }
+  .progress-label { font-size: 0.8rem; color: #64748b; margin-bottom: 0.5rem; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Product Brief</h1>
+<p class="subtitle">Wealth Series (Premium + Lite) — TradeAlgo</p>
+
+<div class="progress-label" id="progress-label">0/0 fields</div>
+<div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+
+<!-- 1. PRODUCT IDENTITY -->
+<div class="section">
+  <span class="section-number">1</span><h2>Product Identity</h2>
+  <div class="question"><label class="label">Product name</label><input type="text" value="Wealth Series (includes: Wealth Series Premium — Atlas / Titan / Everest, Wealth Series Auto, Wealth Series Lite)"></div>
+  <div class="question"><label class="label">Company / brand name</label><input type="text" value="TradeAlgo"></div>
+  <div class="question"><label class="label">Product URL</label><input type="url" value="https://www.tradealgo.com"></div>
+  <div class="question">
+    <label class="label">What is this product?</label>
+    <textarea>Wealth Series is an AI-powered investment portfolio management solution. It provides users with strategically diversified, AI-generated portfolios across different sectors and market narratives — designed to help investors protect and grow their wealth.
+
+Wealth Series Premium gives users fully managed AI portfolios (3–5 portfolios depending on tier) with continuous monitoring and rebalancing, weekly analyst livestreams, 1-on-1 mentorship sessions, and real-time Telegram and email alerts.
+
+Wealth Series Auto is a fully hands-off version — portfolios are traded on the user's behalf, removing the need to manage trades themselves.
+
+Wealth Series Lite is an entry-level AI stock picker product. Users select stocks from 4 AI-powered models to build their own custom portfolio, which then competes on a public leaderboard ranked by PnL. Think of it as a Fantasy League for investing.</textarea>
+  </div>
+  <div class="question"><label class="label">What category / industry does it belong to?</label><input type="text" value="AI-powered investment management / Fintech / Retail wealth management"></div>
+</div>
+
+<!-- 2. WHAT'S INCLUDED -->
+<div class="section">
+  <span class="section-number">2</span><h2>What's Included</h2>
+  <div class="question">
+    <label class="label">Complete list of what the customer receives</label>
+    <textarea class="xl">WEALTH SERIES PREMIUM (Atlas / Titan / Everest):
+- 3 to 5 AI-generated, fully managed portfolios (depending on tier)
+- Portfolios cover 5 narratives: Growth, Low Risk Volatility, Deep Value/Fundamentals, Defensive, Balanced
+- Continuous AI portfolio monitoring and rebalancing (with rationale provided for every rebalance)
+- AI Entry Price indicator — price at which the AI model entered each ticker
+- Key Portfolio Adjustments feed (SELL / BUY / HOLD actions, sequenced by impact)
+- Individual stock sparkline and % performance per timeframe (1D / 7D / 1M / 1Y / YTD)
+- Portfolio-level P&L chart and performance benchmarked vs. S&P 500
+- LLM-generated portfolio and stock-level rebalancing rationale
+- History view of past rebalance actions (up to 5 most recent)
+- Ticker-level view (Overview, Adjustment Rationale, Chart, Financials, About)
+- Weekly analyst livestream sessions (hosted by Dane and Eric — Mon/Tue/Wed at 4:30pm EST depending on tier)
+- 32x 1-on-1 mentorship sessions (Atlas / Titan / Everest via Calendly with Dane and Eric)
+- Real-time Telegram alerts (machine-triggered + analyst-generated messages)
+- Email alerts via OneSignal (portfolio change alerts, monthly recaps, new rebalance notifications)
+- Portfolio Activity section showing latest triggered updates across all portfolios
+- Access via web platform (PC/desktop) and mobile app (pending)
+
+WEALTH SERIES AUTO:
+- Everything in Wealth Series Premium PLUS
+- Fully traded portfolios — no need to manage trades yourself
+- Hands-off, automated investment execution
+
+WEALTH SERIES LITE ($3,000–$8,000 depending on subscription length):
+- 4 AI-powered stock picker models refreshed biweekly: Fundamentals First, Trend Tracker, Sentiment Sentry, Value and Growth
+- Each model surfaces 3–5 stock picks per biweekly cycle with AI-generated rationale per stock
+- Custom portfolio builder: select up to 10 stocks from the AI stock pool, allocate weightages (must total 100%)
+- Public leaderboard — portfolios ranked by PnL across different time periods
+- Biweekly email and Telegram alerts with updated stock picks
+- Weekly livestream sessions (4:30pm EST)
+- 2x 1-on-1 mentorship sessions (via Calendly with Dane and Eric)
+- NO dashboard (Terminal) access
+- NO unlimited TradeGPT prompts</textarea>
+  </div>
+  <div class="question">
+    <label class="label">How is it delivered?</label>
+    <textarea>Web-based platform (PC/desktop, primary) accessible via login at tradealgo.com. Mobile app in development (pending launch). Real-time alerts via Telegram channels (per tier: Atlas, Titan, Everest). Email alerts via OneSignal integration. Mentorship sessions booked via Calendly. Livestreams embedded via Vimeo.</textarea>
+  </div>
+  <div class="question">
+    <label class="label">What does a typical user session look like?</label>
+    <textarea class="lg">PREMIUM USER: User logs in, navigates to Wealth Series via the sidebar, selects their tier (Atlas/Titan/Everest), and reviews their portfolio overview — checking portfolio P&L, individual stock sparklines, and any new Key Portfolio Adjustments (rebalancing actions from the AI). They can click into individual tickers for detailed rationale, toggle between timeframes, and review past adjustment history. They may also tune into the weekly livestream hosted by Dane and Eric, book a mentorship session, or check Telegram for the latest alerts.
+
+LITE USER: User logs in, navigates to Wealth Series Lite, views the latest AI stock picks across 4 models, selects stocks to add/update in their custom portfolio (up to 10 stocks, 100% allocation), then checks the leaderboard to see how their portfolio ranks vs. other users. Biweekly email/Telegram updates prompt them to return and review new picks.</textarea>
+  </div>
+  <div class="question">
+    <label class="label">How quickly does the customer get value after purchase?</label>
+    <textarea>Immediate access upon account setup. Premium users can view their AI-generated portfolios, rebalancing actions, and analyst livestreams right away. Lite users can build their first custom portfolio from the AI stock pick list immediately and begin tracking PnL within the first market cycle.</textarea>
+  </div>
+</div>
+
+<!-- 3. TECHNICAL DETAILS -->
+<div class="section">
+  <span class="section-number">3</span><h2>Technical Details</h2>
+  <div class="question">
+    <label class="label">How does the product work technically?</label>
+    <textarea class="xl">Wealth Series Premium: AI portfolios are generated by PilotAI, evaluated against a qualifying scale, and organised into tier-based portfolio packs (Atlas: 3 portfolios, Titan: 3 portfolios, Everest: 5 portfolios). The AI continuously monitors holdings and triggers rebalancing events based on threshold changes in stock allocation. Each rebalance generates an LLM-written rationale at both the portfolio level (macro/sector sentiment) and stock level (key drivers, growth trends, profitability). Portfolio performance is tracked and benchmarked against the S&P 500. Rebalancing alerts are automatically pushed via Telegram (machine-triggered) and email (via OneSignal). Analyst-generated messages can also be sent manually via Telegram.
+
+Wealth Series Lite: Four AI stock picker models (Fundamentals First, Trend Tracker, Sentiment Sentry, Value and Growth) refresh their stock pick lists on a biweekly schedule. Each model selects 3–5 stocks and provides LLM-generated rationale per ticker. Users build custom portfolios from this pool; portfolios are tracked and ranked on a leaderboard by PnL. Stock picks that are removed from the AI recommendation list can remain in a user's portfolio but cannot be re-added.</textarea>
+  </div>
+  <div class="question">
+    <label class="label">Key specs and numbers</label>
+    <textarea class="lg">- Total users (2024 + 2025): 942 unique users across all Wealth Series products
+- Revenue: $1,439,948 (2024) → $7,722,425 (2025) — total cumulative: $9,162,373
+- AUM accumulated in 2025: ~$32.26M (across Wealth Series and Midas Link portfolios)
+- AUM goal: $100M by end of 2026
+- User breakdown (2025): Atlas 217, Titan 85, Everest 109, Atlas Auto 85, Titan Auto 14, Everest Auto 29, Core 81, Lite 322
+- Top portfolio YTD returns (vs SPY benchmark 16.82%): Momentum Ascent (Everest) +38.43%, Capital Jetstream (Core) +36.34%, Midas Link +33.79%, Dynamic Upside (Titan) +21.7%, Steady Climb (Everest) +25.21%
+- Livestream schedule: Atlas — Every Monday 4:30pm EST (45 min), Titan — Every Tuesday 4:30pm EST (45 min), Everest — Every Wednesday 4:30pm EST (1h 15min)
+- Biweekly stock pick refresh for Wealth Series Lite
+- Portfolios benchmarked vs S&P 500
+- WS Lite: Max 10 stocks per portfolio, 100% allocation required, leaderboard ranking by PnL</textarea>
+  </div>
+  <div class="question">
+    <label class="label">What platforms / devices does it work on?</label>
+    <textarea>PC/desktop web browser (primary). Mobile app in development (pending launch). Mobile web supported. Telegram for real-time alerts. Email (OneSignal) for portfolio change notifications.</textarea>
+  </div>
+  <div class="question">
+    <label class="label">Any integrations with other tools or platforms?</label>
+    <textarea>- Telegram: Per-tier alert channels (Atlas, Titan, Everest, WS Lite) for machine-triggered and analyst-generated alerts
+- OneSignal: Email alert delivery for portfolio changes, monthly recaps, and new stock picks
+- Calendly: 1-on-1 mentorship session booking (per tier, with Dane and Eric)
+- Vimeo: Livestream video embedding on platform
+- In-house brokerage partnerships: Under exploration for Wealth Series Auto (to enable fully automated trade execution)
+- RIA licensing: Under discussion (for institutional-grade credibility)</textarea>
+  </div>
+  <div class="question">
+    <label class="label">Known limitations or things it does NOT do</label>
+    <textarea>- Wealth Series Premium: Users must execute trades manually on their own brokerage (unless on Auto tier)
+- Wealth Series Auto: Fully traded portfolios — brokerage integration still being finalised
+- Wealth Series Lite: No Dashboard (Terminal) access, no unlimited TradeGPT prompts
+- No direct brokerage integration currently for Premium non-Auto users
+- Platform is for informational and portfolio guidance purposes — not personalised financial advice
+- Backtested portfolios and threshold-triggered alerts are future extensions (not yet live)
+- Mobile app not yet available (in development)</textarea>
+  </div>
+</div>
+
+<!-- 4. PRICING -->
+<div class="section">
+  <span class="section-number">4</span><h2>Pricing</h2>
+  <div class="question">
+    <label class="label">All pricing tiers and options</label>
+    <textarea class="lg">WEALTH SERIES PREMIUM (all subscriptions are for a 2-year period):
+- Atlas (Growth, up to $500K portfolio): $25,000 USD / 2 years
+- Titan (Balance, up to $1.5M portfolio): $50,000 USD / 2 years
+- Everest (Wealth Management, $5M+ portfolio): $100,000 USD / 2 years
+
+WEALTH SERIES AUTO (same tiers as Premium, fully traded):
+- Atlas Auto: $25,000 USD / 2 years
+- Titan Auto: $50,000 USD / 2 years
+- Everest Auto: $100,000 USD / 2 years
+
+WEALTH SERIES LITE:
+- Price varies depending on subscription length ($3,000–$8,000 USD for 1–3 year subscriptions)
+
+All pricing is sales-led. Contact: sales@tradealgo.com</textarea>
+  </div>
+  <div class="question">
+    <label class="label">Any bonuses or extras included with purchase?</label>
+    <textarea>Premium (all tiers): AI-generated portfolios, weekly analyst livestreams, 32x 1-on-1 mentorship sessions with Dane and Eric, Telegram alerts, email alerts, portfolio rationale, AI Entry Price indicator, benchmarking vs S&P 500.
+Auto tiers: All Premium features + fully automated trade execution.
+Lite: AI stock pickers, biweekly alerts, leaderboard, weekly livestream, 2x 1-on-1 mentorship sessions with Dane and Eric.</textarea>
+  </div>
+  <div class="question">
+    <label class="label">Guarantee / refund policy</label>
+    <textarea>Refund policy exists but is not guaranteed — assessed on a case-by-case basis. Confirm exact terms with support: sales@tradealgo.com.</textarea>
+  </div>
+  <div class="question">
+    <label class="label">Any limited-time pricing, caps, or upcoming price changes?</label>
+    <textarea>No promotions or sales events. List prices as above. Individual pricing exceptions may occur via sales negotiation. No upcoming price changes currently planned.</textarea>
+  </div>
+  <div class="question"><label class="label">Checkout / purchase URL</label><input type="url" value="https://www.tradealgo.com"></div>
+</div>
+
+<!-- 5. EXISTING USERS -->
+<div class="section">
+  <span class="section-number">5</span><h2>Existing Users & Customers</h2>
+  <div class="question"><label class="label">How many paying customers / users?</label><input type="text" value="942 total unique users across all Wealth Series products (2024–2025 combined). Lite has the highest user count at 322."></div>
+  <div class="question"><label class="label">How many free users (if applicable)?</label><input type="text" value="Not applicable."></div>
+  <div class="question">
+    <label class="label">Who are your typical customers?</label>
+    <textarea class="lg">Investors of all experience levels, primarily US-based.
+- Atlas: Investors with portfolios up to $500,000 looking for AI-powered growth diversification.
+- Titan: More experienced investors with portfolios up to $1.5M seeking advanced diversification and risk management.
+- Everest: High-net-worth investors with $5M+ portfolios seeking institutional-grade wealth management using hedge fund-style strategies.
+- Lite: Beginner to intermediate traders wanting an entry-level AI recommendation to guide their trades, with a social/competitive element.
+- Common thread: Investors who want the benefits of AI-driven investment intelligence without needing deep financial expertise.</textarea>
+  </div>
+  <div class="question">
+    <label class="label">Average customer lifetime / retention</label>
+    <textarea>Subscription cycles range from 1 to 3 years for Lite, and 2 years for Premium tiers. New user growth declined in H2 2025 (~50.6% drop from H1 to H2), attributed to increased compliance scrutiny and reduction in sales pool. Sales are heavily concentrated on Lite (322 users) but revenue per user is highest for Atlas Auto, Titan, and Everest tiers. Renewal rate not currently tracked formally.</textarea>
+  </div>
+  <div class="question"><label class="label">What tools or products were customers using before switching?</label><textarea>Competitor noted in internal docs: Motley Fool (used as a competitor benchmark for portfolio subscription services). Add others when available.</textarea></div>
+  <div class="question">
+    <label class="label">Most common customer complaints or feature requests</label>
+    <textarea>- 80% of users requested more information on portfolio movements (addressed in Phase 2 with rebalancing rationale and stock-level explanations)
+- Users found it difficult to differentiate between portfolios with overlapping stock holdings
+- Desire for more automation (Wealth Series Auto addresses this — interest is growing)
+- User experience on mobile is limited (mobile app in development)
+- Users want better performance comparison tools (MoM/YoY performance reading — pending launch)
+- Users want clearer on-the-go access (mobile app a top priority for 2026)</textarea>
+  </div>
+</div>
+
+<!-- 6. TESTIMONIALS -->
+<div class="section">
+  <span class="section-number">6</span><h2>Testimonials</h2>
+  <div class="question">
+    <label class="label">Do you have testimonials?</label>
+    <div class="radio-group">
+      <label class="radio-option"><input type="radio" name="testimonials" value="many"> Yes — lots</label>
+      <label class="radio-option"><input type="radio" name="testimonials" value="some"> Yes — a few</label>
+      <label class="radio-option"><input type="radio" name="testimonials" value="informal"> Informal only</label>
+      <label class="radio-option"><input type="radio" name="testimonials" value="none" checked> None yet</label>
+    </div>
+  </div>
+  <div class="question"><label class="label">Paste them all here</label><textarea class="xl" placeholder="Copy-paste direct quotes here when available."></textarea></div>
+  <div class="question"><label class="label">Video testimonials?</label><textarea placeholder=""></textarea></div>
+  <div class="question"><label class="label">Review ratings (Trustpilot, App Store, G2, etc.)</label><textarea placeholder=""></textarea></div>
+</div>
+
+<!-- 7. RESULTS & DATA -->
+<div class="section">
+  <span class="section-number">7</span><h2>Results & Data</h2>
+  <div class="question">
+    <label class="label">Specific results users have achieved</label>
+    <textarea class="xl">Portfolio YTD Returns (2025, vs SPY benchmark of 16.82%):
+
+ATLAS tier:
+- Undervalued Advantage: +15.78% (vs SPY 16.82%)
+- Secure Bluechip: +0.26%
+- Accelerated Growth: +14.94%
+
+TITAN tier:
+- Steady Guard: -3.7%
+- Fundamental Edge: +17.16%
+- Dynamic Upside: +21.7% (beats SPY)
+
+EVEREST tier:
+- Momentum Ascent: +38.43% (significantly beats SPY)
+- Resilient Horizon: +6.58%
+- Capital Shield: +18.08% (beats SPY)
+- Hidden Value Discovery: +23.1% (beats SPY)
+- Steady Climb: +25.21% (beats SPY)
+
+CORE tier:
+- Capital Jetstream: +36.34% (significantly beats SPY)
+- Safe Harbor: +12.27%
+- Robust Anchor: +22.35% (beats SPY)
+
+MIDAS LINK: +33.79% (significantly beats SPY)
+
+AI Options product (AIOA): 54% win rate, 24.6% overall P&L</textarea>
+  </div>
+  <div class="question">
+    <label class="label">Any aggregate performance data or stats?</label>
+    <textarea class="lg">- Total AUM accumulated in 2025: ~$32.26M (Wealth Series + Midas Link combined)
+- AUM goal: $100M by end of 2026
+- Total revenue 2024–2025: $9,162,373
+- SPY benchmark (2025): 16.82% — multiple Wealth Series portfolios outperformed this benchmark
+- New users in H1 2025: avg 113/month. New users H2 2025: avg 55.8/month (down 50.6%)
+- 942 total unique users across all products (cumulative 2024–2025)</textarea>
+  </div>
+  <div class="question"><label class="label">Case studies (if any)</label><textarea placeholder="Add detailed case studies when available."></textarea></div>
+</div>
+
+<!-- 8. COMPETITORS -->
+<div class="section">
+  <span class="section-number">8</span><h2>Competitors</h2>
+  <div class="question">
+    <label class="label">List competitors — name, price, what they do</label>
+    <textarea class="xl">1. Motley Fool Stock Advisor — ~$99–$199/year. Stock recommendations and investment ideas for retail investors. Well-known brand, strong community, but picks are not AI-managed portfolios — no automated rebalancing or 1-on-1 mentorship.
+
+2. Betterment — Free–0.25%/year AUM fee. Robo-advisor that automatically invests in diversified ETF portfolios. Passive, low-cost, but limited customisation and no analyst-led guidance or mentorship.
+
+3. Wealthfront — 0.25%/year AUM fee. Automated investing with tax-loss harvesting. Strong tech, but no human analyst touch, no mentorship, and no AI stock-picking transparency.
+
+4. Personal Capital (Empower) — Free tools + 0.49–0.89%/year for managed accounts. Wealth management + financial planning tools. Targets higher net-worth users but lacks the AI portfolio transparency and community features of Wealth Series.
+
+5. Titan Invest — ~1%/year AUM fee. Actively managed hedge-fund-style portfolios for retail investors. Closer competitor in the premium/HNW space — but no per-stock AI rationale, no mentorship, and less transparency on rebalancing decisions.</textarea>
+  </div>
+  <div class="question">
+    <label class="label">What does your product do that they don't?</label>
+    <textarea class="lg">- Full AI rebalancing rationale at both portfolio and stock level — users know exactly WHY the AI made each adjustment, not just what changed
+- 1-on-1 mentorship sessions included (up to 32 sessions for Premium tiers with Dane and Eric) — no competitor bundles this
+- Weekly live analyst sessions with Q&A (Dane and Eric) — human + AI hybrid approach
+- Tiered portfolio structure (Atlas/Titan/Everest) mapped to portfolio size — more personalised than one-size-fits-all robo-advisors
+- Wealth Series Lite provides a gamified, social leaderboard entry point at a competitive price point ($3,000–$8,000 depending on subscription length) that funnels users into premium AI products
+- AI Entry Price indicator — shows exactly the price the AI bought each ticker at, for maximum transparency
+- Benchmarked vs S&P 500 with multi-timeframe PnL views (1D/7D/1M/1Y/YTD)</textarea>
+  </div>
+  <div class="question">
+    <label class="label">What do they do that you don't?</label>
+    <textarea>- Betterment / Wealthfront: Tax-loss harvesting — not offered by Wealth Series
+- Betterment / Wealthfront: Much lower price point (AUM %) vs Wealth Series upfront subscription cost
+- Personal Capital / Empower: Holistic financial planning (budgeting, retirement planning, net worth tracking)
+- Motley Fool: Massive brand recognition and content library
+- All competitors: Established regulatory track records and RIA registration (WS is still pursuing RIA licensing)</textarea>
+  </div>
+</div>
+
+<!-- 9. COMPANY -->
+<div class="section">
+  <span class="section-number">9</span><h2>Company</h2>
+  <div class="question"><label class="label">How long has the company been in business?</label><input type="text" value="Since March 2022 (~3 years)"></div>
+  <div class="question"><label class="label">Team size</label><input type="text" value="~80 people across Singapore and the United States"></div>
+  <div class="question"><label class="label">Founder / leadership background</label><textarea placeholder="Add founder/leadership details here."></textarea></div>
+  <div class="question"><label class="label">Press, awards, partnerships, certifications</label><textarea>RIA licensing currently in discussions. In-house brokerage partnerships being established (for Wealth Series Auto). HUB International official addendum signed (Oct 2025) as part of compliance expansion.</textarea></div>
+  <div class="question"><label class="label">Revenue / funding</label><textarea>Total revenue 2024–2025: ~$9.16M. 2025 revenue alone: ~$7.72M (5x growth from 2024's $1.44M). AUM: ~$32.26M accumulated in 2025. Goal: $100M AUM by end of 2026.</textarea></div>
+</div>
+
+<!-- 10. ASSETS -->
+<div class="section">
+  <span class="section-number">10</span><h2>Existing Assets</h2>
+  <div class="question">
+    <label class="label">Screenshots or product demos available?</label>
+    <textarea>Yes — design mockups available in Figma (internal). Key screens include:
+- Wealth Series tier selection page (Atlas / Titan / Everest cards)
+- Portfolio overview page showing 3 portfolio tiles with PnL, top 5 holdings, sparklines
+- Portfolio performance page with timeframe toggle (1D/7D/1M/1Y/YTD), individual stock sparklines, Key Portfolio Adjustments panel, AI Entry Price toggle
+- Ticker-level view with Overview / Adjustment Rationale / Chart / Financials / About tabs
+- Rebalancing rationale pop-up modals (portfolio-level and stock-level)
+- Wealth Series Lite: AI stock picker interface, custom portfolio builder, leaderboard view
+- Telegram alert screenshots showing machine-triggered portfolio adjustments and analyst messages</textarea>
+  </div>
+  <div class="question"><label class="label">Existing marketing materials</label><textarea>Product listed at tradealgo.com. Sales-led via sales@tradealgo.com. GTM communications prepared for Wealth Series Phase 2 launch. WS Lite GTM communication document exists. Tier marketing taglines: Atlas — "Carry the weight of smart investing"; Titan — "Stand tall with Titan"; Everest — "Reach the pinnacle of smart investing".</textarea></div>
+  <div class="question"><label class="label">Brand assets (logo, colors, fonts, guidelines)</label><textarea>Wealth Series has a premium dark brand identity (dark background, gold/white "WS Wealth Series" logo). Tier logos: Atlas (mountain/A icon), Titan (T icon), Everest (E icon) — inspired by Apple Mac tier naming (M4 / M4 Pro / M4 Max visual hierarchy). Full brand guidelines available in Figma.
+
+Figma link: https://www.figma.com/design/lTrvqAKQm2Lho5M6LSWWbW/%F0%9F%93%9A--TA-TG--MUI-v6.1.0?node-id=6594-47638&t=39CoOTJW19jjBImD-1
+Password: TradeAlgo</textarea></div>
+</div>
+
+<!-- 11. COMPLIANCE -->
+<div class="section">
+  <span class="section-number">11</span><h2>Legal / Compliance</h2>
+  <div class="question">
+    <label class="label">Any claims we cannot make?</label>
+    <textarea>Cannot guarantee investment returns or portfolio profitability. Cannot claim to be a registered investment adviser (RIA) until licensing is confirmed. Cannot imply personalised financial advice. All content is for informational purposes only.</textarea>
+  </div>
+  <div class="question">
+    <label class="label">Required disclaimers</label>
+    <textarea>All marketing and sales content must include: TradeAlgo does not provide personalised financial advice. Investing involves risk and past performance is not indicative of future results. Users should consult a licensed financial advisor before making investment decisions. Portfolio performance data (YTD returns etc.) should be accompanied by appropriate risk disclosures.</textarea>
+  </div>
+  <div class="question">
+    <label class="label">Regulated industry? Any specific rules?</label>
+    <textarea>Yes. US financial services / fintech space. Complies with all applicable US financial regulatory rules. Compliance has been a significant focus in H2 2025 — addressed with product launch guidelines, sales workshops/quizzes, performance dashboards, and HUB International official addendum (Oct 2025). RIA licensing discussions ongoing. Positioned as an independent research and AI portfolio guidance provider.</textarea>
+  </div>
+</div>
+
+<!-- 12. ANYTHING ELSE -->
+<div class="section">
+  <span class="section-number">12</span><h2>Anything Else</h2>
+  <div class="question">
+    <label class="label">Anything else to know</label>
+    <textarea class="xl">PRODUCT FUNNEL STRATEGY:
+Wealth Series Lite ($3,000–$8,000 depending on subscription length) → Dashboard/Terminal ($2,995) → Wealth Series Premium (Atlas $25K / Titan $50K / Everest $100K). Lite is intentionally competitively priced to generate volume, demonstrate AI capabilities, and convert users upward. Internal target: >1% monthly conversion from Lite to other products.
+
+2025 KEY LAUNCHES:
+- Feb 2025: Wealth Series Lite
+- April 2025: Wealth Series Phase 2 + ticker count increase
+- August 2025: Guided Rebalancing
+- October 2025: Wealth Series Core
+
+PENDING LAUNCHES:
+- Wealth Series on App (mobile)
+- MoM/YoY performance reading
+
+2026 GOALS:
+- Full automation (Wealth Series Auto expansion)
+- Mobile app launch
+- Sales structure reform (commission incentives for higher-value products)
+- Long-term: Homepage sales funnel expansion
+- AUM: Target $100M by end of 2026 (from ~$32.26M in 2025)
+
+KEY ISSUE: Sales heavily concentrated on Lite (322 users, $0.889M revenue) despite much higher revenue potential at Atlas/Titan/Everest tiers. This is a strategic sales and marketing challenge to address.
+
+ANALYSTS: Dane and Eric host all Wealth Series Premium livestreams (Atlas Mon, Titan Tue, Everest Wed at 4:30pm EST). Dane and Eric also host Wealth Series Lite mentorship sessions.
+
+Sales contact: sales@tradealgo.com</textarea>
+  </div>
+</div>
+
+<div class="action-bar">
+  <div class="action-bar-inner">
+    <div class="save-status" id="save-status">Auto-saving</div>
+    <div class="action-buttons">
+      <button class="btn btn-secondary" onclick="clearAll()">Clear</button>
+      <button class="btn btn-primary" onclick="exportText()">Export</button>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center;margin-top:2rem;padding:1.25rem;background:#0f172a;border-radius:12px;color:#e2e8f0;">
+  <p style="font-size:0.9rem;"><strong>Product Brief — Wealth Series</strong></p>
+  <p style="font-size:0.8rem;color:#64748b;margin-top:0.4rem;">Auto-saves to your browser.</p>
+</div>
+</div>
+
+<script>
+const SK = 'product_brief_wealth_series_v1';
+let st;
+function getAll() {
+  const d = {};
+  document.querySelectorAll('textarea, input[type="text"], input[type="url"]').forEach((el,i) => d[el.name||el.id||('f'+i)] = el.value);
+  document.querySelectorAll('input[type="radio"]').forEach(el => { if(el.checked) d['r_'+el.name] = el.value; });
+  return d;
+}
+function save() {
+  try {
+    localStorage.setItem(SK, JSON.stringify(getAll()));
+    const s = document.getElementById('save-status'); s.textContent = 'Saved'; s.style.color = '#22c55e';
+    setTimeout(() => { s.textContent = 'Auto-saving'; s.style.color = '#64748b'; }, 1500);
+  } catch(e) {}
+}
+function load() {
+  try {
+    const r = localStorage.getItem(SK); if(!r) return; const d = JSON.parse(r);
+    document.querySelectorAll('textarea, input[type="text"], input[type="url"]').forEach((el,i) => { const k=el.name||el.id||('f'+i); if(d[k]!==undefined) el.value=d[k]; });
+    document.querySelectorAll('input[type="radio"]').forEach(el => { if(d['r_'+el.name]===el.value) el.checked=true; });
+  } catch(e) {}
+}
+function ds() { clearTimeout(st); st = setTimeout(save, 500); }
+document.addEventListener('input', ds);
+document.addEventListener('change', ds);
+function lab(el) { const c=el.closest('.question'); if(c){const l=c.querySelector('.label');if(l)return l.textContent.trim();} return ''; }
+function exportText() {
+  let o = 'PRODUCT BRIEF — Wealth Series\n'+'='.repeat(40)+'\n'+new Date().toLocaleString()+'\n';
+  document.querySelectorAll('.section').forEach(s => {
+    const h=s.querySelector('h2'); if(!h) return; let c='';
+    s.querySelectorAll('textarea, input[type="text"], input[type="url"]').forEach(el => { if(el.value.trim()) c+=lab(el)+':\n'+el.value.trim()+'\n\n'; });
+    s.querySelectorAll('input[type="radio"]:checked').forEach(el => { c+='Testimonials: '+el.parentElement.textContent.trim()+'\n\n'; });
+    if(c.trim()) o+='\n## '+h.textContent.trim()+'\n'+'-'.repeat(30)+'\n'+c;
+  });
+  const b=new Blob([o],{type:'text/plain'}); const a=document.createElement('a');
+  a.href=URL.createObjectURL(b); a.download='product-brief-wealth-series-'+new Date().toISOString().slice(0,10)+'.txt'; a.click();
+}
+function clearAll() {
+  if(!confirm('Clear everything?')) return;
+  localStorage.removeItem(SK);
+  document.querySelectorAll('textarea, input[type="text"], input[type="url"]').forEach(el => el.value='');
+  document.querySelectorAll('input[type="radio"]').forEach(el => el.checked=false);
+  up();
+}
+function up() {
+  let f=0, t=0;
+  document.querySelectorAll('textarea, input[type="text"], input[type="url"]').forEach(el => { t++; if(el.value.trim()) f++; });
+  const p=t?Math.round(f/t*100):0;
+  document.getElementById('progress-fill').style.width=p+'%';
+  document.getElementById('progress-label').textContent=f+'/'+t+' fields ('+p+'%)';
+}
+document.addEventListener('input', up);
+document.addEventListener('DOMContentLoaded', () => { setTimeout(up, 100); });
+</script>
+</body>
+</html>
