@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TradeAlgo Terminal — Institutional-Grade Trading Data for Every Trader</title>
+<meta name="description" content="Access dark pool data, AI-driven stock picks, live options flow, and 12+ professional trading tools — all in one platform. Trusted by 5,030+ traders.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+<style>
+/* ── Reset & Base ──────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;color:#202021;background:#fff;line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+img{max-width:100%;display:block}
+a{color:#007BFF;text-decoration:none}
+
+/* ── Layout ────────────────────────────────── */
+.container{max-width:1140px;margin:0 auto;padding:0 24px}
+.section{padding:80px 0}
+.section-alt{background:#F8FAFC}
+
+/* ── Typography ────────────────────────────── */
+.overline{font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#007BFF}
+h1{font-size:clamp(36px,5vw,60px);font-weight:700;letter-spacing:-1px;line-height:1.1;color:#1C1C1E}
+h2{font-size:clamp(28px,4vw,48px);font-weight:700;letter-spacing:-.5px;line-height:1.15;color:#1C1C1E}
+h3{font-size:clamp(20px,2.5vw,24px);font-weight:600;color:#1C1C1E;line-height:1.3}
+p{font-size:16px;color:#636465}
+.text-center{text-align:center}
+.text-white{color:#fff}
+.text-muted{color:#636465}
+.text-small{font-size:14px}
+
+/* ── Buttons ───────────────────────────────── */
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:inherit;font-size:16px;font-weight:600;padding:16px 32px;border-radius:10px;border:none;cursor:pointer;transition:all .2s ease}
+.btn-primary{background:#007BFF;color:#fff;box-shadow:0 4px 14px rgba(0,123,255,.3)}
+.btn-primary:hover{background:#008FFF;box-shadow:0 6px 20px rgba(0,123,255,.4);transform:translateY(-1px)}
+.btn-outline{background:transparent;color:#007BFF;border:2px solid #007BFF}
+.btn-outline:hover{background:#007BFF;color:#fff}
+.btn-lg{font-size:18px;padding:18px 40px;border-radius:12px}
+.btn .material-icons-round{font-size:20px}
+
+/* ── Sticky Nav ────────────────────────────── */
+.nav{position:fixed;top:0;left:0;right:0;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid #F2F2F5;z-index:1000;padding:14px 0}
+.nav-inner{display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;color:#1C1C1E}
+.nav-logo svg{width:32px;height:32px}
+.nav-cta{font-size:14px;padding:10px 24px;border-radius:8px}
+
+/* ── Hero ──────────────────────────────────── */
+.hero{padding:120px 0 60px;text-align:center}
+.hero h1{margin-bottom:20px}
+.hero p.lead{font-size:clamp(16px,2vw,20px);color:#636465;max-width:680px;margin:0 auto 40px}
+.wistia-wrap{max-width:800px;margin:0 auto 32px;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.12);background:#1C1C1E}
+.wistia_responsive_padding{padding:56.25% 0 0 0;position:relative}
+.wistia_responsive_wrapper{position:absolute;top:0;left:0;width:100%;height:100%}
+.hero-cta-wrap{opacity:0;transform:translateY(10px);transition:opacity .6s ease,transform .6s ease}
+.hero-cta-wrap.visible{opacity:1;transform:translateY(0)}
+.hero-price-note{font-size:14px;color:#9A9B9C;margin-top:12px}
+
+/* ── Social Proof Bar ──────────────────────── */
+.proof-bar{border-top:1px solid #F2F2F5;border-bottom:1px solid #F2F2F5;padding:28px 0;background:#fff}
+.proof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+.proof-item .proof-value{font-size:28px;font-weight:700;color:#1C1C1E}
+.proof-item .proof-label{font-size:13px;color:#9A9B9C;margin-top:2px}
+.proof-item .proof-stars{color:#f59e0b;font-size:16px;letter-spacing:1px}
+
+/* ── Feature Grid ──────────────────────────── */
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.feature-card{background:#fff;border:1px solid #F2F2F5;border-radius:14px;padding:32px 28px;transition:box-shadow .2s ease,transform .2s ease}
+.feature-card:hover{box-shadow:0 8px 30px rgba(0,0,0,.06);transform:translateY(-2px)}
+.feature-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:24px;color:#fff}
+.feature-icon.blue{background:#007BFF}
+.feature-icon.dark{background:#1C1C1E}
+.feature-icon.teal{background:#0891b2}
+.feature-icon.green{background:#2E7D32}
+.feature-card h3{font-size:18px;margin-bottom:8px}
+.feature-card p{font-size:14px;color:#636465;line-height:1.5}
+.feature-tag{display:inline-block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;padding:3px 8px;border-radius:4px;margin-bottom:12px}
+.feature-tag.ai{background:#BBE2FF;color:#007BFF}
+.feature-tag.data{background:#E8F5E9;color:#2E7D32}
+.feature-tag.live{background:#FFF3E0;color:#EF6C00}
+
+/* ── Comparison Table ──────────────────────── */
+.compare-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.compare-table{width:100%;border-collapse:collapse;min-width:640px}
+.compare-table thead th{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#9A9B9C;padding:14px 16px;text-align:center;border-bottom:2px solid #F2F2F5}
+.compare-table thead th:first-child{text-align:left}
+.compare-table thead th.highlight{color:#007BFF;position:relative}
+.compare-table tbody td{padding:16px;text-align:center;font-size:15px;border-bottom:1px solid #F2F2F5;color:#636465}
+.compare-table tbody td:first-child{text-align:left;font-weight:500;color:#1C1C1E}
+.compare-table tbody td.highlight{background:#F0F7FF;font-weight:600;color:#1C1C1E}
+.compare-table .check{color:#2E7D32;font-size:22px}
+.compare-table .cross{color:#ccc;font-size:22px}
+.compare-col-highlight{background:#F0F7FF;border-radius:12px 12px 0 0}
+
+/* ── Testimonial ───────────────────────────── */
+.testimonial-card{max-width:760px;margin:0 auto;background:#fff;border:1px solid #F2F2F5;border-radius:16px;padding:48px;position:relative}
+.testimonial-card blockquote{font-size:18px;line-height:1.7;color:#1C1C1E;font-style:normal;margin-bottom:24px}
+.testimonial-card blockquote::before{content:"\201C";font-size:64px;color:#BBE2FF;position:absolute;top:20px;left:32px;line-height:1;font-family:Georgia,serif}
+.testimonial-source{display:flex;align-items:center;gap:12px}
+.testimonial-stars{color:#f59e0b;font-size:18px}
+.testimonial-platform{font-size:14px;color:#9A9B9C;font-weight:500}
+
+/* ── Pricing CTA ───────────────────────────── */
+.pricing-section{background:linear-gradient(180deg,#1C1C1E 0%,#2a2a2e 100%);color:#fff;padding:100px 0;text-align:center}
+.pricing-section h2{color:#fff;margin-bottom:12px}
+.pricing-section .overline{color:#BBE2FF}
+.price-display{margin:40px auto;max-width:480px}
+.price-big{font-size:clamp(48px,8vw,72px);font-weight:700;letter-spacing:-2px;line-height:1}
+.price-big span{font-size:clamp(20px,3vw,28px);font-weight:500;color:#BABABB;vertical-align:super;margin-right:4px}
+.price-per-day{font-size:20px;color:#BABABB;margin-top:8px}
+.price-per-day strong{color:#BBE2FF;font-weight:600}
+.price-includes{display:flex;flex-wrap:wrap;justify-content:center;gap:16px 32px;margin:32px 0 40px;font-size:14px;color:#BABABB}
+.price-includes li{display:flex;align-items:center;gap:6px;list-style:none}
+.price-includes .material-icons-round{font-size:18px;color:#2E7D32}
+.pricing-section .btn-primary{font-size:20px;padding:20px 48px;border-radius:14px;box-shadow:0 6px 24px rgba(0,123,255,.35)}
+
+/* ── FAQ ───────────────────────────────────── */
+.faq-list{max-width:720px;margin:0 auto}
+.faq-item{border-bottom:1px solid #F2F2F5}
+.faq-question{width:100%;text-align:left;background:none;border:none;font-family:inherit;font-size:17px;font-weight:600;color:#1C1C1E;padding:24px 0;cursor:pointer;display:flex;align-items:center;justify-content:space-between}
+.faq-question .material-icons-round{color:#9A9B9C;transition:transform .2s ease;font-size:24px}
+.faq-item.open .faq-question .material-icons-round{transform:rotate(180deg)}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-answer-inner{padding:0 0 24px;font-size:15px;color:#636465;line-height:1.7}
+
+/* ── Final CTA ─────────────────────────────── */
+.final-cta{background:#F8FAFC;padding:80px 0;text-align:center}
+.final-cta h2{margin-bottom:16px}
+.final-cta p{max-width:560px;margin:0 auto 32px;font-size:18px}
+
+/* ── Footer ────────────────────────────────── */
+.footer{background:#1C1C1E;color:#727274;padding:40px 0;text-align:center;font-size:13px;line-height:1.8}
+.footer a{color:#BABABB}
+.footer-disclaimer{max-width:700px;margin:0 auto;font-size:12px;color:#727274;line-height:1.6}
+
+/* ── Responsive ────────────────────────────── */
+@media(max-width:1024px){
+  .features-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  .section{padding:60px 0}
+  .hero{padding:100px 0 40px}
+  .proof-grid{grid-template-columns:repeat(2,1fr);gap:20px}
+  .features-grid{grid-template-columns:1fr}
+  .testimonial-card{padding:32px 24px}
+  .testimonial-card blockquote::before{left:16px;top:8px}
+  .pricing-section{padding:60px 0}
+  .price-includes{flex-direction:column;align-items:center;gap:12px}
+  .nav-logo span{display:none}
+}
+@media(max-width:480px){
+  .container{padding:0 16px}
+  .hero h1{font-size:32px}
+  .proof-grid{grid-template-columns:1fr 1fr}
+  .compare-table{min-width:580px}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ NAV ═══════ -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 4L6 14l4.5 3L20 10.5 29.5 17 34 14 20 4z" fill="#1C1C1E"/><path d="M20 17L6 27l14 9 14-9L20 17zm0 4.5L29.5 27 20 32.5 10.5 27 20 21.5z" fill="#1C1C1E"/></svg>
+      <span>TradeAlgo</span>
+    </a>
+    <a href="#pricing" class="btn btn-primary nav-cta">Get Terminal Access</a>
+  </div>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero">
+  <div class="container">
+    <p class="overline" style="margin-bottom:16px">TradeAlgo Terminal</p>
+    <h1>Institutional-Grade Trading Data.<br>Built for Every Trader.</h1>
+    <p class="lead">Dark pool activity, AI-driven stock picks from 10,000+ tickers, live options flow, and 12+ professional tools — all in one platform.</p>
+
+    <div class="wistia-wrap">
+      <div class="wistia_responsive_padding">
+        <div class="wistia_responsive_wrapper">
+          <div class="wistia_embed wistia_async_le4c3gl2a9 seo=true videoFoam=true" style="height:100%;position:relative;width:100%">&nbsp;</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-cta-wrap" id="heroCta">
+      <a href="#pricing" class="btn btn-primary btn-lg">
+        <span class="material-icons-round">bolt</span>
+        Start Your 12-Month Access
+      </a>
+      <p class="hero-price-note">$2,995/year — that's just $8.20/day</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SOCIAL PROOF BAR ═══════ -->
+<section class="proof-bar">
+  <div class="container">
+    <div class="proof-grid">
+      <div class="proof-item">
+        <div class="proof-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="proof-value">4.7</div>
+        <div class="proof-label">Trustpilot Rating</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="proof-value">5.0</div>
+        <div class="proof-label">App Store Rating</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-value">5,030+</div>
+        <div class="proof-label">Active Traders</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-value">10,000+</div>
+        <div class="proof-label">Tickers Scanned Daily by AI</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FEATURES ═══════ -->
+<section class="section section-alt" id="features">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:48px">
+      <p class="overline" style="margin-bottom:12px">Everything You Need</p>
+      <h2>12+ Professional Trading Tools.<br>One Platform.</h2>
+      <p style="max-width:600px;margin:16px auto 0">Every tool is designed to surface the signals that institutional traders rely on — now available to you.</p>
+    </div>
+
+    <div class="features-grid">
+
+      <!-- 1. TradeGPT AI -->
+      <div class="feature-card">
+        <span class="feature-tag ai">AI-Powered</span>
+        <div class="feature-icon blue"><span class="material-icons-round">psychology</span></div>
+        <h3>TradeGPT AI Assistant</h3>
+        <p>Ask questions, get trade ideas, and receive AI-driven analysis from an assistant that scans 10,000+ tickers daily to surface top picks with sentiment scores.</p>
+      </div>
+
+      <!-- 2. Dark Pool -->
+      <div class="feature-card">
+        <span class="feature-tag data">Institutional Data</span>
+        <div class="feature-icon dark"><span class="material-icons-round">visibility</span></div>
+        <h3>Dark Pool Activity</h3>
+        <p>See where the big money is moving. Track dark pool activity with percentage-change indicators — data normally reserved for institutional desks.</p>
+      </div>
+
+      <!-- 3. Live Options Flow -->
+      <div class="feature-card">
+        <span class="feature-tag live">Real-Time</span>
+        <div class="feature-icon teal"><span class="material-icons-round">speed</span></div>
+        <h3>Live Options Flow</h3>
+        <p>Real-time options flow data powered by DXFeed. Monitor contracts, strike prices, volume, expiry, and ITM percentage as trades happen.</p>
+      </div>
+
+      <!-- 4. Live Trading Sessions -->
+      <div class="feature-card">
+        <span class="feature-tag live">Real-Time</span>
+        <div class="feature-icon teal"><span class="material-icons-round">videocam</span></div>
+        <h3>Live Trading Sessions</h3>
+        <p>Join professional analysts Brian Mitchell and Eric Armenteros every weekday for live market commentary, trade breakdowns, and real-time analysis.</p>
+      </div>
+
+      <!-- 5. Top Picks -->
+      <div class="feature-card">
+        <span class="feature-tag ai">AI-Powered</span>
+        <div class="feature-icon blue"><span class="material-icons-round">auto_awesome</span></div>
+        <h3>Top Picks of the Day</h3>
+        <p>AI-selected stocks from 10,000+ tickers, refreshed daily. Toggle between intraday (1H, 4H) and swing (1D) views with sentiment scores per ticker.</p>
+      </div>
+
+      <!-- 6. Stock Performance -->
+      <div class="feature-card">
+        <span class="feature-tag data">Institutional Data</span>
+        <div class="feature-icon green"><span class="material-icons-round">trending_up</span></div>
+        <h3>Stock Performance Summary</h3>
+        <p>Track intraday activity, weekly movers, and popular stocks. Filter by market cap — large, medium, or small — with dark pool signals alongside every ticker.</p>
+      </div>
+
+      <!-- 7. Popular Contracts -->
+      <div class="feature-card">
+        <span class="feature-tag data">Institutional Data</span>
+        <div class="feature-icon dark"><span class="material-icons-round">receipt_long</span></div>
+        <h3>Popular Contracts</h3>
+        <p>See the most actively traded options contracts with call/put type, strike price, expiry, volume, and ITM percentage — all in one clean view.</p>
+      </div>
+
+      <!-- 8. Pre-Market -->
+      <div class="feature-card">
+        <span class="feature-tag live">Real-Time</span>
+        <div class="feature-icon teal"><span class="material-icons-round">wb_twilight</span></div>
+        <h3>Pre-Market Analysis</h3>
+        <p>Start your trading day prepared. Review pre-market movers, gaps, and key levels before the opening bell rings.</p>
+      </div>
+
+      <!-- 9. Scanner -->
+      <div class="feature-card">
+        <div class="feature-icon blue"><span class="material-icons-round">manage_search</span></div>
+        <h3>Scanner</h3>
+        <p>Scan the entire market with customisable filters to find exactly the setups that match your trading strategy — from momentum plays to value opportunities.</p>
+      </div>
+
+      <!-- 10. Chart Grid -->
+      <div class="feature-card">
+        <div class="feature-icon dark"><span class="material-icons-round">grid_view</span></div>
+        <h3>Chart Grid</h3>
+        <p>Monitor multiple tickers simultaneously with a multi-chart layout. Keep your watchlist visible at a glance without switching between tabs.</p>
+      </div>
+
+      <!-- 11. Swing AI -->
+      <div class="feature-card">
+        <span class="feature-tag ai">AI-Powered</span>
+        <div class="feature-icon blue"><span class="material-icons-round">swap_horiz</span></div>
+        <h3>Swing Trades AI</h3>
+        <p>AI-generated swing trade opportunities with clear entry signals. Built for traders who hold positions over days or weeks, not just intraday.</p>
+      </div>
+
+      <!-- 12. Trade Alerts -->
+      <div class="feature-card">
+        <div class="feature-icon green"><span class="material-icons-round">notifications_active</span></div>
+        <h3>Trade Alerts</h3>
+        <p>Receive timely trade alerts delivered straight to your Telegram. Never miss a high-conviction setup identified by the platform's AI or analysts.</p>
+      </div>
+
+      <!-- 13. Historical Darkflow -->
+      <div class="feature-card">
+        <span class="feature-tag data">Institutional Data</span>
+        <div class="feature-icon dark"><span class="material-icons-round">history</span></div>
+        <h3>Historical Darkflow</h3>
+        <p>Go beyond today's data. Research historical dark pool activity to identify patterns, recurring institutional interest, and longer-term accumulation signals.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ COMPARISON TABLE ═══════ -->
+<section class="section" id="compare">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:48px">
+      <p class="overline" style="margin-bottom:12px">Why Terminal</p>
+      <h2>Everything They Offer. And More.</h2>
+      <p style="max-width:560px;margin:16px auto 0">Other platforms give you pieces. Terminal gives you the full picture — AI, dark pool data, options flow, live analysts, and 12+ tools in one place.</p>
+    </div>
+
+    <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th style="width:28%">Feature</th>
+            <th class="highlight" style="width:18%">TradeAlgo<br>Terminal</th>
+            <th style="width:14%">Unusual<br>Whales</th>
+            <th style="width:14%">Benzinga<br>Pro</th>
+            <th style="width:14%">BlackBox<br>Stocks</th>
+            <th style="width:14%">Think<br>orswim</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Dark Pool Data</td>
+            <td class="highlight"><span class="material-icons-round check">check_circle</span></td>
+            <td><span class="material-icons-round check">check_circle</span></td>
+            <td><span class="material-icons-round cross">cancel</span></td>
+            <td><span class="material-icons-round check">check_circle</span></td>
+            <td><span class="material-icons-round cross">cancel</span></td>
+          </tr>
+          <tr>
+            <td>AI Stock Picker (10,000+ tickers)</td>
+            <td class="highlight"><span class="material-icons-round check">check_circle</span></td>
+            <td><span class="material-icons-round cross">cancel</span></td>
+            <td><span class="material-icons-round cross">cancel</span></td>
+            <td><span class="material-icons-round cross">cancel</span></td>
+            <td><span class="material-icons-round cross">cancel</span></td>
+          </tr>
+          <tr>
+            <td>AI Sentiment Scoring</td>
+            <td class="highlight"><span class="material-icons-round check">check_circle</span></td>
+            <td><span class="material-icons-round cross">cancel</span></td>
+            <td><span class="material-icons-round cross">cancel</span></td>
+            <td><span class="material-icons-round cross">cancel</span></td>
+            <td><span class="material-icons-round cross">cancel</span></td>
+          </tr>
+          <tr>
+            <td>Live Options Flow</td>
+            <td class="highlight"><span class="material-icons-round check">check_circle</span></td>
+            <td><span class="material-icons-round check">check_circle</span></td>
+            <td><span class="material-icons-round check">check_circle</span></td>
+            <td><span class="material-icons-round check">check_circle</span></td>
+            <td><span class="material-icons-round check">check_circle</span></td>
+          </tr>
+          <tr>
+            <td>Live Analyst Trading Sessions</td>
+            <td class="highlight"><span class="material-icons-round check">check_circle</span></td>
+            <td><span class="material-icons-round cross">cancel</span></td>
+            <td><span class="material-icons-round cross">cancel</span></td>
+            <td><span class="material-icons-round check">check_circle</span></td>
+            <td><span class="material-icons-round cross">cancel</span></td>
+          </tr>
+          <tr>
+            <td>AI Chat Assistant (TradeGPT)</td>
+            <td class="highlight"><span class="material-icons-round check">check_circle</span></td>
+            <td><span class="material-icons-round cross">cancel</span></td>
+            <td><span class="material-icons-round cross">cancel</span></td>
+            <td><span class="material-icons-round cross">cancel</span></td>
+            <td><span class="material-icons-round cross">cancel</span></td>
+          </tr>
+          <tr>
+            <td>Historical Dark Pool Data</td>
+            <td class="highlight"><span class="material-icons-round check">check_circle</span></td>
+            <td><span class="material-icons-round check">check_circle</span></td>
+            <td><span class="material-icons-round cross">cancel</span></td>
+            <td><span class="material-icons-round cross">cancel</span></td>
+            <td><span class="material-icons-round cross">cancel</span></td>
+          </tr>
+          <tr>
+            <td>Swing Trade AI</td>
+            <td class="highlight"><span class="material-icons-round check">check_circle</span></td>
+            <td><span class="material-icons-round cross">cancel</span></td>
+            <td><span class="material-icons-round cross">cancel</span></td>
+            <td><span class="material-icons-round cross">cancel</span></td>
+            <td><span class="material-icons-round cross">cancel</span></td>
+          </tr>
+          <tr>
+            <td>Pre-Market Analysis</td>
+            <td class="highlight"><span class="material-icons-round check">check_circle</span></td>
+            <td><span class="material-icons-round cross">cancel</span></td>
+            <td><span class="material-icons-round check">check_circle</span></td>
+            <td><span class="material-icons-round cross">cancel</span></td>
+            <td><span class="material-icons-round check">check_circle</span></td>
+          </tr>
+          <tr>
+            <td>Telegram Trade Alerts</td>
+            <td class="highlight"><span class="material-icons-round check">check_circle</span></td>
+            <td><span class="material-icons-round cross">cancel</span></td>
+            <td><span class="material-icons-round check">check_circle</span></td>
+            <td><span class="material-icons-round check">check_circle</span></td>
+            <td><span class="material-icons-round cross">cancel</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ TESTIMONIAL ═══════ -->
+<section class="section section-alt" id="testimonial">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:40px">
+      <p class="overline" style="margin-bottom:12px">Real Traders. Real Results.</p>
+      <h2>Recovered the Full Membership Cost<br>Within the First Month.</h2>
+    </div>
+
+    <div class="testimonial-card">
+      <blockquote style="padding-left:24px">
+        I'll admit I was skeptical at first — investing $5,000 for a one-year membership isn't a small decision. But after reading the reviews and taking a moment to quiet my emotions, my gut told me to go for it. That decision paid off quickly: <strong>I recovered the full cost of the membership within the first month.</strong>
+        <br><br>
+        I've actively traded stocks for about 15 years. Trade Algo teaches proven rules and frameworks that help you trade with structure instead of emotion. It reinforces that trading is not gambling — it's a craft. Like any profession, success comes from following rules that build discipline and protect your capital.
+        <br><br>
+        The platform itself is incredibly rich in information, and I learn something new every day from outstanding analysts like Brian, Dane, Bronco, Mike, Eric, and Mr. Confluence. Each brings a different style and strategy.
+      </blockquote>
+      <div class="testimonial-source">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <div class="testimonial-platform">Verified Trustpilot Review</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ PRICING CTA ═══════ -->
+<section class="pricing-section" id="pricing">
+  <div class="container">
+    <p class="overline" style="margin-bottom:12px">Full Platform Access</p>
+    <h2>One Price. Everything Included.</h2>
+    <p style="color:#BABABB;max-width:520px;margin:12px auto 0;font-size:17px">12+ professional tools, AI-driven picks, dark pool data, live analyst sessions, and trade alerts — all for less than a cup of coffee a day.</p>
+
+    <div class="price-display">
+      <div class="price-big"><span>$</span>2,995</div>
+      <div class="price-per-day">That's just <strong>$8.20 per day</strong> for 12 months</div>
+    </div>
+
+    <ul class="price-includes">
+      <li><span class="material-icons-round">check_circle</span> TradeGPT AI Assistant</li>
+      <li><span class="material-icons-round">check_circle</span> Dark Pool Data</li>
+      <li><span class="material-icons-round">check_circle</span> Live Options Flow</li>
+      <li><span class="material-icons-round">check_circle</span> Live Analyst Sessions</li>
+      <li><span class="material-icons-round">check_circle</span> AI Top Picks Daily</li>
+      <li><span class="material-icons-round">check_circle</span> Swing Trade AI</li>
+      <li><span class="material-icons-round">check_circle</span> Trade Alerts via Telegram</li>
+      <li><span class="material-icons-round">check_circle</span> Scanner + Chart Grid</li>
+      <li><span class="material-icons-round">check_circle</span> Historical Darkflow</li>
+      <li><span class="material-icons-round">check_circle</span> Pre-Market Analysis</li>
+    </ul>
+
+    <a href="https://www.tradealgo.com" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
+      <span class="material-icons-round">bolt</span>
+      Get Terminal Access Now
+    </a>
+  </div>
+</section>
+
+<!-- ═══════ FAQ ═══════ -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:48px">
+      <p class="overline" style="margin-bottom:12px">Questions</p>
+      <h2>Frequently Asked</h2>
+    </div>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-question">What exactly is TradeAlgo Terminal?<span class="material-icons-round">expand_more</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">Terminal is a comprehensive trading data platform that delivers institutional-grade options data, dark pool activity, AI-driven stock picks, and 12+ professional trading tools — all in one place. It's designed for traders of all experience levels who want access to the kind of data normally reserved for professional trading desks.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Who is this for?<span class="material-icons-round">expand_more</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">Terminal is built for retail traders and active investors — from self-directed beginners to experienced day traders. If you trade stocks or options and want better data to inform your decisions, Terminal gives you the tools to trade with clarity and confidence.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">How does the AI stock picker work?<span class="material-icons-round">expand_more</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">TradeGPT scans over 10,000 tickers daily using real-time market data from DXFeed. It surfaces top picks with AI sentiment scores (bullish/bearish percentage) and news sentiment analysis. You can view picks across multiple timeframes — 1-hour, 4-hour, and daily — for both intraday and swing trading strategies.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">What is dark pool data and why does it matter?<span class="material-icons-round">expand_more</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">Dark pools are private exchanges where large institutional investors execute trades away from public markets. By tracking dark pool activity, you can see where significant money is flowing before those moves show up in the broader market. Terminal surfaces this data with clear percentage-change indicators so you can spot institutional interest early.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">What are the live trading sessions?<span class="material-icons-round">expand_more</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">Every weekday, professional analysts host live sessions where they break down the market in real time. "DayTrade with Brian" runs Monday to Friday from 10:30 to 11:30 AM EST, and "Platinum Daily Livestreams" with Eric Armenteros runs 9:30 to 10:30 AM EST. These sessions are included with your Terminal subscription.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">How quickly can I start using Terminal?<span class="material-icons-round">expand_more</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">Immediately. Once your account is set up, you can log in and start viewing live data, AI stock picks, dark pool activity, and analyst livestreams right away. There's no setup delay or waiting period.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">What devices does it work on?<span class="material-icons-round">expand_more</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">Terminal works on desktop/laptop web browsers (recommended for the full experience), mobile web, and native iOS and Android apps. Trade alerts are delivered via Telegram so you never miss a signal, wherever you are.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Is this financial advice?<span class="material-icons-round">expand_more</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">No. TradeAlgo is a data and analytics platform for informational and educational purposes only. It does not provide personalised financial advice. All trading involves risk, and you should consult a qualified financial professional before making investment decisions.</div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FINAL CTA ═══════ -->
+<section class="final-cta">
+  <div class="container">
+    <p class="overline" style="margin-bottom:12px">Ready to Trade with Clarity?</p>
+    <h2>See What the Institutions See.</h2>
+    <p>Join 5,030+ traders using institutional-grade data, AI-driven picks, and professional tools — starting at $8.20/day.</p>
+    <a href="#pricing" class="btn btn-primary btn-lg">
+      <span class="material-icons-round">bolt</span>
+      Get Terminal Access
+    </a>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer class="footer">
+  <div class="container">
+    <p style="margin-bottom:16px"><strong style="color:#BABABB">TradeAlgo</strong> &middot; <a href="https://www.tradealgo.com">tradealgo.com</a> &middot; <a href="mailto:sales@tradealgo.com">sales@tradealgo.com</a></p>
+    <div class="footer-disclaimer">
+      <p>TradeAlgo does not provide financial advice. All content is for informational and educational purposes only. Trading stocks and options involves risk, including the potential loss of principal. Past performance is not indicative of future results. Please consult a qualified financial professional before making any investment decisions.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════ WISTIA EMBED ═══════ -->
+<script src="https://fast.wistia.com/embed/medias/le4c3gl2a9.jsonp" async></script>
+<script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+
+<script>
+/* ── Delayed Hero CTA (show after 30s or video play) ── */
+(function(){
+  const cta = document.getElementById('heroCta');
+  let shown = false;
+  function showCTA(){
+    if(shown) return;
+    shown = true;
+    cta.classList.add('visible');
+  }
+  setTimeout(showCTA, 30000);
+  window._wq = window._wq || [];
+  window._wq.push({id:'le4c3gl2a9', onReady:function(video){
+    video.bind('play', function(){ setTimeout(showCTA, 15000); });
+    video.bind('end', showCTA);
+  }});
+})();
+
+/* ── FAQ Accordion ── */
+document.querySelectorAll('.faq-question').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    const item = this.closest('.faq-item');
+    const answer = item.querySelector('.faq-answer');
+    const isOpen = item.classList.contains('open');
+    // close all
+    document.querySelectorAll('.faq-item.open').forEach(function(i){
+      i.classList.remove('open');
+      i.querySelector('.faq-answer').style.maxHeight = null;
+    });
+    if(!isOpen){
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  });
+});
+
+/* ── Smooth scroll for anchor links ── */
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click', function(e){
+    const target = document.querySelector(this.getAttribute('href'));
+    if(target){
+      e.preventDefault();
+      target.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+  });
+});
+</script>
+</body>
+</html>
