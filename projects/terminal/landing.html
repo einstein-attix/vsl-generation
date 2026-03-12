@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TradeAlgo Terminal — Institutional-Grade Trading Data for Every Trader</title>
-<meta name="description" content="Access dark pool data, AI-driven stock picks, live options flow, and 12+ professional trading tools — all in one platform. Trusted by 5,030+ traders.">
+<title>TradeAlgo Terminal — See What the Institutions See</title>
+<meta name="description" content="63% of US equity volume flows through dark pools you can't see. Terminal gives you dark pool data, AI stock picks from 10,000+ tickers, live options flow, and 12+ tools — all in one screen. Trusted by 5,030+ traders.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -52,20 +52,21 @@ p{font-size:16px;color:#636465}
 /* ── Hero ──────────────────────────────────── */
 .hero{padding:120px 0 60px;text-align:center}
 .hero h1{margin-bottom:20px}
-.hero p.lead{font-size:clamp(16px,2vw,20px);color:#636465;max-width:680px;margin:0 auto 40px}
+.hero p.lead{font-size:clamp(16px,2vw,20px);color:#636465;max-width:700px;margin:0 auto 40px}
 .wistia-wrap{max-width:800px;margin:0 auto 32px;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.12);background:#1C1C1E}
 .wistia_responsive_padding{padding:56.25% 0 0 0;position:relative}
 .wistia_responsive_wrapper{position:absolute;top:0;left:0;width:100%;height:100%}
 .hero-cta-wrap{opacity:0;transform:translateY(10px);transition:opacity .6s ease,transform .6s ease}
 .hero-cta-wrap.visible{opacity:1;transform:translateY(0)}
-.hero-price-note{font-size:14px;color:#9A9B9C;margin-top:12px}
+.hero-micro{font-size:14px;color:#9A9B9C;margin-top:12px}
+.hero-micro strong{color:#636465}
 
 /* ── Social Proof Bar ──────────────────────── */
 .proof-bar{border-top:1px solid #F2F2F5;border-bottom:1px solid #F2F2F5;padding:28px 0;background:#fff}
-.proof-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+.proof-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;text-align:center}
 .proof-item .proof-value{font-size:28px;font-weight:700;color:#1C1C1E}
-.proof-item .proof-label{font-size:13px;color:#9A9B9C;margin-top:2px}
-.proof-item .proof-stars{color:#f59e0b;font-size:16px;letter-spacing:1px}
+.proof-item .proof-label{font-size:12px;color:#9A9B9C;margin-top:2px;line-height:1.3}
+.proof-item .proof-stars{color:#f59e0b;font-size:14px;letter-spacing:1px}
 
 /* ── Feature Grid ──────────────────────────── */
 .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
@@ -82,19 +83,37 @@ p{font-size:16px;color:#636465}
 .feature-tag.ai{background:#BBE2FF;color:#007BFF}
 .feature-tag.data{background:#E8F5E9;color:#2E7D32}
 .feature-tag.live{background:#FFF3E0;color:#EF6C00}
+.mid-cta{text-align:center;margin-top:48px}
+.mid-cta .btn-micro{font-size:13px;color:#9A9B9C;margin-top:10px}
 
 /* ── Comparison Table ──────────────────────── */
 .compare-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .compare-table{width:100%;border-collapse:collapse;min-width:640px}
 .compare-table thead th{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:#9A9B9C;padding:14px 16px;text-align:center;border-bottom:2px solid #F2F2F5}
 .compare-table thead th:first-child{text-align:left}
-.compare-table thead th.highlight{color:#007BFF;position:relative}
+.compare-table thead th.highlight{color:#007BFF}
 .compare-table tbody td{padding:16px;text-align:center;font-size:15px;border-bottom:1px solid #F2F2F5;color:#636465}
 .compare-table tbody td:first-child{text-align:left;font-weight:500;color:#1C1C1E}
 .compare-table tbody td.highlight{background:#F0F7FF;font-weight:600;color:#1C1C1E}
 .compare-table .check{color:#2E7D32;font-size:22px}
 .compare-table .cross{color:#ccc;font-size:22px}
-.compare-col-highlight{background:#F0F7FF;border-radius:12px 12px 0 0}
+.compare-table tfoot td{padding:16px;text-align:center;font-size:15px;font-weight:700;color:#1C1C1E;border-top:2px solid #F2F2F5}
+.compare-table tfoot td:first-child{text-align:left}
+.compare-table tfoot td.highlight{background:#F0F7FF;color:#007BFF}
+.compare-table tfoot td.highlight .price-annual{font-size:20px}
+.compare-verdict{text-align:center;margin-top:32px;padding:24px;background:#F0F7FF;border-radius:12px}
+.compare-verdict p{font-size:16px;color:#1C1C1E;font-weight:500}
+.compare-verdict strong{color:#007BFF}
+
+/* ── Retention Proof ─────────────────────── */
+.retention-bar{background:#1C1C1E;padding:48px 0;text-align:center}
+.retention-bar .stat-row{display:flex;justify-content:center;gap:60px;flex-wrap:wrap}
+.retention-bar .stat-item{color:#fff}
+.retention-bar .stat-num{font-size:clamp(36px,5vw,56px);font-weight:700;letter-spacing:-1px;line-height:1}
+.retention-bar .stat-num.blue{color:#007BFF}
+.retention-bar .stat-desc{font-size:14px;color:#BABABB;margin-top:6px;max-width:200px}
+.retention-bar .stat-context{max-width:600px;margin:32px auto 0;font-size:17px;color:#BABABB;line-height:1.6}
+.retention-bar .stat-context strong{color:#fff}
 
 /* ── Testimonial ───────────────────────────── */
 .testimonial-card{max-width:760px;margin:0 auto;background:#fff;border:1px solid #F2F2F5;border-radius:16px;padding:48px;position:relative}
@@ -103,26 +122,44 @@ p{font-size:16px;color:#636465}
 .testimonial-source{display:flex;align-items:center;gap:12px}
 .testimonial-stars{color:#f59e0b;font-size:18px}
 .testimonial-platform{font-size:14px;color:#9A9B9C;font-weight:500}
+.testimonial-context{font-size:13px;color:#9A9B9C;margin-top:4px}
 
 /* ── Pricing CTA ───────────────────────────── */
 .pricing-section{background:linear-gradient(180deg,#1C1C1E 0%,#2a2a2e 100%);color:#fff;padding:100px 0;text-align:center}
 .pricing-section h2{color:#fff;margin-bottom:12px}
 .pricing-section .overline{color:#BBE2FF}
-.price-display{margin:40px auto;max-width:480px}
-.price-big{font-size:clamp(48px,8vw,72px);font-weight:700;letter-spacing:-2px;line-height:1}
+
+/* Price anchors */
+.price-anchors{display:flex;justify-content:center;gap:40px;margin:36px auto 12px;flex-wrap:wrap}
+.anchor-item{text-align:center}
+.anchor-item .anchor-label{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#727274;margin-bottom:4px}
+.anchor-item .anchor-price{font-size:28px;font-weight:700;color:#727274;text-decoration:line-through;text-decoration-color:rgba(255,255,255,.3)}
+.anchor-item .anchor-note{font-size:12px;color:#727274;margin-top:2px}
+.anchor-arrow{display:flex;align-items:center;color:#727274;font-size:28px}
+
+.price-display{margin:20px auto 8px;max-width:480px}
+.price-big{font-size:clamp(48px,8vw,72px);font-weight:700;letter-spacing:-2px;line-height:1;color:#fff}
 .price-big span{font-size:clamp(20px,3vw,28px);font-weight:500;color:#BABABB;vertical-align:super;margin-right:4px}
-.price-per-day{font-size:20px;color:#BABABB;margin-top:8px}
-.price-per-day strong{color:#BBE2FF;font-weight:600}
-.price-includes{display:flex;flex-wrap:wrap;justify-content:center;gap:16px 32px;margin:32px 0 40px;font-size:14px;color:#BABABB}
+.price-per-day{margin-top:8px}
+.price-per-day .daily{font-size:24px;font-weight:700;color:#BBE2FF}
+.price-per-day .daily-label{font-size:16px;color:#BABABB;margin-top:2px}
+.price-context{font-size:15px;color:#727274;margin-top:16px;font-style:italic}
+
+.price-includes{display:flex;flex-wrap:wrap;justify-content:center;gap:16px 32px;margin:32px 0 16px;font-size:14px;color:#BABABB}
 .price-includes li{display:flex;align-items:center;gap:6px;list-style:none}
 .price-includes .material-icons-round{font-size:18px;color:#2E7D32}
+
+.price-renewal{font-size:14px;color:#BABABB;margin-bottom:32px}
+.price-renewal strong{color:#fff}
+
 .pricing-section .btn-primary{font-size:20px;padding:20px 48px;border-radius:14px;box-shadow:0 6px 24px rgba(0,123,255,.35)}
+.pricing-cta-micro{font-size:13px;color:#727274;margin-top:14px}
 
 /* ── FAQ ───────────────────────────────────── */
 .faq-list{max-width:720px;margin:0 auto}
 .faq-item{border-bottom:1px solid #F2F2F5}
-.faq-question{width:100%;text-align:left;background:none;border:none;font-family:inherit;font-size:17px;font-weight:600;color:#1C1C1E;padding:24px 0;cursor:pointer;display:flex;align-items:center;justify-content:space-between}
-.faq-question .material-icons-round{color:#9A9B9C;transition:transform .2s ease;font-size:24px}
+.faq-question{width:100%;text-align:left;background:none;border:none;font-family:inherit;font-size:17px;font-weight:600;color:#1C1C1E;padding:24px 0;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.faq-question .material-icons-round{color:#9A9B9C;transition:transform .2s ease;font-size:24px;flex-shrink:0}
 .faq-item.open .faq-question .material-icons-round{transform:rotate(180deg)}
 .faq-answer{max-height:0;overflow:hidden;transition:max-height .3s ease}
 .faq-answer-inner{padding:0 0 24px;font-size:15px;color:#636465;line-height:1.7}
@@ -130,27 +167,43 @@ p{font-size:16px;color:#636465}
 /* ── Final CTA ─────────────────────────────── */
 .final-cta{background:#F8FAFC;padding:80px 0;text-align:center}
 .final-cta h2{margin-bottom:16px}
-.final-cta p{max-width:560px;margin:0 auto 32px;font-size:18px}
+.final-cta p{max-width:600px;margin:0 auto 12px;font-size:18px}
+.final-cta .trust-recap{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin:20px 0 32px;font-size:14px;color:#636465}
+.final-cta .trust-recap span{display:flex;align-items:center;gap:6px}
+.final-cta .trust-recap .material-icons-round{font-size:18px;color:#2E7D32}
 
 /* ── Footer ────────────────────────────────── */
 .footer{background:#1C1C1E;color:#727274;padding:40px 0;text-align:center;font-size:13px;line-height:1.8}
 .footer a{color:#BABABB}
 .footer-disclaimer{max-width:700px;margin:0 auto;font-size:12px;color:#727274;line-height:1.6}
 
+/* ── Sticky Mobile CTA ────────────────────── */
+.sticky-mobile-cta{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid #F2F2F5;padding:12px 16px;z-index:999;text-align:center;box-shadow:0 -4px 20px rgba(0,0,0,.08)}
+.sticky-mobile-cta .btn{width:100%;justify-content:center;padding:14px 24px;font-size:16px}
+.sticky-mobile-cta .sticky-micro{font-size:11px;color:#9A9B9C;margin-top:6px}
+
 /* ── Responsive ────────────────────────────── */
 @media(max-width:1024px){
   .features-grid{grid-template-columns:repeat(2,1fr)}
+  .proof-grid{grid-template-columns:repeat(3,1fr)}
 }
 @media(max-width:768px){
   .section{padding:60px 0}
   .hero{padding:100px 0 40px}
-  .proof-grid{grid-template-columns:repeat(2,1fr);gap:20px}
+  .proof-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+  .proof-grid .proof-item:last-child{grid-column:1/-1}
   .features-grid{grid-template-columns:1fr}
   .testimonial-card{padding:32px 24px}
   .testimonial-card blockquote::before{left:16px;top:8px}
   .pricing-section{padding:60px 0}
   .price-includes{flex-direction:column;align-items:center;gap:12px}
+  .price-anchors{gap:20px}
+  .anchor-item .anchor-price{font-size:22px}
+  .retention-bar .stat-row{gap:32px}
   .nav-logo span{display:none}
+  .sticky-mobile-cta{display:block}
+  body{padding-bottom:72px}
+  .final-cta .trust-recap{flex-direction:column;align-items:center;gap:8px}
 }
 @media(max-width:480px){
   .container{padding:0 16px}
@@ -169,7 +222,7 @@ p{font-size:16px;color:#636465}
       <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 4L6 14l4.5 3L20 10.5 29.5 17 34 14 20 4z" fill="#1C1C1E"/><path d="M20 17L6 27l14 9 14-9L20 17zm0 4.5L29.5 27 20 32.5 10.5 27 20 21.5z" fill="#1C1C1E"/></svg>
       <span>TradeAlgo</span>
     </a>
-    <a href="#pricing" class="btn btn-primary nav-cta">Get Terminal Access</a>
+    <a href="#pricing" class="btn btn-primary nav-cta">Subscribe Now &mdash; $2,995/yr</a>
   </div>
 </nav>
 
@@ -177,8 +230,8 @@ p{font-size:16px;color:#636465}
 <section class="hero">
   <div class="container">
     <p class="overline" style="margin-bottom:16px">TradeAlgo Terminal</p>
-    <h1>Institutional-Grade Trading Data.<br>Built for Every Trader.</h1>
-    <p class="lead">Dark pool activity, AI-driven stock picks from 10,000+ tickers, live options flow, and 12+ professional tools — all in one platform.</p>
+    <h1>63% of the Market Is<br>Invisible to You.</h1>
+    <p class="lead">Dark pool data. Options flow. AI scanning 10,000 tickers. The same data institutions use to trade against you &mdash; now on your screen, in one platform.</p>
 
     <div class="wistia-wrap">
       <div class="wistia_responsive_padding">
@@ -190,10 +243,10 @@ p{font-size:16px;color:#636465}
 
     <div class="hero-cta-wrap" id="heroCta">
       <a href="#pricing" class="btn btn-primary btn-lg">
-        <span class="material-icons-round">bolt</span>
-        Start Your 12-Month Access
+        <span class="material-icons-round">visibility</span>
+        Start Seeing Dark Pools
       </a>
-      <p class="hero-price-note">$2,995/year — that's just $8.20/day</p>
+      <p class="hero-micro">$2,995/year &mdash; just <strong>$11.88 per trading day</strong>. Instant access.</p>
     </div>
   </div>
 </section>
@@ -205,7 +258,7 @@ p{font-size:16px;color:#636465}
       <div class="proof-item">
         <div class="proof-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <div class="proof-value">4.7</div>
-        <div class="proof-label">Trustpilot Rating</div>
+        <div class="proof-label">Trustpilot &middot; 1,923 reviews</div>
       </div>
       <div class="proof-item">
         <div class="proof-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
@@ -214,7 +267,11 @@ p{font-size:16px;color:#636465}
       </div>
       <div class="proof-item">
         <div class="proof-value">5,030+</div>
-        <div class="proof-label">Active Traders</div>
+        <div class="proof-label">Paying Subscribers</div>
+      </div>
+      <div class="proof-item">
+        <div class="proof-value">95.7%</div>
+        <div class="proof-label">Subscriber Renewal Rate</div>
       </div>
       <div class="proof-item">
         <div class="proof-value">10,000+</div>
@@ -228,9 +285,9 @@ p{font-size:16px;color:#636465}
 <section class="section section-alt" id="features">
   <div class="container">
     <div class="text-center" style="margin-bottom:48px">
-      <p class="overline" style="margin-bottom:12px">Everything You Need</p>
-      <h2>12+ Professional Trading Tools.<br>One Platform.</h2>
-      <p style="max-width:600px;margin:16px auto 0">Every tool is designed to surface the signals that institutional traders rely on — now available to you.</p>
+      <p class="overline" style="margin-bottom:12px">What You Get</p>
+      <h2>Every Signal Institutions Use.<br>One Login. One Screen.</h2>
+      <p style="max-width:620px;margin:16px auto 0">No more piecing together five subscriptions. Terminal puts dark pool data, AI analysis, options flow, and live analyst sessions in a single platform.</p>
     </div>
 
     <div class="features-grid">
@@ -240,7 +297,7 @@ p{font-size:16px;color:#636465}
         <span class="feature-tag ai">AI-Powered</span>
         <div class="feature-icon blue"><span class="material-icons-round">psychology</span></div>
         <h3>TradeGPT AI Assistant</h3>
-        <p>Ask questions, get trade ideas, and receive AI-driven analysis from an assistant that scans 10,000+ tickers daily to surface top picks with sentiment scores.</p>
+        <p>AI scanned 10,000 tickers at 4 AM. Your Top Picks were loaded before your coffee. Ask questions, get trade ideas, receive sentiment scores per ticker.</p>
       </div>
 
       <!-- 2. Dark Pool -->
@@ -248,7 +305,7 @@ p{font-size:16px;color:#636465}
         <span class="feature-tag data">Institutional Data</span>
         <div class="feature-icon dark"><span class="material-icons-round">visibility</span></div>
         <h3>Dark Pool Activity</h3>
-        <p>See where the big money is moving. Track dark pool activity with percentage-change indicators — data normally reserved for institutional desks.</p>
+        <p>AGX showed +208% dark pool activity the day before its 13% gap. It was on screen. Flagged. In real time. See where institutions are loading up.</p>
       </div>
 
       <!-- 3. Live Options Flow -->
@@ -256,7 +313,7 @@ p{font-size:16px;color:#636465}
         <span class="feature-tag live">Real-Time</span>
         <div class="feature-icon teal"><span class="material-icons-round">speed</span></div>
         <h3>Live Options Flow</h3>
-        <p>Real-time options flow data powered by DXFeed. Monitor contracts, strike prices, volume, expiry, and ITM percentage as trades happen.</p>
+        <p>Heavy put buying 30 minutes before your entry? The options flow showed it. Monitor contracts, strike prices, volume, and ITM percentage as trades happen.</p>
       </div>
 
       <!-- 4. Live Trading Sessions -->
@@ -264,7 +321,7 @@ p{font-size:16px;color:#636465}
         <span class="feature-tag live">Real-Time</span>
         <div class="feature-icon teal"><span class="material-icons-round">videocam</span></div>
         <h3>Live Trading Sessions</h3>
-        <p>Join professional analysts Brian Mitchell and Eric Armenteros every weekday for live market commentary, trade breakdowns, and real-time analysis.</p>
+        <p>Brian Mitchell. Live. 10:30 AM. Walking through setups on your screen. Eric Armenteros at 9:30 AM. Not webinars &mdash; live trading, every weekday.</p>
       </div>
 
       <!-- 5. Top Picks -->
@@ -280,7 +337,7 @@ p{font-size:16px;color:#636465}
         <span class="feature-tag data">Institutional Data</span>
         <div class="feature-icon green"><span class="material-icons-round">trending_up</span></div>
         <h3>Stock Performance Summary</h3>
-        <p>Track intraday activity, weekly movers, and popular stocks. Filter by market cap — large, medium, or small — with dark pool signals alongside every ticker.</p>
+        <p>LNTH showed +299% dark pool activity alongside its 8.7% move. Track intraday movers with institutional signals you won't find on free platforms.</p>
       </div>
 
       <!-- 7. Popular Contracts -->
@@ -288,7 +345,7 @@ p{font-size:16px;color:#636465}
         <span class="feature-tag data">Institutional Data</span>
         <div class="feature-icon dark"><span class="material-icons-round">receipt_long</span></div>
         <h3>Popular Contracts</h3>
-        <p>See the most actively traded options contracts with call/put type, strike price, expiry, volume, and ITM percentage — all in one clean view.</p>
+        <p>See the most actively traded options contracts with call/put type, strike price, expiry, volume, and ITM percentage &mdash; all in one clean view.</p>
       </div>
 
       <!-- 8. Pre-Market -->
@@ -296,14 +353,14 @@ p{font-size:16px;color:#636465}
         <span class="feature-tag live">Real-Time</span>
         <div class="feature-icon teal"><span class="material-icons-round">wb_twilight</span></div>
         <h3>Pre-Market Analysis</h3>
-        <p>Start your trading day prepared. Review pre-market movers, gaps, and key levels before the opening bell rings.</p>
+        <p>Log in at 7:30 AM. See the dark pool activity from overnight. Review pre-market movers, gaps, and key levels before the opening bell.</p>
       </div>
 
       <!-- 9. Scanner -->
       <div class="feature-card">
         <div class="feature-icon blue"><span class="material-icons-round">manage_search</span></div>
         <h3>Scanner</h3>
-        <p>Scan the entire market with customisable filters to find exactly the setups that match your trading strategy — from momentum plays to value opportunities.</p>
+        <p>Scan the entire market with customisable filters to find exactly the setups that match your strategy &mdash; from momentum plays to value opportunities.</p>
       </div>
 
       <!-- 10. Chart Grid -->
@@ -333,9 +390,18 @@ p{font-size:16px;color:#636465}
         <span class="feature-tag data">Institutional Data</span>
         <div class="feature-icon dark"><span class="material-icons-round">history</span></div>
         <h3>Historical Darkflow</h3>
-        <p>Go beyond today's data. Research historical dark pool activity to identify patterns, recurring institutional interest, and longer-term accumulation signals.</p>
+        <p>Go beyond today's data. Research historical dark pool activity to identify patterns, recurring institutional interest, and accumulation signals.</p>
       </div>
 
+    </div>
+
+    <!-- Mid-page CTA -->
+    <div class="mid-cta">
+      <a href="#pricing" class="btn btn-primary btn-lg">
+        <span class="material-icons-round">lock_open</span>
+        Get Full Access &mdash; $2,995/year
+      </a>
+      <p class="btn-micro">Instant access. All 13 tools included.</p>
     </div>
   </div>
 </section>
@@ -345,8 +411,8 @@ p{font-size:16px;color:#636465}
   <div class="container">
     <div class="text-center" style="margin-bottom:48px">
       <p class="overline" style="margin-bottom:12px">Why Terminal</p>
-      <h2>Everything They Offer. And More.</h2>
-      <p style="max-width:560px;margin:16px auto 0">Other platforms give you pieces. Terminal gives you the full picture — AI, dark pool data, options flow, live analysts, and 12+ tools in one place.</p>
+      <h2>Even All Three Combined<br>Cost More &mdash; and Still Miss the AI.</h2>
+      <p style="max-width:600px;margin:16px auto 0">Subscribe to Unusual Whales, Benzinga, and BlackBox separately and you'd spend $4,176/year. You'd still be missing TradeGPT, live analysts, Swing AI, and historical dark pool data.</p>
     </div>
 
     <div class="compare-table-wrap">
@@ -395,7 +461,7 @@ p{font-size:16px;color:#636465}
             <td><span class="material-icons-round check">check_circle</span></td>
           </tr>
           <tr>
-            <td>Live Analyst Trading Sessions</td>
+            <td>Live Analyst Sessions (5 days/wk)</td>
             <td class="highlight"><span class="material-icons-round check">check_circle</span></td>
             <td><span class="material-icons-round cross">cancel</span></td>
             <td><span class="material-icons-round cross">cancel</span></td>
@@ -443,8 +509,51 @@ p{font-size:16px;color:#636465}
             <td><span class="material-icons-round cross">cancel</span></td>
           </tr>
         </tbody>
+        <tfoot>
+          <tr>
+            <td>Annual Cost</td>
+            <td class="highlight"><span class="price-annual">$2,995</span></td>
+            <td>$2,040</td>
+            <td>$1,764</td>
+            <td>$1,200</td>
+            <td>Free*</td>
+          </tr>
+        </tfoot>
       </table>
     </div>
+
+    <div class="compare-verdict">
+      <p>All three competitors combined = <strong>$4,176/year</strong> &mdash; and you'd still be missing the AI stock picker, TradeGPT, live analysts, and Swing AI.</p>
+    </div>
+
+    <!-- Post-comparison CTA -->
+    <div class="mid-cta" style="margin-top:36px">
+      <a href="#pricing" class="btn btn-primary btn-lg">
+        <span class="material-icons-round">group</span>
+        Join 5,030 Traders
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ RETENTION PROOF ═══════ -->
+<section class="retention-bar">
+  <div class="container">
+    <div class="stat-row">
+      <div class="stat-item">
+        <div class="stat-num blue">95.7%</div>
+        <div class="stat-desc">of subscribers renewed their annual subscription</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">5,030</div>
+        <div class="stat-desc">active paying subscribers at $2,995/year</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">4.7</div>
+        <div class="stat-desc">Trustpilot rating across 1,923 reviews</div>
+      </div>
+    </div>
+    <p class="stat-context">Traders track P&amp;L to the penny. They'd cancel in a heartbeat if the math didn't work. <strong>95.7% looked at the price, looked at their results, and renewed.</strong></p>
   </div>
 </section>
 
@@ -452,21 +561,24 @@ p{font-size:16px;color:#636465}
 <section class="section section-alt" id="testimonial">
   <div class="container">
     <div class="text-center" style="margin-bottom:40px">
-      <p class="overline" style="margin-bottom:12px">Real Traders. Real Results.</p>
+      <p class="overline" style="margin-bottom:12px">Verified Trustpilot Review</p>
       <h2>Recovered the Full Membership Cost<br>Within the First Month.</h2>
     </div>
 
     <div class="testimonial-card">
       <blockquote style="padding-left:24px">
-        I'll admit I was skeptical at first — investing $5,000 for a one-year membership isn't a small decision. But after reading the reviews and taking a moment to quiet my emotions, my gut told me to go for it. That decision paid off quickly: <strong>I recovered the full cost of the membership within the first month.</strong>
+        I'll admit I was skeptical at first &mdash; investing $5,000 for a one-year membership isn't a small decision. But after reading the reviews and taking a moment to quiet my emotions, my gut told me to go for it. That decision paid off quickly: <strong>I recovered the full cost of the membership within the first month.</strong>
         <br><br>
-        I've actively traded stocks for about 15 years. Trade Algo teaches proven rules and frameworks that help you trade with structure instead of emotion. It reinforces that trading is not gambling — it's a craft. Like any profession, success comes from following rules that build discipline and protect your capital.
+        I've actively traded stocks for about 15 years. Trade Algo teaches proven rules and frameworks that help you trade with structure instead of emotion. It reinforces that trading is not gambling &mdash; it's a craft. Like any profession, success comes from following rules that build discipline and protect your capital.
         <br><br>
         The platform itself is incredibly rich in information, and I learn something new every day from outstanding analysts like Brian, Dane, Bronco, Mike, Eric, and Mr. Confluence. Each brings a different style and strategy.
       </blockquote>
       <div class="testimonial-source">
         <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <div class="testimonial-platform">Verified Trustpilot Review</div>
+        <div>
+          <div class="testimonial-platform">Verified Trustpilot Review</div>
+          <div class="testimonial-context">15-year active trader</div>
+        </div>
       </div>
     </div>
   </div>
@@ -476,13 +588,30 @@ p{font-size:16px;color:#636465}
 <section class="pricing-section" id="pricing">
   <div class="container">
     <p class="overline" style="margin-bottom:12px">Full Platform Access</p>
-    <h2>One Price. Everything Included.</h2>
-    <p style="color:#BABABB;max-width:520px;margin:12px auto 0;font-size:17px">12+ professional tools, AI-driven picks, dark pool data, live analyst sessions, and trade alerts — all for less than a cup of coffee a day.</p>
+    <h2>Bloomberg Data. Not Bloomberg Prices.</h2>
+
+    <!-- Price Anchors -->
+    <div class="price-anchors">
+      <div class="anchor-item">
+        <div class="anchor-label">Bloomberg Terminal</div>
+        <div class="anchor-price">$32,000/yr</div>
+      </div>
+      <div class="anchor-item">
+        <div class="anchor-label">3 Competitors Combined</div>
+        <div class="anchor-price">$4,176/yr</div>
+        <div class="anchor-note">Still missing AI + analysts</div>
+      </div>
+    </div>
 
     <div class="price-display">
-      <div class="price-big"><span>$</span>2,995</div>
-      <div class="price-per-day">That's just <strong>$8.20 per day</strong> for 12 months</div>
+      <div class="price-big"><span>$</span>2,995<span style="font-size:20px;color:#BABABB;vertical-align:baseline;margin-left:4px">/year</span></div>
+      <div class="price-per-day">
+        <div class="daily">$11.88 per trading day</div>
+        <div class="daily-label">252 trading days. Every tool included.</div>
+      </div>
     </div>
+
+    <p class="price-context">Think about your last losing trade. Was it more than $12?</p>
 
     <ul class="price-includes">
       <li><span class="material-icons-round">check_circle</span> TradeGPT AI Assistant</li>
@@ -497,10 +626,12 @@ p{font-size:16px;color:#636465}
       <li><span class="material-icons-round">check_circle</span> Pre-Market Analysis</li>
     </ul>
 
+    <p class="price-renewal"><strong>95.7% of subscribers renewed.</strong> Traders who track every penny of P&amp;L don't renew products that don't pay for themselves.</p>
+
     <a href="https://www.tradealgo.com" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
-      <span class="material-icons-round">bolt</span>
-      Get Terminal Access Now
+      Subscribe Now &mdash; $2,995/year
     </a>
+    <p class="pricing-cta-micro">Instant access. 12-month subscription. Join 5,030 traders.</p>
   </div>
 </section>
 
@@ -516,32 +647,37 @@ p{font-size:16px;color:#636465}
 
       <div class="faq-item">
         <button class="faq-question">What exactly is TradeAlgo Terminal?<span class="material-icons-round">expand_more</span></button>
-        <div class="faq-answer"><div class="faq-answer-inner">Terminal is a comprehensive trading data platform that delivers institutional-grade options data, dark pool activity, AI-driven stock picks, and 12+ professional trading tools — all in one place. It's designed for traders of all experience levels who want access to the kind of data normally reserved for professional trading desks.</div></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Terminal is a comprehensive trading data platform that delivers institutional-grade options data, dark pool activity, AI-driven stock picks, and 12+ professional trading tools &mdash; all in one place. It's designed for traders of all experience levels who want access to the kind of data normally reserved for professional trading desks.</div></div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question">Who is this for?<span class="material-icons-round">expand_more</span></button>
-        <div class="faq-answer"><div class="faq-answer-inner">Terminal is built for retail traders and active investors — from self-directed beginners to experienced day traders. If you trade stocks or options and want better data to inform your decisions, Terminal gives you the tools to trade with clarity and confidence.</div></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Terminal is built for retail traders and active investors &mdash; from self-directed beginners to experienced day traders. If you trade stocks or options and want better data to inform your decisions, Terminal gives you the tools to trade with clarity and confidence.</div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Is $2,995 worth it?<span class="material-icons-round">expand_more</span></button>
+        <div class="faq-answer"><div class="faq-answer-inner">That works out to $11.88 per trading day. For context: a Bloomberg Terminal costs $32,000/year, and subscribing to Unusual Whales, Benzinga Pro, and BlackBoxStocks separately costs $4,176/year &mdash; and you'd still be missing the AI stock picker, TradeGPT, live analyst sessions, and Swing AI. The strongest proof? 95.7% of subscribers renewed. These are traders who track every penny of P&amp;L &mdash; they wouldn't renew if it didn't pay for itself.</div></div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question">How does the AI stock picker work?<span class="material-icons-round">expand_more</span></button>
-        <div class="faq-answer"><div class="faq-answer-inner">TradeGPT scans over 10,000 tickers daily using real-time market data from DXFeed. It surfaces top picks with AI sentiment scores (bullish/bearish percentage) and news sentiment analysis. You can view picks across multiple timeframes — 1-hour, 4-hour, and daily — for both intraday and swing trading strategies.</div></div>
+        <div class="faq-answer"><div class="faq-answer-inner">TradeGPT scans over 10,000 tickers daily using real-time market data from DXFeed. It surfaces top picks with AI sentiment scores (bullish/bearish percentage) and news sentiment analysis. You can view picks across multiple timeframes &mdash; 1-hour, 4-hour, and daily &mdash; for both intraday and swing trading strategies.</div></div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question">What is dark pool data and why does it matter?<span class="material-icons-round">expand_more</span></button>
-        <div class="faq-answer"><div class="faq-answer-inner">Dark pools are private exchanges where large institutional investors execute trades away from public markets. By tracking dark pool activity, you can see where significant money is flowing before those moves show up in the broader market. Terminal surfaces this data with clear percentage-change indicators so you can spot institutional interest early.</div></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Dark pools are private exchanges where large institutional investors execute trades away from public markets &mdash; roughly 63% of US equity volume. By tracking dark pool activity, you can see where significant money is flowing before those moves show up in the broader market. Terminal surfaces this data with clear percentage-change indicators so you can spot institutional interest early.</div></div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question">What are the live trading sessions?<span class="material-icons-round">expand_more</span></button>
-        <div class="faq-answer"><div class="faq-answer-inner">Every weekday, professional analysts host live sessions where they break down the market in real time. "DayTrade with Brian" runs Monday to Friday from 10:30 to 11:30 AM EST, and "Platinum Daily Livestreams" with Eric Armenteros runs 9:30 to 10:30 AM EST. These sessions are included with your Terminal subscription.</div></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Every weekday, professional analysts host live sessions where they break down the market in real time. "DayTrade with Brian" runs Monday to Friday from 10:30 to 11:30 AM EST, and "Platinum Daily Livestreams" with Eric Armenteros runs 9:30 to 10:30 AM EST. These are not pre-recorded webinars &mdash; they're live trading sessions included with your Terminal subscription.</div></div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question">How quickly can I start using Terminal?<span class="material-icons-round">expand_more</span></button>
-        <div class="faq-answer"><div class="faq-answer-inner">Immediately. Once your account is set up, you can log in and start viewing live data, AI stock picks, dark pool activity, and analyst livestreams right away. There's no setup delay or waiting period.</div></div>
+        <div class="faq-answer"><div class="faq-answer-inner">Immediately. Once your account is set up, you can log in and start viewing live data, AI stock picks, dark pool activity, and analyst livestreams right away. No setup delay, no waiting period. Log in at 7:30 AM tomorrow and the overnight dark pool data will already be on your screen.</div></div>
       </div>
 
       <div class="faq-item">
@@ -561,12 +697,18 @@ p{font-size:16px;color:#636465}
 <!-- ═══════ FINAL CTA ═══════ -->
 <section class="final-cta">
   <div class="container">
-    <p class="overline" style="margin-bottom:12px">Ready to Trade with Clarity?</p>
-    <h2>See What the Institutions See.</h2>
-    <p>Join 5,030+ traders using institutional-grade data, AI-driven picks, and professional tools — starting at $8.20/day.</p>
+    <p class="overline" style="margin-bottom:12px">Close the Information Gap</p>
+    <h2>Five Browser Tabs and Guessing.<br>Or One Screen and Every Signal.</h2>
+    <p>5,030 traders chose the second option. The same data institutions use &mdash; dark pool activity, AI analysis, live options flow &mdash; on your screen before the market opens.</p>
+    <div class="trust-recap">
+      <span><span class="material-icons-round">check_circle</span> Trustpilot 4.7 (1,923 reviews)</span>
+      <span><span class="material-icons-round">check_circle</span> 95.7% renewal rate</span>
+      <span><span class="material-icons-round">check_circle</span> 5,030+ paying subscribers</span>
+      <span><span class="material-icons-round">check_circle</span> Instant access</span>
+    </div>
     <a href="#pricing" class="btn btn-primary btn-lg">
-      <span class="material-icons-round">bolt</span>
-      Get Terminal Access
+      <span class="material-icons-round">visibility</span>
+      Close the Information Gap &mdash; $2,995/yr
     </a>
   </div>
 </section>
@@ -576,10 +718,18 @@ p{font-size:16px;color:#636465}
   <div class="container">
     <p style="margin-bottom:16px"><strong style="color:#BABABB">TradeAlgo</strong> &middot; <a href="https://www.tradealgo.com">tradealgo.com</a> &middot; <a href="mailto:sales@tradealgo.com">sales@tradealgo.com</a></p>
     <div class="footer-disclaimer">
-      <p>TradeAlgo does not provide financial advice. All content is for informational and educational purposes only. Trading stocks and options involves risk, including the potential loss of principal. Past performance is not indicative of future results. Please consult a qualified financial professional before making any investment decisions.</p>
+      <p>TradeAlgo does not provide financial advice. All content is for informational and educational purposes only. Trading stocks and options involves risk, including the potential loss of principal. Past performance is not indicative of future results. Please consult a qualified financial professional before making any investment decisions. *Thinkorswim requires a brokerage account with TD Ameritrade/Schwab.</p>
     </div>
   </div>
 </footer>
+
+<!-- ═══════ STICKY MOBILE CTA ═══════ -->
+<div class="sticky-mobile-cta" id="stickyCta">
+  <a href="#pricing" class="btn btn-primary">
+    Subscribe Now &mdash; $11.88/trading day
+  </a>
+  <div class="sticky-micro">$2,995/yr &middot; Join 5,030 traders &middot; Instant access</div>
+</div>
 
 <!-- ═══════ WISTIA EMBED ═══════ -->
 <script src="https://fast.wistia.com/embed/medias/le4c3gl2a9.jsonp" async></script>
@@ -588,8 +738,8 @@ p{font-size:16px;color:#636465}
 <script>
 /* ── Delayed Hero CTA (show after 30s or video play) ── */
 (function(){
-  const cta = document.getElementById('heroCta');
-  let shown = false;
+  var cta = document.getElementById('heroCta');
+  var shown = false;
   function showCTA(){
     if(shown) return;
     shown = true;
@@ -603,13 +753,31 @@ p{font-size:16px;color:#636465}
   }});
 })();
 
+/* ── Sticky mobile CTA: show after scrolling past hero ── */
+(function(){
+  var sticky = document.getElementById('stickyCta');
+  if(!sticky) return;
+  var hero = document.querySelector('.hero');
+  var shown = false;
+  function check(){
+    var rect = hero.getBoundingClientRect();
+    if(rect.bottom < 0 && !shown){
+      shown = true;
+      sticky.style.display = 'block';
+    } else if(rect.bottom >= 0 && shown){
+      shown = false;
+      sticky.style.display = 'none';
+    }
+  }
+  window.addEventListener('scroll', check, {passive:true});
+})();
+
 /* ── FAQ Accordion ── */
 document.querySelectorAll('.faq-question').forEach(function(btn){
   btn.addEventListener('click', function(){
-    const item = this.closest('.faq-item');
-    const answer = item.querySelector('.faq-answer');
-    const isOpen = item.classList.contains('open');
-    // close all
+    var item = this.closest('.faq-item');
+    var answer = item.querySelector('.faq-answer');
+    var isOpen = item.classList.contains('open');
     document.querySelectorAll('.faq-item.open').forEach(function(i){
       i.classList.remove('open');
       i.querySelector('.faq-answer').style.maxHeight = null;
@@ -624,7 +792,7 @@ document.querySelectorAll('.faq-question').forEach(function(btn){
 /* ── Smooth scroll for anchor links ── */
 document.querySelectorAll('a[href^="#"]').forEach(function(a){
   a.addEventListener('click', function(e){
-    const target = document.querySelector(this.getAttribute('href'));
+    var target = document.querySelector(this.getAttribute('href'));
     if(target){
       e.preventDefault();
       target.scrollIntoView({behavior:'smooth',block:'start'});
