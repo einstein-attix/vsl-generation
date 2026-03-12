@@ -51,14 +51,12 @@ Analytics & signals PUBLISHING company (like Motley Fool).
 ### 2.1 Logo
 
 #### Full Logo (Wordmark + Glyph)
-- Glyph mark + "TradeAlgo" wordmark combined
-- Use for: websites, communications, presentations, headers
-- Purpose: Maximum brand recognition
+
+The primary logo pairs the TradeAlgo wordmark with our distinctive glyph. This version is designed for maximum brand recognition and should be used in most branding situations, such as websites, communications, and presentations.
 
 #### Brandmark (Glyph Only)
-- Simplified glyph without wordmark
-- Use for: app icons, favicons, social avatars, subtle brand touches
-- Use when full logo would be too small or visually dense
+
+The brandmark is a simplified version of the full logo, intended for spaces where the full logo would be too small or visually dense. Use the glyph for app icons, favicons, social avatars, and as an accompanying graphic element when a subtler brand touch is better favored.
 
 #### Logo Variants
 
@@ -129,6 +127,8 @@ SVG logo files are available in `brand-guidelines/logos/`:
 
 ### 2.3 Typography
 
+Typography is a core pillar of the TradeAlgo brand identity. We use **Inter**, a functional, precise, and approachable typeface, to communicate clearly and connect authentically with a diverse, modern audience. Its engineered simplicity and balanced design help us deliver information with confidence, making every interaction feel both open and intentional.
+
 **Primary Typeface:** Inter (Google Fonts)
 - Download: https://fonts.google.com/specimen/Inter
 
@@ -136,14 +136,22 @@ SVG logo files are available in `brand-guidelines/logos/`:
 
 | Weight | Value | Usage |
 |--------|-------|-------|
-| Regular | 400 | Body text, paragraphs |
-| Medium | 500 | Emphasis, labels, navigation |
-| SemiBold | 600 | Subheadings, buttons |
-| Bold | 700 | Headlines, CTAs, key data |
+| Inter Regular | 400 | Body text, paragraphs |
+| Inter Medium | 500 | Emphasis, labels, navigation |
+| Inter SemiBold | 600 | Subheadings, buttons |
+| Inter Bold | 700 | Headlines, CTAs, key data |
+
+#### Character Set
+
+```
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+abcdefghijklmnopqrstuvwxyz
+1234567890(,.;:?!$&*)
+```
 
 #### Size Scale
 
-| Token | Size | Usage |
+| Token | Size | Notes |
 |-------|------|-------|
 | h1 | 96px | Hero headlines |
 | h2 | 60px | Section headers |
@@ -151,30 +159,38 @@ SVG logo files are available in `brand-guidelines/logos/`:
 | h4 | 36px | Card headers |
 | h5 | 24px | Small headers |
 | h6 | 20px | Labels |
-| body | 16px | Primary body text |
-| body-sm | 14px | Secondary body text |
-| overline | 12px | Overlines, tags |
+| body1 | 16px | Primary body text |
+| body2 | 14px | Secondary body text |
+| overline | 12px | Overlines, tags (ALWAYS UPPERCASE) |
 | caption | 12px | Captions, fine print |
 
 ---
 
 ### 2.4 Iconography
 
-- **Icon Set:** Material Icons — Rounded style
+We use Material Icons, specifically Rounded styles. Use rounded variants consistently across all surfaces.
+
+- **Icon Set:** Material Icons — Rounded
 - Reference: https://mui.com/material-ui/material-icons/?theme=Rounded
-- Use rounded variants consistently across all surfaces
 
 ---
 
 ## 3. Design System
 
-### Framework
+### UI Components
 
-- **UI Library:** Material UI (MUI)
-- **Figma:** Active design system maintained daily
-- Reference: https://mui.com/material-ui/getting-started
+TradeAlgo is built on Material UI with a Figma Design System being maintained actively and used every day.
 
-### Core Components
+| Detail | Value |
+|--------|-------|
+| **UI Library** | Material UI (MUI) **v6.1.0** |
+| **Scope** | TradeAlgo + TradeGPT |
+| **Figma** | Active design system, maintained daily |
+| **Start date** | 10 Jun 2023 |
+| **Status** | In Progress |
+| **Reference** | https://mui.com/material-ui/getting-started/ |
+
+### Core Component Patterns
 
 Built on MUI defaults, themed with TradeAlgo color palette and Inter typeface. Key patterns visible in product designs:
 
@@ -306,3 +322,4 @@ These override general brand guidelines for VSL/sales funnel contexts:
 |---------|------|---------|
 | 1.0 | Nov 2024 | Initial extraction from brand guidelines |
 | 1.1 | Nov 2025 | Updated color hex codes (refined values across palette), added 4 logo variants, added product portfolio visual references, restructured to match official guideline sections (01–05) |
+| 1.1a | Nov 2025 | Added official copy for Logo Variations, Typography (rationale, character set, corrected tokens body1/body2, overline uppercase), Iconography, Design System (MUI v6.1.0, TradeAlgo + TradeGPT scope, started Jun 2023) |
