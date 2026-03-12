@@ -1,13 +1,44 @@
 # TradeAlgo Brand System
-## Version 1.0 — Extracted from Brand Guidelines (Nov 2024)
+## Version 1.1 — Brand Guidelines (Nov 2025)
 
 ---
 
-## 1. Brand Mission
+## Contents
+
+1. [Brand Overview](#1-brand-overview) — Mission, Vision, Values, One-liner
+2. [Visual Identity](#2-visual-identity) — Logo, Color Palette, Typography, Iconography
+3. [Design System](#3-design-system) — Core Components
+4. [Voice & Messaging](#4-voice--messaging) — Tone of Voice, Messaging Pillars, Dos & Don'ts
+5. [Resources](#5-resources) — Brand Assets, Visual References
+
+---
+
+## 1. Brand Overview
+
+### Mission
 
 > TradeAlgo provides AI-powered analytics and easy-digestible learning for novice to intermediate traders all in one convenient platform.
 
-**Positioning:** Analytics & signals PUBLISHING company (like Motley Fool).
+### Vision
+
+Become the go-to platform where every trader — regardless of experience level — can access institutional-grade analytics and education in a single, intuitive experience.
+
+### Values
+
+| Value | Description |
+|-------|-------------|
+| **Clarity** | We simplify complexity without dumbing it down |
+| **Empowerment** | We equip traders to act with confidence and purpose |
+| **Integrity** | We uphold accuracy, transparency, and honest communication |
+| **Innovation** | We leverage AI and data to continuously raise the bar |
+
+### One-liner
+
+> AI-powered analytics and education for every trader — all in one platform.
+
+### Positioning
+
+Analytics & signals PUBLISHING company (like Motley Fool).
 
 **BANNED terminology:** securities, RIA, registered investment advisor, fiduciary, custodian, SEC, regulated, compliance, manages money.
 
@@ -15,63 +46,103 @@
 
 ---
 
-## 2. Color Palette
+## 2. Visual Identity
 
-### Primary
+### 2.1 Logo
+
+#### Full Logo (Wordmark + Glyph)
+- Glyph mark + "TradeAlgo" wordmark combined
+- Use for: websites, communications, presentations, headers
+- Purpose: Maximum brand recognition
+
+#### Brandmark (Glyph Only)
+- Simplified glyph without wordmark
+- Use for: app icons, favicons, social avatars, subtle brand touches
+- Use when full logo would be too small or visually dense
+
+#### Logo Variants
+
+| Variant | Background | Foreground | Usage |
+|---------|-----------|------------|-------|
+| Full Logo — Dark | Dark / `#1C1C1E` | White | Primary usage on dark surfaces |
+| Glyph — Dark | Dark / `#1C1C1E` | White | Icons, compact placements on dark |
+| Full Logo — Light | Light / `#F2F2F5` | Black | Usage on light backgrounds |
+| Glyph — Light | Light / `#F2F2F5` | Black | Icons, compact placements on light |
+
+#### Logo Files
+
+SVG logo files are available in `brand-guidelines/logos/`:
+- `tradealgo-full-white.svg` — Full logo, white (for dark backgrounds)
+- `tradealgo-glyph-white.svg` — Glyph only, white
+- `tradealgo-full-black.svg` — Full logo, black (for light backgrounds)
+- `tradealgo-glyph-black.svg` — Glyph only, black
+
+---
+
+### 2.2 Color Palette
+
+#### Primary Colours
+
 | Token | Hex | Usage |
 |-------|-----|-------|
-| primary/blue/main | `#007BFF` | Primary brand blue |
-| primary/blue/light | `#008FFF` | Hover states, lighter accents |
-| primary/blue/accent | `#BBE2FF` | Backgrounds, highlights |
-| primary/black/main | `#1C1C1C` | Dark surfaces, headers |
-| primary/black/light | `#3C3C3C` | Secondary dark surfaces |
-| primary/black/accent | `#F2F2F2` | Light borders, dividers |
+| primary / blue / main | `#007BFF` | Primary brand blue — buttons, links, key actions |
+| primary / blue / light | `#008FFF` | Hover states, lighter accents |
+| primary / blue / accent | `#BBE2FF` | Backgrounds, highlights, tags |
+| primary / black / main | `#1C1C1E` | Dark surfaces, headers, primary dark |
+| primary / black / light | `#3C3C3F` | Secondary dark surfaces |
+| primary / black / accent | `#F2F2F5` | Light borders, dividers, subtle backgrounds |
 
-### Foreground — Light Mode
+#### Foreground Colours (Light Mode)
+
 | Token | Hex | Usage |
 |-------|-----|-------|
-| text/primary | `#202020` | Primary body text |
-| text/secondary | `#636466` | Secondary/muted text |
-| text/disabled | `#9A9B9B` | Disabled states |
+| text / primary | `#202021` | Primary body text |
+| text / secondary | `#636465` | Secondary/muted text |
+| text / disabled | `#9A9B9C` | Disabled states, placeholder text |
 
-### Foreground — Dark Mode
+#### Foreground Colours (Dark Mode)
+
 | Token | Hex | Usage |
 |-------|-----|-------|
-| text/primary | `#FFFFFF` | Primary body text (dark) |
-| text/secondary | `#BABABA` | Secondary text (dark) |
-| text/disabled | `#727272` | Disabled states (dark) |
+| text / primary | `#FFFFFF` | Primary body text (dark mode) |
+| text / secondary | `#BABABB` | Secondary text (dark mode) |
+| text / disabled | `#727274` | Disabled states (dark mode) |
 
-### Backgrounds
+#### Background Colours
+
 | Token | Hex | Usage |
 |-------|-----|-------|
-| background/main (light) | `#F8FAFA` | Light mode background |
-| background/main (dark) | `#3C3C3C` | Dark mode background |
+| background / main (light) | `#F8FAFC` | Light mode page background |
+| background / main (dark) | `#3C3C3F` | Dark mode page background |
 
-### Sentiment
+#### Sentiment Colours
+
 | Token | Hex | Usage |
 |-------|-----|-------|
-| success/main | `#2E7D32` | Success states, positive |
-| warning/main | `#EF6C00` | Warning states |
-| error/main | `#202020` | Error states |
+| success / main | `#2E7D32` | Success states, positive indicators |
+| warning / main | `#EF6C00` | Warning states, caution indicators |
+| error / main | `#202021` | Error states, destructive actions |
 
 > **Note:** The previous `#0a8754` green was used for CTA buttons in the VSL. The official brand primary is **blue `#007BFF`**. VSL CTA color may need Carlos's call — keep green for conversion or switch to brand blue.
 
 ---
 
-## 3. Typography
+### 2.3 Typography
 
 **Primary Typeface:** Inter (Google Fonts)
 - Download: https://fonts.google.com/specimen/Inter
 
-### Weights
-| Weight | Usage |
-|--------|-------|
-| Regular (400) | Body text |
-| Medium (500) | Emphasis, labels |
-| SemiBold (600) | Subheadings, buttons |
-| Bold (700) | Headlines, CTAs |
+#### Weights
 
-### Size Scale
+| Weight | Value | Usage |
+|--------|-------|-------|
+| Regular | 400 | Body text, paragraphs |
+| Medium | 500 | Emphasis, labels, navigation |
+| SemiBold | 600 | Subheadings, buttons |
+| Bold | 700 | Headlines, CTAs, key data |
+
+#### Size Scale
+
 | Token | Size | Usage |
 |-------|------|-------|
 | h1 | 96px | Hero headlines |
@@ -87,38 +158,39 @@
 
 ---
 
-## 4. Logo
-
-### Full Logo
-- Wordmark + glyph combined
-- Use for: websites, communications, presentations
-- Purpose: Maximum brand recognition
-
-### Brandmark (Glyph only)
-- Simplified glyph without wordmark
-- Use for: app icons, favicons, social avatars, subtle brand touches
-- Use when full logo would be too small or visually dense
-
-### ⚠️ NEEDS: Actual logo files (SVG/PNG, light + dark versions)
-
----
-
-## 5. Iconography
+### 2.4 Iconography
 
 - **Icon Set:** Material Icons — Rounded style
 - Reference: https://mui.com/material-ui/material-icons/?theme=Rounded
+- Use rounded variants consistently across all surfaces
 
 ---
 
-## 6. Design System
+## 3. Design System
 
-- **Framework:** Material UI (MUI)
+### Framework
+
+- **UI Library:** Material UI (MUI)
 - **Figma:** Active design system maintained daily
 - Reference: https://mui.com/material-ui/getting-started
 
+### Core Components
+
+Built on MUI defaults, themed with TradeAlgo color palette and Inter typeface. Key patterns visible in product designs:
+
+- **Navigation sidebar:** Dark (`#1C1C1E`) with white text, glyph logo top-left, section icons (Material Rounded)
+- **Content area:** Light (`#F8FAFC`) background with card-based layouts
+- **Product cards:** Rounded corners, gradient or solid backgrounds, "Learn More" CTAs with arrow icons
+- **Modal/dialog overlays:** Dark glass effect with structured content sections
+- **CTA buttons:** Primary blue (`#007BFF`) with white text, rounded, or outlined dark variants
+- **Badges/tags:** "New" badge in blue/teal for feature flags (e.g., Wealth Series)
+- **TradeGPT widget:** Floating bottom-right assistant button with glyph icon
+
 ---
 
-## 7. Tone of Voice
+## 4. Voice & Messaging
+
+### 4.1 Tone of Voice
 
 **Overall:** Balanced-to-Bold
 
@@ -130,11 +202,12 @@
 
 ---
 
-## 8. Messaging Pillar: Empowerment Through Clarity
+### 4.2 Messaging Pillar: Empowerment Through Clarity
 
 > We simplify trading without dumbing it down, equipping every trader to act with confidence and purpose.
 
-### Proof Points:
+#### Proof Points
+
 - Easy-to-digest education and transparent analytics
 - Step-by-step learning designed for progress
 - Tools that teach traders to think, not just react
@@ -147,27 +220,74 @@
 
 ---
 
-## 9. Copy Do's & Don'ts
+### 4.3 Copy Dos & Don'ts
 
-### ✅ DO:
+#### DO:
 - Speak with clarity and control
 - Write in short, confident sentences — avoid clutter or filler
-- Empower the reader — frame copy to make user feel the potential
+- Empower the reader — frame copy to make the user feel the potential
 - Educate through insight — make technical education digestible
 - Uphold accuracy and integrity — concrete phrasing over vague promises
 - Reflect calm confidence — assertive but never arrogant
 
-### ❌ DON'T:
+#### DON'T:
 - Overpromise or oversell
 - Use hype words: "revolutionary," "game-changing," "guaranteed"
 - Use fear or FOMO
 - Assume reader knows every trading term — provide context
-- Drift into generic financial clichés ("Take control of your future," "Maximize profits," "Trade smarter, not harder")
+- Drift into generic financial cliches ("Take control of your future," "Maximize profits," "Trade smarter, not harder")
 - Break consistency across channels — same tone everywhere
 
 ---
 
-## 10. VSL-Specific Overrides (from Carlos)
+## 5. Resources
+
+### 5.1 Brand Assets
+
+Logo files (SVG) are in `brand-guidelines/logos/`. Four variants provided:
+
+1. **Full Logo — White on Dark** (primary)
+2. **Glyph — White on Dark**
+3. **Full Logo — Black on Light**
+4. **Glyph — Black on Light**
+
+Source brand guideline PDFs are in `brand-guidelines/source-pdfs/`.
+
+---
+
+### 5.2 Product Portfolio (Visual References)
+
+Current product designs shown in brand guidelines as reference for maintaining visual consistency:
+
+#### Wealth Series Products
+| Product | Tagline |
+|---------|---------|
+| **Wealth Series Core** | Elevated trading with exclusive tools and insights, powered by AI |
+| **Wealth Series Auto** | Smart, secure, and hands-free investing. Connects to your investment account and executes trades with RIA-level oversight |
+| **Wealth Series (Premium)** | Leverage cutting-edge AI technology coupled with advanced diversification techniques |
+| **Wealth Series Lite** | Smart, AI stock recommendations designed to fit every investor's strategy, from beginners to experts |
+
+#### Wealth Series Auto — Portfolio Tiers
+| Tier | Focus | Strategies |
+|------|-------|------------|
+| **Atlas** | Growth Focused | 3 Portfolio Strategies |
+| **Titan** | Balance Focused | 3 Portfolio Strategies |
+| **Everest** | Wealth Management Focused | 5 Portfolio Strategies |
+
+#### Other Products
+| Product | Description |
+|---------|-------------|
+| **TradeAlgo Terminal** | Trade smarter, trade better — experience TradeAlgo at its best |
+| **Emerald Income Alerts** | Elevate your trading strategy and boost your profit with Credit Spreads |
+| **Platinum Program** | Profitable options trading made easy |
+| **TradeGPT** | Your AI Trading Assistant — Empower Your Trading Decisions with AI-Driven Insights |
+| **Options Mentorship** | 1 on 1 Mentorship with our analysts and launch your portfolio to new heights |
+| **Options Academy** | Demystify the complexities of trading options |
+| **AI Options Alerts** | Stay ahead of the market with guaranteed trade opportunities each day |
+
+---
+
+## 6. VSL-Specific Overrides (from Carlos)
 
 These override general brand guidelines for VSL/sales funnel contexts:
 
@@ -180,10 +300,9 @@ These override general brand guidelines for VSL/sales funnel contexts:
 
 ---
 
-## Gaps to Fill
+## Changelog
 
-1. **Color palette** — Need hex codes for full palette (the color page was visual, couldn't extract)
-2. **Logo files** — Need SVG/PNG exports
-3. **Spacing system** — Any defined spacing scale?
-4. **Button styles** — Border radius, padding, hover states
-5. **Photography/imagery style** — Any guidelines?
+| Version | Date | Changes |
+|---------|------|---------|
+| 1.0 | Nov 2024 | Initial extraction from brand guidelines |
+| 1.1 | Nov 2025 | Updated color hex codes (refined values across palette), added 4 logo variants, added product portfolio visual references, restructured to match official guideline sections (01–05) |
