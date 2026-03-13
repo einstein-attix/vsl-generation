@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TA Fintech Inc. | 506(c) Fundraise Marketing Brief</title>
+<style>
+  /* ─── RESET & BASE ─────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black:      #0A0C0F;
+    --dark:       #0F1117;
+    --card:       #141720;
+    --card2:      #181C26;
+    --border:     #1E2535;
+    --blue:       #00A3FF;
+    --blue-dim:   #0070C0;
+    --blue-glow:  rgba(0,163,255,0.12);
+    --blue-line:  rgba(0,163,255,0.35);
+    --white:      #FFFFFF;
+    --muted:      #8B93A8;
+    --light:      #C8D0E0;
+    --red:        #FF4B55;
+    --green:      #00D26A;
+    --gold:       #FFB800;
+    --font:       'Inter', 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--light);
+    font-family: var(--font);
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── GOOGLE FONT IMPORT ───────────────────────────────────── */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  /* ─── NAV SIDEBAR ──────────────────────────────────────────── */
+  .nav {
+    position: fixed;
+    top: 0; left: 0;
+    width: 220px; height: 100vh;
+    background: var(--dark);
+    border-right: 1px solid var(--border);
+    padding: 28px 0;
+    overflow-y: auto;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+  }
+  .nav-logo {
+    padding: 0 20px 24px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+  .nav-logo .wordmark {
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: var(--white);
+  }
+  .nav-logo .wordmark span { color: var(--blue); }
+  .nav-logo .tagline {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .nav a {
+    display: block;
+    padding: 7px 20px;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s, background 0.2s;
+    border-left: 2px solid transparent;
+  }
+  .nav a:hover {
+    color: var(--blue);
+    background: var(--blue-glow);
+    border-left-color: var(--blue);
+  }
+  .nav a .num {
+    display: inline-block;
+    width: 18px;
+    font-size: 10px;
+    color: var(--blue-dim);
+    font-weight: 700;
+    margin-right: 6px;
+  }
+  .nav-conf {
+    margin-top: auto;
+    padding: 16px 20px 0;
+    border-top: 1px solid var(--border);
+  }
+  .nav-conf .badge {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(255,184,0,0.3);
+    padding: 3px 8px;
+    border-radius: 3px;
+  }
+  .nav-conf .date {
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+
+  /* ─── MAIN CONTENT ─────────────────────────────────────────── */
+  .main {
+    margin-left: 220px;
+    min-height: 100vh;
+  }
+
+  /* ─── HERO ─────────────────────────────────────────────────── */
+  .hero {
+    background: linear-gradient(135deg, #0A0C14 0%, #0D1020 50%, #0A0F1A 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 80px 60px 70px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(0,163,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--blue-line), transparent);
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 24px; height: 1px;
+    background: var(--blue);
+  }
+  .hero h1 {
+    font-size: 52px;
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+  .hero h1 span { color: var(--blue); }
+  .hero-sub {
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--muted);
+    margin-bottom: 36px;
+    letter-spacing: 0.01em;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 0;
+    flex-wrap: wrap;
+  }
+  .hero-stat {
+    padding: 16px 28px;
+    border: 1px solid var(--border);
+    border-right: none;
+    background: rgba(255,255,255,0.02);
+    min-width: 150px;
+  }
+  .hero-stat:first-child { border-radius: 6px 0 0 6px; }
+  .hero-stat:last-child { border-right: 1px solid var(--border); border-radius: 0 6px 6px 0; }
+  .hero-stat .val {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .hero-stat .val.blue { color: var(--blue); }
+  .hero-stat .lbl {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 0.04em;
+  }
+  .conf-banner {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,184,0,0.08);
+    border: 1px solid rgba(255,184,0,0.25);
+    border-radius: 4px;
+    padding: 8px 14px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  /* ─── SECTIONS ─────────────────────────────────────────────── */
+  .section {
+    padding: 60px 60px 50px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 16px; height: 1px;
+    background: var(--blue);
+  }
+
+  .section h2 {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.01em;
+    margin-bottom: 24px;
+    line-height: 1.2;
+  }
+
+  .section h3 {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin: 28px 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  p { margin-bottom: 14px; color: var(--light); }
+  p:last-child { margin-bottom: 0; }
+
+  /* ─── TABLES ───────────────────────────────────────────────── */
+  .tbl-wrap { overflow-x: auto; margin: 16px 0 24px; border-radius: 6px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  thead tr { background: var(--card2); }
+  thead th {
+    padding: 11px 14px;
+    text-align: left;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--blue);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: rgba(0,163,255,0.04); }
+  tbody td {
+    padding: 10px 14px;
+    color: var(--light);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  tbody td:first-child { color: var(--white); font-weight: 500; }
+  .td-num { font-family: 'SF Mono', 'Fira Code', monospace; color: var(--white) !important; }
+  .td-blue { color: var(--blue) !important; font-weight: 600; }
+  .td-green { color: var(--green) !important; font-weight: 600; }
+  .td-red { color: var(--red) !important; font-weight: 600; }
+  .td-muted { color: var(--muted) !important; font-size: 12px; }
+
+  /* ─── BULLETS ──────────────────────────────────────────────── */
+  ul.ta-list {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 20px;
+  }
+  ul.ta-list li {
+    position: relative;
+    padding: 7px 0 7px 18px;
+    color: var(--light);
+    font-size: 13.5px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    line-height: 1.55;
+  }
+  ul.ta-list li:last-child { border-bottom: none; }
+  ul.ta-list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 16px;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--blue);
+  }
+  ul.ta-list li strong { color: var(--white); }
+
+  /* ─── CARDS ────────────────────────────────────────────────── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin: 16px 0 24px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: var(--blue-dim); }
+  .card .card-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .card .card-val {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .card .card-val.blue { color: var(--blue); }
+  .card .card-val.green { color: var(--green); }
+  .card .card-sub {
+    font-size: 11.5px;
+    color: var(--muted);
+    margin-top: 5px;
+  }
+
+  /* ─── CALLOUT BOXES ────────────────────────────────────────── */
+  .callout {
+    border-left: 3px solid var(--blue);
+    background: var(--blue-glow);
+    border-radius: 0 6px 6px 0;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: 13.5px;
+    color: var(--light);
+  }
+  .callout.warn {
+    border-left-color: var(--gold);
+    background: rgba(255,184,0,0.07);
+  }
+  .callout.danger {
+    border-left-color: var(--red);
+    background: rgba(255,75,85,0.07);
+  }
+  .callout strong { color: var(--white); }
+
+  /* ─── VALUATION TIMELINE ───────────────────────────────────── */
+  .val-timeline {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin: 20px 0;
+    flex-wrap: wrap;
+  }
+  .val-node {
+    flex: 1;
+    min-width: 130px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 20px;
+    position: relative;
+    text-align: center;
+  }
+  .val-node:not(:last-child)::after {
+    content: '→';
+    position: absolute;
+    right: -14px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--blue);
+    font-size: 18px;
+    font-weight: 700;
+    z-index: 2;
+  }
+  .val-node:first-child { border-radius: 8px 0 0 8px; }
+  .val-node:last-child { border-radius: 0 8px 8px 0; background: rgba(0,163,255,0.07); border-color: var(--blue-dim); }
+  .val-node .vn-date { font-size: 10px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+  .val-node .vn-val { font-size: 22px; font-weight: 800; color: var(--white); letter-spacing: -0.02em; }
+  .val-node:last-child .vn-val { color: var(--blue); }
+  .val-node .vn-note { font-size: 11px; color: var(--muted); margin-top: 5px; }
+
+  /* ─── RISK LABEL ───────────────────────────────────────────── */
+  .risk-tag {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 3px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .risk-high { background: rgba(255,75,85,0.15); color: var(--red); border: 1px solid rgba(255,75,85,0.3); }
+  .risk-med  { background: rgba(255,184,0,0.12); color: var(--gold); border: 1px solid rgba(255,184,0,0.3); }
+
+  /* ─── SECTION ALT BG ───────────────────────────────────────── */
+  .section.alt { background: var(--dark); }
+
+  /* ─── DISCLAIMER ───────────────────────────────────────────── */
+  .disclaimer {
+    background: var(--dark);
+    border-top: 1px solid var(--border);
+    padding: 30px 60px;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .disclaimer strong { color: var(--light); }
+
+  /* ─── RESPONSIVE ───────────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .nav { display: none; }
+    .main { margin-left: 0; }
+    .hero, .section { padding: 40px 24px 36px; }
+    .hero h1 { font-size: 34px; }
+    .disclaimer { padding: 24px; }
+  }
+
+  /* ─── PRINT ────────────────────────────────────────────────── */
+  @media print {
+    .nav { display: none; }
+    .main { margin-left: 0; }
+    .section { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SIDEBAR NAV
+═══════════════════════════════════════════════════════════════ -->
+<nav class="nav">
+  <div class="nav-logo">
+    <div class="wordmark">Trade<span>Algo</span></div>
+    <div class="tagline">506(c) Marketing Brief</div>
+  </div>
+  <a href="#s01"><span class="num">01</span>Company Identity</a>
+  <a href="#s02"><span class="num">02</span>Founders &amp; Leadership</a>
+  <a href="#s03"><span class="num">03</span>Business Model</a>
+  <a href="#s04"><span class="num">04</span>Traction &amp; Metrics</a>
+  <a href="#s05"><span class="num">05</span>Financials</a>
+  <a href="#s06"><span class="num">06</span>Business Plan &amp; Projections</a>
+  <a href="#s07"><span class="num">07</span>Prior Fundraising</a>
+  <a href="#s08"><span class="num">08</span>This Offering</a>
+  <a href="#s09"><span class="num">09</span>Risk Factors</a>
+  <a href="#s10"><span class="num">10</span>Competitors &amp; Market</a>
+  <a href="#s11"><span class="num">11</span>Legal &amp; Compliance</a>
+  <a href="#s12"><span class="num">12</span>Existing Assets</a>
+  <a href="#s13"><span class="num">13</span>Signal &amp; Strategy</a>
+  <div class="nav-conf">
+    <div class="badge">Confidential</div>
+    <div class="date">Internal Use Only<br>March 10, 2026</div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     MAIN CONTENT
+═══════════════════════════════════════════════════════════════ -->
+<main class="main">
+
+<!-- ─── HERO ──────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="conf-banner">⚠ Confidential — Internal Use Only</div>
+  <div class="hero-eyebrow">Regulation D · Rule 506(c) · Accredited Investors Only</div>
+  <h1>TA Fintech Inc.<br><span>TradeAlgo</span></h1>
+  <div class="hero-sub">506(c) Fundraise Marketing Brief · Prepared March 10, 2026</div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="val blue">$120M</div>
+      <div class="lbl">Max Offering</div>
+    </div>
+    <div class="hero-stat">
+      <div class="val">$6.00</div>
+      <div class="lbl">Per Share</div>
+    </div>
+    <div class="hero-stat">
+      <div class="val blue">~$1.15B</div>
+      <div class="lbl">Pre-Money Valuation</div>
+    </div>
+    <div class="hero-stat">
+      <div class="val">$105.6M+</div>
+      <div class="lbl">Capital Raised to Date</div>
+    </div>
+    <div class="hero-stat">
+      <div class="val">50,000+</div>
+      <div class="lbl">Subscribers</div>
+    </div>
+    <div class="hero-stat">
+      <div class="val blue">Nov 3, 2026</div>
+      <div class="lbl">Offering Deadline</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SOURCE OF TRUTH BANNER ────────────────────────────────── -->
+<div style="background:#0D1117;border-bottom:2px solid var(--blue);padding:28px 60px 26px;">
+  <div style="max-width:900px;">
+    <div style="display:flex;align-items:flex-start;gap:16px;">
+      <div style="flex-shrink:0;width:36px;height:36px;background:rgba(0,163,255,0.12);border:1px solid var(--blue);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-top:2px;">📋</div>
+      <div>
+        <div style="font-size:11px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue);margin-bottom:6px;">Source of Truth for All Fundraising Marketing</div>
+        <div style="font-size:14px;font-weight:600;color:var(--white);line-height:1.5;margin-bottom:8px;">
+          The Private Placement Memorandum (PPM) dated November 3, 2025 is the sole authoritative source for all claims made in fundraising and investor marketing materials.
+        </div>
+        <div style="font-size:13px;color:var(--light);line-height:1.65;">
+          All financial figures, company descriptions, product representations, risk disclosures, and offering terms used in any marketing or general solicitation under Reg D Rule 506(c) must be consistent with — and must not contradict, omit material information from, or overstate — the PPM. This is not a compliance formality: Rule 10b-5 of the Exchange Act and Section 17(a) of the Securities Act prohibit any material misstatement or omission in connection with the offer or sale of securities, regardless of intent. Investors must be able to rely on what they are told. When in doubt, use the PPM's exact language. This brief is an internal planning tool only — it does not constitute an offering document and must not be distributed to prospective investors.
+        </div>
+        <div style="margin-top:14px;padding:10px 14px;background:rgba(0,163,255,0.07);border:1px solid rgba(0,163,255,0.25);border-radius:5px;display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;">
+          <span style="font-size:10px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue);">✓ Approved Reference</span>
+          <span style="font-size:13px;color:var(--light);">The following investor-facing page has been reviewed and approved — use it as a reference for compliant tone, wording, and disclosures:</span>
+          <a href="https://links.taf.investsecure.co/" target="_blank" style="font-size:13px;font-weight:600;color:var(--blue);text-decoration:none;border-bottom:1px solid rgba(0,163,255,0.4);">links.taf.investsecure.co →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── 01 COMPANY IDENTITY ────────────────────────────────────── -->
+<section class="section" id="s01">
+  <div class="section-label"><span>01</span> Company Identity</div>
+  <h2>TA Fintech Inc.</h2>
+  <p>TA Fintech develops proprietary AI-driven software and data-analytics systems that enhance financial transparency and automation for investors. Its technology processes large volumes of real-time market, economic, and behavioral data, converting that information into visual intelligence, alerts, and pattern-recognition outputs that help users interpret market dynamics.</p>
+  <p>Operating under a <strong>Software-as-a-Service (SaaS) model</strong>, TA Fintech provides financial-data products, AI-based analytics, and visualization tools to investors, financial professionals, and institutional clients. The platform unifies data research, market analytics, and algorithmic modelling within an AI environment. At present, all internal operations are focused on software analytics, data delivery, and research technology. The Company currently collaborates with a duly licensed Registered Investment Adviser (RIA) firm for certain licensed activities, and is actively developing its financial services infrastructure — including pursuing registration of a proprietary RIA and exploring additional regulated financial service offerings — all subject to applicable regulatory approvals and compliance requirements. TA Fintech Inc. is the legal issuer of record for this Reg D Rule 506(c) offering.</p>
+  <div class="tbl-wrap">
+    <table>
+      <tbody>
+        <tr><td>Legal Entity Name</td><td>TA Fintech Inc.</td></tr>
+        <tr><td>Former Name</td><td>Broad Bold Park, Inc. (renamed to reflect fintech/AI strategic focus)</td></tr>
+        <tr><td>Entity Type</td><td>Delaware C Corporation</td></tr>
+        <tr><td>Date of Incorporation</td><td>September 2021, State of Delaware</td></tr>
+        <tr><td>Registered Address</td><td>401 Park Avenue South, 10th Floor, New York, NY 10016</td></tr>
+        <tr><td>Primary Contact Email</td><td>invest@tradealgo.com</td></tr>
+        <tr><td>Fiscal Year End</td><td>December 31</td></tr>
+        <tr><td>Tax Treatment</td><td>C Corporation (entity-level taxation)</td></tr>
+        <tr><td>Operating Brand</td><td>TradeAlgo</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ─── 02 FOUNDERS & LEADERSHIP ──────────────────────────────── -->
+<section class="section alt" id="s02">
+  <div class="section-label"><span>02</span> Founders &amp; Leadership</div>
+  <h2>Board of Directors &amp; Principal Shareholders</h2>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Name</th><th>Title</th><th>Ownership / Notes</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Carlos Cruz</td>
+          <td>CEO &amp; Director</td>
+          <td>56.09% — 107,425,507 shares. Sole voting rights via proxy agreements with all other investors. Acquired controlling stake June 20, 2025 from Jon Stone for $2M. Unanimous special committee approval.</td>
+        </tr>
+        <tr>
+          <td>Jonathan Stone</td>
+          <td>Founder Emeritus &amp; Director</td>
+          <td>Retained shares with anti-dilution protection. Entered 2-year employment agreement as Founder Emeritus. Original company founder.</td>
+        </tr>
+        <tr>
+          <td>Patrick McErlean</td>
+          <td>CTO &amp; Director</td>
+          <td>Board member; leads technology strategy and product.</td>
+        </tr>
+        <tr>
+          <td>Tony Pascasio</td>
+          <td>Director</td>
+          <td>Entrepreneur and property investor; background in business administration and assisted-living operations.</td>
+        </tr>
+        <tr>
+          <td>Nick Cortes</td>
+          <td>Director</td>
+          <td>Founder of boutique film/post-production studio. Client work includes Netflix, Apple, Microsoft, McDonald's, Mercedes-Benz.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h3>Capital Structure Notes</h3>
+  <ul class="ta-list">
+    <li><strong>Carlos Cruz</strong> holds proxy voting rights from all other investors — effective sole voting control.</li>
+    <li>No preferred stock, stock options, warrants, or convertible securities authorized or outstanding. <strong>Clean common equity structure.</strong></li>
+    <li>Jon Stone retains anti-dilution protection on remaining shares post-June 2025 transaction.</li>
+    <li>All common stockholders hold identical rights — no classes, no preferences, no distinctions.</li>
+  </ul>
+</section>
+
+<!-- ─── 03 BUSINESS MODEL ──────────────────────────────────────── -->
+<section class="section" id="s03">
+  <div class="section-label"><span>03</span> Business Model</div>
+  <h2>Products &amp; Revenue</h2>
+  <p>TA Fintech operates a <strong>Software-as-a-Service (SaaS) model</strong> generating revenue through subscriptions, licensing, and data analytics products. The platform unifies data research, market analytics, and algorithmic modelling within an AI environment, serving retail investors, financial professionals, and institutional clients. The Company is exploring the establishment of advisory subsidiaries and additional regulated financial service offerings, all subject to applicable regulatory approvals.</p>
+
+  <h3>Products &amp; Pricing</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Product</th><th>Description</th><th>Price</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>TradeGPT</td>
+          <td>AI copilot for real-time data interpretation, sentiment analysis, and natural-language market search across global markets</td>
+          <td class="td-muted">Included in tiers</td>
+        </tr>
+        <tr>
+          <td>Dashboard Freemium</td>
+          <td>AI portfolio insights, real-time market data, dark-pool analytics, US equity coverage (NYSE, Nasdaq, Cboe, IEX, OTC, FINRA)</td>
+          <td class="td-green">Free</td>
+        </tr>
+        <tr>
+          <td>Premium Plan</td>
+          <td>Unlimited AI portfolio chats, personalized AI coaching, advanced analytics, global data, model portfolios, AI performance rankings</td>
+          <td class="td-blue">$2,995/year</td>
+        </tr>
+        <tr>
+          <td>Platinum Plan</td>
+          <td>1-on-1 AI coaching, unrestricted AI access, global fundamentals/filings, AI-optimized FIX engine, institutional-grade analytics</td>
+          <td class="td-blue">$4,995/year</td>
+        </tr>
+        <tr>
+          <td>Wealth Series<br><span style="font-size:11px;color:var(--muted)">Atlas / Titan / Everest</span></td>
+          <td>AI signal generation across 3 portfolio families / 8+ strategies; 488 AI-generated rebalancing events documented over 11 months. Signals delivered to subscribers; implementation via a duly licensed third-party RIA firm for certain licensed activities.</td>
+          <td class="td-muted">Subscription</td>
+        </tr>
+        <tr>
+          <td>Midas Link</td>
+          <td>Institutional AI model portfolios &amp; analytics licensed to RIA partners, family offices, and HNW clients</td>
+          <td class="td-muted">Subscription</td>
+        </tr>
+        <tr>
+          <td>Options Academy</td>
+          <td>Educational content and interactive simulations for AI-based and quantitative trading</td>
+          <td class="td-muted">Included in plans</td>
+        </tr>
+        <tr>
+          <td>'The Signal' <span style="font-size:11px;color:var(--muted)">(Proposed Feb 2026)</span></td>
+          <td>AI newsletter product leveraging Wealth Series data — 5 tiers from free to managed accounts</td>
+          <td class="td-muted">$0 / $149 / $499 / $2,500 / managed</td>
+        </tr>
+        <tr>
+          <td>Fincera <span style="font-size:11px;color:var(--muted)">(In Development)</span></td>
+          <td>Proposed proprietary advisory subsidiary under development — subject to applicable regulatory approvals and compliance requirements. Not yet operational.</td>
+          <td class="td-muted">Subject to approval</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Revenue Channels</h3>
+  <ul class="ta-list">
+    <li><strong>Direct-to-Consumer (D2C):</strong> Freemium-to-paid funnel driving individual subscriber upgrades via platform.</li>
+    <li><strong>Third-Party RIA Collaboration:</strong> Company currently collaborates with a duly licensed RIA firm for certain licensed activities.</li>
+    <li><strong>Institutional Licensing:</strong> Midas Link and model portfolio frameworks licensed to RIA partners, family offices, and institutional clients.</li>
+    <li><strong>Regulated Financial Services (Exploratory):</strong> Company is pursuing registration of a proprietary RIA and exploring additional regulated financial service offerings — all subject to applicable regulatory approvals. No such services are currently active under the Company's own license.</li>
+    <li><strong>Newsletter (Proposed):</strong> 'The Signal' — internal proposal (Feb 2026) for a tiered AI newsletter product leveraging Wealth Series analytics data. Not yet launched.</li>
+  </ul>
+</section>
+
+<!-- ─── 04 TRACTION & METRICS ──────────────────────────────────── -->
+<section class="section alt" id="s04">
+  <div class="section-label"><span>04</span> Traction &amp; Metrics</div>
+  <h2>Platform Growth</h2>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">Subscribers</div>
+      <div class="card-val blue">50,000+</div>
+      <div class="card-sub">Platform-wide</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Cumulative Gross Revenue</div>
+      <div class="card-val">$61.2M+</div>
+      <div class="card-sub">Since inception</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Revenue Run Rate</div>
+      <div class="card-val blue">~$23M</div>
+      <div class="card-sub">Annualized (Aug 2025)</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Total Investors</div>
+      <div class="card-val">2,000+</div>
+      <div class="card-sub">All rounds combined</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Capital Raised</div>
+      <div class="card-val">$105.6M+</div>
+      <div class="card-sub">As of Nov 3, 2025</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Live AI Rebalancing Events</div>
+      <div class="card-val blue">488</div>
+      <div class="card-sub">Across 11 months (Mar 2025–Feb 2026)</div>
+    </div>
+  </div>
+
+  <h3>Key Revenue History (per PPM)</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Metric</th><th>Figure</th></tr></thead>
+      <tbody>
+        <tr><td>Net Revenue — 8 months ended Aug 31, 2025</td><td class="td-num td-blue">$15,341,860 <span class="td-muted">(annualized ~$23M)</span></td></tr>
+        <tr><td>Net Revenue — FY 2024</td><td class="td-num">$9,617,239</td></tr>
+        <tr><td>Net Revenue — FY 2023</td><td class="td-num">$11,031,657</td></tr>
+        <tr><td>Net Revenue — FY 2022</td><td class="td-num">$9,499,858</td></tr>
+        <tr><td>Revenue CAGR (2022–projected 2025)</td><td class="td-num td-green">~34%</td></tr>
+        <tr><td>Wealth Series — Live Rebalancing Events</td><td class="td-num">488 events across 11 months</td></tr>
+        <tr><td>Wealth Series — Unique Securities Tracked</td><td class="td-num">504 tickers (80% US equities, 20% ETFs, 30% international)</td></tr>
+        <tr><td>Active AI Strategies</td><td>8+ (Atlas, Everest, Titan families)</td></tr>
+        <tr><td>Deferred Revenue (Aug 31, 2025)</td><td class="td-num">$8,744,971</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <strong>Revenue Recognition Note:</strong> Wealth Series contracts recognized over 24 months; Midas Link over 36 months. GAAP revenue ≠ cash received in any given period. Deferred revenue of $8.7M+ represents future service obligations already paid for.
+  </div>
+</section>
+
+<!-- ─── 05 FINANCIALS ──────────────────────────────────────────── -->
+<section class="section" id="s05">
+  <div class="section-label"><span>05</span> Financials</div>
+  <h2>Financial Statements</h2>
+  <p>All figures sourced from the TA Fintech Inc. PPM (Nov 3, 2025) and unaudited financial statements for the period ended December 31, 2025 (issued January 7, 2026).</p>
+
+  <h3>Balance Sheet Summary — August 31, 2025</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Line Item</th><th>Aug 31, 2025</th><th>Dec 31, 2024</th></tr></thead>
+      <tbody>
+        <tr><td>Cash &amp; Cash Equivalents</td><td class="td-num">$4,385,032</td><td class="td-num">~$21.8M</td></tr>
+        <tr><td>Investments in Equity Securities (Vanguard/IBKR)</td><td class="td-num">$13,217,014</td><td class="td-num">$7,867,868</td></tr>
+        <tr><td>Refundable Deposit</td><td class="td-num">$200,000</td><td class="td-num">$200,000</td></tr>
+        <tr><td>Accounts Receivable</td><td class="td-num">$301,820</td><td class="td-num">$163,220</td></tr>
+        <tr><td>Total Current Assets</td><td class="td-num td-blue">$17,980,010</td><td class="td-muted">—</td></tr>
+        <tr><td>Intangible Assets (net)</td><td class="td-num">$436,103</td><td class="td-num">$609,454</td></tr>
+        <tr><td>Total Assets</td><td class="td-num td-blue">$18,441,113</td><td class="td-num">$28,038,949</td></tr>
+        <tr><td>Accounts Payable</td><td class="td-num">$3,100</td><td class="td-num">$17,872</td></tr>
+        <tr><td>Deferred Revenue (current)</td><td class="td-num">$8,744,971</td><td class="td-num">$6,362,987</td></tr>
+        <tr><td>Total Liabilities</td><td class="td-num">$8,811,188</td><td class="td-num">$6,998,358</td></tr>
+        <tr><td>Long-Term Debt</td><td class="td-green">None</td><td class="td-green">None</td></tr>
+        <tr><td>Additional Paid-In Capital</td><td class="td-num">$102,487,163</td><td class="td-num">$93,328,386</td></tr>
+        <tr><td>Accumulated Deficit</td><td class="td-red">$(93,048,754)</td><td class="td-red">$(72,474,189)</td></tr>
+        <tr><td>Total Stockholders' Equity</td><td class="td-num">$9,629,925</td><td class="td-num">$21,040,591</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Income Statement Summary</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Period</th><th>Net Revenue</th><th>Operating Expenses</th><th>Operating Loss</th><th>Net Loss</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>8 months ended Aug 31, 2025</td>
+          <td class="td-num td-blue">$15,341,860</td>
+          <td class="td-num">$33,539,200</td>
+          <td class="td-num td-red">$(20,615,723)</td>
+          <td class="td-num td-red">$(20,574,565)</td>
+        </tr>
+        <tr>
+          <td>Full Year 2024</td>
+          <td class="td-num">$9,617,239</td>
+          <td class="td-num">$51,783,239</td>
+          <td class="td-num td-red">$(45,445,586)</td>
+          <td class="td-num td-red">$(49,222,053)*</td>
+        </tr>
+        <tr>
+          <td>Full Year 2023</td>
+          <td class="td-num">$11,031,657</td>
+          <td class="td-num">$24,360,069</td>
+          <td class="td-num td-red">$(13,328,412)</td>
+          <td class="td-num td-red">$(9,698,783)**</td>
+        </tr>
+        <tr>
+          <td>Full Year 2022</td>
+          <td class="td-num">$9,499,858</td>
+          <td class="td-num">$22,769,462</td>
+          <td class="td-num td-red">$(13,269,604)</td>
+          <td class="td-num td-red">$(13,541,026)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:12px;color:var(--muted)">* FY2024 net loss includes a $4,097,494 deferred tax benefit. ** FY2023 includes $4,097,494 deferred tax asset recognition.</p>
+
+  <h3>Burn Rate &amp; Cash Position</h3>
+  <ul class="ta-list">
+    <li>Cash used in operating activities (8 months ended Aug 31, 2025): <strong>~$18.7M</strong> — approximately <strong>$2.3M/month</strong> operating burn.</li>
+    <li>Total liquid assets as of Aug 31, 2025: <strong>~$17.6M</strong> ($4.4M cash + $13.2M Vanguard equity securities via IBKR).</li>
+    <li>Cash declined from ~$21.8M (Dec 31, 2024) to $4.4M (Aug 31, 2025) due to operations and equity security investments.</li>
+  </ul>
+
+  <h3>December 31, 2025 Unaudited Financials</h3>
+  <ul class="ta-list">
+    <li>Unaudited financial statements for period ended December 31, 2025 available (issued January 7, 2026).</li>
+    <li>Shares outstanding as of December 31, 2025: <strong>194,454,461</strong>.</li>
+    <li>Cash at IBKR as of December 31, 2025: <strong>$1,411,824</strong>. Cash exceeded FDIC limits by $1,289,195.</li>
+    <li>No pending or threatened lawsuits as of December 31, 2025 (per Notes to Financial Statements).</li>
+  </ul>
+
+  <h3>Audit Status</h3>
+  <ul class="ta-list">
+    <li>FY 2022 &amp; FY 2023: Audited by Abdi Sheikh-Ali, CPA, PLLC — unmodified opinion, report dated June 25, 2024.</li>
+    <li>FY 2024: New audit firm engaged during period; audit completion status to be confirmed.</li>
+    <li>FY 2025: Unaudited. Financial statements issued January 7, 2026.</li>
+  </ul>
+</section>
+
+<!-- ─── 06 BUSINESS PLAN & PROJECTIONS ────────────────────────── -->
+<section class="section alt" id="s06">
+  <div class="section-label"><span>06</span> Business Plan &amp; Projections</div>
+  <h2>Revenue Projections &amp; Growth Outlook</h2>
+  <p>The following projections are sourced directly from the <strong>TA Fintech Inc. PPM</strong>. Management projects strong compound growth driven by subscription expansion, Wealth Series advisory fee activation, and RIA advisory revenue from Fincera. Forward-looking — not a guarantee of future results.</p>
+
+  <h3>Management Revenue Projections (per PPM)</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Year</th><th>Projected Revenue</th><th>YoY Growth</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>2026</td>
+          <td class="td-num td-blue">~$36.8M</td>
+          <td class="td-green">~140%</td>
+          <td>Subscription growth + expanded data/analytics licensing + potential contribution from regulated services (subject to approvals) + proposed newsletter launch</td>
+        </tr>
+        <tr>
+          <td>2027</td>
+          <td class="td-num td-blue">~$58.9M</td>
+          <td class="td-green">~60%</td>
+          <td>Continued subscription and licensing growth; potential contribution from regulated financial services (subject to approvals); Midas Link expansion</td>
+        </tr>
+        <tr>
+          <td>2028</td>
+          <td class="td-num td-blue">~$94.3M</td>
+          <td class="td-green">~60%</td>
+          <td>Platform scaling; potential AUM-linked revenue (subject to regulatory approvals and operational buildout)</td>
+        </tr>
+        <tr>
+          <td>2029</td>
+          <td class="td-num td-blue">~$150.9M</td>
+          <td class="td-green">~60%</td>
+          <td>At-scale revenue target</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Valuation Context (per PPM)</h3>
+  <ul class="ta-list">
+    <li><strong>Pre-money valuation:</strong> ~$1.15B (current offering at $6.00/share × 194,454,461 shares outstanding).</li>
+    <li><strong>At $100M revenue</strong> (achievable in 3–4 years): $1.15B valuation = <strong>11.5x revenue multiple</strong> — within the 10–15x range for high-growth SaaS/fintech analytics companies.</li>
+    <li><strong>At $150.9M projected 2029 revenue:</strong> implied multiple declines to ~7.6x — below median for public SaaS (6.1x) and private fintech analytics (7.0–8.0x).</li>
+    <li><strong>EBITDA profitability target:</strong> approximately $75–100M in annual revenue, as R&amp;D intensity moderates and fixed costs are absorbed by revenue growth.</li>
+  </ul>
+
+  <h3>Key Milestones</h3>
+  <ul class="ta-list">
+    <li><strong>Q1–Q2 2026:</strong> Revenue driven by subscription sales and GAAP recognition of multi-year Wealth Series contracts (24-month recognition) and Midas Link contracts (36-month recognition).</li>
+    <li><strong>Q3 2026 (target):</strong> Company is pursuing registration of a proprietary RIA and exploring advisory subsidiaries — subject to regulatory approval. If approved and operational, management projects new revenue contribution from advisory services.</li>
+    <li><strong>FY 2026–2029:</strong> ~60% CAGR on continued platform growth, Wealth Series advisory fee ramp, and Midas Link institutional expansion.</li>
+    <li><strong>Market capture:</strong> $100M revenue = ~0.062% of management-estimated $160B+ TAM — considered highly achievable given current trajectory.</li>
+  </ul>
+
+  <h3>Management AUM Projections — Advisory Subsidiary (Subject to Regulatory Approval)</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>AUM Category</th><th>FY 2026</th><th>FY 2027</th><th>FY 2028</th><th>FY 2029</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Wealth Management (Proprietary RIA)</td>
+          <td class="td-num">$50M</td>
+          <td class="td-num">$146.3M</td>
+          <td class="td-num">$343.2M</td>
+          <td class="td-num td-blue">$529.6M</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Long-Term Vision &amp; Exit</h3>
+  <p>Management's long-term vision references a trajectory aligned with BlackRock's Aladdin-style infrastructure — AI-native, serving retail investors alongside RIAs, regional banks, and fintechs. With management projecting revenue of <strong>$150.9M by 2029</strong> (per PPM, forward-looking and not guaranteed), the company's stated aim is to position for institutional partnerships, a strategic acquisition, or a public market event. All projections are subject to execution risk, regulatory approvals for planned financial services, and market conditions.</p>
+</section>
+
+<!-- ─── 07 PRIOR FUNDRAISING ───────────────────────────────────── -->
+<section class="section" id="s07">
+  <div class="section-label"><span>07</span> Prior Fundraising</div>
+  <h2>Capital Raised: ~$105.6M</h2>
+  <p>As of November 3, 2025 per PPM.</p>
+  <div class="callout warn" style="margin-bottom:24px;">
+    <strong>Marketing Compliance — Fundraising History:</strong> All prior raise figures, valuations, and investor counts referenced in marketing must be sourced directly from the PPM or verifiable public filings (e.g., StartEngine / SEC EDGAR). Do not use estimated, rounded, or internally projected figures in investor-facing materials. Valuation figures shown below are implied valuations based on offering price and shares outstanding at the time of each round — they are not appraised or independently verified enterprise values, and should be framed accordingly. Any claim that could be construed as a guarantee of future value appreciation is prohibited.
+  </div>
+
+  <div class="card-grid" style="grid-template-columns: repeat(3, 1fr); max-width: 700px;">
+    <div class="card">
+      <div class="card-label">Reg CF (Crowdfunding)</div>
+      <div class="card-val" style="font-size:20px;">$9.56M</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Regulation D</div>
+      <div class="card-val" style="font-size:20px;">$84.31M</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Section 4(a)(2)</div>
+      <div class="card-val" style="font-size:20px;">$11.73M</div>
+    </div>
+  </div>
+
+  <h3>Valuation Progression — The 40x Story</h3>
+  <div class="val-timeline">
+    <div class="val-node">
+      <div class="vn-date">Mar 31, 2022</div>
+      <div class="vn-val">$28.3M</div>
+      <div class="vn-note">Reg CF · $1.00/share<br>Round 1 · Oversubscribed</div>
+    </div>
+    <div class="val-node">
+      <div class="vn-date">May 27, 2022</div>
+      <div class="vn-val">$113M</div>
+      <div class="vn-note">Reg CF · $4.00/share<br>High demand · &lt;60 days later</div>
+    </div>
+    <div class="val-node">
+      <div class="vn-date">2023</div>
+      <div class="vn-val">$375M</div>
+      <div class="vn-note">Reg D · Private placement<br>~13x Round 1</div>
+    </div>
+    <div class="val-node">
+      <div class="vn-date">2024</div>
+      <div class="vn-val">$600M</div>
+      <div class="vn-note">Reg D · Private placement<br>~21x Round 1</div>
+    </div>
+    <div class="val-node">
+      <div class="vn-date">Current Offering</div>
+      <div class="vn-val">~$1.15B</div>
+      <div class="vn-note">$6.00/share · 506(c)<br>40x from first raise</div>
+    </div>
+  </div>
+
+  <h3>Historical Raise by Period (per PPM)</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Period</th><th>Amount</th><th>Mechanism</th><th>Shares Issued</th><th>Effective $/Share</th></tr></thead>
+      <tbody>
+        <tr><td>2022</td><td class="td-num">$7,746,656</td><td>Reg D + early private placements</td><td class="td-num">30,305,575 (pre-split)</td><td class="td-num">~$0.26 pre / ~$1.02 post-split</td></tr>
+        <tr><td>2023</td><td class="td-num">$22,538,008</td><td>Reg D + Reg CF</td><td class="td-num">17,016,147 (post-split)</td><td class="td-num">~$1.32</td></tr>
+        <tr><td>2024</td><td class="td-num">$63,139,198</td><td>Regulation D</td><td class="td-num">48,156,073</td><td class="td-num">~$1.31</td></tr>
+        <tr><td>Jan–Aug 2025</td><td class="td-num">$9,524,000</td><td>Section 4(a)(2)</td><td class="td-num">5,219,317</td><td class="td-num">~$1.82</td></tr>
+        <tr><td>Post Aug 31, 2025</td><td class="td-num">$426,000</td><td>Section 4(a)(2)</td><td class="td-num">192,454</td><td class="td-muted">—</td></tr>
+        <tr style="background:rgba(0,163,255,0.06)"><td><strong>TOTAL</strong></td><td class="td-num td-blue"><strong>~$105.6M</strong></td><td>Multiple exempt offerings</td><td class="td-muted">Varied</td><td class="td-muted">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Cap Table Notes</h3>
+  <ul class="ta-list">
+    <li>Single class of equity: Common Stock only. No preferred stock, SAFEs, convertible notes, options, or warrants.</li>
+    <li>All shares carry identical rights. No super-voting structure other than Carlos Cruz's proxy agreements.</li>
+    <li><strong>194,454,461 shares</strong> issued and outstanding as of December 31, 2025.</li>
+    <li>Authorized: 800,000,000 shares at $0.001 par value.</li>
+    <li><strong>Mar 31, 2022:</strong> First Reg CF crowdfund opened at $28.3M implied valuation ($1.00/share) — oversubscribed, raised $1.06M from 381 investors.</li>
+    <li><strong>May 27, 2022:</strong> Second Reg CF round closed at $113M implied valuation ($4.00/share) — driven by high demand, less than 60 days after the first close. Raised $3.4M from 957 investors.</li>
+    <li>Subsequent Reg D private placements at <strong>$375M</strong> then <strong>$600M</strong> implied valuations before the current $1.15B offering — a 40x step-up from the original $28.3M round.</li>
+    <li>No debt instruments of record. Company has <strong>zero long-term debt.</strong></li>
+  </ul>
+</section>
+
+<!-- ─── 08 THIS OFFERING ───────────────────────────────────────── -->
+<section class="section alt" id="s08">
+  <div class="section-label"><span>08</span> This Offering</div>
+  <h2>Offering Terms</h2>
+  <div class="tbl-wrap">
+    <table>
+      <tbody>
+        <tr><td>Issuer</td><td>TA Fintech Inc. (TradeAlgo)</td></tr>
+        <tr><td>Maximum Offering Amount</td><td class="td-blue">$120,000,000 <span class="td-muted">(working range: $50M–$150M)</span></td></tr>
+        <tr><td>Security Type</td><td>Common Stock</td></tr>
+        <tr><td>Price Per Share</td><td class="td-blue">$6.00</td></tr>
+        <tr><td>Minimum Individual Investment</td><td>$10,000</td></tr>
+        <tr><td>Maximum Individual Investment</td><td>Unlimited</td></tr>
+        <tr><td>Offering Deadline</td><td>November 3, 2026</td></tr>
+        <tr><td>Exempt Offering Type</td><td>Regulation D Rule 506(c) — general solicitation permitted; accredited investors only</td></tr>
+        <tr><td>Implied Pre-Money Valuation</td><td class="td-blue">~$1.15B <span class="td-muted">(194,454,461 shares × $6.00/share)</span></td></tr>
+        <tr><td>Oversubscription</td><td>Company may accept above $120M at sole discretion</td></tr>
+        <tr><td>PPM Date</td><td>November 3, 2025</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Bonus Share Program</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Investment Amount</th><th>Bonus Shares</th></tr></thead>
+      <tbody>
+        <tr><td>$25,000 – $49,999</td><td class="td-blue">+10%</td></tr>
+        <tr><td>$50,000 – $74,999</td><td class="td-blue">+15%</td></tr>
+        <tr><td>$75,000 – $99,999</td><td class="td-blue">+20%</td></tr>
+        <tr><td>$100,000 – $999,999</td><td class="td-blue">+25%</td></tr>
+        <tr><td>$1,000,000 and above</td><td class="td-blue">+50%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:12.5px;color:var(--muted)">Bonus shares are Common Stock with identical rights. Company reserves right to offer additional bonus shares on top of this.</p>
+
+  <h3>Use of Proceeds (Full $120M Raise)</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Allocation</th><th>% of Gross</th><th>Amount</th></tr></thead>
+      <tbody>
+        <tr><td>AI &amp; Product Engineering</td><td>35%</td><td class="td-num td-blue">~$42.0M</td></tr>
+        <tr><td>Market Data, Cloud / HPC &amp; Core Infrastructure</td><td>15%</td><td class="td-num">~$18.0M</td></tr>
+        <tr><td>Go-to-Market Engine</td><td>10%</td><td class="td-num">~$12.0M</td></tr>
+        <tr><td>Enterprise Pilots, Integrations &amp; Security Reviews</td><td>7%</td><td class="td-num">~$8.4M</td></tr>
+        <tr><td>Regulatory, Compliance &amp; Licensing</td><td>6%</td><td class="td-num">~$7.2M</td></tr>
+        <tr><td>Working Capital &amp; Operations</td><td>10%</td><td class="td-num">~$12.0M</td></tr>
+        <tr><td>Contingency Reserve</td><td>10%</td><td class="td-num">~$12.0M</td></tr>
+        <tr><td>Transaction Costs (placement, legal, escrow, TA)</td><td>~7%</td><td class="td-num">~$8.4M</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Investor Rights</h3>
+  <ul class="ta-list">
+    <li>Identical rights to all other common stockholders — no preferences, no distinctions.</li>
+    <li>Restricted securities — no public market exists or expected; <strong>illiquid investment.</strong></li>
+    <li>Shares may not be transferred except in compliance with the Securities Act and applicable state laws.</li>
+    <li>Company runway target: <strong>36 months of runway</strong> from full raise to achieve profitability or additional financing.</li>
+  </ul>
+</section>
+
+<!-- ─── 09 RISK FACTORS ────────────────────────────────────────── -->
+<section class="section" id="s09">
+  <div class="section-label"><span>09</span> Risk Factors</div>
+  <h2>Key Risks</h2>
+  <p>The following key risks are disclosed in the PPM (Nov 3, 2025). This is a summary only — the full PPM Risk Factors section must be reviewed before marketing.</p>
+
+  <div class="callout danger">
+    <strong><span class="risk-tag risk-high">Material</span>ACTIVE SEC INVESTIGATION</strong><br>
+    The Company is currently under SEC investigation. This presents material risk of civil monetary penalties, disgorgement, injunctive relief, enforcement actions, reputational harm, and potential disruption to the business and this offering. <strong>All 506(c) marketing materials must disclose this risk.</strong>
+  </div>
+
+  <h3>Regulatory / Legal Risks</h3>
+  <ul class="ta-list">
+    <li>Offering relies on Reg D Rule 506(c) exemption — not registered with SEC or any state securities authority.</li>
+    <li>Future regulatory changes could affect AI-driven investment operations and impose additional costs.</li>
+    <li>Proprietary RIA and broker-dealer registrations not yet complete; no guarantee of timely regulatory approval.</li>
+  </ul>
+
+  <h3>Business / Operational Risks</h3>
+  <ul class="ta-list">
+    <li>Company has not achieved profitability; expected to operate at a loss for an extended period.</li>
+    <li>Financial projections are forward-looking and highly speculative; actual results may differ materially.</li>
+    <li>No formal refund policy; historic practice of providing refunds creates unpredictable revenue reversal risk.</li>
+    <li>Revenue recognition model creates timing mismatch between cash received and GAAP recognized revenue.</li>
+    <li>Heavy reliance on upfront multi-year subscription licenses — less durable than AUM-linked recurring fees.</li>
+    <li>Competitive market: Betterment, Wealthfront, Motley Fool, Stansberry, Bloomberg, FactSet, and others.</li>
+    <li>Key person risk: Carlos Cruz holds sole voting control via proxy agreements.</li>
+  </ul>
+
+  <h3>Financial Risks</h3>
+  <ul class="ta-list">
+    <li>Accumulated deficit of <strong>$93M+</strong> as of August 2025; ~$2.3M/month operating cash burn.</li>
+    <li>Cash position may not be sufficient if additional capital cannot be raised on acceptable terms.</li>
+    <li>Equity investment portfolio ($13.2M Vanguard/IBKR as of Aug 2025) exposes company to market price risk.</li>
+    <li>Continued operations dependent on new equity raises or achieving operating profitability.</li>
+  </ul>
+
+  <div class="callout">
+    <strong>Litigation (as of December 31, 2025):</strong> Per the unaudited Notes to Financial Statements (Dec 31, 2025): No pending or threatened lawsuits expected to have a material effect on operations. Note: the active SEC investigation is a separate, material disclosure item distinct from civil litigation.
+  </div>
+</section>
+
+<!-- ─── 10 COMPETITORS & MARKET ───────────────────────────────── -->
+<section class="section alt" id="s10">
+  <div class="section-label"><span>10</span> Competitors &amp; Market</div>
+  <h2>Market Size &amp; Competitive Positioning</h2>
+
+  <h3>TAM Overview</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Market Segment</th><th>Size / Projection</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>Global Robo Advisory Revenue (2023)</td><td class="td-num">$110B+</td><td class="td-muted">Statista</td></tr>
+        <tr><td>Global Robo Advisory Revenue (2033, projected)</td><td class="td-num">$136B</td><td class="td-muted">Research and Markets</td></tr>
+        <tr><td>US Fee-Based Advisory Revenue (annual)</td><td class="td-num">~$260B</td><td class="td-muted">McKinsey (Feb 2025)</td></tr>
+        <tr><td>Global Assets Under Management (2024)</td><td class="td-num">$128T</td><td class="td-muted">BCG Global Asset Management 2025</td></tr>
+        <tr><td>Global Market Data Spend (2024)</td><td class="td-num">$44.3B</td><td class="td-muted">Finextra / Burton-Taylor</td></tr>
+        <tr><td>Global Financial Wealth</td><td class="td-num">$305T</td><td class="td-muted">BCG Global Wealth Report 2025</td></tr>
+        <tr><td>Algorithmic Trading Market (2030, projected)</td><td class="td-num">$31.3B <span class="td-muted">(13.6% CAGR)</span></td><td class="td-muted">Straits Research</td></tr>
+        <tr><td>US Retail Brokerage Accounts</td><td class="td-num">100M+</td><td class="td-muted">Stakeholder Labs</td></tr>
+        <tr><td>Retail Share of Global AUM</td><td>52% today → 61%+ by 2030</td><td class="td-muted">World Economic Forum</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Competitive Landscape</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Competitor / Category</th><th>Profile</th><th>TradeAlgo's Differentiation</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Betterment / Wealthfront</td>
+          <td class="td-muted">Automated passive portfolio management; AUM fees</td>
+          <td>Multi-strategy, live AI trading with verifiable 11-month trade history; not rules-based passive indexing</td>
+        </tr>
+        <tr>
+          <td>Motley Fool / Stansberry / Seeking Alpha</td>
+          <td class="td-muted">Opinion-based investment content; large subscriber bases, unverifiable track records</td>
+          <td>'Show your receipts' — auditable AI portfolios with timestamped entries, exits, and losses</td>
+        </tr>
+        <tr>
+          <td>Numerai / Kensho</td>
+          <td class="td-muted">Crowdsourced/AI quant strategies; institutional focus</td>
+          <td>Direct-to-retail accessible with institutional-grade infrastructure</td>
+        </tr>
+        <tr>
+          <td>Bloomberg / LSEG / FactSet / MSCI</td>
+          <td class="td-muted">Dominant data and analytics platforms; institutional</td>
+          <td>TradeAlgo uses them as inputs; moat is in model generation, governance, and managed delivery on top</td>
+        </tr>
+        <tr>
+          <td>Interactive Brokers</td>
+          <td class="td-muted">Execution venue; not an intelligence competitor</td>
+          <td>TradeAlgo integrates via API/FIX and positions above the broker as the AI strategy/automation layer</td>
+        </tr>
+        <tr>
+          <td>OpenAI / Anthropic / Google</td>
+          <td class="td-muted">General-purpose LLMs</td>
+          <td>Treated as commodity inputs; TradeAlgo adds finance-specific models, live trading data, and execution</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Competitive Moat</h3>
+  <ul class="ta-list">
+    <li><strong>488 timestamped rebalancing events</strong> across 11 months of live AI trading — verifiable, auditable trade history including losses.</li>
+    <li>Multi-strategy architecture (8+ strategies, 3 portfolio families) delivering different risk profiles — no financial newsletter competitor has live AI portfolios trading real money.</li>
+    <li>Institutional-grade infrastructure serving retail price points: democratizes sophisticated tools previously reserved for Wall Street.</li>
+    <li>'Show your receipts' positioning: <strong>radical transparency (including losses)</strong> as the core brand differentiation.</li>
+  </ul>
+</section>
+
+<!-- ─── 11 LEGAL & COMPLIANCE ──────────────────────────────────── -->
+<section class="section" id="s11">
+  <div class="section-label"><span>11</span> Legal &amp; Compliance</div>
+  <h2>Offering Structure &amp; Legal Framework</h2>
+
+  <div class="tbl-wrap">
+    <table>
+      <tbody>
+        <tr><td>Exemption</td><td>Regulation D Rule 506(c) under Securities Act of 1933</td></tr>
+        <tr><td>General Solicitation</td><td class="td-green">Permitted — 506(c) allows advertising to the general public</td></tr>
+        <tr><td>Eligible Investors</td><td>Accredited Investors only — verified prior to sale</td></tr>
+        <tr><td>PPM Date</td><td>November 3, 2025</td></tr>
+        <tr><td>Offering Deadline</td><td>November 3, 2026</td></tr>
+        <tr><td>Issuer Attorney / Legal Counsel</td><td class="td-muted">[Not disclosed in provided documents — confirm internally]</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Accredited Investor Verification</h3>
+  <ul class="ta-list">
+    <li>Net worth (or joint) &gt; $1M excluding primary residence.</li>
+    <li>Income &gt; $200K/year individual ($300K joint) for two prior years with expectation of same.</li>
+    <li>FINRA Series 7, 65, or 82 license holder in good standing.</li>
+    <li>Directors, executive officers, or general partners of the issuer.</li>
+    <li>Qualified institutional entities: banks, broker-dealers, RIAs, insurance companies, registered investment companies, benefit plans &gt; $5M, etc.</li>
+  </ul>
+
+  <div class="callout warn">
+    <strong>Form D Filing:</strong> A Form D filing with the SEC is required within 15 days of the first sale under Reg D. Blue Sky compliance in each state where the offering is made is required. Current filing: <a href="https://www.sec.gov/Archives/edgar/data/1920223/000192022325000005/0001920223-25-000005-index.html" style="color:var(--blue)">SEC EDGAR →</a>
+  </div>
+
+  <div class="callout danger">
+    <strong>SEC Investigation — Material Disclosure Required:</strong> The Company has an active SEC investigation as of the PPM date. All 506(c) marketing materials and general solicitation communications must disclose this material risk and cannot omit or downplay it. Consult legal counsel before distributing any materials.
+  </div>
+
+  <h3>RIA &amp; Broker-Dealer Status</h3>
+  <ul class="ta-list">
+    <li>Currently: Duly licensed third-party RIA partner active for certain investment advisory functions.</li>
+    <li>Pursuing Registration: Proprietary RIA advisory subsidiary under development — subject to applicable regulatory approvals and compliance requirements. Not yet operational.</li>
+    <li>In Process: Broker-dealer registration — timeline not specified in current documents.</li>
+  </ul>
+</section>
+
+<!-- ─── 12 EXISTING ASSETS ─────────────────────────────────────── -->
+<section class="section alt" id="s12">
+  <div class="section-label"><span>12</span> Existing Assets</div>
+  <h2>What's Built &amp; Available</h2>
+
+  <h3>Offering Documents</h3>
+  <ul class="ta-list">
+    <li>Private Placement Memorandum (PPM) — November 3, 2025 (66 pages)</li>
+    <li>Subscription Agreement — referenced in PPM; executed by each investor</li>
+    <li>Investor Suitability Questionnaire — referenced in PPM</li>
+  </ul>
+
+  <h3>Financial Documents</h3>
+  <ul class="ta-list">
+    <li>Unaudited Financial Statements — Period ended December 31, 2025 (10 pages; issued January 7, 2026)</li>
+    <li>Audited Financial Statements — FY 2022 &amp; FY 2023 by Abdi Sheikh-Ali, CPA, PLLC (unmodified opinions)</li>
+    <li>PPM contains full financial data for 8 months ended August 31, 2025 and all historical periods</li>
+  </ul>
+
+  <h3>Strategy &amp; Pitch Documents</h3>
+  <ul class="ta-list">
+    <li>TradeAlgo Business Plan (confidential; 49 pages; 2025)</li>
+    <li>'The Signal' — AI Newsletter Strategic Proposal (internal; February 25, 2026)</li>
+  </ul>
+
+  <h3>Brand Assets</h3>
+  <ul class="ta-list">
+    <li>Brand Guidelines: TA-BrandGuides-Nov2025 (24 pages)</li>
+    <li>TradeAlgo brand name, domain, and IP (acquired from related party 2021; carried at $436,103 net book value as of Aug 2025)</li>
+  </ul>
+
+  <h3>Live Technology Assets</h3>
+  <ul class="ta-list">
+    <li><strong>TradeGPT</strong> — AI financial copilot (live, in production)</li>
+    <li><strong>Dashboard / Terminal / Premium / Platinum</strong> subscription platform (live; 50,000+ subscribers)</li>
+    <li><strong>Wealth Series AI Portfolios:</strong> Atlas, Titan, Everest — 488 rebalancing events documented across 11 months (live, production-grade)</li>
+    <li><strong>Midas Link</strong> — institutional AI model portfolio platform (live)</li>
+    <li><strong>Options Academy</strong> — educational platform (live)</li>
+    <li><strong>Fincera</strong> — proposed advisory subsidiary under development; subject to applicable regulatory approvals. Not yet operational.</li>
+    <li>488 rebalancing event data files with 79 configuration columns each — institutional-grade documented AI trading history available for marketing use (with appropriate regulatory review)</li>
+  </ul>
+</section>
+
+<!-- ─── 13 THE SIGNAL / STRATEGY ──────────────────────────────── -->
+<section class="section" id="s13">
+  <div class="section-label"><span>13</span> Signal &amp; Strategic Notes</div>
+  <h2>'The Signal' Newsletter &amp; Anything Else</h2>
+
+  <h3>Strategic Pivot: 'The Signal' Newsletter</h3>
+  <p>An internal strategy document produced in February 2026 proposes packaging the Wealth Series AI trading data into a tiered subscription newsletter. Core insight: the AI portfolios already generate daily, timestamped, auditable trading signals — the newsletter is essentially zero incremental cost to produce.</p>
+
+  <div class="callout">
+    <strong>Hidden Gem:</strong> At 0.1% conversion of 200K free subscribers to managed accounts (avg $150K AUM) = <strong>$30M+ AUM</strong> generating ~$450K/year at 1.5% management fee — from a near-zero cost acquisition channel.
+  </div>
+
+  <h3>Newsletter Tier Structure</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Tier</th><th>Price</th><th>Access</th></tr></thead>
+      <tbody>
+        <tr><td>Free</td><td class="td-green">$0</td><td>Daily P&amp;L summary, weekly commentary, one portfolio spotlight</td></tr>
+        <tr><td>Premium</td><td class="td-blue">$149/year</td><td>Full trade history — all buys/sells/exits across all 5 portfolios</td></tr>
+        <tr><td>Pro</td><td class="td-blue">$499/year</td><td>Current live positions + real-time SMS trade alerts</td></tr>
+        <tr><td>Elite</td><td class="td-blue">$2,500/year</td><td>Exact position sizing, options overlay, weekly video + analyst access</td></tr>
+        <tr><td>Managed</td><td class="td-blue">$50K–$400K min.</td><td>AI manages capital directly via existing Wealth Series product</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Newsletter Growth Model (Internal Projections — Not in PPM)</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Milestone</th><th>Free Subs</th><th>Paid Subs</th><th>Est. ARR</th><th>Timeline</th></tr></thead>
+      <tbody>
+        <tr><td>Launch</td><td>1,000</td><td>0</td><td class="td-muted">$6K (ads only)</td><td>Month 2</td></tr>
+        <tr><td>Traction</td><td>10,000</td><td>400</td><td>$120K</td><td>Month 4</td></tr>
+        <tr><td>Growth</td><td>25,000</td><td>1,500</td><td>$500K</td><td>Month 6</td></tr>
+        <tr><td>Scale</td><td>50,000</td><td>4,000</td><td>$1.5M</td><td>Month 12</td></tr>
+        <tr><td>Maturity</td><td>200,000</td><td>15,000</td><td class="td-blue">$8–10M</td><td>Month 24</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:12px;color:var(--muted)">Newsletter projections are internal estimates from The Signal proposal (Feb 25, 2026) and are not sourced from the PPM.</p>
+
+  <h3>506(c) Marketing Compliance Notes</h3>
+  <ul class="ta-list">
+    <li><strong>Rule 506(c) compliance:</strong> All advertising and general solicitation materials must be truthful and non-misleading. <strong>Approved reference:</strong> <a href="https://links.taf.investsecure.co/" target="_blank" style="color:var(--blue);">links.taf.investsecure.co</a> — this investor-facing page has been reviewed and approved; use it as a benchmark for compliant wording, tone, and disclosures when drafting any new marketing materials.</li>
+    <li><strong>Accredited Investor verification:</strong> Investors must be verified prior to sale — acceptable methods include third-party verification letters, tax returns/W-2s, brokerage statements, CPA/attorney letters.</li>
+    <li>The full valuation journey — $28.3M (Mar 2022) → $113M (May 2022) → $375M → $600M → $1.15B today — is a compelling marketing narrative. 40x from the first public round, with each step verified through StartEngine crowdfunding records and PPM disclosures.</li>
+    <li>The 506(c) exemption permits general solicitation and advertising — website, social media, email, events, and broker-dealer networks are all permissible channels.</li>
+    <li>EIN and name of offering legal counsel are not confirmed in the provided documents — add these before publishing any marketing materials.</li>
+    <li>FY2025 audit not yet complete as of January 7, 2026. A full FY2025 audit will be important for institutional investor diligence.</li>
+  </ul>
+</section>
+
+<!-- ─── DISCLAIMER ────────────────────────────────────────────── -->
+<div class="disclaimer">
+  <strong>DISCLAIMER:</strong> This brief was prepared for internal marketing and planning purposes only. All financial figures are sourced from: (1) the TA Fintech Inc. PPM dated November 3, 2025; (2) the TradeAlgo Business Plan (2025); and (3) unaudited financial statements for the period ended December 31, 2025 (issued January 7, 2026). Projections are forward-looking statements based on management estimates and are not guarantees of future performance. This document does not constitute an offer to sell or a solicitation of an offer to buy any securities. Any such offer will be made only pursuant to the PPM and related subscription documents. Securities offered under Reg D Rule 506(c) are restricted and illiquid. Investing in early-stage companies involves substantial risk of loss. The Company is currently subject to an active SEC investigation — this constitutes a material risk factor and must be disclosed in all offering materials. Not for external distribution without legal review.
+  <br><br>
+  <strong>Prepared:</strong> March 10, 2026 &nbsp;|&nbsp; <strong>TA Fintech Inc. / TradeAlgo</strong> &nbsp;|&nbsp; invest@tradealgo.com
+</div>
+
+</main>
+</body>
+</html>
