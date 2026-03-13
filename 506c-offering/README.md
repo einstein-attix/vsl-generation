@@ -10,7 +10,9 @@ This folder contains financial data, analysis, and supporting documents for TA F
 506c-offering/
 ├── README.md                      ← This file — folder guide
 ├── extracted-financials.md        ← Clean extracted data from financial statements (Dec 2025)
+├── extracted-ppm.md              ← Clean extracted data from PPM (Nov 2025)
 ├── financial-analysis.md          ← Comprehensive financial analysis with ratios and observations
+├── ppm-analysis.md               ← PPM analysis — offering terms, valuation, dilution, risks
 ├── source-docs/                   ← Original source PDFs
 │   └── TA-Fintech-Inc-Financial-Statements-Dec2025.pdf  ← Unaudited financials (10 pages)
 ├── offering-documents/            ← 506(c) specific documents (add here)
@@ -30,7 +32,9 @@ This folder contains financial data, analysis, and supporting documents for TA F
 | File | Description | Status |
 |------|-------------|--------|
 | `extracted-financials.md` | Balance sheet, income statement, cash flows, equity changes, and notes — extracted from Dec 31, 2025 unaudited financial statements | Complete |
+| `extracted-ppm.md` | Key offering terms, company overview, financials, capitalization, tax info, subscription requirements — extracted from Nov 3, 2025 PPM | Complete |
 | `financial-analysis.md` | YoY analysis, key ratios (current ratio, debt-to-equity, gross margin, burn rate, runway, revenue growth), equity timeline, risk factors | Complete |
+| `ppm-analysis.md` | Offering summary, valuation assessment (88.7x revenue), dilution analysis, Stone–Cruz control transfer, PPM vs Dec actuals cross-reference, revenue discrepancy, NOL/tax analysis, risk factors | Complete |
 | `source-docs/TA-Fintech-Inc-Financial-Statements-Dec2025.pdf` | Original 10-page unaudited financial statements PDF | Source |
 
 ---
