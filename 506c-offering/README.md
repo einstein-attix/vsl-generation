@@ -11,10 +11,8 @@ This folder contains financial data, analysis, and supporting documents for TA F
 ├── README.md                      ← This file — folder guide
 ├── extracted-financials.md        ← Clean extracted data from financial statements (Dec 2025)
 ├── financial-analysis.md          ← Comprehensive financial analysis with ratios and observations
-├── source-documents/              ← Original source PDFs and filings (add here)
-│   ├── financial-statements/      ← Audited/unaudited financial statements
-│   ├── tax-returns/               ← Corporate tax returns
-│   └── legal/                     ← Formation docs, operating agreements, board resolutions
+├── source-docs/                   ← Original source PDFs
+│   └── TA-Fintech-Inc-Financial-Statements-Dec2025.pdf  ← Unaudited financials (10 pages)
 ├── offering-documents/            ← 506(c) specific documents (add here)
 │   ├── ppm/                       ← Private Placement Memorandum drafts
 │   ├── subscription-agreements/   ← Investor subscription documents
@@ -33,6 +31,7 @@ This folder contains financial data, analysis, and supporting documents for TA F
 |------|-------------|--------|
 | `extracted-financials.md` | Balance sheet, income statement, cash flows, equity changes, and notes — extracted from Dec 31, 2025 unaudited financial statements | Complete |
 | `financial-analysis.md` | YoY analysis, key ratios (current ratio, debt-to-equity, gross margin, burn rate, runway, revenue growth), equity timeline, risk factors | Complete |
+| `source-docs/TA-Fintech-Inc-Financial-Statements-Dec2025.pdf` | Original 10-page unaudited financial statements PDF | Source |
 
 ---
 
