@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>TA Fintech 506(c) Private Offering — V2</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+body{background:#000;overflow:hidden;font-family:'Inter','Helvetica Neue',Arial,sans-serif;-webkit-font-smoothing:antialiased}
+
+.slide{position:absolute;top:0;left:0;width:100vw;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 120px;opacity:0;pointer-events:none;transition:opacity .6s ease}
+.slide.active{opacity:1;pointer-events:auto}
+.slide.left-align{text-align:left;align-items:flex-start}
+
+/* Backgrounds */
+.bg-dark{background:#1C1C1E;color:#F2F2F5}
+.bg-black{background:#0A0C10;color:#F2F2F5}
+.bg-white{background:#F8FAFC;color:#202021}
+.bg-light{background:#F2F2F5;color:#202021}
+.bg-gradient-blue{background:linear-gradient(135deg,#1C1C1E 0%,#0d1b33 50%,#1C1C1E 100%);color:#F2F2F5}
+.bg-gradient-cta{background:linear-gradient(135deg,#0A0C10 0%,#0a1a2e 50%,#0A0C10 100%);color:#F2F2F5}
+.bg-warm{background:linear-gradient(135deg,#1C1C1E 0%,#1a1820 50%,#1C1C1E 100%);color:#F2F2F5}
+
+/* Animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideInLeft{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideInRight{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+@keyframes pulseGlow{0%,100%{box-shadow:0 0 20px rgba(0,123,255,.15)}50%{box-shadow:0 0 40px rgba(0,123,255,.3)}}
+@keyframes flywheel{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+.anim{opacity:0;will-change:transform,opacity}
+.slide.active .anim{animation:fadeUp .7s ease forwards}
+.slide.active .fi{animation-name:fadeIn}
+.slide.active .sl{animation-name:slideInLeft}
+.slide.active .sr{animation-name:slideInRight}
+.slide.active .si{animation-name:scaleIn}
+.d1{animation-delay:.15s}.d2{animation-delay:.3s}.d3{animation-delay:.45s}.d4{animation-delay:.6s}
+.d5{animation-delay:.75s}.d6{animation-delay:.9s}.d7{animation-delay:1.05s}.d8{animation-delay:1.2s}
+
+/* Typography */
+.hero-num{font-size:150px;font-weight:800;letter-spacing:-4px;line-height:1}
+.hero-num-sm{font-size:110px;font-weight:800;letter-spacing:-3px;line-height:1}
+.big-text{font-size:72px;font-weight:700;letter-spacing:-2px;line-height:1.15}
+.med-text{font-size:56px;font-weight:700;letter-spacing:-1px;line-height:1.2}
+.body-text{font-size:38px;font-weight:400;line-height:1.55}
+.small-text{font-size:32px;font-weight:400;line-height:1.5}
+.label-text{font-size:26px;font-weight:600;letter-spacing:3px;text-transform:uppercase}
+.tiny-text{font-size:22px;font-weight:400;line-height:1.6}
+
+/* Brand colors */
+.blue{color:#007BFF}
+.green{color:#2E7D32}
+.red{color:#c0392b}
+.gold{color:#d4a017}
+.muted{color:#636465}
+.white{color:#fff}
+.dark{color:#202021}
+
+/* Utility */
+.mt-20{margin-top:20px}.mt-30{margin-top:30px}.mt-40{margin-top:40px}.mt-60{margin-top:60px}
+.mb-20{margin-bottom:20px}.mb-40{margin-bottom:40px}
+.w-full{width:100%}.max-w-1400{max-width:1400px}.max-w-1200{max-width:1200px}.max-w-1000{max-width:1000px}
+.flex{display:flex}.flex-col{flex-direction:column}.gap-30{gap:30px}.gap-40{gap:40px}
+.items-center{align-items:center}.justify-center{justify-content:center}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:30px}
+.text-left{text-align:left}
+
+/* Stat cards */
+.stat-card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:44px 32px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.stat-card.dark{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);box-shadow:none}
+.stat-card .stat-val{font-size:72px;font-weight:800;letter-spacing:-2px;line-height:1;color:#007BFF}
+.stat-card.dark .stat-val{color:#fff}
+.stat-card .stat-label{font-size:24px;font-weight:500;margin-top:14px;color:#636465}
+.stat-card.dark .stat-label{color:rgba(255,255,255,.6)}
+
+/* Flywheel */
+.flywheel-step{background:rgba(0,123,255,.08);border:1px solid rgba(0,123,255,.2);border-radius:16px;padding:36px 40px;text-align:left;max-width:1200px;width:100%}
+.flywheel-step .step-num{font-size:22px;font-weight:800;color:#007BFF;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.flywheel-step .step-title{font-size:44px;font-weight:700;color:#fff}
+.flywheel-step .step-desc{font-size:28px;color:rgba(255,255,255,.5);margin-top:12px;line-height:1.5}
+
+/* Flywheel diagram */
+.flywheel-ring{position:relative;width:560px;height:560px;border-radius:50%;border:3px solid rgba(0,123,255,.25)}
+.flywheel-ring::after{content:"";position:absolute;top:-2px;left:-2px;right:-2px;bottom:-2px;border-radius:50%;border:2px solid transparent;border-top-color:#007BFF;animation:flywheel 8s linear infinite}
+.fw-node{position:absolute;background:#1C1C1E;border:2px solid #007BFF;border-radius:12px;padding:14px 20px;font-size:18px;font-weight:700;color:#fff;white-space:nowrap;text-align:center}
+.fw-node.n1{top:-20px;left:50%;transform:translateX(-50%)}
+.fw-node.n2{top:50%;right:-30px;transform:translateY(-50%) translateX(50%)}
+.fw-node.n3{bottom:-20px;left:50%;transform:translateX(-50%)}
+.fw-node.n4{top:50%;left:-30px;transform:translateY(-50%) translateX(-50%)}
+.fw-node.n5{top:12%;right:5%;transform:translateX(30%)}
+.fw-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.fw-center .label{font-size:20px;font-weight:600;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:2px}
+.fw-center .title{font-size:32px;font-weight:800;color:#007BFF;margin-top:4px}
+
+/* Product cards */
+.product-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:32px 24px;text-align:left}
+.product-card .product-name{font-size:28px;font-weight:700;color:#fff;margin-bottom:6px}
+.product-card .product-desc{font-size:20px;color:rgba(255,255,255,.5);line-height:1.5}
+
+/* Deal card */
+.deal-card{background:#fff;border:2px solid #007BFF;border-radius:20px;padding:50px 60px;text-align:left;box-shadow:0 4px 24px rgba(0,123,255,.12);max-width:1100px;width:100%}
+.deal-row{display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid #f1f5f9}
+.deal-row:last-child{border-bottom:none}
+.deal-label{font-size:28px;font-weight:500;color:#636465}
+.deal-value{font-size:32px;font-weight:700;color:#202021}
+
+/* Tier cards */
+.tier-card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:36px 28px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.05);transition:all .3s}
+.tier-card .tier-name{font-size:22px;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:#636465;margin-bottom:8px}
+.tier-card .tier-amount{font-size:36px;font-weight:800;color:#202021}
+.tier-card .tier-shares{font-size:28px;font-weight:700;color:#007BFF;margin-top:12px}
+.tier-card .tier-bonus{font-size:20px;color:#636465;margin-top:6px}
+.tier-card.featured{border-color:#007BFF;border-width:2px;background:#EBF5FF;box-shadow:0 4px 24px rgba(0,123,255,.12)}
+.tier-card.featured .tier-name{color:#007BFF}
+
+/* Competitor */
+.comp-card{border-radius:16px;padding:36px 28px;text-align:center}
+.comp-card .comp-name{font-size:26px;font-weight:700;margin-bottom:8px}
+.comp-card .comp-price{font-size:44px;font-weight:800;letter-spacing:-1px}
+.comp-card .comp-detail{font-size:20px;margin-top:10px;line-height:1.5}
+
+/* Due diligence */
+.dd-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:28px 32px;text-align:left}
+.dd-card .dd-title{font-size:24px;font-weight:700;color:#F2F2F5;margin-bottom:8px}
+.dd-card .dd-desc{font-size:20px;color:rgba(255,255,255,.5);line-height:1.5}
+
+/* CTA */
+.cta-btn{display:inline-block;background:#007BFF;color:#fff;font-size:38px;font-weight:700;padding:28px 80px;border-radius:14px;border:none;cursor:pointer;letter-spacing:-.5px;box-shadow:0 8px 30px rgba(0,123,255,.35);transition:transform .2s;text-decoration:none}
+.cta-btn:hover{transform:scale(1.03);background:#008FFF}
+.cta-link{font-size:48px;font-weight:800;color:#007BFF;letter-spacing:-1px}
+
+/* Disclaimer */
+.disclaimer-bar{position:absolute;bottom:30px;left:0;right:0;text-align:center;font-size:20px;color:#9A9B9C;padding:0 120px;line-height:1.5}
+.disclaimer-bar.on-dark{color:rgba(255,255,255,.3)}
+
+/* Watermark */
+.watermark{position:absolute;bottom:30px;left:40px;font-size:18px;font-weight:600;color:rgba(255,255,255,.12);letter-spacing:1px;z-index:50}
+.watermark.on-light{color:rgba(0,0,0,.06)}
+
+/* Progress */
+#progress{position:fixed;top:0;left:0;height:4px;background:#007BFF;z-index:100;transition:width .3s ease;width:0}
+#counter{position:fixed;bottom:20px;right:30px;font-size:18px;color:rgba(255,255,255,.25);z-index:100;font-variant-numeric:tabular-nums}
+
+/* Identity transform */
+.transform-line{display:flex;align-items:center;gap:30px;justify-content:center}
+.transform-box{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:16px;padding:28px 44px;text-align:center}
+.transform-box .t-label{font-size:20px;font-weight:600;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:2px;margin-bottom:8px}
+.transform-box .t-val{font-size:36px;font-weight:800;color:#fff}
+.transform-box.active-t{background:rgba(0,123,255,.1);border-color:#007BFF}
+.transform-box.active-t .t-val{color:#007BFF}
+.transform-arrow{font-size:48px;color:#007BFF;font-weight:800}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+<div id="counter"></div>
+
+<!-- ===== SLIDE 1: $28.3M — Pattern Interrupt ===== -->
+<div class="slide bg-black active" data-slide="1">
+  <div class="anim fi d2 hero-num" style="color:rgba(255,255,255,.2)">$28.3M</div>
+  <div class="anim fi d4 label-text mt-20" style="color:rgba(255,255,255,.25)">March 2022</div>
+  <div class="watermark">TRADEALGO</div>
+</div>
+
+<!-- ===== SLIDE 2: 381 Investors ===== -->
+<div class="slide bg-black" data-slide="2">
+  <div class="anim d1 label-text" style="color:#007BFF">Where It Started</div>
+  <div class="anim d2 med-text mt-20" style="max-width:1100px">381 investors. $1 per share.<br>A $28.3M bet on an idea.</div>
+  <div class="anim d3 body-text mt-40" style="color:rgba(255,255,255,.4);max-width:900px">Most of them had never heard of TradeAlgo.</div>
+  <div class="watermark">TRADEALGO</div>
+</div>
+
+<!-- ===== SLIDE 3: Valuation Journey ===== -->
+<div class="slide bg-white" data-slide="3">
+  <div class="anim d1 label-text" style="color:#636465">Company-Set Implied Valuations by Offering Round</div>
+  <div class="anim d2 mt-30" style="display:flex;align-items:flex-end;gap:24px;justify-content:center;max-width:1400px">
+    <div style="text-align:center">
+      <div style="background:#E8F0FE;width:80px;height:40px;border-radius:8px 8px 0 0;margin:0 auto"></div>
+      <div style="font-size:24px;font-weight:700;color:#202021;margin-top:8px">$28.3M</div>
+      <div style="font-size:18px;color:#636465">Mar '22</div>
+    </div>
+    <div style="text-align:center">
+      <div style="background:#D0E2FD;width:80px;height:80px;border-radius:8px 8px 0 0;margin:0 auto"></div>
+      <div style="font-size:24px;font-weight:700;color:#202021;margin-top:8px">$113M</div>
+      <div style="font-size:18px;color:#636465">May '22</div>
+    </div>
+    <div style="text-align:center">
+      <div style="background:#B8D4FB;width:80px;height:120px;border-radius:8px 8px 0 0;margin:0 auto"></div>
+      <div style="font-size:24px;font-weight:700;color:#202021;margin-top:8px">$183M</div>
+      <div style="font-size:18px;color:#636465">2023</div>
+    </div>
+    <div style="text-align:center">
+      <div style="background:#8CBCF8;width:80px;height:200px;border-radius:8px 8px 0 0;margin:0 auto"></div>
+      <div style="font-size:24px;font-weight:700;color:#202021;margin-top:8px">~$600M</div>
+      <div style="font-size:18px;color:#636465">2024</div>
+    </div>
+    <div style="text-align:center">
+      <div style="background:#007BFF;width:100px;height:340px;border-radius:8px 8px 0 0;margin:0 auto;box-shadow:0 4px 20px rgba(0,123,255,.25)"></div>
+      <div style="font-size:32px;font-weight:800;color:#007BFF;margin-top:8px">$1.15B</div>
+      <div style="font-size:18px;font-weight:600;color:#007BFF">Current</div>
+    </div>
+  </div>
+  <div class="anim d4 tiny-text mt-30" style="color:#9A9B9C;max-width:1000px">Implied valuations set by the company for each offering round. Not independently appraised. No investor has realized any return — shares remain illiquid with no public market. Past increases are not indicative of future results.</div>
+</div>
+
+<!-- ===== SLIDE 4: They Were Guessing. You're Not. ===== -->
+<div class="slide bg-dark" data-slide="4">
+  <div class="anim d1 med-text" style="max-width:1100px">They were betting on an idea.</div>
+  <div class="anim d3 med-text mt-30" style="max-width:1100px;color:#007BFF">You've been using the product.</div>
+  <div class="anim d5 body-text mt-40" style="color:rgba(255,255,255,.4);max-width:900px">And until today — you've been a customer.<br>Paying for the data. While other people owned the company.</div>
+  <div class="watermark">TRADEALGO</div>
+</div>
+
+<!-- ===== SLIDE 5: Customer → Owner ===== -->
+<div class="slide bg-gradient-blue" data-slide="5">
+  <div class="anim d1 transform-line">
+    <div class="transform-box">
+      <div class="t-label">You were</div>
+      <div class="t-val">Customer</div>
+    </div>
+    <div class="transform-arrow">&rarr;</div>
+    <div class="transform-box active-t">
+      <div class="t-label">You could be</div>
+      <div class="t-val">Owner</div>
+    </div>
+  </div>
+  <div class="anim d3 body-text mt-40" style="color:rgba(255,255,255,.5);max-width:1000px">I'm Carlos Cruz. CEO and majority shareholder of TA Fintech. I have a direct financial interest in this offering. Today, for the first time, I'm opening it to our community.</div>
+  <div class="watermark">TRADEALGO</div>
+</div>
+
+<!-- ===== SLIDE 6: Why I Built This ===== -->
+<div class="slide bg-dark" data-slide="6">
+  <div class="anim d1 label-text" style="color:#007BFF">The Founder</div>
+  <div class="anim d2 med-text mt-20" style="max-width:1100px">The financial markets have<br>a transparency problem.</div>
+  <div class="anim d4 body-text mt-40" style="color:rgba(255,255,255,.45);max-width:1000px">Bloomberg charges $32,000/year for a terminal. Institutional investors get AI, dark pool data, real-time flow — and trade against retail investors who can't see it. Not because it's illegal. Because nobody built a platform to deliver it at a price retail can afford.</div>
+  <div class="watermark">TRADEALGO</div>
+</div>
+
+<!-- ===== SLIDE 7: The Mission ===== -->
+<div class="slide bg-black" data-slide="7">
+  <div class="anim d1 label-text" style="color:#007BFF">Mission</div>
+  <div class="anim d2 med-text mt-20" style="max-width:1000px">Democratize institutional-grade market intelligence through AI.</div>
+  <div class="anim d4 mt-40 grid-2" style="max-width:900px;width:100%">
+    <div class="stat-card dark"><div class="stat-val" style="font-size:56px">50K+</div><div class="stat-label">Subscribers</div></div>
+    <div class="stat-card dark"><div class="stat-val" style="font-size:56px">504</div><div class="stat-label">Securities Tracked</div></div>
+  </div>
+  <div class="anim d5 body-text mt-40" style="color:rgba(255,255,255,.4);max-width:900px">Do you want to keep paying for the data...<br>or profit from everyone who does?</div>
+  <div class="watermark">TRADEALGO</div>
+</div>
+
+<!-- ===== SLIDE 8: The AI Infrastructure Flywheel ===== -->
+<div class="slide bg-gradient-blue" data-slide="8">
+  <div class="anim d1 label-text" style="color:#007BFF">The Mechanism</div>
+  <div class="anim d2 big-text mt-20">The AI Infrastructure<br>Flywheel</div>
+  <div class="anim d4 body-text mt-30" style="color:rgba(255,255,255,.4)">This is what you're investing in. Not a product. An engine.</div>
+  <div class="watermark">TRADEALGO</div>
+</div>
+
+<!-- ===== SLIDE 9: Flywheel Step 1 ===== -->
+<div class="slide bg-dark" data-slide="9">
+  <div class="anim d1 flywheel-step">
+    <div class="step-num">Step 1</div>
+    <div class="step-title">AI generates live trading signals</div>
+    <div class="step-desc">Not backtested. Not hypothetical. Real decisions on real portfolios across 504 securities and 8+ active strategies.</div>
+  </div>
+  <div class="watermark">TRADEALGO</div>
+</div>
+
+<!-- ===== SLIDE 10: Flywheel Step 2 ===== -->
+<div class="slide bg-dark" data-slide="10">
+  <div class="anim d1 flywheel-step">
+    <div class="step-num">Step 2</div>
+    <div class="step-title">Every trade makes the AI smarter</div>
+    <div class="step-desc">Every win and every loss feeds back into the system. The models improve. The edge compounds.</div>
+  </div>
+  <div class="watermark">TRADEALGO</div>
+</div>
+
+<!-- ===== SLIDE 11: Flywheel Step 3 ===== -->
+<div class="slide bg-dark" data-slide="11">
+  <div class="anim d1 flywheel-step">
+    <div class="step-num">Step 3</div>
+    <div class="step-title">Better AI attracts more subscribers</div>
+    <div class="step-desc">50,000+ people use this platform. They stay because the intelligence improves over time.</div>
+  </div>
+  <div class="watermark">TRADEALGO</div>
+</div>
+
+<!-- ===== SLIDE 12: Flywheel Step 4 ===== -->
+<div class="slide bg-dark" data-slide="12">
+  <div class="anim d1 flywheel-step">
+    <div class="step-num">Step 4</div>
+    <div class="step-title">Revenue funds development</div>
+    <div class="step-desc">$12.9M recognized revenue (FY2025, unaudited) + $15.1M deferred revenue already collected. The subscription flywheel at work.</div>
+  </div>
+  <div class="anim d3 tiny-text mt-20" style="color:rgba(255,255,255,.25);max-width:900px">That $15M number is one of the most important in this presentation. I'll come back to it.</div>
+  <div class="watermark">TRADEALGO</div>
+</div>
+
+<!-- ===== SLIDE 13: Flywheel Step 5 ===== -->
+<div class="slide bg-dark" data-slide="13">
+  <div class="anim d1 flywheel-step">
+    <div class="step-num">Step 5</div>
+    <div class="step-title">Moat deepens daily</div>
+    <div class="step-desc">After 11 months and 488 live events, a competitor would need to replicate the data, the trades, the AI training, and the subscriber history. That moat isn't theoretical. It's timestamped.</div>
+  </div>
+  <div class="watermark">TRADEALGO</div>
+</div>
+
+<!-- ===== SLIDE 14: Full Flywheel Diagram ===== -->
+<div class="slide bg-dark" data-slide="14">
+  <div class="anim si d1 flywheel-ring">
+    <div class="fw-node n1">AI Generates Signals</div>
+    <div class="fw-node n5">Data Improves AI</div>
+    <div class="fw-node n2">Subscribers Grow</div>
+    <div class="fw-node n3">Revenue Funds R&D</div>
+    <div class="fw-node n4">Moat Deepens</div>
+    <div class="fw-center">
+      <div class="label">The</div>
+      <div class="title">AI Flywheel</div>
+    </div>
+  </div>
+  <div class="watermark">TRADEALGO</div>
+</div>
+
+<!-- ===== SLIDE 15: 488 Events — Radical Transparency ===== -->
+<div class="slide bg-black" data-slide="15">
+  <div class="anim d1 label-text" style="color:#007BFF">Radical Transparency</div>
+  <div class="anim d2 hero-num mt-20" style="color:#fff">488</div>
+  <div class="anim d3 med-text mt-20">Live AI events. Including every loss.</div>
+  <div class="anim d4 body-text mt-30" style="color:rgba(255,255,255,.45);max-width:1000px">11 months. Every entry timestamped. Every exit recorded. Every loss published. We believe this level of transparency is uncommon in our industry.</div>
+  <div class="anim d5 tiny-text mt-30" style="color:rgba(255,255,255,.25)">Past performance is not indicative of future results.</div>
+  <div class="watermark">TRADEALGO</div>
+</div>
+
+<!-- ===== SLIDE 16: Competitor Kill Shot ===== -->
+<div class="slide bg-white" data-slide="16">
+  <div class="anim d1 label-text" style="color:#636465">The Landscape</div>
+  <div class="anim d2 mt-30 grid-3" style="max-width:1300px;width:100%;gap:24px">
+    <div class="comp-card" style="background:#FEF2F2;border:2px solid #FECACA">
+      <div class="comp-name" style="color:#c0392b">Bloomberg</div>
+      <div class="comp-price" style="color:#c0392b">$32K/yr</div>
+      <div class="comp-detail" style="color:#991B1B">Zero auditable AI<br>trading history</div>
+    </div>
+    <div class="comp-card" style="background:#FFFBEB;border:2px solid #FDE68A">
+      <div class="comp-name" style="color:#92400E">Newsletters</div>
+      <div class="comp-price" style="color:#92400E">Opinions</div>
+      <div class="comp-detail" style="color:#78350F">Motley Fool, Stansberry<br>No receipts</div>
+    </div>
+    <div class="comp-card" style="background:#EBF5FF;border:2px solid #007BFF;box-shadow:0 4px 20px rgba(0,123,255,.12)">
+      <div class="comp-name" style="color:#007BFF">TradeAlgo</div>
+      <div class="comp-price" style="color:#007BFF">488 Receipts</div>
+      <div class="comp-detail" style="color:#1e40af">AI that trades and shows<br>every move it makes</div>
+    </div>
+  </div>
+  <div class="anim d4 small-text mt-40" style="color:#636465;max-width:1000px">The question isn't whether TradeAlgo competes.<br>The question is whether the industry catches up before you invest.</div>
+  <div class="disclaimer-bar">Competitive positioning per internal analysis. Competitors' pricing as of March 2026.</div>
+</div>
+
+<!-- ===== SLIDE 17: The Number Nobody's Talking About ===== -->
+<div class="slide bg-gradient-blue" data-slide="17">
+  <div class="anim d1 label-text" style="color:#007BFF">The Open Loop</div>
+  <div class="anim d2 med-text mt-20">Remember that $15 million number?</div>
+  <div class="watermark">TRADEALGO</div>
+</div>
+
+<!-- ===== SLIDE 18: $15.1M Deferred — Hero Moment ===== -->
+<div class="slide bg-white" data-slide="18">
+  <div class="anim d1 label-text" style="color:#636465">Deferred Revenue — Dec 31, 2025</div>
+  <div class="anim d2 hero-num mt-20" style="color:#007BFF">$15.1M</div>
+  <div class="anim d3 body-text mt-30" style="color:#202021;max-width:1000px;font-weight:500">Already collected. Already in the bank.<br>For subscriptions customers have already committed to.</div>
+  <div class="anim d4 mt-30" style="display:inline-block;background:#F2F2F5;padding:16px 32px;border-radius:12px">
+    <span style="font-size:28px;color:#636465">Up 119% from prior year &mdash; </span>
+    <span style="font-size:28px;font-weight:700;color:#007BFF">the flywheel accelerating</span>
+  </div>
+  <div class="anim d5 tiny-text mt-30" style="color:#9A9B9C;max-width:900px">Recognized as revenue over the next 12–36 months under GAAP. Source: Unaudited Financial Statements (Dec 31, 2025).</div>
+</div>
+
+<!-- ===== SLIDE 19: Revenue + Margin ===== -->
+<div class="slide bg-light" data-slide="19">
+  <div class="anim d1 label-text" style="color:#636465">FY 2025 (Unaudited)</div>
+  <div class="anim d2 mt-30 grid-3" style="max-width:1200px;width:100%">
+    <div class="stat-card">
+      <div class="stat-val" style="font-size:64px">$12.9M</div>
+      <div class="stat-label">Net Revenue</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" style="font-size:64px">+34.6%</div>
+      <div class="stat-label">YoY Growth</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" style="font-size:64px">71.8%</div>
+      <div class="stat-label">Gross Margin</div>
+    </div>
+  </div>
+  <div class="anim d4 tiny-text mt-30" style="color:#9A9B9C;max-width:1000px">Figures from unaudited financial statements, subject to adjustment. The company has never been profitable and expects to continue operating at a loss for an extended period. Source: Unaudited Financial Statements (Dec 31, 2025).</div>
+</div>
+
+<!-- ===== SLIDE 20: $105M Raised ===== -->
+<div class="slide bg-dark" data-slide="20">
+  <div class="anim d1 label-text" style="color:#007BFF">Track Record</div>
+  <div class="anim d2 mt-20 grid-2" style="max-width:900px;width:100%">
+    <div class="stat-card dark"><div class="stat-val" style="font-size:72px;color:#fff">$105M+</div><div class="stat-label">Capital Raised</div></div>
+    <div class="stat-card dark"><div class="stat-val" style="font-size:72px;color:#fff">2,000+</div><div class="stat-label">Investors</div></div>
+  </div>
+  <div class="anim d4 body-text mt-30" style="color:rgba(255,255,255,.4);max-width:900px">From 381 people on StartEngine who couldn't use the product — to this offering, where every investor can.</div>
+  <div class="disclaimer-bar on-dark">Source: PPM (Nov 3, 2025). Total through PPM date: $105,600,000.</div>
+</div>
+
+<!-- ===== SLIDE 21: The Ecosystem ===== -->
+<div class="slide bg-dark" data-slide="21">
+  <div class="anim d1 label-text" style="color:#007BFF">Ecosystem</div>
+  <div class="anim d2 mt-20 grid-3" style="max-width:1300px;width:100%;gap:20px">
+    <div class="product-card"><div class="product-name">TradeGPT</div><div class="product-desc">AI copilot — real-time data, sentiment, NLP</div></div>
+    <div class="product-card"><div class="product-name">Terminal</div><div class="product-desc">Institutional-grade data, dark pool analytics</div></div>
+    <div class="product-card"><div class="product-name">Wealth Series</div><div class="product-desc">AI portfolios — Atlas, Titan, Everest</div></div>
+    <div class="product-card"><div class="product-name">Midas Link</div><div class="product-desc">Institutional AI licensed to RIA partners</div></div>
+    <div class="product-card"><div class="product-name">Options Academy</div><div class="product-desc">Education and interactive simulations</div></div>
+    <div class="product-card" style="border-color:rgba(0,123,255,.3);background:rgba(0,123,255,.06)"><div class="product-name" style="color:#007BFF">The Signal</div><div class="product-desc">Proposed AI newsletter — near-zero incremental cost</div></div>
+  </div>
+  <div class="anim d4 tiny-text mt-20" style="color:rgba(255,255,255,.3)">Each product feeds the flywheel. Each subscriber makes the AI smarter.</div>
+  <div class="watermark">TRADEALGO</div>
+</div>
+
+<!-- ===== SLIDE 22: Trustpilot ===== -->
+<div class="slide bg-white" data-slide="22">
+  <div class="anim d1 mt-20 grid-2" style="max-width:800px;width:100%">
+    <div class="stat-card"><div class="stat-val" style="font-size:80px">4.7</div><div class="stat-label">Trustpilot</div></div>
+    <div class="stat-card"><div class="stat-val" style="font-size:80px">5.0</div><div class="stat-label">App Store</div></div>
+  </div>
+  <div class="anim d3 small-text mt-30" style="color:#636465">You can't manufacture these numbers. The product earns them.</div>
+  <div class="disclaimer-bar">Source: Trustpilot.com and Apple App Store as of February 2026.</div>
+</div>
+
+<!-- ===== SLIDE 23: MID-VSL CTA #1 ===== -->
+<div class="slide bg-gradient-cta" data-slide="23">
+  <div class="anim d1 med-text" style="max-width:1000px">Ready to review the full PPM?</div>
+  <div class="anim d2 mt-40 cta-link">links.taf.investsecure.co</div>
+  <div class="anim d3 mt-40">
+    <a href="https://links.taf.investsecure.co" class="cta-btn" style="font-size:32px;padding:22px 60px" target="_blank">View the Offering &amp; PPM</a>
+  </div>
+  <div class="anim d5 small-text mt-40" style="color:rgba(255,255,255,.35)">The PPM contains complete information including all material risks.<br>Read it in full before investing.</div>
+  <div class="watermark">TRADEALGO</div>
+</div>
+
+<!-- ===== SLIDE 24: Velvet Rope ===== -->
+<div class="slide bg-black" data-slide="24">
+  <div class="anim d1 label-text" style="color:#007BFF">Exclusive Access</div>
+  <div class="anim d2 big-text mt-20">This isn't on Robinhood.</div>
+  <div class="anim d4 body-text mt-30" style="color:rgba(255,255,255,.4);max-width:1000px">Not on Schwab. Not on Fidelity. Not on any exchange.<br>506(c) private placement. Accredited investors only — verified.</div>
+  <div class="watermark">TRADEALGO</div>
+</div>
+
+<!-- ===== SLIDE 25: Deal Terms ===== -->
+<div class="slide bg-white" data-slide="25">
+  <div class="anim d1 label-text" style="color:#636465">Offering Terms</div>
+  <div class="anim d2 mt-30 deal-card">
+    <div class="deal-row"><span class="deal-label">Security</span><span class="deal-value">Common Stock — identical rights to all stockholders</span></div>
+    <div class="deal-row"><span class="deal-label">Offering Price</span><span class="deal-value" style="color:#007BFF;font-size:38px">$6.00 per share</span></div>
+    <div class="deal-row"><span class="deal-label">Minimum</span><span class="deal-value">$10,000</span></div>
+    <div class="deal-row"><span class="deal-label">Hard Cap</span><span class="deal-value">$120,000,000 — then it closes</span></div>
+    <div class="deal-row"><span class="deal-label">Pre-Money Valuation</span><span class="deal-value">~$1.15 Billion (company-set, not appraised)</span></div>
+    <div class="deal-row"><span class="deal-label">Deadline</span><span class="deal-value">November 3, 2026</span></div>
+  </div>
+  <div class="disclaimer-bar">Source: PPM dated November 3, 2025. This summary does not replace the PPM.</div>
+</div>
+
+<!-- ===== SLIDE 26: Bonus Shares — Narrative ===== -->
+<div class="slide bg-dark" data-slide="26">
+  <div class="anim d1 label-text" style="color:#007BFF">Additional Shares</div>
+  <div class="anim d2 med-text mt-20">The part that made institutional<br>investors take a second look.</div>
+  <div class="anim d3 body-text mt-30" style="color:rgba(255,255,255,.5);max-width:1000px">When you invest at higher levels, you receive additional shares at the same $6 offering price. Not a discount — additional shares as a bonus.</div>
+  <div class="anim d4 mt-40" style="max-width:1000px;width:100%">
+    <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center">
+      <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:16px 24px;text-align:center"><div style="font-size:20px;color:rgba(255,255,255,.5)">$25K</div><div style="font-size:28px;font-weight:700;color:#fff">+10%</div></div>
+      <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:16px 24px;text-align:center"><div style="font-size:20px;color:rgba(255,255,255,.5)">$50K</div><div style="font-size:28px;font-weight:700;color:#fff">+15%</div></div>
+      <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:16px 24px;text-align:center"><div style="font-size:20px;color:rgba(255,255,255,.5)">$75K</div><div style="font-size:28px;font-weight:700;color:#fff">+20%</div></div>
+      <div style="background:rgba(0,123,255,.1);border:1px solid rgba(0,123,255,.3);border-radius:10px;padding:16px 24px;text-align:center"><div style="font-size:20px;color:rgba(255,255,255,.5)">$100K</div><div style="font-size:28px;font-weight:700;color:#007BFF">+25%</div></div>
+      <div style="background:rgba(0,123,255,.15);border:2px solid rgba(0,123,255,.4);border-radius:10px;padding:16px 24px;text-align:center"><div style="font-size:20px;color:rgba(255,255,255,.5)">$1M+</div><div style="font-size:32px;font-weight:800;color:#007BFF">+50%</div></div>
+    </div>
+  </div>
+  <div class="anim d6 tiny-text mt-30" style="color:rgba(255,255,255,.25);max-width:900px">Bonus shares are common stock with identical rights. They dilute all existing stockholders, including investors at lower tiers. Terms per PPM.</div>
+  <div class="watermark">TRADEALGO</div>
+</div>
+
+<!-- ===== SLIDE 27: Investment Tiers ===== -->
+<div class="slide bg-light" data-slide="27">
+  <div class="anim d1 label-text" style="color:#636465">Investment Tiers</div>
+  <div class="anim d2 mt-30" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:20px;max-width:1400px;width:100%">
+    <div class="tier-card">
+      <div class="tier-name">Foundation</div>
+      <div class="tier-amount">$10,000</div>
+      <div class="tier-shares">1,667 shares</div>
+      <div class="tier-bonus">No bonus</div>
+    </div>
+    <div class="tier-card">
+      <div class="tier-name">Builder</div>
+      <div class="tier-amount">$25,000</div>
+      <div class="tier-shares">4,584 shares</div>
+      <div class="tier-bonus">+10% additional</div>
+    </div>
+    <div class="tier-card featured">
+      <div class="tier-name">Believer</div>
+      <div class="tier-amount">$100,000</div>
+      <div class="tier-shares">20,834 shares</div>
+      <div class="tier-bonus">+25% additional</div>
+    </div>
+    <div class="tier-card featured">
+      <div class="tier-name">Architect</div>
+      <div class="tier-amount">$1,000,000+</div>
+      <div class="tier-shares">250,000 shares</div>
+      <div class="tier-bonus">+50% additional</div>
+    </div>
+  </div>
+  <div class="anim d4 tiny-text mt-20" style="color:#9A9B9C;max-width:1000px">No investor in the history of this company has received a lower price by waiting. Each successive round has been priced higher. Historical pattern is not a guarantee of future pricing.</div>
+</div>
+
+<!-- ===== SLIDE 28: Projections — Narrative ===== -->
+<div class="slide bg-white" data-slide="28">
+  <div class="anim d1 label-text" style="color:#636465">Management Revenue Projections (PPM)</div>
+  <div class="anim d2 mt-30" style="display:flex;align-items:flex-end;gap:40px;justify-content:center;max-width:1200px">
+    <div style="text-align:center">
+      <div style="background:#E2E8F0;width:100px;height:60px;border-radius:10px 10px 0 0;margin:0 auto"></div>
+      <div style="font-size:28px;font-weight:700;color:#202021;margin-top:10px">$12.9M</div>
+      <div style="font-size:18px;color:#636465">2025 Actual</div>
+    </div>
+    <div style="text-align:center">
+      <div style="background:#B8D4FB;width:100px;height:130px;border-radius:10px 10px 0 0;margin:0 auto"></div>
+      <div style="font-size:28px;font-weight:700;color:#202021;margin-top:10px">~$36.8M</div>
+      <div style="font-size:18px;color:#636465">2026</div>
+    </div>
+    <div style="text-align:center">
+      <div style="background:#8CBCF8;width:100px;height:200px;border-radius:10px 10px 0 0;margin:0 auto"></div>
+      <div style="font-size:28px;font-weight:700;color:#202021;margin-top:10px">~$58.9M</div>
+      <div style="font-size:18px;color:#636465">2027</div>
+    </div>
+    <div style="text-align:center">
+      <div style="background:#5BA3F5;width:100px;height:290px;border-radius:10px 10px 0 0;margin:0 auto"></div>
+      <div style="font-size:28px;font-weight:700;color:#202021;margin-top:10px">~$94.3M</div>
+      <div style="font-size:18px;color:#636465">2028</div>
+    </div>
+    <div style="text-align:center">
+      <div style="background:#007BFF;width:120px;height:400px;border-radius:10px 10px 0 0;margin:0 auto;box-shadow:0 4px 20px rgba(0,123,255,.2)"></div>
+      <div style="font-size:32px;font-weight:800;color:#007BFF;margin-top:10px">~$150.9M</div>
+      <div style="font-size:18px;font-weight:600;color:#007BFF">2029</div>
+    </div>
+  </div>
+  <div class="anim d4 tiny-text mt-20" style="color:#9A9B9C;max-width:1000px">Forward-looking projections subject to significant execution risk, market conditions, competitive dynamics, and regulatory approvals. Not guarantees. The company has never been profitable. Source: PPM (Nov 3, 2025).</div>
+</div>
+
+<!-- ===== SLIDE 29: Future Pacing ===== -->
+<div class="slide bg-warm" data-slide="29">
+  <div class="anim d1 label-text" style="color:#007BFF">Imagine</div>
+  <div class="anim d2 med-text mt-20" style="max-width:1100px">It's 2029.</div>
+  <div class="anim d3 body-text mt-30" style="color:rgba(255,255,255,.5);max-width:1000px">The AI has been trading live for over four years. Thousands of rebalancing events. The Signal newsletter feeds the premium funnel every month.</div>
+  <div class="anim d4 body-text mt-30" style="color:rgba(255,255,255,.7);max-width:1000px">You open your portfolio. And you don't just see the AI's latest picks.<br>You see <span class="blue">your shares</span>. Not as a customer. As an owner.</div>
+  <div class="anim d5 tiny-text mt-40" style="color:rgba(255,255,255,.25);max-width:800px">This is a projection, not a guarantee. The company may not achieve these results. Your investment could lose value or become worthless.</div>
+  <div class="watermark">TRADEALGO</div>
+</div>
+
+<!-- ===== SLIDE 30: CTA #2 ===== -->
+<div class="slide bg-gradient-cta" data-slide="30">
+  <div class="anim d1 med-text" style="max-width:900px">If that future resonates with you.</div>
+  <div class="anim d2 mt-40 cta-link">links.taf.investsecure.co</div>
+  <div class="anim d3 mt-40">
+    <a href="https://links.taf.investsecure.co" class="cta-btn" target="_blank">Review the PPM &amp; Invest</a>
+  </div>
+  <div class="anim d5 small-text mt-40" style="color:rgba(255,255,255,.35)">Full PPM. Subscription agreement. Accredited investor verification.</div>
+  <div class="watermark">TRADEALGO</div>
+</div>
+
+<!-- ===== SLIDE 31: Stress Test ===== -->
+<div class="slide bg-black" data-slide="31">
+  <div class="anim d1 label-text" style="color:rgba(255,255,255,.4)">Due Diligence</div>
+  <div class="anim d2 big-text mt-20">Let's stress-test this.</div>
+  <div class="watermark">TRADEALGO</div>
+</div>
+
+<!-- ===== SLIDE 32: Due Diligence — 6 Points ===== -->
+<div class="slide bg-dark" data-slide="32">
+  <div class="anim d1 label-text" style="color:rgba(255,255,255,.4)">What You Should Weigh</div>
+  <div class="anim d2 mt-30" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:1300px;width:100%">
+    <div class="dd-card">
+      <div class="dd-title">Never Profitable</div>
+      <div class="dd-desc">$107.9M accumulated deficit. Expects continued losses. High-growth stage — heavy R&D investment.</div>
+    </div>
+    <div class="dd-card">
+      <div class="dd-title">Cash Position</div>
+      <div class="dd-desc">$1.8M cash + $12.8M securities. This raise targets ~36 months runway. 35% to AI &amp; product.</div>
+    </div>
+    <div class="dd-card">
+      <div class="dd-title">Illiquid Investment</div>
+      <div class="dd-desc">No public market. No expected market. Prepare to hold indefinitely. Restricted securities.</div>
+    </div>
+    <div class="dd-card">
+      <div class="dd-title">Controlling Shareholder</div>
+      <div class="dd-desc">Carlos Cruz holds ~56% with proxy voting rights. New investors will not have meaningful voting power.</div>
+    </div>
+    <div class="dd-card">
+      <div class="dd-title">Unaudited Financials</div>
+      <div class="dd-desc">FY2025 statements are unaudited. Material adjustments could emerge. No registered IP.</div>
+    </div>
+    <div class="dd-card">
+      <div class="dd-title">Read the PPM</div>
+      <div class="dd-desc">These are not all the risks. The PPM has the full picture. Read it. All of it. Talk to your advisor.</div>
+    </div>
+  </div>
+  <div class="disclaimer-bar on-dark">Source: PPM (Nov 3, 2025) and Unaudited Financial Statements (Dec 31, 2025).</div>
+</div>
+
+<!-- ===== SLIDE 33: Invest With Conviction ===== -->
+<div class="slide bg-dark" data-slide="33">
+  <div class="anim d1 med-text" style="max-width:1100px">I'd rather you invest with conviction<br>than with hope.</div>
+  <div class="anim d3 body-text mt-40" style="color:rgba(255,255,255,.4);max-width:900px">The people who read the PPM and still invest are the investors I want on this cap table.</div>
+  <div class="watermark">TRADEALGO</div>
+</div>
+
+<!-- ===== SLIDE 34: You Already Did Due Diligence ===== -->
+<div class="slide bg-gradient-blue" data-slide="34">
+  <div class="anim d1 label-text" style="color:#007BFF">Your Advantage</div>
+  <div class="anim d2 med-text mt-20" style="max-width:1100px">Institutional investors read the PPM.<br>They analyze the financials.</div>
+  <div class="anim d3 med-text mt-20" style="color:#007BFF;max-width:1100px">They've never logged into TradeAlgo<br>at 6 AM and watched the AI work.</div>
+  <div class="anim d5 body-text mt-40" style="color:rgba(255,255,255,.4);max-width:900px">You've been doing due diligence every time you opened the platform. You just didn't know it yet.</div>
+  <div class="watermark">TRADEALGO</div>
+</div>
+
+<!-- ===== SLIDE 35: $120M Hard Cap ===== -->
+<div class="slide bg-black" data-slide="35">
+  <div class="anim d1 hero-num-sm" style="color:#fff">$120M Cap</div>
+  <div class="anim d2 med-text mt-20" style="color:rgba(255,255,255,.5)">When it's full, it closes.</div>
+  <div class="anim d4 body-text mt-40" style="color:rgba(255,255,255,.35);max-width:900px">We're showing this to our community first. The people who know the product. Before it goes anywhere else.</div>
+  <div class="watermark">TRADEALGO</div>
+</div>
+
+<!-- ===== SLIDE 36: Customer → Owner (Identity Close) ===== -->
+<div class="slide bg-dark" data-slide="36">
+  <div class="anim d1 transform-line">
+    <div class="transform-box">
+      <div class="t-label">You've been</div>
+      <div class="t-val">A Customer</div>
+    </div>
+    <div class="transform-arrow">&rarr;</div>
+    <div class="transform-box active-t" style="animation:pulseGlow 3s ease infinite">
+      <div class="t-label">Become</div>
+      <div class="t-val">An Owner</div>
+    </div>
+  </div>
+  <div class="anim d3 body-text mt-40" style="color:rgba(255,255,255,.5);max-width:1000px">Stop paying for the data.<br>Profit from everyone who does.</div>
+  <div class="watermark">TRADEALGO</div>
+</div>
+
+<!-- ===== SLIDE 37: Final CTA ===== -->
+<div class="slide bg-gradient-cta" data-slide="37">
+  <div class="anim d1 cta-link" style="font-size:56px">links.taf.investsecure.co</div>
+  <div class="anim d2 mt-40">
+    <a href="https://links.taf.investsecure.co" class="cta-btn" target="_blank">View the Offering</a>
+  </div>
+  <div class="anim d4 mt-60" style="max-width:800px;width:100%">
+    <div style="display:flex;gap:40px;justify-content:center">
+      <div style="text-align:center"><div style="font-size:20px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:1px">PPM</div><div style="font-size:22px;color:rgba(255,255,255,.6);margin-top:4px">Full offering details</div></div>
+      <div style="text-align:center"><div style="font-size:20px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:1px">Verification</div><div style="font-size:22px;color:rgba(255,255,255,.6);margin-top:4px">Accredited status</div></div>
+      <div style="text-align:center"><div style="font-size:20px;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:1px">Questions</div><div style="font-size:22px;color:rgba(255,255,255,.6);margin-top:4px">invest@tradealgo.com</div></div>
+    </div>
+  </div>
+  <div class="watermark">TRADEALGO</div>
+</div>
+
+<!-- ===== SLIDE 38: Legal Disclaimer — Expanded ===== -->
+<div class="slide bg-black" data-slide="38">
+  <div class="anim fi d1" style="max-width:1300px;text-align:left">
+    <div style="font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,.3);margin-bottom:20px">Legal Disclaimer</div>
+    <div style="font-size:19px;color:rgba(255,255,255,.4);line-height:1.85;columns:2;column-gap:60px">
+      <p style="margin-bottom:14px"><strong style="color:rgba(255,255,255,.55)">Conflict of Interest:</strong> This presentation was made by Carlos Cruz, CEO and majority shareholder (~56%) of TA Fintech Inc. He has a direct financial interest in the success of this offering.</p>
+      <p style="margin-bottom:14px"><strong style="color:rgba(255,255,255,.55)">Not an Offer:</strong> This presentation is not an offer to sell or a solicitation of an offer to buy securities. The offering is made solely by the Private Placement Memorandum ("PPM") dated November 3, 2025. This presentation is not a substitute for the PPM.</p>
+      <p style="margin-bottom:14px"><strong style="color:rgba(255,255,255,.55)">Risk of Loss:</strong> This investment involves a high degree of risk, including the possible loss of your entire investment. Shares are illiquid with no public market and significant transfer restrictions. The Company has never been profitable and expects to continue operating at a loss.</p>
+      <p style="margin-bottom:14px"><strong style="color:rgba(255,255,255,.55)">Forward-Looking Statements:</strong> Revenue projections, AUM targets, and business plans are forward-looking statements subject to significant risks including execution risk, market conditions, competitive dynamics, and regulatory approvals. There is no assurance any projections will be achieved.</p>
+      <p style="margin-bottom:14px"><strong style="color:rgba(255,255,255,.55)">Valuations:</strong> Implied valuations were set by the Company for each offering round and are not based on independent third-party appraisals. Past valuation increases are not indicative of future results.</p>
+      <p style="margin-bottom:14px"><strong style="color:rgba(255,255,255,.55)">Unaudited:</strong> FY2025 financial statements are unaudited and subject to material adjustment.</p>
+      <p style="margin-bottom:14px"><strong style="color:rgba(255,255,255,.55)">Bonus Shares:</strong> Additional shares issued at the stated offering price. They carry identical rights and dilute all existing stockholders. Terms as described in the PPM.</p>
+      <p style="margin-bottom:14px"><strong style="color:rgba(255,255,255,.55)">No Approval:</strong> No federal or state securities commission has approved or disapproved these securities or passed upon the accuracy of this presentation.</p>
+      <p style="margin-bottom:14px"><strong style="color:rgba(255,255,255,.55)">Accredited Only:</strong> Available only to accredited investors (Rule 501, Reg D). Verification required under Rule 506(c). Consult your own financial, tax, and legal advisors before investing.</p>
+      <p><span style="color:rgba(255,255,255,.5);font-weight:600">TA Fintech Inc. &bull; 401 Park Ave South, 10th Floor, New York, NY 10016 &bull; invest@tradealgo.com</span></p>
+    </div>
+  </div>
+  <div class="watermark">TRADEALGO</div>
+</div>
+
+<!-- ==================== NAVIGATION ==================== -->
+<script>
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+let current = 0;
+
+function show(n) {
+  if (n < 0 || n >= total) return;
+  slides[current].classList.remove('active');
+  current = n;
+  slides[current].classList.add('active');
+  document.getElementById('progress').style.width = ((current + 1) / total * 100) + '%';
+  document.getElementById('counter').textContent = (current + 1) + ' / ' + total;
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'ArrowDown') { e.preventDefault(); show(current + 1); }
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); show(current - 1); }
+  if (e.key === 'Home') { e.preventDefault(); show(0); }
+  if (e.key === 'End') { e.preventDefault(); show(total - 1); }
+});
+
+document.addEventListener('click', e => {
+  if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') return;
+  const x = e.clientX;
+  if (x > window.innerWidth * 0.3) show(current + 1);
+  else show(current - 1);
+});
+
+let touchStartX = 0;
+document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if (Math.abs(dx) > 50) { dx < 0 ? show(current + 1) : show(current - 1); }
+});
+
+show(0);
+</script>
+</body>
+</html>
